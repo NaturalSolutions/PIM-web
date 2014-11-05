@@ -1,0 +1,6 @@
+; $Id: ctools.info,v 1.2 2011/08/02  $
+name = PIM Fiche Ile - tab Menu
+description = Crée un menu pour la page Fiche Ile
+core = 6.x
+version = "6.x-1.0"
+package = "# NS Modules"

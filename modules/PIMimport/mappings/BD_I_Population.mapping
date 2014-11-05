@@ -1,0 +1,146 @@
+<?php 
+
+
+
+function _getTemplateField(  ) {
+    $templateFields = "Code_ile_ilot,Annee,Nb_habitants_permanents,Nb_estivants,Nb_visiteurs_min,Nb_visiteurs_max,Nb_de_bateaux";
+    return $templateFields;
+}
+
+function _getCheckFormatField() {
+    $checkFormatField= array();
+    $checkFormatField['Nb_habitants_permanents']= array(
+            'type'=>'integer','field'=> "Nb_habitants_permanents",
+            'message' => t('Valid Nb_habitants_permanents public format : integer'),
+            );
+    $checkFormatField['Annee']= array(
+            'type'=>'integer', 'field'=> "Annee",
+            'message' => t('Valid Annee : integer'),
+            );
+    $checkFormatField['Nb_estivants']= array(
+            'type'=>'integer','field'=> "Nb_estivants",
+            'message' => t('Valid Nb_estivants public format : integer'),
+            );
+    $checkFormatField['Nb_visiteurs_min']= array(
+            'type'=>'integer','field'=> "Nb_visiteurs_min",
+            'message' => t('Valid Nb_visiteurs_min format : integer'),
+            );
+    $checkFormatField['Nb_visiteurs_max']= array(
+            'type'=>'integer','field'=> "Nb_visiteurs_max",
+            'message' => t('Valid Nb_visiteurs_max : year'),
+            );
+    $checkFormatField['Nb_de_bateaux']= array(
+            'type'=>'integer','field'=> "Nb_de_bateaux",
+            'message' => t('Valid Nb_de_bateaux : integer'),
+            );
+    return $checkFormatField;
+}
+
+function _getSqlCheckValue($tableName) {
+    $sqlCheckValue = array();
+    $sqlCheckValue[]=  array(
+            'message' => t('Unknow island'),
+            'sql' => "SELECT importid+1 as importid, Code_ile_ilot as val
+                FROM $tableName LEFT OUTER JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_Code_ile_ilot
+                ON thes_Code_ile_ilot.name = Code_ile_ilot WHERE thes_Code_ile_ilot.tid IS NULL ",
+            'field' => 'val',
+            'mandatory'=> true,
+            );
+    return $sqlCheckValue;
+}
+
+
+function _getSqlCheckDuplicate($tableName) {
+    $sqlCheckDuplicate= array();
+    $sqlCheckDuplicate[0]=  "UPDATE $tableName SET isdoublon = false";
+    return $sqlCheckDuplicate;
+}
+
+function  _getSqlCheckWarning($tableName) {
+    $sqlCheckWarning= array();
+    return $sqlCheckWarning;
+}
+
+function _getMappingNodeSelectImportableData($tableName) {
+    $mapping = array();
+    $mapping['import_BD_I_Population'] = array(
+            'name' => t('Island').' : '.t('Population'),
+            'contentType' => "bd_i_multipop",
+            'titleField' => 'Code_ile_ilot',
+            'multivalueSeparator' =>';',
+            'update' => true,
+            'updateSelectNid' =>"
+                SELECT nid
+                FROM $tableName imp, {term_data} ti, {content_type_bd_i_multipop} pop
+                WHERE ti.name = imp.Code_ile_ilot
+                  AND YEAR(pop.field_bdi_pop_annee_value) = imp.Annee
+                  AND ti.vid = 4
+                  AND imp.importid=XXupdateSelectNidXX
+                  AND ti.tid = pop.field_bdi_pop_code_ile_ilot_value
+                LIMIT 1",
+            'query'=>"
+                SELECT imp.importid, imp.Code_ile_ilot, ti.tid AS tid_ile_ilot, STR_TO_DATE(Annee, '%%Y') AS Annee, Nb_habitants_permanents, Nb_estivants, Nb_visiteurs_min, Nb_visiteurs_max, Nb_de_bateaux
+                FROM $tableName imp, {term_data} ti
+                WHERE NOT imp.isdoublon AND ti.vid = 4 AND ti.name = imp.Code_ile_ilot",
+            'fields' => array (
+                    0 => array (
+                        'name'=>'code_ile',
+                        'mutlivalue'=> false,
+                        'contentField' => 'field_bdi_pop_code_ile_ilot',
+                        'type'=>'thesaurus',
+                        'typeImpl'=>'value',
+                        'importTableField'=>'tid_ile_ilot',
+                        ),
+                    1 => array (
+                        'name'=>'Annee',
+                        'mutlivalue'=> false,
+                        'contentField'=>'field_bdi_pop_annee',
+                        'type'=>'date',
+                        'typeImpl'=>'value',
+                        'importTableField'=>'Annee'
+                        ),
+                    2 => array (
+                        'name'=>'Nb_habitants_permanents',
+                        'mutlivalue'=> false,
+                        'contentField' => 'field_bdi_pop_pp_nb_habitant',
+                        'type'=>'int',
+                        'typeImpl'=>'value',
+                        'importTableField'=> 'Nb_habitants_permanents'
+                        ),
+                    3 => array (
+                        'name'=>'Nb_estivants',
+                        'mutlivalue'=> false,
+                        'contentField' => 'field_bdi_pop_pe_nb',
+                        'type'=>'int',
+                        'typeImpl'=>'value',
+                        'importTableField'=> 'Nb_estivants'
+                        ),
+                    4 => array (
+                        'name'=>'Nb_visiteurs_min',
+                        'mutlivalue'=> false,
+                        'contentField' => 'field_bdi_pop_ft_nb_touriste',
+                        'type'=>'int',
+                        'typeImpl'=>'value',
+                        'importTableField'=> 'Nb_visiteurs_min'
+                        ),
+                    5 => array (
+                        'name'=>'Nb_visiteurs_max',
+                        'mutlivalue'=> false,
+                        'contentField' => 'field_bdi_pop_ft_nb_touriste_max',
+                        'type'=>'int',
+                        'typeImpl'=>'value',
+                        'importTableField'=> 'Nb_visiteurs_max'
+                        ),
+                    8 => array (
+                        'name'=>'Nb_de_bateaux',
+                        'mutlivalue'=> false,
+                        'contentField' => 'field_bdi_pop_fm_nb_bateau_an',
+                        'type'=>'int',
+                        'typeImpl'=>'value',
+                        'importTableField'=> 'Nb_de_bateaux'
+                        ),
+                    ),
+                    );
+    return $mapping;
+}
+

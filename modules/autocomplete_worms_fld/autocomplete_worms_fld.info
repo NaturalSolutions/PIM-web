@@ -1,0 +1,7 @@
+; $Id:$
+name = WORMS Field
+description = A CCK compound field representing a worms taxon
+dependencies[] = content
+package = "# NS Modules"
+core = 6.x
+version = 6.x-0.0

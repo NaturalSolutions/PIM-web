@@ -1,0 +1,298 @@
+<?php 
+
+
+
+function _getTemplateField(  ) {
+    $templateFields= "Code_ile_ilot,Archipel,Nom_ile_ilot,Autres_nom,Zone_geographique,Region_Wilaya_Gouvernorat_Communaute_autonome,Departement_Province,Commune,Localite_la_plus_proche,Latitude,Longitude,Superficie_terrestre,Superficie_aire_marine_protegee,Altitude,Distance_cote_continentale,Cote_continentale_reference,Distance_ile_principale_plus_proche,Ile_principale_de_reference,Lineaire_cotier,Ile_PIM";
+    return $templateFields;
+}
+
+function _getCheckFormatField() {
+    $checkFormatField= array();
+	$checkFormatField['Latitude']= array(
+		'type'=>'decimal',
+		'field'=> "REPLACE(`Latitude`, ',', '.')",
+		'message' => 'Valid latitude format : decimal ex(12.3)',
+	) ;
+	$checkFormatField['Longitude']= array(
+		'type'=>'decimal',
+		'field'=> "REPLACE(`Longitude`, ',', '.')",
+		'message' => 'Valid longitude format : decimal ex(12.3)',
+	) ;
+	
+    return $checkFormatField;
+}
+
+function _getSqlCheckValue($tableName) {
+    $sqlCheckValue = array();
+	/*$sqlCheckValue[]=  array(
+    'message' => t('Unknow island'),
+    'sql' => "SELECT importid+1 as importid, Code_ilot_ile as val 
+              FROM $tableName LEFT OUTER JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_code_ilot_ile
+        ON thes_code_ilot_ile.name = Code_ilot_ile WHERE thes_code_ilot_ile.tid IS NULL ",
+    'field' => 'val',
+    'mandatory'=> true,
+    );*/
+	$sqlCheckValue[]=  array(
+		'message' =>  t('Island code  mandatory'),
+		'type' => 'text', 
+		'field'=> 'Code_ile_ilot',
+		'mandatory'=> true,
+    );
+	$sqlCheckValue[]=  array(
+		'message' =>  t('Island name  mandatory'),
+		'type' => 'text', 
+		'field'=> 'Nom_ile_ilot',
+		'mandatory'=> true,
+    );
+	  $sqlCheckValue[]=  array(
+    'message' => t('Unknow Geographical area'),
+     'sql' => "SELECT importid, Zone_geographique as val 
+        FROM $tableName LEFT OUTER JOIN (SELECT * FROM {term_data} WHERE vid = 8) AS thes_zone_geo
+        ON   Zone_geographique = thes_zone_geo.name WHERE thes_zone_geo.tid IS NULL ",
+    );	
+	$sqlCheckValue[]=  array(
+		'message' =>  t('Latitude  mandatory'),
+		'type' => 'float', 
+		'field'=> 'Latitude',
+		'mandatory'=> true,
+    );
+	$sqlCheckValue[]=  array(
+		'message' =>  t('Longitude  mandatory'),
+		'type' => 'float', 
+		'field'=> 'Longitude',
+		'mandatory'=> true,
+    );
+	$sqlCheckValue[]=  array(
+	    'message' => t('Invalid value').": ".t('Pim island'),
+	    'description'=>t('Possible values (Oui, Non)'),
+	    'sql' => "SELECT importid+1 as importid, Ile_PIM FROM $tableName WHERE Ile_PIM NOT IN (BINARY 'Oui', BINARY 'Non')",
+	    'mandatory'=> false,
+	    'field'=> 'Ile_PIM',
+	);
+	return $sqlCheckValue;
+}
+
+
+function _getSqlCheckDuplicate($tableName) {
+  $sqlCheckDuplicate= array();
+	$sqlCheckDuplicate[0]=  "UPDATE $tableName SET isdoublon = false";
+	//$sqlCheckDuplicate[1]=  "UPDATE $tableName, `drp_content_type_bd_i_description_physique`  SET isdoublon = true WHERE Code_ile_ilot = `field_bdi_dp_code_ile_value`";
+	return $sqlCheckDuplicate;
+}
+
+function _getSqlCheckWarning($tableName) {
+	$sqlCheckWarning= array();
+	return $sqlCheckWarning;
+}
+
+function _getMappingNodeSelectImportableData($tableName) {
+    $mapping = array();
+    $mapping['import_bd_i_description_physique'] = array(
+        'name' => t('Island').' : '.t('Physical description'),
+        'contentType' => "bd_i_description_physique",
+        'titleField' => 'Code_ile_ilot',
+		'update' =>true,
+		'updateSelectNid' =>"
+				SELECT nid 
+				FROM (
+				  SELECT  thes_code_ilot_ile.tid AS code_ile
+				  FROM (SELECT * FROM $tableName WHERE importid=XXupdateSelectNidXX) AS PIMimport
+				  JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_code_ilot_ile
+				  ON thes_code_ilot_ile.name = Code_ile_ilot
+				) AS importTable 
+				JOIN {content_type_bd_i_description_physique}  ON code_ile =  field_bdi_dp_nom_ile_code_ile_value LIMIT 1",
+		'query'=>"
+			SELECT
+			`importid`,
+			`Code_ile_ilot`,
+			CONCAT (`Code_ile_ilot`, '||', COALESCE (`Nom_ile_ilot`, '')) `Code_ile_ilot_name`, 
+			`Archipel`,
+			`Nom_ile_ilot`,
+			`Autres_nom`,
+			`Zone_geographique`,
+			`Region_Wilaya_Gouvernorat_Communaute_autonome`,
+			`Departement_Province`,
+			`Commune`,
+			`Localite_la_plus_proche`,
+			CONCAT(`FLat`, ' ',  `FLon`) AS field_bdi_dp_coordonnees,
+			`Superficie_terrestre`,
+			`Superficie_aire_marine_protegee`,
+			`Altitude`,
+			`Distance_cote_continentale`,
+			`Cote_continentale_reference`,
+			`Distance_ile_principale_plus_proche`,
+			`Ile_principale_de_reference`,
+			`Lineaire_cotier`,
+			`Ile_PIM`
+			FROM (
+				SELECT 
+					*, 
+					IF (`Latitude`,REPLACE(`Latitude`, ',', '.')-0.0, NULL ) AS FLat,
+					IF (`Longitude`,REPLACE(`Longitude`, ',', '.')-0.0, NULL ) AS FLon
+				FROM $tableName WHERE NOT isdoublon
+			) importTable",
+		'fields' => array (
+                0 => array (
+                    'name'=>'Code_ile_ilot',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_dp_nom_ile_code_ile',
+					'type'=>'taxonomy',
+                    'taxonomyVoc'=>4,
+                    'taxonomyDesc'=>true,
+                    'taxonomyOpen'=>true,
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Code_ile_ilot_name',
+                ),
+                1 => array (
+                    'name'=>'Archipel',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_dp_archipel',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Archipel',
+                ),
+                                 2 => array (
+                    'name'=>'Autres_nom',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_dp_autres_noms',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Autres_nom',
+                ),
+				 3 => array (
+                   'name'=>'Zone_geographique',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_dp_zone_geographique',
+                    'type'=>'taxonomy',
+                    'taxonomyVoc'=>8,
+                    'taxonomyOpen'=>false,
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Zone_geographique'
+                ),
+				5 => array (
+                    'name'=>'Localite_la_plus_proche',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_dp_localite_proche',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Localite_la_plus_proche',
+                ),
+				6 => array (
+                    'name'=>'Superficie_terrestre',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_dp_sup_terrestre_ha',
+                    'type'=>'float',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Superficie_terrestre'
+                ),
+				7=> array (
+                    'name'=>'Superficie_aire_marine_protegee',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_dp_sup_amp_ha',
+                    'type'=>'float',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Superficie_aire_marine_protegee'
+                ),
+				8 => array (
+                    'name'=>'Altitude',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_dp_altitude_metre',
+                    'type'=>'float',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Altitude'
+                ),
+				9 => array (
+                    'name'=>'Distance_cote_continentale',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_dp_dist_cote_cont',
+                    'type'=>'float',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Distance_cote_continentale'
+                ),
+				10 => array (
+                    'name'=>'Cote_continentale_reference',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_dp_cote_cont_reference',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Cote_continentale_reference',
+                ),
+				11 => array (
+                    'name'=>'Distance_ile_principale_plus_proche',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_dp_dist_ile_proche',
+                    'type'=>'float',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Distance_ile_principale_plus_proche'
+                ),
+				12 => array (
+                    'name'=>'Ile_principale_de_reference',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_dp_ile_principal_ref',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Ile_principale_de_reference',
+                ),
+				11 => array (
+                    'name'=>'Lineaire_cotier',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_dp_lineaire_cote_metre',
+                    'type'=>'float',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Lineaire_cotier'
+                ),
+				13=> array (
+                    'name'=>'field_bdi_dp_coordonnees',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_dp_coordonnees',
+                    'type'=>'geoData',
+                    'typeImpl'=>'geo',
+                    'importTableField'=> 'field_bdi_dp_coordonnees'
+                ),
+				14 => array (
+                    'name'=>'Code_ile_ilot',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_dp_code_ile',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Code_ile_ilot',
+                ),
+				15 => array (
+                   'name'=>'Commune',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_dp_topo_communes',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Commune',
+                ),
+				16 => array (
+                   'name'=>'Departement_Province',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_dp_topo_province',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Departement_Province',
+                ),
+				17 => array (
+                   'name'=>'Region_Wilaya_Gouvernorat_Communaute_autonome',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_dp_topo_region',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Region_Wilaya_Gouvernorat_Communaute_autonome',
+                ),
+		18 => array (
+		   'name'=>'Ile_PIM',
+		    'mutlivalue'=> false,
+		   'contentField' => 'field_bdi_dp_ispim_island',
+		    'type'=>'text',
+		    'typeImpl'=>'value',
+		    'importTableField'=>'Ile_PIM',
+		),
+			)
+	);
+    return $mapping;
+}
+
+

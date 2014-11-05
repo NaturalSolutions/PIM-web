@@ -1,0 +1,428 @@
+
+#fiche-ile-border {
+    margin-top: 5px;
+    margin-left: 15px;
+    background: url("../images/page-background/bg_fiche_ile.png") no-repeat scroll 0 0 transparent;
+    width: 765px;
+    margin-bottom: 26px;
+}
+#fiche-ile {
+  margin-top: 10px;
+}
+
+.section-fiche-ile .fiche_img {
+    margin-left: 15px;
+    margin-top: 47px;
+    display: block;
+    height: auto;
+    position: absolute;
+    width: 180px;
+}
+
+.section-fiche-ile img {
+    border: 0 none;
+}
+
+#fiche-menu {
+    margin-left: 4px;
+    /* margin-top: 190px; */
+    margin-top: 140px;
+    position: absolute;
+    width: 206px;
+    font-size: 0.75em;
+    overflow: hidden;
+    /* z-index: 20; */
+}
+
+#fiche-ile-content {
+
+    /* margin-left: 257px; */
+    margin-left: 210px;
+    margin-top: 15px;
+    margin-right: 26px;
+    /* overflow: auto; */
+    overflow: hidden;
+    display: block;
+    position: relative;
+    width: 70%;
+    /* min-height: 900px;*/
+    min-height: 1260px;
+   
+}
+
+#ficheile {
+	margin-top: 20px;
+  z-index: 10;
+}
+
+/*****************************/
+/* Vertical Tabs */
+
+.section-fiche-ile ul.primary {
+  background: none;
+  border-width: 0;
+  line-height: normal;
+  list-style: none outside none;
+  margin: 0;
+  padding-left: 10px;
+  white-space: nowrap;
+  border-bottom: none;
+  border-collapse: collapse;
+  height: auto;
+  line-height: normal;
+  list-style: none outside none;
+  white-space: nowrap;
+}
+
+.section-fiche-ile ul.primary li {
+  float: right;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.section-fiche-ile ul.primary li.active a,
+.section-fiche-ile ul.primary li.active a:hover,
+.section-fiche-ile ul.primary li.active a:focus {
+  background: url("../images/vtabs/vtab-left.png") no-repeat scroll left 0 transparent;
+  border-width: 0;
+  color: #000000;
+}
+.section-fiche-ile ul.primary li a {
+  background: url("../images/vtabs/vtab-left.png") no-repeat scroll left -38px transparent;
+  border-width: 0;
+  color: #777777;
+}
+
+.section-fiche-ile ul.primary li.active a {
+  -moz-border-bottom-colors: none;
+  -moz-border-image: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background-color: #FFFFFF;
+  border-color: #BBBBBB #BBBBBB #FFFFFF;
+  border-style: solid;
+}
+.section-fiche-ile ul.primary li.active a,
+.section-fiche-ile ul.primary li.active a:hover,
+.section-fiche-ile ul.primary li.active a:focus  {
+  color: #003eac;
+}
+
+.section-fiche-ile ul.primary li a {
+  display: block;
+  font-weight: bold;
+  height: 24px;
+  margin: 0;
+  padding: 0 0 0 5px;
+  text-decoration: none;
+}
+
+.section-fiche-ile ul.primary li.active a .tab,
+.section-fiche-ile ul.primary li.active a:hover .tab,
+.section-fiche-ile ul.primary li.active a:focus .tab {
+  background: url("../images/vtabs/vtab-right2.png") no-repeat scroll right 0 transparent;
+}
+
+
+.section-fiche-ile ul.primary li a .tab {
+  border-width: 0;
+  display: block;
+  height: 20px;
+  line-height: 20px;
+  margin: 0;
+  padding: 4px 13px 0 6px;
+}
+#fiche-menu .tabs-biodiversity-title {
+  padding-top: 10px;
+  padding-left: 5px;
+  font-size: 1.2em;
+}
+#fiche-menu .tabs-bdn-subtitle1 {
+  padding-top: 5px;
+  padding-left: 10px;
+  font-size: 1.1em;
+}
+
+/* disable scroll bar on bdn tabs contained into fieldsets */
+html.js fieldset.fi_bdn_tabs .fieldset-wrapper {
+  overflow: hidden;
+}
+
+
+#fiche-menu fieldset.collapsible  legend a {
+  color: #777777;
+  text-decoration: none;
+}
+#fiche-menu fieldset.collapsed  legend a {
+  color: #777777;
+  text-decoration: none;
+}
+
+/* fieldset test: display fieldsets like tabs = failure  */
+/*
+#fiche-menu .fi_bdn_fieldsets fieldset.collapsible legend  {
+  background: url("../images/vtabs/vtab-left.png") no-repeat scroll left 0 transparent;
+  border-width: 0;
+  color: #003eac;
+  
+  display: block;
+  font-weight: bold;
+  height: 24px;
+  margin: 0;
+  padding: 0 0 0 5px;
+  text-decoration: none;
+  
+  -moz-border-bottom-colors: none;
+  -moz-border-image: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background-color: #FFFFFF;
+  border-color: #BBBBBB #BBBBBB #FFFFFF;
+  border-style: solid;
+  z-index = 20;
+}
+
+#fiche-menu .fi_bdn_fieldsets fieldset.collapsed legend {
+  
+  background: none;
+  border-width: 0;
+  color: #777777;
+  
+  display: block;
+  
+  height: 24px;
+  margin: 0;
+  padding: 0 0 0 5px;
+  text-decoration: none;
+  z-index = 20;
+}
+#fiche-menu .fi_bdn_fieldsets fieldset.collapsible legend a{
+  background: url("../images/vtabs/vtab-right2.png") no-repeat scroll right 0 transparent;
+  
+  border-width: 0;
+  display: block;
+  height: 20px;
+  line-height: 20px;
+  margin: 0;
+  padding: 4px 13px 0 6px;
+  z-index = 25;
+}
+#fiche-menu .fi_bdn_fieldsets fieldset.collapsed legend a{
+  
+  background: url("../images/vtabs/vtab-left.png") no-repeat scroll left -38px transparent;
+  border-width: 0;
+  color: #777777;
+  text-decoration: none;
+  font-weight: none;
+  background-position: 0px 100%;
+  
+  border-width: 0;
+  display: block;
+  height: 20px;
+  line-height: 20px;
+  margin: 0;
+  padding: 4px 13px 0 6px;
+  z-index = 25;
+}
+
+*/
+
+/*****************************/
+/* Voir / Modifier Small Tabs */
+
+.section-fiche-ile #level2 {
+  font-size: 0.7em;
+  float: right;
+  margin-top: 10px;
+  z-index: 5;
+}
+
+.section-fiche-ile ul.secondary {
+  background: none;
+  border-bottom: none;
+  list-style: none outside none;
+  margin: 0;
+  padding: 0 0 0 5px;
+  white-space: nowrap;
+}
+
+.section-fiche-ile ul.secondary li {
+  border-right: medium none;
+  float: left;
+  margin: 0 5px 0 0;
+  padding: 5px 0;
+}
+
+.section-fiche-ile ul.secondary a.active, 
+.section-fiche-ile ul.secondary a.active:hover, 
+.section-fiche-ile ul.secondary a.active:focus {
+    background: url("../images/tab-secondary.png") repeat-x scroll left top transparent;
+    border: 1px solid #C0C0C0;
+    color: #000000;
+}
+
+.section-fiche-ile ul.secondary a.active {
+    border-bottom: 1px solid #999999;
+}
+
+
+.section-fiche-ile ul.secondary a {
+    display: block;
+    height: 20px;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+
+/*****************************/
+
+.ficheile-titre {
+   padding-top: 0px;
+	/*padding-left: 20px;*/
+	line-height: 1.2em;
+   text-align: left;
+   font-size: 1.4em;
+}
+
+/*
+.ficheile-titre .texte-orange a {
+  color: #FF741C;
+  text-decoration: none;
+}
+.ficheile-titre .texte-orange a:hover {
+  text-decoration: underline;
+}
+*/
+
+#ficheile table {
+	width: 100%;
+  border: 1px solid #CCCCCC;
+  margin-top: 10px;
+}
+
+#ficheile td.ficheile-label {
+    background: none repeat scroll 0 0 #EEEEEE;
+    border-left: 1px solid #CCCCCC;
+    font-weight: bold;
+    width: 55%;
+}
+
+#ficheile td.tableile-label {
+    background: none repeat scroll 0 0 #EEEEEE;
+    border-left: 1px solid #CCCCCC;
+    font-weight: bold;
+}
+
+#ficheile td {
+    border-bottom: 1px solid #CCCCCC;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #CCCCCC;
+    margin: 0;
+    padding: 0 0 0 5px;
+    vertical-align: middle;
+}
+
+#ficheile td  .texte-orange a
+ {
+  color: #FF741C;
+  text-decoration: none;
+}
+#ficheile td  .texte-orange a:hover {
+  text-decoration: underline;
+}
+
+#ficheile td a {
+  color: #666666;
+  text-decoration: underline;
+}
+#ficheile td a:hover {
+  color: #FF741C;
+  text-decoration: underline;
+}
+
+#ficheile .ficheile-legend {
+  padding-top: 20px;
+  font-size: 0.75em;
+}
+/*----------------------------------------------------------------------------*/
+ /** Node/edit **
+ /*----------------------------------------------------------------------------*/
+ 
+#fi_breadcrumb {
+    padding-top: 15px;
+		padding-left: 26px;
+    text-align: left;
+    font-size: 1.2em;
+}
+ 
+/*----------------------------------------------------------------------------*/
+ /** Rapports **
+ /*----------------------------------------------------------------------------*/
+
+#ficheile .div-titre,
+#ficheile .table-titre {
+  padding-top: 26px;
+  padding-left: 0px;
+  /* padding-left: 26px; */
+}
+
+#ficheile td .tr-titre {
+	width: 100%;
+}
+
+#ficheile .table-report {
+  margin-top: 10px;
+  font-family: Trebuchet MS,Lucida Grande,Arial,Helvetica,sans-serif;
+  font-size: 0.75em;
+}
+
+#ficheile .table-report a {
+  font-family: Trebuchet MS,Lucida Grande,Arial,Helvetica,sans-serif;
+  font-size: 1em;
+}
+
+#ficheile .table-report tr.even, 
+#ficheile .table-report tr.odd {
+  background-color: #FFFFFF;
+  border-top: 1px solid #CCCCCC;
+}
+
+#ficheile .table-report td.active {
+  background-color: #EEEEEE;
+  border-top: 1px solid #CCCCCC;
+}
+
+#ficheile .pager a {
+  color: #666666;
+}
+
+#ficheile th a {
+  color: #003eac;
+  text-decoration: none;
+}
+#ficheile th.active a {
+  color: #003eac;
+  text-decoration: underline;
+}
+
+
+/*----------------------------------------------------------------------------*/
+ /** Photos et illustrations **
+ /*----------------------------------------------------------------------------*/
+
+#ficheile-photos_illustrations ul {
+	display:inline;
+}
+#ficheile-photos_illustrations li {
+	float:left;
+	display:inline;
+	clear:none;
+	margin-bottom: 10px;
+	margin-left: 5px;
+	height: 200px;
+	max-width: 180px;
+}

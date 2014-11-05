@@ -1,0 +1,6 @@
+; $Id: ctools.info,v 1.2 2011/08/02  $
+name = Autocomplete Taxonomy Filter
+description = Filtre exposé autocomplete pour les champs de type taxonomy
+core = 6.x
+version = "6.x-1.2"
+package = "# NS Modules"

@@ -1,0 +1,583 @@
+/**
+ * @file
+ * PIM Styles
+ */
+ 
+ /*----------------------------------------------------------------------------*/
+ /** inherited styles **/
+ 
+ body {
+  color: #666666;
+  font-size: 100%;
+  font-family: Trebuchet MS,Lucida Grande,Arial,Helvetica,sans-serif;
+}
+
+ 
+ /*----------------------------------------------------------------------------*/
+ /** View header / Node Chapeau / Node Programme **
+ /*----------------------------------------------------------------------------*/
+ /* used in templates: 
+    views-view-fields--page.tpl.php 
+    node-pages_chapeau.tpl.php
+    node-programme.tpl.php
+*/
+ 
+
+ h1 { font-size: 1em; font-weight: bold; }
+ 
+.page-titre-bleu,
+.page-soustitre-bleu,
+.accueil-titre-bleu-mini,
+.accueil-soustitre-bleu-mini { display: block; 
+                       color: #003eac; 
+                       font-family: Verdana, Trebuchet MS,"Lucida Grande",Arial,Times New Roman;
+                       line-height: 1em;}
+               
+.page-titre-bleu { font-size: 2em;} /*2.2em;}*/
+.page-soustitre-bleu { font-size: 2.8em} /*3.4em}*/
+.accueil-titre-bleu-mini  { font-size: 1.6em} /*1.8em}*/
+.accueil-soustitre-bleu-mini  { font-size: 2.4em} /*2.8em}*/
+
+
+h2 { font-size: 1em;}
+
+.description-orange {
+	color: #FF741C;
+    font-family: "Lucida Grande","Trebuchet MS",Arial,Helvetica,sans-serif;
+    font-size: 1em; /* 0.875em;*/
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+    padding-top: 15px;
+}
+
+
+p { text-align: justify;  margin-bottom: 1em;}
+
+.texte-gris,
+.texte-gris-em,
+.texte-gris-gras,
+.texte-gris-grossi,
+.texte-gris-grossi-gras,
+.texte-gris-plus,
+.texte-gris-em-plus {
+    /* color : #666666; */
+    font-size: 0.75em;
+    font-family: Trebuchet MS,Lucida Grande,Arial,Helvetica,sans-serif;
+}
+
+.texte-gris a { color: #666;}
+.texte-gris a:hover { color: #FF741C;}
+
+
+.texte-gris-em,
+.texte-gris-em-plus {
+  font-style: italic; font-weight: bold;
+}
+.texte-gris-gras {font-weight: bold;}
+.texte-gris-grossi {font-size: 0.77em;}
+.texte-gris-grossi-gras {font-size: 0.77em;font-weight: bold;}
+
+.texte-gris-plus, 
+.texte-gris-em-plus { 
+  font-size: 0.85em; 
+  font-weight: normal;
+}
+
+
+.admin-links {
+    color : #FF741C;
+    font-size: 0.75em;
+    font-family: Trebuchet MS,Lucida Grande,Arial,Helvetica,sans-serif;
+}
+
+.views-view-header-content {
+    padding-top: 15px;
+}
+
+#content-area .admin-links a,
+#content-area .node-ref-iles a
+ {
+  color: #FF741C;
+  text-decoration: none;
+}
+
+#content-area .admin-links a:hover,
+#content-area .node-ref-iles a:hover {
+text-decoration: underline;
+}
+
+.texte-orange a {
+  color: #FF741C;
+  text-decoration: none;
+}
+.texte-orange a:hover {
+  text-decoration: underline;
+}
+/*----------------------------------------------------------------------------
+ ** Special Wysiwyg **
+ *   = tenir compte que ces styles sont imbriqués dans texte gris 
+ *      => le font size se cumule avec le font size de texte gris
+ *      => ici font size 1em = font size texte-gris = 0.75em
+ ----------------------------------------------------------------------------*/
+
+.texte-gris-em-wsg,
+.texte-gris-gras-wsg,
+.texte-gris-grossi-wsg,
+.texte-gris-grossi-gras-wsg {
+    /* color : #666666; */
+    font-size: 1em;
+    font-family: Trebuchet MS,Lucida Grande,Arial,Helvetica,sans-serif;
+}
+.texte-gris-em-wsg,
+.texte-gris-em-plus-wsg {
+  font-style: italic; font-weight: bold;
+}
+.texte-gris-gras-wsg {font-weight: bold;}
+.texte-gris-grossi-wsg {font-size: 1.2em;}
+.texte-gris-grossi-gras-wsg {font-size: 1.2em;font-weight: bold;}
+
+ 
+.texte-orange,
+.texte-orange-em,
+.texte-orange-gras,
+.texte-orange-grossi,
+.texte-orange-grossi-gras {
+    color : #FF741C;
+    font-size: 1em;
+    font-family: Trebuchet MS,Lucida Grande,Arial,Helvetica,sans-serif;
+}
+
+.texte-orange-em {font-style: italic; font-weight: bold;}
+.texte-orange-gras {font-weight: bold;}
+.texte-orange-grossi {font-size: 1.2em;}
+.texte-orange-grossi-gras {font-size: 1.2em;font-weight: bold;}
+/*----------------------------------------------------------------------------*/
+ /** Page d'accueil **
+ /*----------------------------------------------------------------------------*/
+.texte-blanc-grossi-gras h2 
+{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.texte-blanc-grossi-gras a,
+.texte-blanc-grossi-gras h2 a
+ {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.4em;
+}
+
+.texte-blanc-grossi-gras a:hover,
+.texte-blanc-grossi a:hover,
+.texte-blanc a:hover { color: #add8e6;}
+    
+.accueil-block-presentation-content {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+/**/
+
+.view-dom-id-Accueil-Presentation-block-2-1 {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-left: 26px;
+  margin-right: 26px;
+}
+
+.view-Accueil-FourNews2 .view_photo_slideshow,
+.view-Accueil-TroisDocs2 .view_photo_slideshow {
+	position: relative;
+	margin-top: 0px; 
+	margin-bottom: 26px; 
+}
+
+#block-views-Accueil_TroisDocs2-block_1 {
+  margin-left: 350px;
+}
+
+
+.page-accueil2 #block-menu-menu-menu-accueil-titrebloc-docs {
+  background: url("../images/background/background-front-title-block.png") no-repeat scroll left top transparent;
+  font-size: 1em;
+  padding: 7px 14px;
+  width: 126px;
+  margin-left: 350px;
+}
+#block-menu-menu-accueil2-actualites-titre
+ {
+  background: url("../images/background/background-front-title-block.png") no-repeat scroll left top transparent;
+  font-size: 1em;
+  padding: 7px 14px;
+  width: 126px;
+}
+
+#block-menu-menu-accueil2-actualites-titre ul li a {
+  background: url("../images/puce/Fleche_n1_5x9.png") no-repeat scroll 0 10px transparent;
+  color: #FFFFFF;
+  padding-bottom: 0;
+  padding-left: 12px;
+  padding-top: 3px;
+  text-decoration: none;
+}
+/*tmp*/
+.page-accueil2 .views-row {
+  margin-top: 0px;
+}
+/*----------------------------------------------------------------------------*/
+ /** Actualités - Bibliothèque **
+ /*----------------------------------------------------------------------------*/
+ 
+/* .views-view--topnews-attachment-1-header */
+.bloc-gris { 
+            /* background-color: #ddd;  */
+            /* background-color: #74797d; 		#726E6D #717D7D*/
+            background-color:  #767b7f;  /*bluegrey: #546c7e; othergrey #726E6D; */
+            /* color: #31569F;  */
+            color: #fff;
+            margin-top: 10px; 
+            padding: 5px; 
+            font-size: 0.875em;} 
+
+#content-area .bloc-gris .bloc-gris-titre h2,
+#content-area .bloc-gris .bloc-gris-titre h2 a {
+  /* font-size: 0.875em; */
+  line-height: 1em;
+  margin-bottom: 0;
+  margin-top: 0;
+  color: #fff;
+  text-decoration: none;
+}
+/* .views-view--topnews-attachment-1-header-date */
+#content-area .bloc-gris-date,
+#content-area .bloc-gris-date a {
+	display: block;
+	/* font-size: 0.85em;*/
+  color: #fff;
+  text-decoration: none;
+}
+#content-area .bloc-gris .bloc-gris-titre h2 a:hover,
+#content-area .bloc-gris-date a:hover {
+  text-decoration: underline;
+}
+
+/* .views-view--topnews-attachment-1-header-title */
+.bloc-gris-titre {
+	display: block;
+	width: 550px;
+	font-weight:bold;
+}
+
+/*----------------------------------------------------------------------------*/
+ /** Bibliothèque **
+ /*----------------------------------------------------------------------------*/
+.view-Bibliotheque2 .view-filters {
+  padding-top: 15px;
+}
+.view-Bibliotheque2 .pager {
+  padding-top: 15px;
+  padding-bottom: 0px;
+}
+/*
+.view-Bibliotheque2 .views-row {
+  margin-top: 0px;
+}
+*/
+.pim-exposed-filter {
+	background: #E5E5E5;
+	padding: 20px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+/*----------------------------------------------------------------------------*/
+ /** Tables **
+ /*----------------------------------------------------------------------------*/
+
+.view-Partenaires-Bailleurs  .views-view-grid td,
+.view-Equipe  .views-view-grid td,
+.view-Corege .views-view-grid td,
+.view-Annuaire .views-view-grid td {
+    width: 33%;
+    vertical-align: top;
+}
+
+.view-content table.views-view-grid {
+  clear: both;
+  content: ".";
+  display: block;
+}
+
+
+/*----------------------------------------------------------------------------*/
+ /** Espace Collaboratif **
+ /*----------------------------------------------------------------------------*/
+
+.more-help-link {
+    padding-bottom: 15px;
+}
+#content-area .view-og .views-exposed-form {
+  background: #E5E5E5;
+  padding: 6px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  width:50%;
+  font-size: 0.8em;
+  font-family: Trebuchet MS,Lucida Grande,Arial,Helvetica,sans-serif;
+}
+
+#content-area .view-og .view-content {
+  padding-top: 10px;
+}
+#content-area .view-og  table th,
+#content-area .view-og  table td {
+  font-size: 0.8em;
+  font-family: Trebuchet MS,Lucida Grande,Arial,Helvetica,sans-serif;
+  padding: 8px;
+}
+
+.page-og .feed-icons {
+  display: none;
+}
+/*----------------------------------------------------------------------------*/
+ /** Affichage Noeud Simple Page **
+ /*----------------------------------------------------------------------------*/
+div.nodepageview-field-content {
+    display: block;
+    padding-left: 15px;
+ }
+ 
+
+div.nodepageview-field-label {
+    padding-top: 1em;
+    padding-bottom: 5px;
+ }
+
+table.nodepageview {
+width: 100%;
+border: 1px solid #CCC;
+margin-top: 20px;
+}
+
+
+
+td.nodepageview-field-label {
+  background: none repeat scroll 0 0 #EEE;
+  border-left: 1px solid #CCC;
+  font-weight: bold;
+  width: 25%;
+}
+
+td.nodepageview-field-content,
+td.nodepageview-field-label {
+border-bottom: 1px solid #CCC;
+border-right: 1px solid #CCC;
+margin: 0;
+padding: 2px 5px 2px 5px;
+vertical-align: middle;
+}
+
+td.nodepageview-field-content-admin {
+  background: none repeat scroll 0 0 #F8F0F8;
+}
+
+#content-area td.nodepageview-field-content .texte-orange a
+ {
+  color: #FF741C;
+  text-decoration: none;
+}
+
+#content-area td.nodepageview-field-content .texte-orange a:hover {
+text-decoration: underline;
+}
+
+/*----------------------------------------------------------------------------*/
+ /** Slideshow **
+ /*----------------------------------------------------------------------------*/
+
+.page-phototheque .view_photo_slideshow {
+	position: relative;
+	margin-top: 30px; 
+	margin-bottom: 50px; 
+}
+
+.page-phototheque .views-slideshow-controls-top {
+		display: inline;
+}
+
+.page-phototheque .views_slideshow_singleframe_teaser_section {
+	position: relative;
+	height: 216px;
+  width: 573px;
+	margin-left: auto;
+  margin-right: auto;   
+}
+	
+.page-phototheque .views_slideshow_singleframe_previous, .views_slideshow_singleframe_next {
+	width:30px;/*48px;*/
+	height:30px;/*0px;*/
+	/*padding-top:48px;*/
+	position:absolute;
+	top:135px;
+	overflow:hidden;	
+  font-size:0;
+}
+.page-phototheque .views_slideshow_singleframe_previous {
+  background: url("../images/phototheque/prev30.gif");
+  left:0px;
+}
+.page-phototheque .views_slideshow_singleframe_previous:hover {
+	background: url("../images/phototheque/prev_hover30.gif");
+}
+.page-phototheque .views_slideshow_singleframe_next {
+  background: url("../images/phototheque/next30.gif");
+  right:0px;
+}
+.page-phototheque .views_slideshow_singleframe_next:hover {
+	background: url("../images/phototheque/next_hover30.gif");
+
+}
+/*******/
+
+.page-phototheque .views_slideshow_singleframe_pause {
+  display:none;
+}
+
+.page-phototheque .content-fields-slideshow-image {
+	position:absolute;
+	left:0px;
+	width:320px;
+	height:216px;
+}
+
+.page-phototheque .content-fields-slideshow-text{
+	position:absolute;
+	left:320px;
+	text-align: justify;
+	margin-left:10px;
+	padding-left:10px;
+	width:250px;
+	height:216px;
+}
+
+.page-phototheque .content-fields-slideshow-text-meta{
+	position: absolute;
+	bottom: 0;
+}
+
+#content-area ul.pim-specialite {
+padding-bottom: 0em;
+
+}
+
+
+
+
+/******************************************************************************************/
+/*					FILTRES exposés
+/*******************************************************************************************/
+
+.pim-exposed-filter{
+	background: #E5E5E5;
+	padding: 20px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+/******************************************************************************************/
+/*					FICHE TAXON
+/*******************************************************************************************/
+
+.flicker-image{
+	clear:both;
+	/*padding: 20px;
+	margin: 20px;*/
+	overflow:auto;
+	height: 250px;
+}
+
+.flicker-image div {
+	margin-bottom: 10px;
+	margin-left: 10px;
+	float:left;
+}
+
+h1.taxon-name {
+	font-size: 28px;
+	line-height: 34px;
+	font-style: italic;
+	margin-bottom: 5px;
+}
+
+#statusEspeces-box {
+	width:214px;
+}
+
+div.statutEspeces {
+	border: 1px solid #990000;
+	color: #990000;
+	padding:5px;
+	margin:2px;
+	font-size: 11px;
+	font-weight: bold;
+	text-align: center;
+}
+
+div.fiche-taxon-content {
+	border: 1px solid ;
+	padding:10px;
+	margin-bottom:10px;
+}
+div.fiche-taxon-header {
+	margin-bottom:10px;
+}
+
+div.fiche-taxon-header h2 {
+	margin-left:10px;
+	margin-top:0;
+}
+
+
+div.fiche-taxon-content label {
+	font-weight: bold;
+}
+
+img.main-picture{
+	width:100%;
+}
+
+div.gbif-map img {
+	width:100%;
+}
+div.wikipedia{
+	border: none;
+}
+div.flicker-thumb {
+	clear: both;
+}
+
+div.left-box {
+  width:329px;
+}
+
+div.right-box {
+  width:329px;
+	margin-left:10px;
+	float:right;
+}
+.float-left {
+	float:left;	
+}
+
+
+/******************************************************************************************/
+/*					Export
+/*******************************************************************************************/
+.wizard-trail {
+	font-size: 110%;
+   padding-top: 20px;
+}
+.wizard-trail-current {
+   color:#FF741C;
+} 

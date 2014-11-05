@@ -1,0 +1,5 @@
+; $Id: ctools.info,v 1.2 2011/08/02  $
+name = Fiche taxon
+description = Affichage des données relatives aux taxons (interne + wikipedia+ flicker+ gbif)
+core = 6.x
+package = "# NS Modules"

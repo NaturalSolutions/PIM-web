@@ -1,0 +1,15 @@
+/**
+ * @file
+ * Views Styling
+ */
+
+ /* actualités */
+.view-ArchivesNews .views-row,
+.view-TopNews .views-row { clear: both; margin-top: 15px;}
+.views-view--topnews-attachment-1-header { background-color: #ddd; color: #31569F; margin-top: 10px; padding: 3px; font-size: 0.875em;} 
+.views-view--topnews-attachment-1-content-text a { color: #666;}
+.views-view--topnews-attachment-1-content-text a:hover { color: #FF741C;}
+
+/*bandeau*/
+.view-Bandeau .view-content li { display: none;}
+.view-Bandeau .view-content li.views-row-first { display: block;}

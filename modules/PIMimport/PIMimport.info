@@ -1,0 +1,5 @@
+; $Id: ctools.info,v 1.2 2011/08/02  $
+name = NS import
+description = NS import
+core = 6.x
+package = "# NS Modules"

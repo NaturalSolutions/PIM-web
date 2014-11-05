@@ -1,0 +1,78 @@
+/**
+ * @file
+ * RTL companion for the layout-fixed.css file.
+ */
+
+
+/*
+ * Content
+ */
+ /*
+#content,
+.no-sidebars #content {
+  float: right;
+  margin-left: -900px; 
+  margin-right: 0;
+}
+
+.sidebar-first #content {
+  margin-left: -900px; 
+  margin-right: 200px;
+}
+
+.sidebar-second #content {
+  margin-left: -700px; 
+  margin-right: 0;
+}
+
+.two-sidebars #content {
+  margin-left: -700px; 
+  margin-right: 200px; 
+}
+*/
+
+/*
+ * Navigation
+ */
+/*#navigation {
+  float: right;
+  margin-left: -100%; 
+  margin-right: 0;
+}
+
+#navigation ul  {
+  text-align: right;
+}
+
+#navigation li {
+  float: right;
+  padding: 0 0 0 10px;
+}*/
+
+/*
+ * First sidebar
+ */
+/*.region-sidebar-first {
+  float: right;
+  margin-left: -200px; 
+  margin-right: 0;
+}
+
+.region-sidebar-first .section {
+  margin: 0 0 0 20px;
+}*/
+
+/*
+ * Second sidebar
+ */
+ /*
+.region-sidebar-second {
+  float: right;
+  margin-left: -900px; 
+  margin-right: 700px; 
+}
+
+.region-sidebar-second .section {
+  margin: 0 20px 0 0;
+}
+*/

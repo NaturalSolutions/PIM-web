@@ -1,0 +1,1749 @@
+/****************************************************************************************************************************************************/
+/*		                                       CE FICHIER REGROUPE TOUT LE CSS PORTANT DE LA PARTIE ATLAS                                           */
+/*                                                                                                                                                  */
+/*          !! Pour ne pas alterer le style de la partie PIM - Veuillez respecter le systeme de selecteur mis en place (pas section#[ID]) !!        */
+/*                                                                                                                                                  */
+/****************************************************************************************************************************************************/
+/*
+* Feuille de style pour PIM ATLAS - NS 2014 
+* MEMO CSS CONDENSER : http://www.w3.org/TR/CSS2/indexlist.html
+* font: [ [ <'font-style'> || <'font-variant'> || <'font-weight'> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'>
+* background : 	[<'background-color'> || <'background-image'> || <'background-repeat'> || <'background-attachment'> || <'background-position'>] | inherit;
+*/
+/***************************************************************************/
+/*                          FONT - POLICE                                  */
+/*                                                                         */
+/***************************************************************************/
+/*@font-face {
+    font-family: helveticaNeueBold;
+    src: url('font/HelveticaNeueCondensedBold.ttf');
+}
+*/
+/***************************************************************************/
+/*                          DIVERS - Tools                                 */
+/*                                                                         */
+/***************************************************************************/
+/**
+ * clearfix sur le parent des float
+ */
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+/* IE6 */
+* html .clearfix {
+  height: 1%;
+}
+/* IE7 */
+*:first-child + html .clearfix {
+  min-height: 1%;
+}
+div.indentRight1 {
+  margin-left: 30px;
+}
+body.not-logged-in ul#nice-menu-2 li.menu-13551.menu-path-node-56647.odd.last,
+body.not-logged-in ul#nice-menu-2 li.menu-13552.menu-path-node-56647.odd.last {
+  display: none;
+}
+ul#nice-menu-2 li.menu-13551.menu-path-node-56647.odd.last,
+ul#nice-menu-2 li.menu-13552.menu-path-node-56647.odd.last {
+  position: absolute;
+  left: 739px;
+  z-index: 99999999;
+  top: -131px;
+  width: 50px;
+  color: transparent;
+  background: none repeat scroll 0% 0% #4779C0;
+  border-radius: 20px;
+  -webkit-moz-border-radius: 10px;
+  -moz-moz-border-radius: 10px;
+  -ms-moz-border-radius: 10px;
+  -o-moz-border-radius: 10px;
+  moz-border-radius: 10px;
+}
+ul#nice-menu-2 li.menu-13551.menu-path-node-56647.odd.last:hover,
+ul#nice-menu-2 li.menu-13552.menu-path-node-56647.odd.last:hover {
+  background: #FF741C;
+}
+ul#nice-menu-2 li.menu-13551.menu-path-node-56647.odd.last a,
+ul#nice-menu-2 li.menu-13552.menu-path-node-56647.odd.last a {
+  padding-left: 0px;
+  background: url('../../../images/icon_book.png') no-repeat 50% 50% !important;
+  background-size: 100% !important;
+  line-height: 0;
+  color: transparent;
+}
+ul#nice-menu-2 li.menu-13551.menu-path-node-56647.odd.last a:hover,
+ul#nice-menu-2 li.menu-13552.menu-path-node-56647.odd.last a:hover {
+  color: transparent;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                  		    CSS MENU                                   */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+ul#nice-menu-5 ul li {
+  background-color: rgba(255, 255, 255, 0.8);
+  /*width: 160%; */
+}
+/*
+ul#nice-menu-6 ul li a{
+	width: 100%;
+}*/
+/***************************************************************************/
+/***************************************************************************/
+/*                  		PAGE PROJET-ATLAS                              */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+div.firstLineOFHpAtlas div.meta,
+div.firstLineOFHpAtlas div.book-navigation,
+div.firstLineOFHpAtlas li.book_add_child {
+  display: none;
+}
+div.firstLineOFHpAtlas p {
+  display: block;
+  height: 38px;
+  padding-top: 10px;
+  background-size: 6%;
+  border-bottom: 3px dashed #666;
+  text-decoration: initial;
+  font-size: 1.8em;
+}
+div.firstLineOFHpAtlas li.book_printer {
+  /*	position: absolute;
+	bottom: 32%;
+	font-size: 12px;
+	z-index: 99999999;*/
+  display: none;
+}
+body.page-projet-atlas li.ar,
+body.page-projet-atlas li.it,
+body.page-projet-atlas li.es,
+body.node-type-book-sous-bassin li.ar,
+body.node-type-book-sous-bassin li.it,
+body.node-type-book-sous-bassin li.es {
+  visibility: hidden;
+}
+body.page-projet-atlas div#map_hp {
+  background: url(../../../images/map.png) no-repeat 99% 50%;
+  height: 400px;
+  width: 100%;
+  background-size: 100%;
+  border-bottom: 3px solid #4779C0;
+  border-left: 3px solid #4779C0;
+  border-right: 3px solid #4779C0;
+}
+body.page-projet-atlas a#btnImprim {
+  text-align: right;
+  width: auto;
+  margin-top: -17px;
+  float: right;
+}
+body.page-projet-atlas .dashboardLabel {
+  background: url(../../../images/gauge.png) no-repeat 99% 50% #4779c0;
+  display: block;
+  height: 38px;
+  padding: 4%;
+  background-size: 14%;
+  text-decoration: underline;
+  font-size: 1.8em;
+  margin-top: 77px;
+  color: #fff;
+  margin-bottom: 0;
+  width: 662px;
+}
+/*commentaires*/
+body.page-projet-atlas .titleCommentaire {
+  background: url(../../../images/comment_icon.png) no-repeat 99% 50% #4779c0;
+  display: block;
+  height: 38px;
+  padding: 4%;
+  background-size: 14%;
+  text-decoration: underline;
+  font-size: 1.8em;
+  margin-top: 77px;
+  color: #fff;
+  margin-bottom: 0;
+}
+body.page-projet-atlas div.view-v-atlas-affiche-comment-in-hp {
+  border-left: 1px solid #4779c0;
+  border-right: 1px solid #4779c0;
+  border-bottom: 1px solid #4779c0;
+  padding: 3%;
+}
+body.page-projet-atlas div.containerOfOneComment {
+  border-bottom: 1px dashed #4779c0;
+  padding-bottom: 32px;
+}
+body.page-projet-atlas div.views-row-last div.containerOfOneComment {
+  border-bottom: 0;
+  padding-bottom: 15px;
+}
+/*fin com*/
+/***************************************************************************/
+/***************************************************************************/
+/*                          EDITION SOUS BASSIN                            */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.node-type-book-sous-bassin.section-node-edit table.cke_editor tbody{
+  display: block;
+  min-height: 550px;
+}
+body.node-type-book-sous-bassin.section-node-edit table.cke_editor tbody tr{
+  display: block;
+}
+body.node-type-book-sous-bassin.section-node-edit table.cke_editor tbody tr td{
+  display: block;
+}
+body.node-type-book-sous-bassin.section-node-edit iframe {
+  float: left;
+}
+body.node-type-book-sous-bassin.section-node-edit .addEncadre, body.node-type-book-sous-bassin.section-node-edit .addSection, body.node-type-book-sous-bassin.section-node-edit .addLegend {
+  display: none;
+}
+body.node-type-book-sous-bassin.section-node-edit table .cke_toolbar, body.node-type-book-sous-bassin.section-node-edit table .cke_toolgroup {
+  width: 100%;
+}
+body.node-type-book-sous-bassin.section-node-edit a.addButton {
+  background: url(../../../images/add-new.png) no-repeat 20% 50% #4779bf;
+  height: 38px;
+  padding: 20px 0px 0px 0px;
+  background-size: 9%;
+  text-decoration: initial;
+  font-size: 2em;
+  width: 48%;
+  float: left;
+  color: #fff !important;
+  text-align: -webkit-center;
+  text-align: -o-center;
+  text-align: center;
+  vertical-align: top;
+  border-left: 14px solid #fff;
+}
+body.node-type-book-sous-bassin.section-node-edit a.addButton:hover {
+  background: url(../../../images/add-new_hover.png) no-repeat 20% 50% #ff741c;
+  background-size: 9%;
+}
+body.node-type-book-sous-bassin.section-node-edit div#field-ss-bassin-caract-env-items table,
+body.node-type-book-sous-bassin.section-node-edit div#field-ss-bassin-pic-of-map-items table {
+  width: 100%;
+}
+body.node-type-book-sous-bassin.section-node-edit div.body-field-wrapper {
+  display: none;
+}
+body.node-type-book-sous-bassin.section-node-edit fieldset.collapsible.collapsed,
+body.node-type-book-sous-bassin.section-node-edit div.wysiwyg-toggle-wrapper {
+  display: none;
+}
+body.node-type-book-sous-bassin.section-node-edit div#edit-title-wrapper {
+  margin-top: 55px;
+}
+body.node-type-book-sous-bassin.section-node-edit input#edit-preview {
+  display: none;
+}
+body.node-type-book-sous-bassin.section-node-edit div#edit-field-ss-bassin-status-conserv-0-value-wrapper label,
+body.node-type-book-sous-bassin.section-node-edit div#edit-field-ss-bassin-strat-conserv-0-value-wrapper label {
+  visibility: hidden;
+}
+body.node-type-book-sous-bassin.section-node-edit div.ui-dialog.jquery_ui_dialog-dialog.jquery_ui_dialog_default_ns-dialog {
+  background-color: #7FB3CE;
+}
+body.node-type-book-sous-bassin.section-node-edit iframe {
+  min-height: 0px!important; 
+}
+body.node-type-book-sous-bassin.section-node-edit .ui-dialog-content {
+  width: 100% !important;
+  height: 100% !important;
+}
+body.node-type-book-sous-bassin.section-node-edit .ui-dialog-titlebar-close {
+  color: transparent;
+}
+body.node-type-book-sous-bassin.section-node-edit .encadreStyle {
+  background-color: orange;
+}
+body.node-type-book-sous-bassin.section-node-edit .contenerRelatif {
+  position: relative;
+}
+body.node-type-book-sous-bassin.section-node-edit .addEncadre:hover,
+body.node-type-book-sous-bassin.section-node-edit .addSection:hover,
+body.node-type-book-sous-bassin.section-node-edit .btnShowDocs:hover,
+body.node-type-book-sous-bassin.section-node-edit .addLegend:hover {
+  background-color: #B2BBD0;
+}
+body.node-type-book-sous-bassin.section-node-edit .addEncadre,
+body.node-type-book-sous-bassin.section-node-edit .addSection,
+body.node-type-book-sous-bassin.section-node-edit .btnShowDocs,
+body.node-type-book-sous-bassin.section-node-edit .addLegend {
+  position: absolute;
+  top: 61px;
+  right: 35px;
+  font-weight: 700;
+  border: 1px solid #000;
+  padding: 1px 4px;
+  cursor: pointer;
+}
+body.node-type-book-sous-bassin.section-node-edit .addSection {
+  right: 12px;
+}
+body.node-type-book-sous-bassin.section-node-edit .addEncadre {
+  right: 58px;
+}
+body.node-type-book-sous-bassin input#edit-submit {
+  background-color: #4779bf;
+  height: 85px;
+  background-size: 9%;
+  text-decoration: initial;
+  font-size: 2em;
+  width: 100%;
+  color: #fff!important;
+  text-align: -webkit-center;
+  text-align: -o-center;
+  text-align: center;
+  cursor: pointer;
+}
+body.node-type-book-sous-bassin input#edit-submit:hover {
+  background-color: #FF741C;
+}
+body.node-type-book-sous-bassin .book-navigation,
+body.node-type-book-sous-bassin .links.inline,
+body.node-type-book-sous-bassin fieldset.menu-item-form,
+body.node-type-book-sous-bassin div#edit-path-wrapper {
+  display: none;
+}
+body.node-type-book-sous-bassin fieldset.collapsible legend.collapse-processed,
+body.node-type-book-sous-bassin div#edit-revision-wrapper,
+body.node-type-book-sous-bassin div#edit-status-wrapper {
+  display: none;
+}
+/*ref biblio*/
+body.node-type-book-sous-bassin .btnShowDocs {
+  right: 65px;
+}
+body.node-type-book-sous-bassin #dialog2{
+  display: none; 
+}
+body.node-type-book-sous-bassin div.ui-dialog.ui-draggable{
+  background-color: #7FB3CE;
+  padding: 1%;
+  height: auto !important;
+  resize: both; 
+    max-height: 500px;
+  overflow-y: scroll !important;
+}
+body.node-type-book-sous-bassin div.view-v-atlas-display-docs div.views-row{
+  border-bottom: 4px dashed #fff;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+body.node-type-book-sous-bassin div.view-v-atlas-display-docs div.views-row-last{
+  border-bottom: none;
+}
+body.node-type-book-sous-bassin span#ui-dialog-title-dialog2{
+  font-weight: bold;
+  cursor: move;
+  color: #fff;
+  font-size: 2.2em;
+}
+body.node-type-book-sous-bassin div.views-field-field-document-titre-value a{
+  text-decoration: none;
+  color: #fff;
+}
+body.node-type-book-sous-bassin div.views-field-field-document-titre-value a:hover{
+  text-decoration: underline;
+}
+body.node-type-book-sous-bassin div.views-field-field-document-auteur-value{
+  color: #fff;
+  font-style: italic;
+  font-size: 0.8em; 
+}
+body.node-type-book-sous-bassin div.views-field-field-document-titre-value{
+  padding-bottom: 10px;
+}
+body.node-type-book-sous-bassin div.views-field-field-document-annee-value{
+  display: none;
+}
+body.node-type-book-sous-bassin a.closeDialog2{
+  background: url('../../../images/Cancel.png') no-repeat 50% 50%;
+  background-size: 100%;
+  border: none;
+  position: absolute;
+  top: -16px;
+  left: -27px;
+}
+body.node-type-book-sous-bassin a.closeDialog2 span{
+  border: none;
+}
+body.node-type-book-sous-bassin div#dialog2 > a{
+  display: block;
+  width: 100%;
+  text-align: right;
+  color: #fff;
+  font-size: 0.8em;
+}
+body.node-type-book-sous-bassin div.views-field-field-document-auteur-value label.views-label-field-document-auteur-value{
+  float: left;
+  padding-right: 5px;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                  		VISUALISATION SOUS BASSIN                      */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+div.containerOfMyssBassin img.imageMap {
+  width: 100%;
+  margin-top: 30px;
+}
+div.containerOfMyssBassin a.titleSSbassin {
+  background: url(../../../images/icon_ss_bassin.png) no-repeat 102% 55%;
+  display: block;
+  height: 38px;
+  padding-top: 10px;
+  background-size: 12%;
+  border-bottom: 3px dashed #666666;
+  text-decoration: initial;
+  font-size: 1.8em;
+}
+div.containerOfMyssBassin h2 {
+  line-height: 10px;
+}
+div.containerOfMyssBassin .encadreStyle {
+  background-color: orange;
+  padding: 6px;
+  border: 1px solid black;
+}
+/*Commentaires*/
+body.section-comment h2 {
+  display: none;
+}
+body.section-comment fieldset.collapsible.collapsed,
+body.section-comment div.wysiwyg-toggle-wrapper {
+  display: none;
+}
+body.section-comment li.ar,
+body.section-comment li.it,
+body.section-comment li.es {
+  visibility: hidden;
+}
+div.containerOfMyssBassin .titleCommentaire {
+  background: url(../../../images/comment_icon.png) no-repeat 99% 50% #4779c0;
+  display: block;
+  height: 38px;
+  padding: 4%;
+  background-size: 14%;
+  text-decoration: underline;
+  font-size: 1.8em;
+  margin-top: 77px;
+  color: #fff;
+  margin-bottom: 0;
+}
+div.containerOfMyssBassin div.view-v-atlas-affiche-comment {
+  border-left: 1px solid #4779c0;
+  border-right: 1px solid #4779c0;
+  border-bottom: 1px solid #4779c0;
+  padding: 3%;
+}
+div.containerOfMyssBassin div.containerOfOneComment {
+  border-bottom: 1px dashed #4779c0;
+  padding-bottom: 32px;
+}
+div.containerOfMyssBassin div.views-row-last div.containerOfOneComment {
+  border-bottom: 0;
+  padding-bottom: 15px;
+}
+/*fin comment*/
+body.section-projet-atlas.node-type-book-sous-bassin .tabs {
+  position: fixed;
+  top: 250px;
+  width: 750px;
+  height: 24px;
+  border: 0;
+  background-color: #fff;
+  margin-bottom: 5px;
+  padding-top: 7px;
+}
+body.section-projet-atlas.node-type-book-sous-bassin div#header {
+  position: fixed;
+}
+body.section-projet-atlas.node-type-book-sous-bassin div#content-area {
+  /*margin-top: 30%;*/
+  margin-top: 34%;
+  top: 33%;
+}
+body.section-projet-atlas.node-type-book-sous-bassin div.region.region-sidebar-first.column.sidebar {
+  position: fixed;
+  /*top: 193px;*/
+  top: 230px;
+}
+/*TAB RECAP ILE CLUSTER */
+body.section-projet-atlas.node-type-book-sous-bassin div#containerOfTabRecap {
+  padding-bottom: 1%;
+}
+body.section-projet-atlas.node-type-book-sous-bassin div.view-v-atlas-affiche-tab-ile-cluster div.view-content {
+  padding-bottom: 3%;
+}
+body.section-projet-atlas.node-type-book-sous-bassin p.headerLabelLeft {
+  background-color: #00659B;
+  color: #fff;
+  text-align: center;
+  padding: 2% 0%;
+  float: left;
+  width: 50%;
+  margin: 0 !important;
+}
+body.section-projet-atlas.node-type-book-sous-bassin p.headerLabelRight {
+  background-color: #00659B;
+  color: #fff;
+  text-align: center;
+  padding: 2% 0%;
+  float: left;
+  width: 50%;
+  margin: 0 !important;
+}
+body.section-projet-atlas.node-type-book-sous-bassin .leftZoneForCulster {
+  float: left;
+  width: 48%;
+  border-right: 1px dashed #FF741C;
+  padding-left: 20px;
+}
+body.section-projet-atlas.node-type-book-sous-bassin .rightZoneForCulster {
+  float: left;
+  width: 48%;
+  text-indent: 20px;
+}
+body.section-projet-atlas.node-type-book-sous-bassin div.view-v-atlas-affiche-tab-ile-cluster div.views-row-first {
+  margin-top: 0;
+}
+body.section-projet-atlas.node-type-book-sous-bassin div.view-v-atlas-affiche-tab-ile-cluster div.views-row-last,
+body.section-projet-atlas.node-type-book-sous-bassin div.view-v-atlas-affiche-tab-ile-cluster div.views-row-even,
+body.section-projet-atlas.node-type-book-sous-bassin div.view-v-atlas-affiche-tab-ile-cluster div.views-row-odd {
+  display: inline-block;
+  width: 100%;
+  border-top: 2px solid #00659B;
+  padding-top: 13px;
+}
+body.section-projet-atlas.node-type-book-sous-bassin div.view-v-atlas-affiche-tab-ile-cluster {
+  border-bottom: 3px solid #00659B;
+  border-right: 3px solid #00659B;
+  border-left: 3px solid #00659B;
+}
+/*FIN TAB RECAP ILE CLUSTER */
+/***************************************************************************/
+/***************************************************************************/
+/*          		        	REVISIONS                                  */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.node-type-book-sous-bassin .LikeAtitle,
+body.node-type-book-ile .LikeAtitle,
+body.node-type-book-cluster .LikeAtitle {
+  background: url(../../../images/refresh.png) no-repeat 99% 50%;
+  display: block;
+  height: 38px;
+  padding-top: 10px;
+  background-size: 6%;
+  border-bottom: 3px dashed #666;
+  text-decoration: initial;
+  font-size: 1.5em;
+}
+body.node-type-book-sous-bassin .LikeAtitle:hover,
+body.node-type-book-ile .LikeAtitle:hover,
+body.node-type-book-cluster .LikeAtitle:hover {
+  background: url(../../../images/refresh_hover.png) no-repeat 99% 50%;
+  background-size: 6%;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                  	   	MENU SECONDAIRE                                */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+ul#secondary-menu {
+  background: rgba(255, 255, 255, 0.6);
+  padding: 2%;
+}
+ul#secondary-menu li a {
+  color: #666666;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                  	   	   COMMENTAIRES                                */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.section-comment .node-type-book-sous-bassin,
+body.section-comment .node-type-book-ile,
+body.section-comment .node-type-book-cluster {
+  display: none;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                  	   	   ADD FORM ILE                               */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.page-node-add-book-ile table.cke_editor tbody{
+  display: block;
+  min-height: 550px;
+}
+body.page-node-add-book-ile table.cke_editor tbody tr{
+  display: block;
+}
+body.page-node-add-book-ile table.cke_editor tbody tr td{
+  display: block;
+}
+body.page-node-add-book-ile iframe {
+  float: left;
+}
+body.page-node-add-book-ile .addEncadre, 
+body.page-node-add-book-ile .addSection, 
+body.page-node-add-book-ile .addLegend {
+  display: none;
+}
+body.page-node-add-book-ile table .cke_toolbar, 
+body.page-node-add-book-ile table .cke_toolgroup {
+  width: 100%;
+}
+body.page-node-add-book-ile li.ar,
+body.page-node-add-book-ile li.it,
+body.page-node-add-book-ile li.es {
+  visibility: hidden;
+}
+body.page-node-add-book-ile .book-outline-form {
+  display: none;
+}
+body.page-node-add-book-ile p.labelFieldImages {
+  position: absolute;
+  left: 88px;
+  font-style: italic;
+}
+body.page-node-add-book-ile form{
+  position: relative;
+}
+body.page-node-add-book-ile input#edit-submit {
+  background-color: #4779bf;
+  height: 85px;
+  background-size: 9%;
+  text-decoration: initial;
+  font-size: 2em;
+  width: 100%;
+  color: #fff!important;
+  text-align: -webkit-center;
+  text-align: -o-center;
+  text-align: center;
+  cursor: pointer;
+}
+body.page-node-add-book-ile div.wysiwyg-toggle-wrapper,
+body.page-node-add-book-ile div#edit-field-ile-id-ss-bassin-0-value-wrapper,
+body.page-node-add-book-ile div#edit-field-ile-id-ile-0-value-wrapper,
+body.page-node-add-book-ile div#edit-menu-link-title-wrapper,
+body.page-node-add-book-ile .hierarchical-select-wrapper-wrapper .description {
+  display: none;
+}
+body.page-node-add-book-ile fieldset.collapsible.collapsed,
+body.page-node-add-book-ile #edit-preview,
+body.page-node-add-book-ile div.body-field-wrapper,
+body.page-node-add-book-ile div#edit-status-wrapper,
+body.page-node-add-book-ile div#edit-field-ile-have-ss-bassin-nid-nid-wrapper,
+body.page-node-add-book-ile div#edit-field-ile-have-cluster-nid-nid-wrapper,
+body.page-node-add-book-ile div#edit-field-ile-id-cluster-0-value-wrapper {
+  display: none;
+}
+body.page-node-add-book-ile fieldset.menu-item-form.collapsible.collapsed {
+  display: block;
+}
+body.page-node-add-book-ile input#edit-submit:hover {
+  background-color: #FF741C;
+}
+body.page-node-add-book-ile div.hierarchical-select select {
+  min-height: 20px;
+}
+/*CONTEOLE IMAGE UPLOAD*/
+body.page-node-add-book-ile div.ui-dialog.jquery_ui_dialog-dialog.jquery_ui_dialog_default_ns-dialog {
+  background-color: #7FB3CE;
+}
+body.page-node-add-book-ile iframe {
+  min-height: 0px !important;
+}
+body.page-node-add-book-ile .ui-dialog-content {
+  width: 100% !important;
+  height: 100% !important;
+}
+body.page-node-add-book-ile .ui-dialog-titlebar-close {
+  color: transparent;
+}
+/* FIN CONTEOLE IMAGE UPLOAD*/
+/*BTN EN +*/
+body.page-node-add-book-ile .encadreStyle {
+  background-color: orange;
+}
+body.page-node-add-book-ile .contenerRelatif {
+  position: relative;
+}
+body.page-node-add-book-ile .addEncadre:hover,
+body.page-node-add-book-ile .addSection:hover,
+body.page-node-add-book-ile .btnShowDocs:hover,
+body.page-node-add-book-ile .addLegend:hover {
+  background-color: #B2BBD0;
+}
+body.page-node-add-book-ile .addEncadre,
+body.page-node-add-book-ile .addSection,
+body.page-node-add-book-ile .btnShowDocs,
+body.page-node-add-book-ile .addLegend {
+  position: absolute;
+  top: 61px;
+  right: 35px;
+  font-weight: 700;
+  border: 1px solid #000;
+  padding: 1px 4px;
+  cursor: pointer;
+}
+body.page-node-add-book-ile .addSection {
+  right: 12px;
+}
+body.page-node-add-book-ile .addEncadre {
+  right: 58px;
+}
+body.page-node-add-book-ile #field_ile_image_values {
+  width: 100%;
+}
+body.page-node-add-book-ile h1.titleIle {
+  background: url(../../../images/add-new.png) no-repeat 100% 50%;
+  display: block;
+  height: 38px;
+  padding-top: 10px;
+  background-size: 6%;
+  border-bottom: 3px dashed #666;
+  text-decoration: initial;
+  font-size: 1.8em;
+}
+/*fin btn ++*/
+/*ref biblio*/
+body.page-node-add-book-ile .btnShowDocs {
+  right: 65px;
+}
+body.page-node-add-book-ile #dialog2{
+  display: none; 
+}
+body.page-node-add-book-ile div.ui-dialog.ui-draggable{
+  background-color: #7FB3CE;
+  padding: 1%;
+  height: auto !important;
+  resize: both; 
+    max-height: 500px;
+  overflow-y: scroll !important;
+}
+body.page-node-add-book-ile div.view-v-atlas-display-docs div.views-row{
+  border-bottom: 4px dashed #fff;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+body.page-node-add-book-ile div.view-v-atlas-display-docs div.views-row-last{
+  border-bottom: none;
+}
+body.page-node-add-book-ile span#ui-dialog-title-dialog2{
+  font-weight: bold;
+  cursor: move;
+  color: #fff;
+  font-size: 2.2em;
+}
+body.page-node-add-book-ile div.views-field-field-document-titre-value a{
+  text-decoration: none;
+  color: #fff;
+}
+body.page-node-add-book-ile div.views-field-field-document-titre-value a:hover{
+  text-decoration: underline;
+}
+body.page-node-add-book-ile div.views-field-field-document-auteur-value{
+  color: #fff;
+  font-style: italic;
+  font-size: 0.8em; 
+}
+body.page-node-add-book-ile div.views-field-field-document-titre-value{
+  padding-bottom: 10px;
+}
+body.page-node-add-book-ile div.views-field-field-document-annee-value{
+  display: none;
+}
+body.page-node-add-book-ile a.closeDialog2{
+  background: url('../../../images/Cancel.png') no-repeat 50% 50%;
+  background-size: 100%;
+  border: none;
+  position: absolute;
+  top: -16px;
+  left: -27px;
+}
+body.page-node-add-book-ile a.closeDialog2 span{
+  border: none;
+}
+body.page-node-add-book-ile div#dialog2 > a{
+  display: block;
+  width: 100%;
+  text-align: right;
+  color: #fff;
+  font-size: 0.8em;
+}
+body.page-node-add-book-ile div.views-field-field-document-auteur-value label.views-label-field-document-auteur-value{
+  float: left;
+  padding-right: 5px;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                  	   	   EDIT FORM ILE                               */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.node-type-book-ile.section-node-edit.section-node-edit table.cke_editor tbody{
+  display: block;
+  min-height: 550px;
+}
+body.node-type-book-ile.section-node-edit table.cke_editor tbody tr{
+  display: block;
+}
+body.node-type-book-ile.section-node-edit table.cke_editor tbody tr td{
+  display: block;
+}
+body.node-type-book-ile.section-node-edit iframe {
+  float: left;
+}
+body.node-type-book-ile.section-node-edit .addEncadre, 
+body.node-type-book-ile.section-node-edit .addSection, 
+body.node-type-book-ile.section-node-edit .addLegend {
+  display: none;
+}
+body.node-type-book-ile.section-node-edit table .cke_toolbar, 
+body.node-type-book-ile.section-node-edit table .cke_toolgroup {
+  width: 100%;
+}
+body.node-type-book-ile.section-node-edit input#edit-submit {
+  background-color: #4779bf;
+  height: 85px;
+  background-size: 9%;
+  text-decoration: initial;
+  font-size: 2em;
+  width: 100%;
+  color: #fff!important;
+  text-align: -webkit-center;
+  text-align: -o-center;
+  text-align: center;
+  cursor: pointer;
+}
+body.node-type-book-ile.section-node-edit p.labelFieldImages {
+  position: absolute;
+  left: 88px;
+  font-style: italic;
+}
+body.node-type-book-ile.section-node-edit form{
+  position: relative;
+}
+body.node-type-book-ile.section-node-edit h1.titleIle {
+  background: url(../../../images/data-edit.png) no-repeat 100% 50%;
+  display: block;
+  height: 38px;
+  padding-top: 10px;
+  background-size: 6%;
+  border-bottom: 3px dashed #666;
+  text-decoration: initial;
+  font-size: 1.8em;
+}
+body.node-type-book-ile.section-node-edit div.wysiwyg-toggle-wrapper,
+body.node-type-book-ile.section-node-edit div#edit-field-ile-id-ss-bassin-0-value-wrapper,
+body.node-type-book-ile.section-node-edit div#edit-field-ile-id-cluster-0-value-wrapper,
+body.node-type-book-ile.section-node-edit div#edit-menu-delete-wrapper,
+body.node-type-book-ile.section-node-edit div#edit-menu-link-title-wrapper,
+body.node-type-book-ile.section-node-edit div#edit-field-ile-have-cluster-nid-nid-wrapper {
+  display: none;
+}
+body.node-type-book-ile.section-node-edit fieldset.collapsible.collapsed,
+body.node-type-book-ile.section-node-edit #edit-preview,
+body.node-type-book-ile.section-node-edit div.body-field-wrapper,
+body.node-type-book-ile.section-node-edit div#edit-field-ile-have-ss-bassin-nid-nid-wrapper,
+body.node-type-book-ile.section-node-edit .hierarchical-select-wrapper-wrapper .description {
+  display: none;
+}
+body.node-type-book-ile.section-node-edit fieldset.menu-item-form.collapsible.collapsed {
+  display: block;
+}
+body.node-type-book-ile.section-node-edit input#edit-submit:hover {
+  background-color: #FF741C;
+}
+body.node-type-book-ile li.ar,
+body.node-type-book-ile li.es,
+body.node-type-book-ile li.it {
+  visibility: hidden;
+}
+/*CONTEOLE IMAGE UPLOAD*/
+body.node-type-book-ile.section-node-edit div.ui-dialog.jquery_ui_dialog-dialog.jquery_ui_dialog_default_ns-dialog {
+  background-color: #7FB3CE;
+}
+body.node-type-book-ile.section-node-edit iframe {
+  min-height: 0px !important;
+}
+body.node-type-book-ile.section-node-edit .ui-dialog-content {
+  width: 100% !important;
+  height: 100% !important;
+}
+body.node-type-book-ile.section-node-edit .ui-dialog-titlebar-close {
+  color: transparent;
+}
+/* FIN CONTEOLE IMAGE UPLOAD*/
+/*BTN EN +*/
+body.node-type-book-ile.section-node-edit .encadreStyle {
+  background-color: orange;
+}
+body.node-type-book-ile.section-node-edit .contenerRelatif {
+  position: relative;
+}
+body.node-type-book-ile.section-node-edit .addEncadre:hover,
+body.node-type-book-ile.section-node-edit .addSection:hover,
+body.node-type-book-ile.section-node-edit .addLegend:hover, 
+body.node-type-book-ile.section-node-edit .btnShowDocs:hover {
+  background-color: #B2BBD0;
+}
+body.node-type-book-ile.section-node-edit .addEncadre,
+body.node-type-book-ile.section-node-edit .addSection,
+body.node-type-book-ile.section-node-edit .addLegend,
+body.node-type-book-ile.section-node-edit .btnShowDocs {
+  position: absolute;
+  top: 61px;
+  right: 35px;
+  font-weight: 700;
+  border: 1px solid #000;
+  padding: 1px 4px;
+  cursor: pointer;
+}
+body.node-type-book-ile.section-node-edit .addSection {
+  right: 12px;
+}
+body.node-type-book-ile.section-node-edit .addEncadre {
+  right: 58px;
+}
+/*fin btn ++*/
+body.node-type-book-ile div#edit-status-wrapper {
+  display: none;
+}
+body.node-type-book-ile div#edit-path-wrapper,
+body.node-type-book-ile legend.collapse-processed {
+  display: none;
+}
+body.node-type-book-ile #field_ile_image_values {
+  width: 100%;
+}
+/*ref biblio*/
+body.node-type-book-ile.section-node-edit .btnShowDocs {
+  right: 65px;
+}
+body.node-type-book-ile.section-node-edit #dialog2{
+  display: none; 
+}
+body.node-type-book-ile.section-node-edit div.ui-dialog.ui-draggable{
+  background-color: #7FB3CE;
+  padding: 1%;
+  height: auto !important;
+  resize: both; 
+    max-height: 500px;
+  overflow-y: scroll !important;
+}
+body.node-type-book-ile.section-node-edit div.view-v-atlas-display-docs div.views-row{
+  border-bottom: 4px dashed #fff;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+body.node-type-book-ile.section-node-edit div.view-v-atlas-display-docs div.views-row-last{
+  border-bottom: none;
+}
+body.node-type-book-ile.section-node-edit span#ui-dialog-title-dialog2{
+  font-weight: bold;
+  cursor: move;
+  color: #fff;
+  font-size: 2.2em;
+}
+body.node-type-book-ile.section-node-edit div.views-field-field-document-titre-value a{
+  text-decoration: none;
+  color: #fff;
+}
+body.node-type-book-ile.section-node-edit div.views-field-field-document-titre-value a:hover{
+  text-decoration: underline;
+}
+body.node-type-book-ile.section-node-edit div.views-field-field-document-auteur-value{
+  color: #fff;
+  font-style: italic;
+  font-size: 0.8em; 
+}
+body.node-type-book-ile.section-node-edit div.views-field-field-document-titre-value{
+  padding-bottom: 10px;
+}
+body.node-type-book-ile.section-node-edit div.views-field-field-document-annee-value{
+  display: none;
+}
+body.node-type-book-ile.section-node-edit a.closeDialog2{
+  background: url('../../../images/Cancel.png') no-repeat 50% 50%;
+  background-size: 100%;
+  border: none;
+  position: absolute;
+  top: -16px;
+  left: -27px;
+}
+body.node-type-book-ile.section-node-edit a.closeDialog2 span{
+  border: none;
+}
+body.node-type-book-ile.section-node-edit div#dialog2 > a{
+  display: block;
+  width: 100%;
+  text-align: right;
+  color: #fff;
+  font-size: 0.8em;
+}
+body.node-type-book-ile.section-node-edit div.views-field-field-document-auteur-value label.views-label-field-document-auteur-value{
+  float: left;
+  padding-right: 5px;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                  	   	   ADD FORM CLUSTER                            */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.page-node-add-book-cluster table.cke_editor tbody{
+  display: block;
+  min-height: 550px;
+}
+body.page-node-add-book-cluster table.cke_editor tbody tr{
+  display: block;
+}
+body.page-node-add-book-cluster table.cke_editor tbody tr td{
+  display: block;
+}
+body.page-node-add-book-cluster iframe {
+  float: left;
+}
+body.page-node-add-book-cluster .addEncadre, 
+body.page-node-add-book-cluster .addSection, 
+body.page-node-add-book-cluster .addLegend {
+  display: none;
+}
+body.page-node-add-book-cluster table .cke_toolbar, 
+body.page-node-add-book-cluster table .cke_toolgroup {
+  width: 100%;
+}
+body.page-node-add-book-cluster h1.titleCluster {
+  background: url(../../../images/add-new.png) no-repeat 100% 50%;
+  display: block;
+  height: 38px;
+  padding-top: 10px;
+  background-size: 6%;
+  border-bottom: 3px dashed #666;
+  text-decoration: initial;
+  font-size: 1.8em;
+}
+body.page-node-add-book-cluster li.ar,
+body.page-node-add-book-cluster li.it,
+body.page-node-add-book-cluster li.es {
+  visibility: hidden;
+}
+body.page-node-add-book-cluster .book-outline-form {
+  display: none;
+}
+body.page-node-add-book-cluster p.labelFieldImages {
+  position: absolute;
+  left: 88px;
+  font-style: italic;
+}
+body.page-node-add-book-cluster form{
+  position: relative;
+}
+body.page-node-add-book-cluster input#edit-submit {
+  background-color: #4779bf;
+  height: 85px;
+  background-size: 9%;
+  text-decoration: initial;
+  font-size: 2em;
+  width: 100%;
+  color: #fff!important;
+  text-align: -webkit-center;
+  text-align: -o-center;
+  text-align: center;
+  cursor: pointer;
+}
+body.page-node-add-book-cluster div.wysiwyg-toggle-wrapper,
+body.page-node-add-book-cluster div#edit-field-cluster-id-ss-bassin-0-value-wrapper,
+body.page-node-add-book-cluster div#edit-field-cluster-id-cluster-0-value-wrapper,
+body.page-node-add-book-cluster div#edit-status-wrapper,
+body.page-node-add-book-cluster div#edit-field-id-bassin-for-cluster-0-value-wrapper,
+body.page-node-add-book-cluster div#edit-field-cluster-have-ss-bassin-nid-nid-wrapper,
+body.page-node-add-book-cluster div#edit-menu-delete-wrapper,
+body.page-node-add-book-cluster div#edit-menu-link-title-wrapper {
+  display: none;
+}
+body.page-node-add-book-cluster fieldset.collapsible.collapsed,
+body.page-node-add-book-cluster #edit-preview,
+body.page-node-add-book-cluster div.body-field-wrapper,
+body.page-node-add-book-cluster .hierarchical-select-wrapper-wrapper .description {
+  display: none;
+}
+body.page-node-add-book-cluster fieldset.menu-item-form.collapsible.collapsed {
+  display: block;
+}
+body.page-node-add-book-cluster input#edit-submit:hover {
+  background-color: #FF741C;
+}
+body.page-node-add-book-cluster #field_cluster_image_values {
+  width: 100%;
+}
+body.page-node-add-book-cluster div.hierarchical-select select {
+  min-height: 20px;
+}
+/*CONTEOLE IMAGE UPLOAD*/
+body.page-node-add-book-cluster div.ui-dialog.jquery_ui_dialog-dialog.jquery_ui_dialog_default_ns-dialog {
+  background-color: #7FB3CE;
+}
+body.page-node-add-book-cluster iframe {
+  min-height: 0px !important;
+}
+body.page-node-add-book-cluster .ui-dialog-content {
+  width: 100% !important;
+  height: 100% !important;
+}
+body.page-node-add-book-cluster .ui-dialog-titlebar-close {
+  color: transparent;
+}
+/* FIN CONTEOLE IMAGE UPLOAD*/
+/*BTN EN +*/
+body.page-node-add-book-cluster .encadreStyle {
+  background-color: orange;
+}
+body.page-node-add-book-cluster .contenerRelatif {
+  position: relative;
+}
+body.page-node-add-book-cluster .addEncadre:hover,
+body.page-node-add-book-cluster .addSection:hover,
+body.page-node-add-book-cluster .btnShowDocs:hover,
+body.page-node-add-book-cluster .addLegend:hover {
+  background-color: #B2BBD0;
+}
+body.page-node-add-book-cluster .addEncadre,
+body.page-node-add-book-cluster .addSection,
+body.page-node-add-book-cluster .btnShowDocs,
+body.page-node-add-book-cluster .addLegend {
+  position: absolute;
+  top: 61px;
+  right: 35px;
+  font-weight: 700;
+  border: 1px solid #000;
+  padding: 1px 4px;
+  cursor: pointer;
+}
+body.page-node-add-book-cluster .addSection {
+  right: 12px;
+}
+body.page-node-add-book-cluster .addEncadre {
+  right: 58px;
+}
+/*fin btn ++*/
+/*ref biblio*/
+body.page-node-add-book-cluster .btnShowDocs {
+  right: 65px;
+}
+body.page-node-add-book-cluster #dialog2{
+  display: none; 
+}
+body.page-node-add-book-cluster div.ui-dialog.ui-draggable{
+  background-color: #7FB3CE;
+  padding: 1%;
+  height: auto !important;
+  resize: both; 
+    max-height: 500px;
+  overflow-y: scroll !important;
+}
+body.page-node-add-book-cluster div.view-v-atlas-display-docs div.views-row{
+  border-bottom: 4px dashed #fff;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+body.page-node-add-book-cluster div.view-v-atlas-display-docs div.views-row-last{
+  border-bottom: none;
+}
+body.page-node-add-book-cluster span#ui-dialog-title-dialog2{
+  font-weight: bold;
+  cursor: move;
+  color: #fff;
+  font-size: 2.2em;
+}
+body.page-node-add-book-cluster div.views-field-field-document-titre-value a{
+  text-decoration: none;
+  color: #fff;
+}
+body.page-node-add-book-cluster div.views-field-field-document-titre-value a:hover{
+  text-decoration: underline;
+}
+body.page-node-add-book-cluster div.views-field-field-document-auteur-value{
+  color: #fff;
+  font-style: italic;
+  font-size: 0.8em; 
+}
+body.page-node-add-book-cluster div.views-field-field-document-titre-value{
+  padding-bottom: 10px;
+}
+body.page-node-add-book-cluster div.views-field-field-document-annee-value{
+  display: none;
+}
+body.page-node-add-book-cluster a.closeDialog2{
+  background: url('../../../images/Cancel.png') no-repeat 50% 50%;
+  background-size: 100%;
+  border: none;
+  position: absolute;
+  top: -16px;
+  left: -27px;
+}
+body.page-node-add-book-cluster a.closeDialog2 span{
+  border: none;
+}
+body.page-node-add-book-cluster div#dialog2 > a{
+  display: block;
+  width: 100%;
+  text-align: right;
+  color: #fff;
+  font-size: 0.8em;
+}
+body.page-node-add-book-cluster div.views-field-field-document-auteur-value label.views-label-field-document-auteur-value{
+  float: left;
+  padding-right: 5px;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                  	   	   EDIT FORM CLUSTER                           */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.node-type-book-cluster table.cke_editor tbody{
+  display: block;
+  min-height: 550px;
+}
+body.node-type-book-cluster table.cke_editor tbody tr{
+  display: block;
+}
+body.node-type-book-cluster table.cke_editor tbody tr td{
+  display: block;
+}
+body.node-type-book-cluster iframe {
+  float: left;
+}
+body.node-type-book-cluster .addEncadre, 
+body.node-type-book-cluster .addSection, 
+body.node-type-book-cluster .addLegend {
+  display: none;
+}
+body.node-type-book-cluster table .cke_toolbar, 
+body.node-type-book-cluster table .cke_toolgroup {
+  width: 100%;
+}
+body.node-type-book-cluster.section-node-edit input#edit-submit {
+  background-color: #4779bf;
+  height: 85px;
+  background-size: 9%;
+  text-decoration: initial;
+  font-size: 2em;
+  width: 100%;
+  color: #fff!important;
+  text-align: -webkit-center;
+  text-align: -o-center;
+  text-align: center;
+  cursor: pointer;
+}
+body.node-type-book-cluster.section-node-edit h1.titleCluster {
+  background: url(../../../images/data-edit.png) no-repeat 100% 50%;
+  display: block;
+  height: 38px;
+  padding-top: 10px;
+  background-size: 6%;
+  border-bottom: 3px dashed #666;
+  text-decoration: initial;
+  font-size: 1.8em;
+}
+body.node-type-book-cluster.section-node-edit div.wysiwyg-toggle-wrapper,
+body.node-type-book-cluster.section-node-edit div#edit-field-id-bassin-for-cluster-0-value-wrapper,
+body.node-type-book-cluster div#edit-status-wrapper,
+body.node-type-book-cluster.section-node-edit .hierarchical-select-wrapper-wrapper .description {
+  display: none;
+}
+body.node-type-book-cluster.section-node-edit fieldset.collapsible.collapsed,
+body.node-type-book-cluster.section-node-edit #edit-preview,
+body.node-type-book-cluster.section-node-edit div.body-field-wrapper,
+body.node-type-book-cluster.section-node-edit div#edit-field-cluster-have-ss-bassin-nid-nid-wrapper,
+body.node-type-book-cluster.section-node-edit div#edit-menu-delete-wrapper,
+body.node-type-book-cluster.section-node-edit div#edit-menu-link-title-wrapper {
+  display: none;
+}
+body.node-type-book-cluster.section-node-edit fieldset.menu-item-form.collapsible.collapsed {
+  display: block;
+}
+body.node-type-book-cluster.section-node-edit p.labelFieldImages {
+  position: absolute;
+  left: 88px;
+  font-style: italic;
+}
+body.node-type-book-cluster.section-node-edit form{
+  position: relative;
+}
+body.node-type-book-cluster.section-node-edit input#edit-submit:hover {
+  background-color: #FF741C;
+}
+body.node-type-book-cluster li.ar,
+body.node-type-book-cluster li.es,
+body.node-type-book-cluster li.it {
+  visibility: hidden;
+}
+body.node-type-book-cluster div#edit-path-wrapper,
+body.node-type-book-cluster legend.collapse-processed {
+  display: none;
+}
+body.node-type-book-cluster #field_cluster_image_values {
+  width: 100%;
+}
+/*CONTEOLE IMAGE UPLOAD*/
+body.node-type-book-cluster.section-node-edit div.ui-dialog.jquery_ui_dialog-dialog.jquery_ui_dialog_default_ns-dialog {
+  background-color: #7FB3CE;
+}
+body.node-type-book-cluster.section-node-edit iframe {
+  min-height: 0px !important;
+}
+body.node-type-book-cluster.section-node-edit .ui-dialog-content {
+  width: 100% !important;
+  height: 100% !important;
+}
+body.node-type-book-cluster.section-node-edit .ui-dialog-titlebar-close {
+  color: transparent;
+}
+/* FIN CONTEOLE IMAGE UPLOAD*/
+/*BTN EN +*/
+body.node-type-book-cluster.section-node-edit .encadreStyle {
+  background-color: orange;
+}
+body.node-type-book-cluster.section-node-edit .contenerRelatif {
+  position: relative;
+}
+body.node-type-book-cluster.section-node-edit .addEncadre:hover,
+body.node-type-book-cluster.section-node-edit .addSection:hover,
+body.node-type-book-cluster.section-node-edit .btnShowDocs:hover,
+body.node-type-book-cluster.section-node-edit .addLegend:hover {
+  background-color: #B2BBD0;
+}
+body.node-type-book-cluster.section-node-edit .addEncadre,
+body.node-type-book-cluster.section-node-edit .addSection,
+body.node-type-book-cluster.section-node-edit .btnShowDocs,
+body.node-type-book-cluster.section-node-edit .addLegend {
+  position: absolute;
+  top: 61px;
+  right: 35px;
+  font-weight: 700;
+  border: 1px solid #000;
+  padding: 1px 4px;
+  cursor: pointer;
+}
+body.node-type-book-cluster.section-node-edit .addSection {
+  right: 12px;
+}
+body.node-type-book-cluster.section-node-edit .addEncadre {
+  right: 58px;
+}
+/*fin btn ++*/
+/*ref biblio*/
+body.node-type-book-cluster.section-node-edit .btnShowDocs {
+  right: 65px;
+}
+body.node-type-book-cluster.section-node-edit #dialog2{
+  display: none; 
+}
+body.node-type-book-cluster.section-node-edit div.ui-dialog.ui-draggable{
+  background-color: #7FB3CE;
+  padding: 1%;
+  height: auto !important;
+  resize: both; 
+    max-height: 500px;
+  overflow-y: scroll !important;
+}
+body.node-type-book-cluster.section-node-edit div.view-v-atlas-display-docs div.views-row{
+  border-bottom: 4px dashed #fff;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+body.node-type-book-cluster.section-node-edit div.view-v-atlas-display-docs div.views-row-last{
+  border-bottom: none;
+}
+body.node-type-book-cluster.section-node-edit span#ui-dialog-title-dialog2{
+  font-weight: bold;
+  cursor: move;
+  color: #fff;
+  font-size: 2.2em;
+}
+body.node-type-book-cluster.section-node-edit div.views-field-field-document-titre-value a{
+  text-decoration: none;
+  color: #fff;
+}
+body.node-type-book-cluster.section-node-edit div.views-field-field-document-titre-value a:hover{
+  text-decoration: underline;
+}
+body.node-type-book-cluster.section-node-edit div.views-field-field-document-auteur-value{
+  color: #fff;
+  font-style: italic;
+  font-size: 0.8em; 
+}
+body.node-type-book-cluster.section-node-edit div.views-field-field-document-titre-value{
+  padding-bottom: 10px;
+}
+body.node-type-book-cluster.section-node-edit div.views-field-field-document-annee-value{
+  display: none;
+}
+body.node-type-book-cluster.section-node-edit a.closeDialog2{
+  background: url('../../../images/Cancel.png') no-repeat 50% 50%;
+  background-size: 100%;
+  border: none;
+  position: absolute;
+  top: -16px;
+  left: -27px;
+}
+body.node-type-book-cluster.section-node-edit a.closeDialog2 span{
+  border: none;
+}
+body.node-type-book-cluster.section-node-edit div#dialog2 > a{
+  display: block;
+  width: 100%;
+  text-align: right;
+  color: #fff;
+  font-size: 0.8em;
+}
+body.node-type-book-cluster.section-node-edit div.views-field-field-document-auteur-value label.views-label-field-document-auteur-value{
+  float: left;
+  padding-right: 5px;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                  		VISUALISATION CLUSTER                          */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+div.containerOfCluster a.titleCulster {
+  background: url(../../../images/iconePalmier2b.png) no-repeat 100% 64%;
+  display: block;
+  /*height: 38px;*/
+  padding-top: 10px;
+  background-size: 12%;
+  border-bottom: 3px dashed #666666;
+  text-decoration: initial;
+  font-size: 1.8em;
+}
+div.containerOfCluster a.titleCulster h1 {
+  width: 80%;
+}
+/*commentaires*/
+div.containerOfCluster .titleCommentaire {
+  background: url(../../../images/comment_icon.png) no-repeat 99% 50% #4779c0;
+  display: block;
+  height: 38px;
+  padding: 4%;
+  background-size: 14%;
+  text-decoration: underline;
+  font-size: 1.8em;
+  margin-top: 77px;
+  color: #fff;
+  margin-bottom: 0;
+}
+div.containerOfCluster div.view-v-atlas-affiche-comment {
+  border-left: 1px solid #4779c0;
+  border-right: 1px solid #4779c0;
+  border-bottom: 1px solid #4779c0;
+  padding: 3%;
+}
+div.containerOfCluster div.containerOfOneComment {
+  border-bottom: 1px dashed #4779c0;
+  padding-bottom: 32px;
+}
+div.containerOfCluster div.views-row-last div.containerOfOneComment {
+  border-bottom: 0;
+  padding-bottom: 15px;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                  		VISUALISATION ILE                              */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+div.containerOfMyIsland a.titleIsland {
+  background: url(../../../images/iconePalmierb.png) no-repeat 100% 50%;
+  display: block;
+  height: 38px;
+  padding-top: 10px;
+  background-size: 6%;
+  border-bottom: 3px dashed #666666;
+  text-decoration: initial;
+  font-size: 1.8em;
+}
+/*commentaires*/
+div.containerOfMyIsland .titleCommentaire {
+  background: url(../../../images/comment_icon.png) no-repeat 99% 50% #4779c0;
+  display: block;
+  height: 38px;
+  padding: 4%;
+  background-size: 14%;
+  text-decoration: underline;
+  font-size: 1.8em;
+  margin-top: 77px;
+  color: #fff;
+  margin-bottom: 0;
+}
+div.containerOfMyIsland div.view-v-atlas-affiche-comment {
+  border-left: 1px solid #4779c0;
+  border-right: 1px solid #4779c0;
+  border-bottom: 1px solid #4779c0;
+  padding: 3%;
+}
+div.containerOfMyIsland div.containerOfOneComment {
+  border-bottom: 1px dashed #4779c0;
+  padding-bottom: 32px;
+}
+div.containerOfMyIsland div.views-row-last div.containerOfOneComment {
+  border-bottom: 0;
+  padding-bottom: 15px;
+}
+/*fin com*/
+/***************************************************************************/
+/***************************************************************************/
+/*                          REFERENCE                                    */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.page-projet-atlas-references li.ar,
+body.page-projet-atlas-references li.it,
+body.page-projet-atlas-references li.es {
+  visibility: hidden;
+}
+body.page-projet-atlas-references div.views-field-field-document-titre-value {
+  background-color: #767b7f;
+  width: 100%;
+  display: block;
+}
+body.page-projet-atlas-references div.views-field-field-document-titre-value a {
+  color: #fff!important;
+  font-size: .8em;
+  line-height: 22px;
+  text-decoration: none;
+  padding: 7px 10px 6px 10px;
+  display: block;
+  width: 85%;
+}
+body.page-projet-atlas-references div.views-field-field-document-titre-value a:hover {
+  text-decoration: underline;
+}
+body.page-projet-atlas-references div.views-field-field-document-auteur-value {
+  font-size: .8em;
+  font-style: italic;
+  margin-top: 5px;
+}
+body.page-projet-atlas-references label.views-label-field-document-auteur-value {
+  float: left;
+  padding-right: 5px;
+  font-style: normal;
+}
+body.page-projet-atlas-references div.view-v-atlas-display-docs div.views-row {
+  position: relative;
+  padding-bottom: 12px;
+}
+body.page-projet-atlas-references div.views-field-field-document-annee-value {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #fff;
+  font-size: 0.8em;
+}
+body.page-projet-atlas-references h1 {
+  display: block;
+  padding-top: 10px;
+  background-size: 12%;
+  border-bottom: 3px dashed #666;
+  text-decoration: initial;
+  font-size: 1.8em;
+}
+/*# sourceMappingURL=bootstrap-atlas.css.map */
+/***************************************************************************/
+/***************************************************************************/
+/*                           EDITION CHARTE                                */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.node-type-book-charte .menu-item-form.collapsible{
+  display: none;
+}
+body.node-type-book-charte .collapsible.collapsed{
+  display: none;
+}
+body.node-type-book-charte .collapsible{
+  display: none;
+}
+body.node-type-book-charte .teaser-checkbox{
+  display: none;
+}
+body.node-type-book-charte #edit-preview{
+  display: none;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                             VISU CHARTE                                */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.node-type-book-charte div.containerOfCharte h1{
+  display: block;
+  height: 38px;
+  padding-top: 10px;
+  border-bottom: 3px dashed #666666;
+  text-decoration: initial;
+  font-size: 1.8em;
+}
+body.node-type-book-charte div.containerOfCharte .content{
+  padding-top: 20px;
+}
+body.node-type-book-charte li.ar,
+body.node-type-book-charte li.it,
+body.node-type-book-charte li.es {
+  visibility: hidden;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                           EDITION GLOSSAIRE                             */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.node-type-book-glossaire  .menu-item-form.collapsible{
+  display: none;
+}
+body.node-type-book-glossaire  .collapsible.collapsed{
+  display: none;
+}
+body.node-type-book-glossaire  .collapsible{
+  display: none;
+}
+body.node-type-book-glossaire  .teaser-checkbox{
+  display: none;
+}
+body.node-type-book-glossaire  #edit-preview{
+  display: none;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                             VISU GLOSSAIRE                              */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.node-type-book-glossaire div.containerOfGlossaire h1{
+  display: block;
+  height: 38px;
+  padding-top: 10px;
+  border-bottom: 3px dashed #666666;
+  text-decoration: initial;
+  font-size: 1.8em;
+}
+body.node-type-book-glossaire div.containerOfGlossaire .content{
+  padding-top: 20px;
+}
+body.node-type-book-glossaire li.ar,
+body.node-type-book-glossaire li.it,
+body.node-type-book-glossaire li.es {
+  visibility: hidden;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                           EDITION NORMES                                */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.node-type-book-normes  .menu-item-form.collapsible{
+  display: none;
+}
+body.node-type-book-normes  .collapsible.collapsed{
+  display: none;
+}
+body.node-type-book-normes  .collapsible{
+  display: none;
+}
+body.node-type-book-normes  .teaser-checkbox{
+  display: none;
+}
+body.node-type-book-normes  #edit-preview{
+  display: none;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                             VISU NORMES                                 */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.node-type-book-normes div.containerOfNormes h1{
+  display: block;
+  height: 38px;
+  padding-top: 10px;
+  border-bottom: 3px dashed #666666;
+  text-decoration: initial;
+  font-size: 1.8em;
+}
+body.node-type-book-normes div.containerOfNormes .content{
+  padding-top: 20px;
+}
+body.node-type-book-normes li.ar,
+body.node-type-book-normes li.it,
+body.node-type-book-normes li.es {
+  visibility: hidden;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                           EDITION PRESENTATION                          */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.node-type-book-presentation   .menu-item-form.collapsible, div.wysiwyg-toggle-wrapper,body.node-type-book-presentation  .collapsible.collapsed, body.node-type-book-presentation  .collapsible, body.node-type-book-presentation  .teaser-checkbox, body.node-type-book-presentation  #edit-preview, body.node-type-book-presentation  #edit-body-wrapper, body.node-type-book-presentation  input.form-submit, body.node-type-book-presentation  #edit-field-title-en-0-value-wrapper, body.node-type-book-presentation  #edit-field-title-fr-0-value-wrapper, body.node-type-book-presentation  #edit-field-body-en-0-value-wrapper, body.node-type-book-presentation  #edit-field-body-fr-0-value-wrapper{
+  display: none;
+}
+body.node-type-book-presentation li.ar,
+body.node-type-book-presentation li.it,
+body.node-type-book-presentation li.es {
+  visibility: hidden;
+}
+body.node-type-book-presentation  input.form-submit.custom{
+  display: block;
+}
+body.node-type-book-presentation  h1{
+  display: block;
+  height: 38px;
+  padding-top: 10px;
+  background-size: 6%;
+  border-bottom: 3px dashed #666;
+  text-decoration: initial;
+  font-size: 1.8em;
+}
+

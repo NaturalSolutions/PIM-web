@@ -1,0 +1,300 @@
+<?php 
+
+
+
+function _getTemplateField(  ) {
+    $templateFields= "Code_ilot_ile,Gestionnaire_existance,Gestionnaire_nom,Gestionnaire_adresse,Gestionnaire_telephone,Gestionnaire_fax,Gestionnaire_email,Gestionnaire_site_internet,AccordGestion_type,AccordGestion_annee_mise_en_place,PlanGestion_annee_mise_en_place,AccordGestion_type_precision,Surveillance_site,PlanGestion_etat,CommiteGestion_existance,Ressources_nb_personne_equipe_gestion,Ressources_nb_gardes_permanants,Ressources_nb_gardes_saisonniers,Ressources_bateau,Ressources_equipement_plongee,Ressources_local_accueil,Ressources_petit_materiel,Ressources_moyens_transport,Ressources_autres,Principe_action_gestion";
+    print $templateField;
+    return $templateFields;
+}
+
+function _getCheckFormatField() {
+    $checkFormatField= array();
+  /*$checkFormatField['Latitude']= array(
+    'type'=>'decimal',
+    'field'=> "REPLACE(`Latitude`, ',', '.')",
+    'message' => 'Valid latitude format : decimal ex(12.3)',
+  ) ;
+  $checkFormatField['Longitude']= array(
+    'type'=>'decimal',
+    'field'=> "REPLACE(`Longitude`, ',', '.')",
+    'message' => 'Valid longitude format : decimal ex(12.3)',
+  ) ;*/
+  
+    return $checkFormatField;
+}
+
+function _getSqlCheckValue($tableName) {
+    $sqlCheckValue = array();
+  $sqlCheckValue[]=  array(
+    'message' => t('Unknow island'),
+    'sql' => "SELECT importid+1 as importid, Code_ilot_ile as val 
+              FROM $tableName LEFT OUTER JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_code_ilot_ile
+        ON thes_code_ilot_ile.name = Code_ilot_ile WHERE thes_code_ilot_ile.tid IS NULL ",
+    'field' => 'val',
+    'mandatory'=> true,
+    );
+	$sqlCheckValue[]=  array(
+		   'message' => t('Unknow Ressources bateau'),
+			'description'=>t('Possible values (Oui, Non)'),
+			'sql' => "SELECT importid+1 as importid ,Ressources_bateau AS val
+					FROM $tableName WHERE NOT Ressources_bateau IS NULL  AND NOT Ressources_bateau IN (Binary 'Oui', Binary 'Non')",
+			'field'=> 'val',
+      'mandatory'=> false,
+	);
+	$sqlCheckValue[]=  array(
+		   'message' => t('Unknow Plan gestion etat'),
+			'description'=>t('Possible values (Oui, Non, En projet)'),
+			'sql' => "SELECT importid+1 as importid ,PlanGestion_etat AS val
+					FROM $tableName WHERE NOT PlanGestion_etat IS NULL  AND NOT PlanGestion_etat IN (Binary 'Oui', Binary 'Non', Binary 'En projet') ",
+			'field'=> 'val',
+      'mandatory'=> false,
+	);
+  return $sqlCheckValue;
+}
+
+
+function _getSqlCheckDuplicate($tableName) {
+  $sqlCheckDuplicate= array();
+  $sqlCheckDuplicate[0]=  "UPDATE $tableName SET isdoublon = false";
+  return $sqlCheckDuplicate;
+}
+
+function  _getSqlCheckWarning($tableName) {
+    $sqlCheckWarning= array();
+	return $sqlCheckWarning;
+}
+
+function _getMappingNodeSelectImportableData($tableName) {
+    $mapping = array();
+    $mapping['import_bd_i_statut_protection'] = array(
+        'name' => t('Island').' : '.t('Managment operations'),
+        'contentType' => "bd_i_gestionnaire",
+        'titleField' => 'Code_ilot_ile',
+    'update' =>true,
+    'updateSelectNid' =>"
+              SELECT nid 
+        FROM (
+          SELECT thes_code_ilot_ile.tid AS code_ile
+          FROM (SELECT * FROM $tableName WHERE importid=XXupdateSelectNidXX) AS PIMimport
+          JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_code_ilot_ile
+          ON thes_code_ilot_ile.name = Code_ilot_ile
+        ) AS importTable 
+        JOIN {content_type_bd_i_gestionnaire}  ON code_ile = field_bdi_g_code_ile_ilot_value LIMIT 1",
+    'query'=>"SELECT 
+            importid,
+            thes_code_ilot_ile.tid as field_bdi_g_code_ile_ilot,
+            Gestionnaire_existance	 AS 	field_bdi_g_exist_gestionnaire,
+            Gestionnaire_nom	 AS 	field_bdi_g_nom_gestionnaire,
+            Gestionnaire_adresse	 AS 	field_bdi_g_adresse_gestionnaire,
+            Gestionnaire_telephone	 AS 	field_bdi_g_tel_gestionnaire,
+            Gestionnaire_email	 AS 	field_bdi_g_email_gestionnaire,
+            Gestionnaire_fax	 AS 	field_bdi_g_fax_gestionnaire,
+            Gestionnaire_site_internet	 AS 	field_bdi_g_website_gestionnaire,
+            AccordGestion_annee_mise_en_place,
+            CONCAT(STR_TO_DATE(PlanGestion_annee_mise_en_place	, '%Y') , ' 00:00:00') AS field_dbi_g_annee_plan_gestion,
+            CONCAT(STR_TO_DATE(AccordGestion_annee_mise_en_place	, '%Y') , ' 00:00:00') AS field_bdi_g_annee_debut_gestion,
+            Surveillance_site	 AS 	field_bdi_g_surveillance_de_site,
+            PlanGestion_etat	 AS 	field_bdi_g_etat_plan_gestion,
+            CommiteGestion_existance	 AS 	field_bdi_g_comite_gestion,
+            Ressources_nb_personne_equipe_gestion	 AS 	field_bdi_g_res_nb_gestion,
+            Ressources_nb_gardes_permanants	 AS 	field_bdi_g_res_nb_permanent,
+            Ressources_nb_gardes_saisonniers	 AS 	field_bdi_g_res_nb_saisonniers,
+            Ressources_bateau	 AS 	field_bdi_g_res_bateau,
+            Ressources_equipement_plongee	 AS 	field_bdi_g_res_plongee,
+            Ressources_local_accueil	 AS 	field_bdi_g_res_accueil,
+            Ressources_petit_materiel	 AS 	field_bdi_g_res_analyse,
+            Ressources_moyens_transport	 AS 	field_bdi_g_res_transport,
+            Ressources_autres	 AS 	field_bdi_g_res_autre,
+            AccordGestion_type		field_bdi_g_type_accord_gestion,
+            Principe_action_gestion	 AS 	field_bdi_g_principe_gestion,
+            AccordGestion_type_precision	AS	field_bdi_g_type_accordg_precis
+            FROM $tableName
+            JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_code_ilot_ile
+            ON thes_code_ilot_ile.name = Code_ilot_ile",
+    'fields' => array (
+		0 => array ('name'=>'field_bdi_g_code_ile_ilot',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_code_ile_ilot',
+		  'type'=>'thesaurus',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_code_ile_ilot',
+		),
+		1=> array ('name'=>'field_bdi_g_exist_gestionnaire',
+		  'mutlivalue'=> false,
+		  'contentField' =>'field_bdi_g_exist_gestionnaire',
+		  'type'=>'text',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_exist_gestionnaire',
+		),
+		2=> array ('name'=>'field_bdi_g_nom_gestionnaire',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_nom_gestionnaire',
+		  'type'=>'text',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_nom_gestionnaire',
+		),
+		3=> array ('name'=>'field_bdi_g_adresse_gestionnaire',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_adresse_gestionnaire',
+		  'type'=>'text',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_adresse_gestionnaire',
+		),
+		4=> array ('name'=>'field_bdi_g_tel_gestionnaire',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_tel_gestionnaire',
+		  'type'=>'text',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_tel_gestionnaire',
+		),
+		5=> array ('name'=>'field_bdi_g_email_gestionnaire',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_email_gestionnaire',
+		  'type'=>'text',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_email_gestionnaire',
+		),
+		6=> array ('name'=>'field_bdi_g_fax_gestionnaire',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_fax_gestionnaire',
+		  'type'=>'text',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_fax_gestionnaire',
+		),
+		7=> array ('name'=>'field_bdi_g_website_gestionnaire',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_website_gestionnaire',
+		  'type'=>'text',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_website_gestionnaire',
+		),
+		8=> array ('name'=>'field_bdi_g_annee_debut_gestion',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_annee_debut_gestion',
+		  'type'=>'date',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_annee_debut_gestion',
+		),
+		9=> array ('name'=>'field_bdi_g_surveillance_de_site',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_surveillance_de_site',
+		  'type'=>'text',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_surveillance_de_site',
+		),
+		10=> array ('name'=>'field_bdi_g_etat_plan_gestion',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_etat_plan_gestion',
+		  'type'=>'text',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_etat_plan_gestion',
+		),
+		11=> array ('name'=>'field_bdi_g_comite_gestion',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_comite_gestion',
+		  'type'=>'text',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_comite_gestion',
+		),
+		12=> array ('name'=>'field_bdi_g_res_nb_gestion',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_res_nb_gestion',
+		  'type'=>'int',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_res_nb_gestion',
+		),
+		13=> array ('name'=>'field_bdi_g_res_nb_permanent',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_res_nb_permanent',
+		  'type'=>'int',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_res_nb_permanent',
+		),
+		14=> array ('name'=>'field_bdi_g_res_nb_saisonniers',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_res_nb_saisonniers',
+		  'type'=>'int',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_res_nb_saisonniers',
+		),
+		15=> array ('name'=>'field_bdi_g_res_bateau',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_res_bateau',
+		  'type'=>'text',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_res_bateau',
+		),
+		17=> array ('name'=>'field_bdi_g_res_plongee',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_res_plongee',
+		  'type'=>'text',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_res_plongee',
+		),
+		18=> array ('name'=>'field_bdi_g_res_accueil',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_res_accueil',
+		  'type'=>'text',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_res_accueil',
+		),
+		19=> array ('name'=>'field_bdi_g_res_analyse',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_res_analyse',
+		  'type'=>'text',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_res_analyse',
+		),
+		20=> array ('name'=>'field_bdi_g_res_transport',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_res_transport',
+		  'type'=>'text',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_res_transport',
+		),
+		22=> array ('name'=>'field_bdi_g_res_autre',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_res_autre',
+		  'type'=>'text',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_res_autre',
+		),
+		23=> array ('name'=>'field_bdi_g_principe_gestion',
+		  'mutlivalue'=> true,
+		  'contentField' => 'field_bdi_g_principe_gestion',
+		  'type'=>'taxonomy',
+		  'taxonomyVoc'=>51,
+		  'taxonomyOpen'=>false,
+		  'typeImpl'=>'value',
+		  'importTableField'=> 'field_bdi_g_principe_gestion'
+		),
+		24=> array ('name'=>'field_bdi_g_type_accord_gestion',
+		'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_type_accord_gestion',
+		  'type'=>'taxonomy',
+		  'taxonomyVoc'=>46,
+		  'taxonomyOpen'=>false,
+		  'typeImpl'=>'value',
+		  'importTableField'=> 'field_bdi_g_type_accord_gestion',
+		),
+		25=> array ('name'=>'field_bdi_g_type_accordg_precis',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_bdi_g_type_accordg_precis',
+		  'type'=>'text',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_bdi_g_type_accordg_precis',
+		),
+		28=> array ('name'=>'field_dbi_g_annee_plan_gestion',
+		  'mutlivalue'=> false,
+		  'contentField' => 'field_dbi_g_annee_plan_gestion',
+		  'type'=>'date',
+		  'typeImpl'=>'value',
+		  'importTableField'=>'field_dbi_g_annee_plan_gestion',
+		),
+      )
+  );
+  return $mapping;
+}
+
+

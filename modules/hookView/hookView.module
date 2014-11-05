@@ -1,0 +1,324 @@
+<?php
+/**
+ * Implementation of hook_views_pre_execute()
+ *
+ **/
+function hookView_views_pre_execute(&$view) {
+  switch($view->name) {
+  	case "v_search_manager":
+      case "v_search_protection":
+      case "v_search_islands_archipelagos":
+      case "v_search_inventory":
+        if (empty($view->exposed_input)) {
+		  		$view->set_items_per_page(1); 
+      	}
+      	break;
+    case 'phototheque':
+      //echo "<pre>"; var_dump($view->build_info); exit(); 
+			if (preg_match("/^attachment_([2|4])$/i",$view->current_display)) {
+				// Rewrite the query
+				$view->build_info['query'] = "SELECT 
+							node.*,
+							drp_content_type_photos.field_photos_image_fid AS node_data_field_photos_image_field_photos_image_fid,
+							drp_content_type_photos.field_photos_image_list AS node_data_field_photos_image_field_photos_image_list,
+							drp_content_type_photos.field_photos_image_data AS node_data_field_photos_image_field_photos_image_data,
+							drp_content_type_photos.field_photos_description_value AS node_data_field_photos_image_field_photos_description_value,
+							drp_content_type_photos.field_photos_auteur_value AS node_data_field_photos_image_field_photos_auteur_value,
+							drp_content_type_photos.field_photos_date_value AS node_data_field_photos_image_field_photos_date_value,
+							drp_content_type_photos.field_photos_portfolio_value AS node_data_field_photos_portfolio_field_photos_portfolio_value
+						FROM (
+							SELECT  
+								node.nid AS nid,
+							 	node.language AS node_language,
+								node.type AS node_type,
+								node.vid AS node_vid,
+								node.title AS node_title
+							FROM drp_node node
+							WHERE node.type ='".$view->build_info['query_args'][1]."' AND node.language ='***CURRENT_LANGUAGE***'
+							UNION
+							SELECT 
+								node.nid AS nid,
+							 	node.language AS node_language,
+								node.type AS node_type,
+								node.vid AS node_vid,
+								node.title AS node_title
+							FROM drp_node node
+							WHERE node.type ='".$view->build_info['query_args'][1]."' AND node.language ='***DEFAULT_LANGUAGE***'
+							AND NOT nid IN (
+								SELECT  tnid
+								FROM drp_node node
+								WHERE node.type ='".$view->build_info['query_args'][1]."' AND node.language ='***CURRENT_LANGUAGE***'
+							)
+						) node
+						INNER JOIN drp_content_type_photos
+						ON node.node_vid = drp_content_type_photos.vid
+						WHERE field_photos_portfolio_value = '".$view->build_info['query_args'][2]."'";
+			}
+			break;
+    
+    
+	  case 'ResultatRegion': 
+      if (preg_match("/^page_1$/i",$view->current_display)) {
+      /* Permet d'ignorer l'argument dans la requête 
+       * et de le laisser disponible comme motif de substitution 
+       * utilisé dans la description orange de la page
+       */
+        //echo "<pre>"; var_dump($view->build_info); exit(); 
+        
+        $view->build_info['query'] = 
+        "SELECT node.nid AS nid,
+             node_revisions.title AS node_revisions_title,
+             node.language AS node_language,
+             node_data_field_chapeau_soustitre.field_chapeau_soustitre_value AS node_data_field_chapeau_soustitre_field_chapeau_soustitre_value,
+             node.type AS node_type,
+             node.vid AS node_vid,
+             node_data_field_chapeau_soustitre.field_chapeau_description_value AS node_data_field_chapeau_soustitre_field_chapeau_description_value,
+             node_data_field_chapeau_soustitre.field_chapeau_texte_value AS node_data_field_chapeau_soustitre_field_chapeau_texte_value,
+             node_data_field_chapeau_soustitre.field_chapeau_texte_format AS node_data_field_chapeau_soustitre_field_chapeau_texte_format
+           FROM {node} node 
+           INNER JOIN {content_type_pages_chapeau} node_data_field_chapeau_soustitre ON node.vid = node_data_field_chapeau_soustitre.vid
+           LEFT JOIN {node_revisions} node_revisions ON node.vid = node_revisions.vid
+           WHERE (node.type in ('%s')) AND (node_data_field_chapeau_soustitre.field_chapeau_nompage_value = '%s') AND (node.language in ('%s')) 
+          ";
+        
+        $view->build_info['count_query'] =
+          "SELECT node.nid AS nid
+           FROM {node} node 
+           INNER JOIN {content_type_pages_chapeau} node_data_field_chapeau_soustitre ON node.vid = node_data_field_chapeau_soustitre.vid
+           LEFT JOIN {node_revisions} node_revisions ON node.vid = node_revisions.vid
+           WHERE (node.type in ('%s')) AND (node_data_field_chapeau_soustitre.field_chapeau_nompage_value = '%s') AND (node.language in ('%s'))
+          ";
+      } 
+      else if (preg_match("/^openlayers_1$/i",$view->current_display)) {
+      /* Permet de tester le term_field is_archipel et de faire la jointure voulue pour le synonyme */
+        //echo "<pre>"; var_dump($view->build_info); exit(); 
+            
+        $view->build_info['query'] = 
+          "SELECT node.nid AS nid,
+                     AsText(node_data_field_bdi_dp_zone_geographique.field_bdi_dp_coordonnees_geo) 
+                        AS field_bdi_dp_coordonnees_geo_astext,
+                     term_synonym.name AS term_synonym_name,
+                     node_data_field_bdi_dp_zone_geographique.field_bdi_dp_nom_ile_code_ile_value 
+                        AS node_data_field_bdi_dp_zone_geographique_field_bdi_dp_nom_ile_code_ile_value,
+                     node.language AS node_language,
+                     node.type AS node_type,
+                     node.vid AS node_vid
+            FROM {node} node 
+            LEFT JOIN {content_type_bd_i_description_physique} node_data_field_bdi_dp_zone_geographique 
+                ON node.vid = node_data_field_bdi_dp_zone_geographique.vid
+            LEFT JOIN {term_node} term_node 
+                ON node.vid = term_node.vid
+            LEFT JOIN {term_synonym} term_synonym 
+                ON node_data_field_bdi_dp_zone_geographique.field_bdi_dp_nom_ile_code_ile_value = term_synonym.tid
+            LEFT join {term_fields_term} term_fields_term
+                ON node_data_field_bdi_dp_zone_geographique.field_bdi_dp_nom_ile_code_ile_value = term_fields_term.tid
+            WHERE (node.type in ('%s')) 
+              AND (node_data_field_bdi_dp_zone_geographique.field_bdi_dp_zone_geographique_value = %d)
+              AND (term_fields_term.is_archipel = 0)
+          ";
+        
+        $view->build_info['count_query'] =
+          "SELECT node.nid AS nid
+            FROM {node} node 
+            LEFT JOIN {content_type_bd_i_description_physique} node_data_field_bdi_dp_zone_geographique 
+                ON node.vid = node_data_field_bdi_dp_zone_geographique.vid
+            LEFT join {term_fields_term} term_fields_term
+                ON node_data_field_bdi_dp_zone_geographique.field_bdi_dp_nom_ile_code_ile_value = term_fields_term.tid 
+            WHERE (node.type in ('%s')) 
+            AND (node_data_field_bdi_dp_zone_geographique.field_bdi_dp_zone_geographique_value = %d)
+            AND term_fields_term.is_archipel = 0
+          ";
+      } 
+      else if (preg_match("/^openlayers_2$/i",$view->current_display)) {
+      /* Permet de tester le term_field is_archipel et de faire la jointure voulue pour le synonyme */
+        //echo "<pre>"; var_dump($view->build_info); exit(); 
+            
+        $view->build_info['query'] = 
+          "SELECT node.nid AS nid,
+                 AsText(node_data_field_bdi_dp_zone_geographique.field_bdi_dp_coordonnees_geo) 
+                    AS field_bdi_dp_coordonnees_geo_astext,
+                 term_synonym.name AS term_synonym_name,
+                 node_data_field_bdi_dp_zone_geographique.field_bdi_dp_nom_ile_code_ile_value 
+                    AS node_data_field_bdi_dp_zone_geographique_field_bdi_dp_nom_ile_code_ile_value,
+                 node.language AS node_language,
+                 node.type AS node_type,
+                 node.vid AS node_vid
+            FROM {node} node 
+            LEFT JOIN {content_type_bd_i_description_physique} node_data_field_bdi_dp_zone_geographique 
+                ON node.vid = node_data_field_bdi_dp_zone_geographique.vid
+            LEFT JOIN {term_node} term_node 
+                ON node.vid = term_node.vid
+            LEFT JOIN {term_synonym} term_synonym 
+                ON node_data_field_bdi_dp_zone_geographique.field_bdi_dp_nom_ile_code_ile_value = term_synonym.tid
+            LEFT join {term_fields_term} term_fields_term
+                ON node_data_field_bdi_dp_zone_geographique.field_bdi_dp_nom_ile_code_ile_value = term_fields_term.tid
+            WHERE (node.type in ('%s')) 
+              AND (node_data_field_bdi_dp_zone_geographique.field_bdi_dp_zone_geographique_value = %d)
+              AND (term_fields_term.is_archipel = 1)
+          ";
+					   
+        $view->build_info['count_query'] =
+          "SELECT node.nid AS nid
+            FROM {node} node 
+            LEFT JOIN {content_type_bd_i_description_physique} node_data_field_bdi_dp_zone_geographique 
+                ON node.vid = node_data_field_bdi_dp_zone_geographique.vid
+            LEFT join {term_fields_term} term_fields_term
+                ON node_data_field_bdi_dp_zone_geographique.field_bdi_dp_nom_ile_code_ile_value = term_fields_term.tid 
+            WHERE (node.type in ('%s')) 
+            AND (node_data_field_bdi_dp_zone_geographique.field_bdi_dp_zone_geographique_value = %d)
+            AND term_fields_term.is_archipel = 1
+          ";
+      }
+      break;
+      
+	  case 'ResultatRegion_emprise': 
+      if (preg_match("/^page_1$/i",$view->current_display)) {
+      /* Permet d'ignorer l'argument dans la requête 
+       * et de le laisser disponible comme motif de substitution 
+       * utilisé dans la description orange de la page
+       */
+        
+        $view->build_info['query'] = 
+        "SELECT node.nid AS nid,
+             node_revisions.title AS node_revisions_title,
+             node.language AS node_language,
+             node_data_field_chapeau_soustitre.field_chapeau_soustitre_value AS node_data_field_chapeau_soustitre_field_chapeau_soustitre_value,
+             node.type AS node_type,
+             node.vid AS node_vid,
+             node_data_field_chapeau_soustitre.field_chapeau_description_value AS node_data_field_chapeau_soustitre_field_chapeau_description_value,
+             node_data_field_chapeau_soustitre.field_chapeau_texte_value AS node_data_field_chapeau_soustitre_field_chapeau_texte_value,
+             node_data_field_chapeau_soustitre.field_chapeau_texte_format AS node_data_field_chapeau_soustitre_field_chapeau_texte_format
+           FROM {node} node 
+           INNER JOIN {content_type_pages_chapeau} node_data_field_chapeau_soustitre ON node.vid = node_data_field_chapeau_soustitre.vid
+           LEFT JOIN {node_revisions} node_revisions ON node.vid = node_revisions.vid
+           WHERE (node.type in ('%s')) AND (node_data_field_chapeau_soustitre.field_chapeau_nompage_value = '%s') AND (node.language in ('%s')) 
+          ";
+        
+        $view->build_info['count_query'] =
+          "SELECT node.nid AS nid
+           FROM {node} node 
+           INNER JOIN {content_type_pages_chapeau} node_data_field_chapeau_soustitre ON node.vid = node_data_field_chapeau_soustitre.vid
+           LEFT JOIN {node_revisions} node_revisions ON node.vid = node_revisions.vid
+           WHERE (node.type in ('%s')) AND (node_data_field_chapeau_soustitre.field_chapeau_nompage_value = '%s') AND (node.language in ('%s'))
+          ";
+      } 
+      else if (preg_match("/^openlayers_1$/i",$view->current_display)) {
+      /* Permet de tester le term_field is_archipel et de faire la jointure voulue pour le synonyme */
+        //echo "<pre>"; var_dump($view->build_info); exit(); 
+          
+        $view->build_info['query'] = 
+          "SELECT node.nid AS nid,
+                     AsText(node_data_field_bdi_dp_zone_geographique.field_bdi_dp_coordonnees_geo) 
+                        AS field_bdi_dp_coordonnees_geo_astext,
+                     term_synonym.name AS term_synonym_name,
+                     node_data_field_bdi_dp_zone_geographique.field_bdi_dp_nom_ile_code_ile_value 
+                        AS node_data_field_bdi_dp_zone_geographique_field_bdi_dp_nom_ile_code_ile_value,
+                     node.language AS node_language,
+                     node.type AS node_type,
+                     node.vid AS node_vid
+            FROM {node} node 
+            LEFT JOIN {content_type_bd_i_description_physique} node_data_field_bdi_dp_zone_geographique 
+                ON node.vid = node_data_field_bdi_dp_zone_geographique.vid
+            LEFT JOIN {term_node} term_node 
+                ON node.vid = term_node.vid
+            LEFT JOIN {term_synonym} term_synonym 
+                ON node_data_field_bdi_dp_zone_geographique.field_bdi_dp_nom_ile_code_ile_value = term_synonym.tid
+            LEFT join {term_fields_term} term_fields_term
+                ON node_data_field_bdi_dp_zone_geographique.field_bdi_dp_nom_ile_code_ile_value = term_fields_term.tid
+            WHERE (node.type in ('%s')) 
+              AND (term_fields_term.is_archipel = 0)
+          ";
+        
+        $view->build_info['count_query'] =
+          "SELECT node.nid AS nid
+            FROM {node} node 
+            LEFT JOIN {content_type_bd_i_description_physique} node_data_field_bdi_dp_zone_geographique 
+                ON node.vid = node_data_field_bdi_dp_zone_geographique.vid
+            LEFT join {term_fields_term} term_fields_term
+                ON node_data_field_bdi_dp_zone_geographique.field_bdi_dp_nom_ile_code_ile_value = term_fields_term.tid 
+            WHERE (node.type in ('%s')) 
+            AND term_fields_term.is_archipel = 0
+          ";
+      } 
+      else if (preg_match("/^openlayers_2$/i",$view->current_display)) {
+      /* Permet de tester le term_field is_archipel et de faire la jointure voulue pour le synonyme */
+        //echo "<pre>"; var_dump($view->build_info); exit(); 
+            
+       //exit();   
+        $view->build_info['query'] = 
+          "SELECT node.nid AS nid,
+                 AsText(node_data_field_bdi_dp_zone_geographique.field_bdi_dp_coordonnees_geo) 
+                    AS field_bdi_dp_coordonnees_geo_astext,
+                 term_synonym.name AS term_synonym_name,
+                 node_data_field_bdi_dp_zone_geographique.field_bdi_dp_nom_ile_code_ile_value 
+                    AS node_data_field_bdi_dp_zone_geographique_field_bdi_dp_nom_ile_code_ile_value,
+                 node.language AS node_language,
+                 node.type AS node_type,
+                 node.vid AS node_vid
+            FROM {node} node 
+            LEFT JOIN {content_type_bd_i_description_physique} node_data_field_bdi_dp_zone_geographique 
+                ON node.vid = node_data_field_bdi_dp_zone_geographique.vid
+            LEFT JOIN {term_node} term_node 
+                ON node.vid = term_node.vid
+            LEFT JOIN {term_synonym} term_synonym 
+                ON node_data_field_bdi_dp_zone_geographique.field_bdi_dp_nom_ile_code_ile_value = term_synonym.tid
+            LEFT join {term_fields_term} term_fields_term
+                ON node_data_field_bdi_dp_zone_geographique.field_bdi_dp_nom_ile_code_ile_value = term_fields_term.tid
+            WHERE (node.type in ('%s')) 
+              AND (term_fields_term.is_archipel = 1)
+          ";
+					   
+        $view->build_info['count_query'] =
+          "SELECT node.nid AS nid
+            FROM {node} node 
+            LEFT JOIN {content_type_bd_i_description_physique} node_data_field_bdi_dp_zone_geographique 
+                ON node.vid = node_data_field_bdi_dp_zone_geographique.vid
+            LEFT join {term_fields_term} term_fields_term
+                ON node_data_field_bdi_dp_zone_geographique.field_bdi_dp_nom_ile_code_ile_value = term_fields_term.tid 
+            WHERE (node.type in ('%s')) 
+            AND term_fields_term.is_archipel = 1
+          ";
+      }
+      break;
+       
+	  case 'Localiser_une_ile':
+      if (preg_match("/^openlayers_3$/i",$view->current_display)) {
+      /* Permet de tester le term_field is_archipel et de faire la jointure voulue pour le synonyme */
+        //echo "<pre>"; var_dump($view->build_info); exit(); 
+            
+        $view->build_info['query'] = 
+          "SELECT node.nid AS nid,
+             AsText(node_data_field_bdi_dp_coordonnees.field_bdi_dp_coordonnees_geo) 
+                AS field_bdi_dp_coordonnees_geo_astext,
+             term_synonym.name AS term_synonym_name,
+             node_data_field_bdi_dp_coordonnees.field_bdi_dp_nom_ile_code_ile_value 
+                AS node_data_field_bdi_dp_coordonnees_field_bdi_dp_nom_ile_code_ile_value,
+             node.language AS node_language,
+             node.type AS node_type,
+             node.vid AS node_vid
+            FROM {node} node  
+            LEFT JOIN {content_type_bd_i_description_physique} node_data_field_bdi_dp_coordonnees 
+                ON node.vid = node_data_field_bdi_dp_coordonnees.vid           
+            LEFT JOIN {term_synonym} term_synonym 
+                ON node_data_field_bdi_dp_coordonnees.field_bdi_dp_nom_ile_code_ile_value = term_synonym.tid
+            WHERE (node.type in ('%s')) 
+          ";
+        
+        $view->build_info['count_query'] =
+          "SELECT node.nid AS nid
+            FROM {node} node  
+            LEFT JOIN {content_type_bd_i_description_physique} node_data_field_bdi_dp_coordonnees 
+                ON node.vid = node_data_field_bdi_dp_coordonnees.vid           
+            LEFT JOIN {term_synonym} term_synonym 
+                ON node_data_field_bdi_dp_coordonnees.field_bdi_dp_nom_ile_code_ile_value = term_synonym.tid
+            WHERE (node.type in ('%s'))
+          ";
+      } 
+      break;
+	  
+            
+  }
+}
+
+
+

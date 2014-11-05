@@ -1,0 +1,391 @@
+<?php
+
+require('nsExportKml.inc');
+/*##################################################################
+						FONCTIONS D'ACCES AUX DONNEES 
+##################################################################*/
+
+/*Récupération de l'ensemble des exports définis */
+function nsExport_get_All_Export() {
+	$items = array();
+	$sql = "SELECT eid, name FROM {myExport} ORDER BY name"	;
+	$result = db_query($sql, $args);
+	while ($row = db_fetch_array($result)) {
+		$items[$row['eid']] = $row['name'];
+	}
+	return $items;
+}
+
+/*Récupération des filtres pour un export */
+function nsExport_get_FilterForOneExport($exportId) {
+	if ( ( $exportId != null ) && ( $exportId >0 )) {
+		$items = array();
+		$sql = "SELECT filter FROM {myExport} WHERE eid=".$exportId	;
+		$result = db_query($sql, $args);
+		while ($row = db_fetch_array($result)) {
+			$items = json_decode($row['filter']);
+		}
+		return $items;
+	}
+	else return null;
+}
+
+
+/*Récupération des fields pour un export */
+function nsExport_get_FieldsForOneExport($exportId) {
+	if ( ( $exportId != null ) && ( $exportId >0 )) {
+		$items = array();
+		$sql = "SELECT field FROM {myExport} WHERE eid=".$exportId	;
+		$result = db_query($sql, $args);
+		while ($row = db_fetch_array($result)) {
+			//Le second paramètre permet de convertir la class en array ()assoc When TRUE, returned objects will be converted into associative arrays.)
+			$items = json_decode($row['field'], true);
+		}
+		return $items;
+	}
+	else return null;
+}
+
+/*##################################################################
+						FONCTIONS DE CONSTRUCTION DU SQL 
+##################################################################*/
+
+function brock_nsExport_build_sql_where($nsExport) {
+	$filter = nsExport_get_FilterForOneExport($nsExport->exportType);
+	$where = "";
+	if ($filter != null) {
+		$index=0;
+		foreach($filter as $key => $value) {
+			$val = $nsExport->$key;
+			if (($val != null) && ($val != 'null')) {
+				if (is_array($val)) {
+					$subi=0;
+					$subwhere=" ";
+					foreach($val as $valkey => $valvalue) {
+						if (($valvalue != null) && ($valvalue != 'null')) {
+							$subwhere .= nsExport_build_unitsql_where($value, $valvalue, $subi, 'OR');
+							$subi++;
+						}
+					}
+					if ($index>0) $where .=" AND ";
+					if (trim($subwhere) != '') {
+						$where .= " ( ".$subwhere." ) " ;
+						$index++;
+					}
+				}
+				else {
+					$where .= nsExport_build_unitsql_where($value, $val, $index);
+				$index++;
+				}
+			}
+		}
+	}
+	return $where;
+}
+
+
+function nsExport_build_unitsql_where($value, $val, $index, $association='AND') {
+	if ($index>0) $where = " ".$association." ";
+	//Traitement particulier si le filtre est de type   hierarchical_autocomplete
+	if ($value->form_type == 'hierarchical_autocomplete') {
+		$tid= db_result(db_query("SELECT tid from {term_data} WHERE name = '".$val."' AND vid = ".$value->vid));
+		if ($tid) {
+			$sql = "SELECT tn.tid FROM {term_data} tn ";
+			$sql .= " LEFT JOIN {term_hierarchy} th ON th.tid = tn.tid ";
+			$whereunit[] = "tn.tid = ".$tid ." ";
+			$lasttable = 'th';
+			for ($i = 1; $i <= $value->depth; $i++) {
+				$sql .= "LEFT JOIN {term_hierarchy} th".$i." ON th".$i.".tid = ".$lasttable.".parent ";
+				$whereunit[] = "th".$i.".tid = ".$tid ." ";
+				$lasttable = "th".$i;
+			}
+			$sql .= "WHERE ".implode(' OR ', $whereunit);
+		}
+		$where.= $value->field."  IN (".$sql.")";
+	}
+	else {
+		switch($value->operator) {
+			  case 'FIND_IN_SET':
+				$where.= "FIND_IN_SET('".$val."',".$value->field.")";
+			  break;
+			  default: 
+				$where.= $value->field."  ".$value->operator." '".$val."' ";
+			  break;
+		}
+	}
+	return $where;
+}
+
+function nsExport_build_sql_where($value, $val, $i) {
+	if ($i==0) $where = " WHERE ";
+	else $where = " AND ";
+	$where.= $value->field."  ".$value->operator." '".$val."' ";
+	return $where;
+}
+
+function  nsExport_build_sql_selectField($fields) {
+	$sortedField= sortByKey($fields, 'weight' , 'ASC');
+	$sqlfield = " ";
+	$i =0;
+	foreach( $sortedField as $key=>$value) {
+		if ($value['check']==1) {
+			if ($i > 0) $sqlfield .= ", ";
+			$sqlfield .= "`".$value['column']."` AS `".$value['alias']."` ";
+			$i++;
+		}
+	}
+	return $sqlfield;
+}
+
+
+/*##################################################################
+						FONCTIONS DE CREATION DES FORMULAIRES
+##################################################################*/
+
+function nsExport_build_export_filter(&$form, $filter) {
+	$form['filter'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Query filter'),
+		'#attributes' => array('id' => 'export-filters'),
+    '#tree' => TRUE,
+  );
+ 	foreach($filter as $key => $value) {
+		if ($value->exposed) {
+			switch($value->form_type) {
+				case 'text':
+				break;
+				case 'select': 
+					nsExport_create_select_filter(&$form, $key, $value);
+				break;
+				case 'checkboxes': 
+					nsExport_create_select_filter(&$form, $key, $value);
+				break;
+				case 'date_select': 
+					nsExport_create_date_filter(&$form, $key, $value);
+				break;
+			case 'hierarchical_autocomplete': 
+					nsExport_create_hierarchical_text_filter($form, $key, $value);
+				break; 
+			}
+		}
+		else {
+			nsExport_create_hidden_filter(&$form, $key, $value);
+		}
+  }
+	return $form;
+}
+
+function nsExport_create_date_filter(&$form, $key, $fil) {
+	$form['filter']['filter_'.$key] = array(
+		'#type'   => $fil->form_type,
+		'#title'  => t($fil->expose->label),
+		'#date_format' => 'd-m-Y',
+		'#date_year_range' =>$fil->year_range,
+	);
+	return $form;
+}
+
+function nsExport_create_hidden_filter(&$form,$key, $fil) {
+ 	 $form['filter']['filter_'.$key] = array(
+			'#type'   => 'hidden',
+			'#value' => $fil->value
+			);
+	return $form;
+}
+
+
+function nsExport_create_select_filter(&$form, $key, $fil) {
+	#construction de la liste des valeurs
+	$values = nsExport_generate_value_list($fil, true);
+	
+	if (count($values)>0) {
+		//construction des prefix et suffix
+		if ($fil->fieldprefix !='') {
+			$prefix = '<'.$fil->fieldprefix.'>';
+			$suffix = '</'.$fil->fieldsuffix.'>' ;
+		}
+		if ($fil->expose->multiple=='true') {
+			$multiple = TRUE;
+		}
+		else {
+			$multiple=FALSE;
+		}
+		$form['filter']['filter_'.$key] = array(
+			'#prefix' => $prefix  , 
+			'#type'   => $fil->form_type,
+			'#title'  => t($fil->expose->label),
+			'#multiple' => $multiple ,
+			'#size' => $multiple ? 8 : 0,
+			'#options'	=> $values,
+			'#suffix'=> $suffix,
+		);
+	}
+	
+	return $form;
+}
+
+function nsExport_create_text_filter(&$form, $key, $fil) {
+ 	$form['filter']['filter_'.$key] = array(
+		'#type'   => $fil->form_type,
+		'#title'  => t($fil->expose->label),
+		'#date_format' => 'd-m-Y'
+	);
+	return $form;
+}
+
+
+function nsExport_create_hierarchical_text_filter(&$form, $key, $fil) {
+ 	$form['filter']['filter_'.$key] = array(
+		'#type'   => 'textfield',
+		'#title'  => $fil->expose->label,
+		'#autocomplete_path' =>'customAutocomplete/autocomplete/'. $fil->CCKfield,
+	);
+	return $form;
+}
+
+function nsExport_generate_value_list($fil) {
+ 	$values = array();
+ 	if ($fil->anyOption) {
+		$values['null'] = t($fil->anyOption);
+ 	}
+	if ($fil->value_type == "query") {
+		$result = db_query($fil->value);
+		while ($row = db_fetch_array($result)) {
+			$values[$row['id']] = $row['value'];
+		}
+	}
+	return $values;
+}
+
+function nsExport_build_export_fields(&$form, $fields)  {
+global $base_url;
+	$form['export'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Export format'),
+    '#tree' => TRUE,
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+  $form['export']['format'] = array(
+    '#type' => 'radios',
+    '#title' => t('Select format'),
+    '#options' => array(
+    		'csv'=>'<img src="'. $base_url.'/sites/default/files/icones/IconCsv.png" alt="CSV" class="exportformat-icone" style="width: 35px;"/>'.t('csv'), 
+    		'kml'=>'<img src="'. $base_url.'/sites/default/files/icones/IconKml.png" alt="KML" class="exportformat-icone" style="width: 35px;"/>'.t('kml')
+    	),
+    '#default_value' => 'csv'
+  );
+	$form['fields'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Select fields'),
+    '#tree' => TRUE,
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#theme' => 'nsExport_fields_sort_filter_fields',
+  );
+  $delta = count($fields);
+  $def_sort=1;
+ 	foreach($fields as $key => $value) {
+		$form['fields'][$key]['check'] = array('#type' => 'checkbox', '#default_value' => 1);
+		$form['fields'][$key]['title'] = array('#type' => 'textfield', '#default_value' => $value);
+		$form['fields'][$key]['sort'] = array('#type' => 'weight', '#delta' => $delta, '#default_value' =>  $def_sort);
+		$def_sort++;
+  }
+	
+	return $form;
+}
+
+/*##################################################################
+						FONCTIONS D'EXPORTS 
+##################################################################*/
+
+function nsExport_customreports_render($type,  $sql) {
+  $args = func_get_args();
+  unset($args[0]);
+  unset($args[1]);
+
+  // Pull 'use' line out of the node's body, if we are to use a custom db.
+  $use_db_regex = '/^use (\w+);/i';
+  $custom_db = preg_match($use_db_regex, $sql, $matches);
+
+  // Allow parameters to be passed as arguments to the query.
+
+  // Check to see if a custom database connection should be used.
+  if($custom_db) {
+    db_set_active($matches[1]);
+    $sql = str_replace($matches[0], '', $sql);
+    $result = db_query($sql, $args);
+  }
+  else {
+    // Check to see if Pressflow is being used.
+    if (function_exists('db_query_slave')) {
+      // Pressflow users can use the slave db for these queries, read more on the
+      // following link.
+      // https://wiki.fourkitchens.com/display/PF/Using+database+replication+with+Pressflow+5+and+6
+      $result = db_query_slave($sql, $args);
+    }
+    else {
+      // We are on a normal installation of drupal.
+      $result = db_query($sql, $args);
+    }
+  }
+	//if ($type == 'kml') nsExport_customreports_render_kml($result);
+  $function = 'nsExport_customreports_render_'. $type;
+  if (function_exists($function)) {
+  	return call_user_func($function, $result);
+  }
+  else {
+    drupal_set_message(t('Requested render type not available, falling back to table display.'), 'warning');
+    return theme('table', $header, $data);
+  }
+ 
+}
+
+/**
+ * Render a CSV file from the input.
+ * @param array $header
+ *   Array of items to be rendered as the CSV header.
+ * @param array $rows
+ *   Array of items to be rendered as the CSV content.
+ * @param string $separator
+ *   The data column separator string.
+ * @param string $delimiter
+ *   The field delimiter string.
+ */
+function nsExport_customreports_render_csv($result, $separator = ';', $delimiter = '"') {
+  while ($item = db_fetch_array($result)) {
+    $data[] = $item;
+  }
+  if (count($data) >0) {
+    foreach ($data[0] as $key => $value) {
+      $header[] = $key;
+    }
+		$output = $delimiter . implode('"'. $separator .'"', $header) . $delimiter ."\n"; // header
+		foreach ($data as $row) { // loop through all rows
+		  $output .= $delimiter . implode('"'. $separator .'"', $row) . $delimiter . "\n"; // create CSV of rows
+		} 
+  }
+  $timestamp = date("Y-m-d"); // Create a timestamp for the filename.
+  $filename = 'Export'.$timestamp.'.csv';
+  header("Content-type: text/csv");
+  header('Content-Disposition: attachment; filename="'. $filename .'"');
+	print $output;
+  exit;
+}
+
+
+function sortByKey($array, $index, $order = 'ASC') {
+	$sort = array();
+	foreach ($array as $key => $val){
+		  $sort[$key] = $val[$index];
+	}
+	asort($sort);
+	$output = array();
+	foreach($sort as $key => $val){
+		  $output[] = $array->$key;
+	}
+	if($order == 'DESC'){
+		  $output = array_reverse($output);
+	}
+	return $output;
+}

@@ -1,0 +1,374 @@
+<?php
+require_once('PIM_ficheIle_charts.inc');
+require_once('PIM_ficheIle_commons.inc');
+require_once('PIM_ficheIle_tabs.inc');
+require_once('PIM_ficheIle_callbacks.inc');
+
+//static 
+$pim_fi_nodetype2url;
+
+
+/*--------------------------------------------------------
+**  Hook_init
+**--------------------------------------------------------*/
+function PIM_ficheIle_tabMenu_init() {
+  drupal_add_js('misc/collapse.js');
+}
+
+/*--------------------------------------------------------
+**  Hook_menu
+**--------------------------------------------------------*/
+function PIM_ficheIle_tabMenu_menu() {
+	global $pim_fi_nodetype2url;
+	pim_fi_set_nodetype2url();
+	
+  $items = array();
+
+  foreach(array_keys($pim_fi_nodetype2url) as $node_type) {
+    
+    /* FicheIle: url par défaut = duplication de bd description vue */
+    if ($node_type == 'bd_i_description_physique') {
+      $items['fiche-Ile/%'] = array(
+        'title' => t('Fiche ile'),
+        'page callback' => 'pim_fi_node_bd_i_callback',
+        'page arguments' => array(1, 'view', $node_type),
+        'access arguments' => array('access content'),
+        'load arguments' => array(1,$pim_fi_nodetype2url[$node_type]['url']),
+        'type' => MENU_NORMAL_ITEM,
+      );
+    }
+    /* Item par défaut  */
+    if ($node_type == 'bd_i_description_physique')  {
+        $menu_type = MENU_DEFAULT_LOCAL_TASK;
+    } else {
+      $menu_type = MENU_LOCAL_TASK;
+    }
+    /*-------------------------------------*/
+    /* Menus primaires = Traitement Commun */
+    /*-------------------------------------*/
+    $items['fiche-Ile/%/'.$pim_fi_nodetype2url[$node_type]['url']] = array(
+    'title' => t($pim_fi_nodetype2url[$node_type]['title']),
+    'page callback' => $pim_fi_nodetype2url[$node_type]['callback'],
+    'page arguments' => $pim_fi_nodetype2url[$node_type]['page arguments'],
+    'access arguments' => $pim_fi_nodetype2url[$node_type]['access arguments'],
+    'type' => $menu_type,
+    'weight' => $pim_fi_nodetype2url[$node_type]['weight'], //-10,
+    );
+    /*-------------------------------------*/
+    /* Menus secondaires (view, edit, add) */
+    /*-------------------------------------*/
+    /* Menus Secondaires BDI */
+    /* seul contenu multi iles */
+    if ($node_type == 'bd_i_statut_de_protection' || $node_type == 'bd_i_multipop') {
+      $title = ($node_type == 'bd_i_statut_de_protection') ? t('Add a protection status') : t('Add a population record');
+      $items['fiche-Ile/%/'. $pim_fi_nodetype2url[$node_type]['url'] .'/view'] = array(
+        'title' => t('View'),
+        'access arguments' => array('access content'),
+        'type' => MENU_DEFAULT_LOCAL_TASK,
+        'weight' => -20,
+      );
+      $items['fiche-Ile/%/'.$pim_fi_nodetype2url[$node_type]['url'] .'/add'] = array(
+        'title' => $title,
+        'page callback' => 'pim_fi_node_bd_i_callback',
+        'page arguments' => array(1, 'create', $node_type),
+        'access callback' => 'pim_fi_node_access',
+        'access arguments' => array('create', NULL, $node_type),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -10,
+      );
+    } elseif ($node_type == 'bd_i_photos_illustrations') {
+      $items['fiche-Ile/%/'. $pim_fi_nodetype2url[$node_type]['url'] .'/view'] = array(
+        'title' => t('View'),
+        'access arguments' => array('access content'),
+        'type' => MENU_DEFAULT_LOCAL_TASK,
+        'weight' => -20,
+      );
+      $items['fiche-Ile/%/'.$pim_fi_nodetype2url[$node_type]['url'] .'/add'] = array(
+        'title' => t('Add an illustration'),
+        'page callback' => 'pim_fi_node_bd_i_callback',
+        'page arguments' => array(1, 'create', $node_type),
+        'access callback' => 'pim_fi_node_access',
+        'access arguments' => array('create', NULL, $node_type),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -10,
+      );
+    } else if (strncasecmp($node_type, 'bd_i', strlen('bd_i')) == 0) { 
+      $items['fiche-Ile/%/'. $pim_fi_nodetype2url[$node_type]['url'] .'/view'] = array(
+        'title' => t('View'),
+        'access arguments' => array('access content'),
+        'type' => MENU_DEFAULT_LOCAL_TASK,
+        'weight' => -20,
+      );
+      
+      $items['fiche-Ile/%/'.$pim_fi_nodetype2url[$node_type]['url'] .'/edit'] = array(
+        'title' => t('Edit'),
+        'page callback' => $pim_fi_nodetype2url[$node_type]['callback'],
+        'page arguments' => array(1,3, $node_type),
+        'access callback' => 'pim_fi_node_access',
+        'access arguments' => array('update', 1, $node_type),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -10,
+      );
+    }
+    /* Menus Secondaires BDN list level */
+    if (strncasecmp($node_type, 'bd_ni_', strlen('bd_ni_')) == 0) {
+      $items['fiche-Ile/%/'. $pim_fi_nodetype2url[$node_type]['url'] .'/view'] = array(
+        'title' => t('View'),
+        'access arguments' => array('access content'),
+        'type' => MENU_DEFAULT_LOCAL_TASK,
+        'weight' => -20,
+      );
+      $items['fiche-Ile/%/'.$pim_fi_nodetype2url[$node_type]['url'] .'/add'] = array(
+        'title' => t('Add an Inventory'),
+        'page callback' => 'pim_fi_node_bd_n_callback',
+        'page arguments' => array(1, 'create', $node_type, $nid=NULL),
+        'access callback' => 'pim_fi_node_access',
+        'access arguments' => array('create', NULL, $node_type),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -10,
+      );
+    }
+    /* Menus Secondaires BDN node level */
+    if (strncasecmp($node_type, 'bd_ni_', strlen('bd_ni_')) == 0) {
+      /*
+      $items['fiche-Ile/%/'. $pim_fi_nodetype2url[$node_type]['url'] .'/list'] = array(
+        'title' => t('View Inventory'),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -20,
+      );
+      */
+      $items['fiche-Ile/%/'. $pim_fi_nodetype2url[$node_type]['url'] .'/%'] = array(
+        'title' => t('List1'),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -20,
+      );
+      $items['fiche-Ile/%/'. $pim_fi_nodetype2url[$node_type]['url'] .'/%/view'] = array(
+        'title' => t('View'),
+        'page callback' => 'pim_fi_node_bd_n_callback',
+        'page arguments' => array($tid=1,$op=4, $node_type, $nid=3),
+        'access arguments' => array('access content'),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -15,
+      );
+      
+      $items['fiche-Ile/%/'.$pim_fi_nodetype2url[$node_type]['url'] .'/%/edit'] = array(
+        'title' => t('Edit'),
+        'page callback' => 'pim_fi_node_bd_n_callback',
+        'page arguments' => array($tid=1,$op=4, $node_type, $nid=3),
+        'access callback' => 'pim_fi_node_access',
+        'access arguments' => array('update', 3, $node_type),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -12,
+      );
+      /*
+      $items['fiche-Ile/%/'.$pim_fi_nodetype2url[$node_type]['url'] .'/%/list'] = array(
+        'title' => t('List'),
+        'page callback' => 'pim_fi_node_bd_n_callback',
+        'page arguments' => array($tid=1,$nid=3,$op=4, $node_type),
+        'access arguments' => array('access content'),
+        'type' => MENU_LOCAL_TASK,
+        'weight' => -10,
+      );
+      */
+    }
+  }
+  
+  return $items; 
+}
+
+
+/*------------------------------------------------------
+ ** Redirect functions **
+ *----------------------------------------------------*/
+function PIM_ficheIle_tabMenu_set_breadcrumb($nid, $node_type, $tid=NULL) {
+  global $pim_fi_nodetype2url;
+	pim_fi_set_nodetype2url();
+  $tablename = "";
+  if (isset($pim_fi_nodetype2url[$node_type]['title2'])) {
+    $tablename .= $pim_fi_nodetype2url[$node_type]['title2'];
+    $tablename .= " ";
+  }
+  $tablename .= $pim_fi_nodetype2url[$node_type]['title'];
+  if (empty($tablename)) {
+    return NULL;
+  }
+  if ((!isset($tid)) and isset($nid)) $tid = pim_fi_get_tid($nid, $node_type);
+  if (empty($tid)) {
+    return NULL;
+  }
+  $ilename = taxonomy_get_synonyms($tid);
+  $ileterm = taxonomy_get_term($tid);
+  $my_breadcrumb = 
+    $ilename[0] . ' - ' . $ileterm->name . ' >> ' . $tablename . ' >> ' . t('Edit');
+  return $my_breadcrumb;
+}
+
+function PIM_ficheIle_tabMenu_form_alter(&$form, &$form_state, $form_id) {
+  $withoutip_url = $form["#action"];
+  
+  if (!isset($withoutip_url)) return;
+  // !!!  pas compris pourquoi mais changé en == au lieu de <> sur le site de test uniquement !!!!!!!
+  if (strpos($withoutip_url, "/node/") <> 0) {
+    return;
+  }
+  
+  $node_type = $form["type"]["#value"];  
+  
+  if (isset($form["type"]["#value"])) {
+    $node_type = $form["type"]["#value"];
+  } else if (isset($form["#parameters"][2]->type)) {
+    $node_type = $form["#parameters"][2]->type;
+  } else {
+    return;
+  }
+  
+  if ( !((strpos($node_type, "bd_i") == 0) || (strpos($node_type, "bd_ni") == 0)) ) {
+    return;
+  }
+  
+  $op = "";
+  if ((strpos($withoutip_url, "/edit") !== FALSE) and (isset($form["nid"]["#value"]))) {
+    $op = "edit";
+  } else if ((strpos($withoutip_url, "/add/") !== FALSE) and isset($form["nid"])) {
+    //$form["nid"] is set, meme vide => c'est le bon formulaire
+    $op = "create";
+  } else if ((strpos($withoutip_url, "/delete") !== FALSE) and (isset($form["nid"]["#value"]))) {
+    $op = "delete";
+  }
+  switch ($op) {
+    case "edit":
+      $url = pim_fi_hack_nodeview_url($form["nid"]["#value"], $node_type);
+      $form_state['pim_fi_redirect'] = $url;
+      //une seule destination
+      if (strpos($form['#action'], '?destination=') == FALSE) {
+        $form['#action'] .= '?destination=' . urlencode($url);
+      }
+    break;
+    
+    case "delete":
+      //nop: destination is set
+    break;
+    
+    case "create":
+      $url_parts = explode('/', $withoutip_url);
+      $cnt = count($url_parts);
+      if (str_replace("-","_",$url_parts[$cnt - 2]) !== $node_type) {
+        return;
+      }
+      $tid = $url_parts[$cnt - 1];
+      $url = pim_fi_hack_nodeview_url(NULL, $node_type,$tid);
+      if (isset($url)) {
+        $form['#redirect'] = $url;
+      } 
+      /* Load default IleCode value not working 
+       * node form already loaded
+       * call to node_form_build here could lead to endless loop 
+       * form update?
+       */
+      
+      $node_fields = pim_fi_node2bd($node_type);
+      $field_ile = $node_fields['ile_term_field']['field'];
+	
+      if (isset($field_ile)) {
+        //$ile_term = taxonomy_get_term($tid);
+        //$ile_code = $ile_term->name;
+        //$form[$field_ile]["#default_value"][0]["value"] = '"'.$tid.'"';
+        $form[$field_ile]['#default_value'][0]['value'] = $tid;
+        //$form["#field_info"][$field_ile]["widget"]["#default_value"] = $tid;
+      }
+    break;
+    
+  }
+}
+
+
+/*------------------------------------------------------
+ ** Template Tab menus **
+ *----------------------------------------------------*/
+function PIM_ficheIle_tabMenu_menu_primary_local_tasks($level = 0, $node_type = NULL, 
+                                              $menu_group = NULL, $return_root = FALSE) {
+  
+  return pim_fi_menu_primary_local_tasks($level, $node_type, $menu_group, $return_root);
+}
+
+/* Fiche Ile:
+ * create thematics div for primary menu to hide parts of them in collapsible field
+ * create a separate div.tabs for secondary links 
+ */
+function PIM_ficheIle_tabMenu_preprocess_page(&$vars) {
+  
+  $path =  $_GET['q'];
+	$alias = drupal_get_path_alias($path);
+  $alias_parts = explode('/', $alias);
+  
+  /* Attention le menu n'est pas sensible à la casse mais le template si!! (page-fiche-Ile.tpl.php) */
+  if (strcasecmp($alias_parts[0],'fiche-Ile') == 0) {
+  
+      /*BD Ile photo*/
+      $tid = $alias_parts[1];
+      $vars['fi_picture'] = pim_fi_get_picture($tid);
+      
+      /*BD Ile menu*/
+      $vars['fi_primary_bdi'] = 
+        '<ul class="tabs primary clearfix">' .PIM_ficheIle_tabMenu_menu_primary_local_tasks(0, NULL, 'bdi'). '</ul>';
+      
+      /* BDN title */
+      $vars['fi_bdn_title'] =
+        '<div class="tabs-biodiversity-title">'.t(Biodiversity).'</div>';
+      /* BDN high level menu */
+      $vars['fi_primary_bdn'] = 
+        '<ul class="tabs primary clearfix">' .PIM_ficheIle_tabMenu_menu_primary_local_tasks(0, NULL, 'bdn'). '</ul>';
+      
+      /*BDN menus */
+      /* Fieldsets management */
+      $bota_collapsed = $chiro_collapsed = $entomo_collapsed = $marineff_collapsed 
+        = $herpeto_collapsed = $mamt_collapsed = $ornitho_collapsed
+        = "collapsible collapsed";
+      
+      $fieldset_active = "collapsible";
+      if (strpos($path, '/bdn_b') > 0) {
+        $bota_collapsed = $fieldset_active;
+      } else if (strpos($path, '/bdn_c') > 0) {
+        $chiro_collapsed = $fieldset_active;
+      } else if (strpos($path, '/bdn_e') > 0) {
+        $entomo_collapsed = $fieldset_active;
+      } else if (strpos($path, '/bdn_ffm') > 0) {
+        $marineff_collapsed = $fieldset_active;
+      } else if (strpos($path, '/bdn_h') > 0) {
+        $herpeto_collapsed = $fieldset_active;
+      } else if (strpos($path, '/bdn_mt') > 0) {
+        $mamt_collapsed = $fieldset_active;
+      } else if (strpos($path, '/bdn_o') > 0) {
+        $ornitho_collapsed = $fieldset_active;
+      }
+      /* end Fieldsets management */
+      
+      $vars['fi_primary_bota'] = 
+        //pim_fi_tab_fieldset_theme(t('Botany'), 'bota_i', $bota_collapsed);
+        pim_fi_tab_theme(t('Botany'), 'bota_i', $bota_collapsed);
+      $vars['fi_primary_chiro'] = 
+        pim_fi_tab_theme(t('Chiroptera'), 'chiro_i', $chiro_collapsed);
+      $vars['fi_primary_entomo'] = 
+        pim_fi_tab_theme(t('Arthropoda'), 'entomo_i', $entomo_collapsed);
+      $vars['fi_primary_marineff'] = 
+        pim_fi_tab_theme(t('Marine Species'), 'marineff_i', $marineff_collapsed);
+      $vars['fi_primary_herpeto'] = 
+        pim_fi_tab_theme(t('Herpetology'), 'herpeto_i', $herpeto_collapsed);
+      $vars['fi_primary_mamt'] = 
+        pim_fi_tab_theme(t('Terrestrial Mammals'), 'mamt_i', $mamt_collapsed);
+      $vars['fi_primary_ornitho'] = 
+        pim_fi_tab_theme(t('Ornithology'), 'ornitho_i', $ornitho_collapsed);
+
+      //ctools_include('menu');
+      
+      $vars['fi_secondary'] = 
+        '<ul class="tabs secondary clearfix">' . ctools_menu_secondary_local_tasks() . '</ul>';
+      
+  }
+}
+/*------------------------------------------------------
+ ** Data Layer Helper **
+ *----------------------------------------------------*/
+function PIM_ficheIle_tabMenu_node2bd($node_type, $return_bdfields = FALSE) {
+  return pim_fi_node2bd($node_type, $return_bdfields);
+}

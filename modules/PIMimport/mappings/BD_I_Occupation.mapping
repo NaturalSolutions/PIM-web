@@ -1,0 +1,144 @@
+<?php 
+
+
+
+function _getTemplateField(  ) {
+    $templateFields= "Code_ile_ilot,Desserte,Historique,Activites_visiteurs,Infrastructure_equipements,Usage_actuels";
+    return $templateFields;
+}
+
+function _getCheckFormatField() {
+    $checkFormatField= array();
+    return $checkFormatField;
+}
+
+function  _getSqlCheckWarning($tableName) {
+    $sqlCheckWarning= array();
+	return $sqlCheckWarning;
+}
+
+function _getSqlCheckValue($tableName) {
+    $sqlCheckValue = array();
+	$sqlCheckValue[]=  array(
+    'message' => t('Unknow island'),
+    'sql' => "SELECT importid+1 as importid, Code_ile_ilot as val 
+              FROM $tableName LEFT OUTER JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_Code_ile_ilot
+        ON thes_Code_ile_ilot.name = Code_ile_ilot WHERE thes_Code_ile_ilot.tid IS NULL ",
+    'field' => 'val',
+    'mandatory'=> true,
+    );
+	$sqlCheckValue[]=  array(
+		'message' =>  t('Invalid term').":".t('Activites visiteurs'),
+		'type' => 'taxonomy', 
+		'field'=> 'Activites_visiteurs',
+		'vid'=>59,	'mandatory'=> false,
+    );	
+	$sqlCheckValue[]=  array(
+		'message' =>  t('Invalid term').":".t('Infrastructure et equipements'),
+		'type' => 'taxonomy', 
+		'field'=> 'Infrastructure_equipements',
+		'vid'=>57,	'mandatory'=> false,
+    );	
+	$sqlCheckValue[]=  array(
+		'message' =>  t('Invalid term').":".t('Usage actuels'),
+		'type' => 'taxonomy', 
+		'field'=> 'Usage_actuels',
+		'vid'=>58,	'mandatory'=> false,
+    );
+	$sqlCheckValue[]=  array(
+		'message' => t('Invalid value').": ".t('Déserte'),
+		'description'=>t('Possible values (OUI, NON, NC)'),
+		'sql' => "SELECT importid+1 as importid, `Desserte` AS val 
+			FROM $tableName WHERE NOT  `Desserte` IN('OUI', 'NON', 'NC') ",
+			'mandatory'=> false,
+			'field'=> 'val',
+	);
+	return $sqlCheckValue;
+}
+
+
+function _getSqlCheckDuplicate($tableName) {
+    $sqlCheckDuplicate= array();
+	$sqlCheckDuplicate[0]=  "UPDATE $tableName SET isdoublon = false";
+	return $sqlCheckDuplicate;
+}
+
+function _getMappingNodeSelectImportableData($tableName) {
+    $mapping = array();
+    $mapping['import_BD_I_Occupation'] = array(
+        'name' => t('Island').' : '.t('Occupation'),
+        'contentType' => "bd_i_occupation",
+        'titleField' => 'Code_ile_ilot',
+		'multivalueSeparator' =>';',
+		'update' =>true,
+		'updateSelectNid' =>"
+				SELECT nid 
+				FROM (
+				  SELECT  thes_code_ilot_ile.tid AS code_ile
+				  FROM (SELECT * FROM $tableName WHERE importid=XXupdateSelectNidXX) AS PIMimport
+				  JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_code_ilot_ile
+				  ON thes_code_ilot_ile.name = Code_ile_ilot
+				) AS importTable 
+				JOIN {content_type_bd_i_occupation}  ON code_ile = field_bdi_o_code_ile_ilot_value LIMIT 1",
+		'query'=>"
+					SELECT  `importid` ,  `Code_ile_ilot` ,thes_Code_ile_ilot.tid AS field_bdi_o_code_ile_ilot, Desserte, Historique, Activites_visiteurs, Infrastructure_equipements, Usage_actuels 
+				FROM ( 
+					SELECT *
+					FROM $tableName  WHERE NOT isdoublon
+				) AS importTable
+				JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_Code_ile_ilot
+				ON thes_Code_ile_ilot.name = Code_ile_ilot",
+		'fields' => array (
+			0 => array (
+                    'name'=>'code_ile',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_o_code_ile_ilot',
+                    'type'=>'thesaurus',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'field_bdi_o_code_ile_ilot',
+                ),
+       1 => array (
+                    'name'=>'Desserte',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_o_desserte_de_l_ile',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Desserte',
+                ),      
+       2=> array(  'name'=>'Historique',	
+                    'mutlivalue'=> true,
+                    'contentField' => 'field_bdi_o_historique_culture',
+                    'type'=>'taxonomy',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Historique'),
+        3=> array(  'name'=>'Activites_visiteurs',
+                    'mutlivalue'=> true,
+                    'contentField' => 'field_bdi_o_activites_visiteurs',
+                    'type'=>'taxonomy',
+                    'taxonomyVoc'=>59,
+                    'taxonomyOpen'=>false,
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Activites_visiteurs'),
+        4=> array(  'name'=>'Infrastructure_equipements',
+                    'mutlivalue'=> true,
+                    'contentField' => 'field_bdi_o_infrastruct_equip',
+                    'type'=>'taxonomy',
+                    'taxonomyVoc'=>57,
+                    'taxonomyOpen'=>false,
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Infrastructure_equipements'),
+        5=> array(  'name'=>'Usage_actuels',
+                    'mutlivalue'=> true,
+                    'contentField' => 'field_bdi_o_usages_actuels',
+                    'type'=>'taxonomy',
+                    'taxonomyVoc'=>58,
+                    'taxonomyOpen'=>false,
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Usage_actuels'),
+		)
+	);
+    return $mapping;
+}
+
+

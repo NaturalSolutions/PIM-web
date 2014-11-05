@@ -1,0 +1,491 @@
+<?php
+
+require_once('PIM_ficheTaxon.inc');
+require_once('PESI.inc');
+
+/**
+ * Implementation of hook_menu().
+ */
+function PIM_ficheTaxon_menu() {
+	$items=array();
+	$items['fiche-taxon/%'] = array(
+		'title' => 'Fiche-taxon',
+    'page callback' => 'pim_fiche_taxon_callback_overview',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+		'weight'=>0,
+	); 
+  $items['fiche-taxon/%/overview'] = array(
+    'title' => t('Overview'),
+		'type' =>MENU_DEFAULT_LOCAL_TASK,
+		'weight'=>1,
+  );
+  $items['fiche-taxon/%/data'] = array(
+    'title' => t('Data'),
+    'page callback' => 'pim_fiche_taxon_callback_data',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+    'weight'=>2,
+    'type' => MENU_LOCAL_TASK,
+  );
+    $items['fiche-taxon/%/illustration'] = array(
+    'title' => t('Illustrations'),
+    'page callback' => 'pim_fiche_taxon_callback_illustration',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+    'weight'=>3,
+    'type' => MENU_LOCAL_TASK,
+  );
+  $items['fiche-worms/%'] = array(
+		'title' => 'Fiche-taxon',
+    'page callback' => 'pim_fiche_worms_callback_overview',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+		'weight'=>0,
+	); 
+  $items['fiche-worms/%/overview'] = array(
+    'title' => t('Overview'),
+		'type' =>MENU_DEFAULT_LOCAL_TASK,
+		'weight'=>1,
+  );
+  $items['fiche-worms/%/data'] = array(
+    'title' => t('Data'),
+    'page callback' => 'pim_fiche_worms_callback_data',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+    'weight'=>2,
+    'type' => MENU_LOCAL_TASK,
+  );
+  $items['fiche-worms/%/illustration'] = array(
+    'title' => t('Illustrations'),
+    'page callback' => 'pim_fiche_worms_callback_illustration',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+    'weight'=>3,
+    'type' => MENU_LOCAL_TASK,
+  );
+  return $items;  
+}
+
+function pim_fiche_taxon_callback_illustration($tid) {
+	$term = taxonomy_get_term($tid);
+	$taxons =formatTermFicheNode ($tid);
+	$node_type = _get_node_type($term->vid);
+	$pesiGuid = get_pesi_guid_by_exactName($term->name);
+	if (!empty($pesiGuid)) {
+		$vernacularPesiReturn = _get_html_pesi_vernacularNames ($pesiGuid);
+		$vernacularCurrentLg = $vernacularPesiReturn['vernacular_current_lg'];
+	}
+	$taxon_name = $term->name;
+	if ($term->description) $taxon_name =$term->description;
+	$htmlout .= _get_html_taxon_header($taxon_name, $taxons,$vernacularCurrentLg );
+	$htmlout .= _get_html_flicker_thumb($term->name);
+	return $htmlout;
+}
+
+function pim_fiche_taxon_callback_data ($tid) {
+	$term = taxonomy_get_term($tid);
+	$taxons =formatTermFicheNode ($tid);
+	$node_type = _get_node_type($term->vid);
+	$pesiGuid = get_pesi_guid_by_exactName($term->name);
+	if (!empty($pesiGuid)) {
+		$vernacularPesiReturn = _get_html_pesi_vernacularNames ($pesiGuid);
+		$vernacularCurrentLg = $vernacularPesiReturn['vernacular_current_lg'];
+	}
+	$taxon_name = $term->name;
+	if ($term->description) $taxon_name =$term->description;
+	$htmlout .= _get_html_taxon_header($taxon_name, $taxons,$vernacularCurrentLg );
+	$viewName = 'v_search_taxon_observed';
+	$myArgs = array($tid);
+	$htmlout .=  views_embed_view($viewName, 'block_1', $tid);
+	$htmlout .=  views_embed_view($viewName, 'block_2', $tid);
+	return $htmlout;
+}
+
+function pim_fiche_taxon_callback_overview ($tid) {
+
+	$term = taxonomy_get_term($tid);
+	$taxons =formatTermFicheNode ($tid);
+	$term_name = str_replace(' ', '_', $term->name);
+	$pesiGuid = get_pesi_guid_by_exactName($term->name);
+	if (!empty($pesiGuid)) {
+		$vernacularPesiReturn = _get_html_pesi_vernacularNames ($pesiGuid);
+		$vernacularCurrentLg = $vernacularPesiReturn['vernacular_current_lg'];
+	}
+	$taxon_name = $term->name;
+	if ($term->description) $taxon_name =$term->description;
+	$htmlout .= _get_html_taxon_header($taxon_name, $taxons,$vernacularCurrentLg );
+	$htmlout .= _get_html_taxon_bd_t_status($term, $taxons);
+
+	$htmlout .= _get_html_flicker_main($term_name);
+	$htmlout .= _get_html_gbifMap($term_name);
+	if (!empty($pesiGuid))  $htmlout .= $vernacularPesiReturn['vernacular_box'];
+	if (!empty($pesiGuid)) $htmlout .= _get_html_pesi_data ($pesiGuid);
+	$htmlout .= _get_html_taxon_thesaurus($term, $taxons);
+	//$htmlout .= _get_html_wikipedia($term_name);
+	
+	return $htmlout;
+}
+
+function pim_fiche_worms_callback_data ($lsid) {
+	$name = get_worms_name_with_AphiaID($lsid);
+	$taxons =formatTermFicheNode ($lsid, 'worms');
+	$term_name = str_replace(' ', '_', $name);
+	//$node_type = _get_node_type($term->vid);
+	$pesiGuid = get_pesi_guid_by_exactName($name);
+	if (!empty($pesiGuid)) {
+		$vernacularPesiReturn = _get_html_pesi_vernacularNames ($pesiGuid);
+		$vernacularCurrentLg = $vernacularPesiReturn['vernacular_current_lg'];
+	}
+	$htmlout = _get_html_taxon_header($name, $taxons,$vernacularCurrentLg );
+  $viewName = 'v_search_taxon_observed';
+	$myArgs = array($lsid);
+	$htmlout .=  views_embed_view($viewName, 'block_1', $lsid);
+	$htmlout .=  views_embed_view($viewName, 'block_2', $lsid);
+//	$htmlout .= pim_tax_view_bd_n_callback ($lsid, 'bd_ni_faune_flore_marine_present');
+	return $htmlout;
+}
+
+function pim_fiche_worms_callback_illustration($lsid) {
+	$name = get_worms_name_with_AphiaID($lsid);
+	$taxons =formatTermFicheNode ($lsid, 'worms');
+	$term_name = str_replace(' ', '_', $name);
+	if (!empty($pesiGuid)) {
+		$vernacularPesiReturn = _get_html_pesi_vernacularNames ($pesiGuid);
+		$vernacularCurrentLg = $vernacularPesiReturn['vernacular_current_lg'];
+	}
+	$htmlout .= _get_html_taxon_header($name, $taxons,$vernacularCurrentLg );
+	$htmlout .= _get_html_flicker_thumb($name);
+	return $htmlout;
+}
+
+function pim_fiche_worms_callback_overview ($lsid) {
+	$name = get_worms_name_with_AphiaID($lsid);
+	$term_name = str_replace(' ', '_', $name);
+	$taxons =formatTermFicheNode ($lsid, 'worms');
+	$pesiGuid = get_pesi_guid_by_exactName($name);
+	if (!empty($pesiGuid)) {
+		$vernacularPesiReturn = _get_html_pesi_vernacularNames ($pesiGuid);
+		$vernacularCurrentLg = $vernacularPesiReturn['vernacular_current_lg'];
+	}
+	$htmlout .= _get_html_taxon_header($name, $taxons, $vernacularCurrentLg);
+	$htmlout .= _get_html_taxon_bd_t_status($term, $taxons);
+	$htmlout .= _get_html_flicker_main($term_name);
+	$htmlout .= _get_html_gbifMap($term_name);
+	if (!empty($pesiGuid))  $htmlout .= $vernacularPesiReturn['vernacular_box'];
+	if (!empty($pesiGuid)) $htmlout .= _get_html_pesi_data ($pesiGuid);
+	return $htmlout;
+}
+
+
+/*
+[0] => stdClass Object ( 
+[GUID] => urn:lsid:marinespecies.org:taxname:232052 
+[url] => http://www.eu-nomen.eu/portal/taxon.php?GUID=urn:lsid:marinespecies.org:taxname:232052 
+[scientificname] => Larus michahellis 
+[authority] => Naumann, 1840 
+[rank] => Species 
+[status] => accepted 
+[valid_guid] => urn:lsid:marinespecies.org:taxname:232052 
+[valid_name] => Larus michahellis 
+[valid_authority] => Naumann, 1840 
+[kingdom] => Animalia 
+[phylum] => Chordata 
+[class] => Aves 
+[order] => Charadriiformes 
+[family] => Laridae 
+[genus] => Larus 
+[citation] => WoRMS (2011). Larus michahellis Naumann, 1840. Accessed through: World Register of Marine Species at http://www.marinespecies.org/aphia.php?p=taxdetails&id=232052 | Drs Cees Roselaar. Larus michahellis Naumann, 1840. Accessed through: Fauna Europaea at http://www.faunaeur.org/full_results.php?id=96939 
+)*/
+
+function _get_html_pesi_data ($guid) {
+	$record = get_pesi_record_by_guid($guid);
+	$htmlout .= '<div class="fiche-taxon-content left-box pessi-data texte-gris">';
+	$htmlout .= _pars_pessi_unit (t('Scientific name'), '<i>'.$record->scientificname.'</i> '.$record->authority);
+	$htmlout .= _pars_pessi_unit (t('Rank'), $record->rank);
+	$htmlout .= _pars_pessi_unit (t('Status'), $record->status);
+	if ($record->status != 'accepted') {
+			$htmlout .= _pars_pessi_unit (t('Valid name'), '<i>'.$record->valid_name.'</i> '.$record->valid_authority);
+	}
+	$htmlout .= '<div id="pessi-taxonomy"><label>Taxonomy</label>';
+	$htmlout .= '<ul>';
+	$i = 5;
+	$count = $i;
+	$htmlout .= "<li style='margin-left:".$count."px;'>"._pars_pessi_unit (t('Kingdom'), $record->kingdom)."</li>";
+	$count += $i;
+	$htmlout .= "<li style='margin-left:".$count."px;'>"._pars_pessi_unit (t('Phylum'), $record->phylum)."</li>";
+	$count += $i;
+	$htmlout .= "<li style='margin-left:".$count."px;'>"._pars_pessi_unit (t('Class'), $record->class)."</li>";
+	$count += $i;
+	$htmlout .= "<li style='margin-left:".$count."px;'>"._pars_pessi_unit (t('Order'), $record->order)."</li>";
+	$count += $i;
+	$htmlout .= "<li style='margin-left:".$count."px;'>"._pars_pessi_unit (t('Family'), $record->family)."</li>";
+	$count += $i;
+	$htmlout .= "<li style='margin-left:".$count."px;'>"._pars_pessi_unit (t('Genus'), $record->genus)."</li>";
+	$htmlout .= '</ul>';
+	$htmlout .= '</div>';
+	
+	$htmlout .= _pars_pessi_unit (t('Citation'), $record->citation);
+	$htmlout .=_get_html_pesi_source($guid);
+	$htmlout .= '</div>';
+		
+	return $htmlout;
+}
+
+/*
+[0] => stdClass Object ( 
+[vernacular] => Bataklik kirlangici 
+[language_code] => tr 
+[language] => Turkish ) */
+function _get_html_pesi_vernacularNames($guid) {
+	$return = array();
+
+	global $language;
+	
+	//Récupération des noms verrnaculaires
+	$vernacularNames = get_pesi_vernacularsNames_by_guid($guid);
+	
+	if (isset($vernacularNames[0]->language)) {
+		$htmlout .= '<div class="fiche-taxon-content right-box pessi-vernacular texte-gris">';
+		$htmlout .= '<label>'.t('Vernacular names').'</label>';
+		$htmlout .= '<ul>';
+		foreach($vernacularNames as $vernacularName) {
+			$htmlout .= '<li>';
+			$liunit= t($vernacularName->language).' : '.$vernacularName->vernacular;
+			if ($vernacularName->language_code == $language->language) {
+				$liunit = '<b>'.$liunit.'</b>';
+				$return['vernacular_current_lg']= $vernacularName->vernacular;
+			}
+			$htmlout .= $liunit;
+			$htmlout .= '</li>';
+		}
+		$htmlout .= '</ul>';
+		$htmlout .=_get_html_pesi_source($guid);
+		$htmlout .= '</div>';
+		$return['vernacular_box']= $htmlout;
+	}
+	return $return;
+}
+
+function _get_html_pesi_source($guid){
+	$pessiSource = '<a href="http://www.eu-nomen.eu/portal/index.php">Pessi</a> (<a href=http://www.eu-nomen.eu/portal/index.php?GUID="'.$guid.'">1</a>)';
+	$htmlout .=_get_html_sources($pessiSource);
+	return $htmlout;
+}
+function _pars_pessi_unit ($label, $rawvalue){
+	$htmlout .= '<div><label class="field-label">';
+	$htmlout .= $label ;
+	$htmlout .= ': </label>';
+	$htmlout .= '<span class="field-items">';
+	$htmlout .= $rawvalue;
+	$htmlout .= '</span></div>';
+	return $htmlout;
+}
+
+function _get_html_taxon_header($termName, $taxons, $vernacularCurrentLg) {
+	$htmlout .= '<div class="fiche-taxon-header">';
+	$htmlout .= '<div id ="statusEspeces-box" class="right-box">';
+	if (! empty( $taxons['warning'])) {
+		foreach ( $taxons['warning'] as $warning) {
+			$htmlout .= $warning;
+		}
+	}
+	$htmlout .= '</div>';
+	$htmlout .= '<h1 class="taxon-name">';
+	$htmlout .=  $termName;
+	$htmlout .= '</h1>';
+	if ($vernacularCurrentLg != '') {
+		$htmlout .=  '<h2>'.$vernacularCurrentLg.'</h2>';	
+	}
+	$htmlout .= '</div>';
+	return $htmlout;
+}
+
+function _get_html_taxon_bd_t_status($term, $taxons) {
+	if (! empty( $taxons['content'])) {
+	$htmlout .= '<div class="fiche-taxon-content taxon-data texte-gris" style="clear: both;">';
+	foreach ( $taxons['content'] as $content) {
+			$htmlout .= '<div><label class="field-label">';
+			$htmlout .= $content['label'];
+			$htmlout .= '</label>';
+			$htmlout .= '<div class="field-items">';
+			$htmlout .= $content['value'];
+			$htmlout .= '</div></div>';
+		}
+	$htmlout .= '</div>';
+	}
+	return $htmlout;
+}
+
+
+function _get_html_taxon_thesaurus($term) {
+	$parentsAll = taxonomy_get_parents_all($term->tid);
+	$parentsAll = array_reverse ($parentsAll);
+	$synonymes = taxonomy_get_synonyms($term->tid);
+	$termFields = get_taxonomy_termField($term->tid);
+	$htmlout .='<div class="fiche-taxon-content left-box thesaurus texte-gris">';
+	if ( !empty($synonymes)) {
+		$htmlout .='<div class="taxon-synonyms"><label>'.t('Synonyms').':</label><ul>';
+		foreach($synonymes as $syn) {
+			$htmlout .= "<li>".$syn."</li>";
+		}
+		$htmlout .='</ul></div>';
+	}
+
+	if ($term->description) {
+		$htmlout .='<div class="taxon-description"><label>'.t('Full name').'</label>';
+		$htmlout .='<div>'.$term->description.'</div></div>';
+	}
+
+	$htmlout .='<div class="taxon-classification">';
+	$htmlout .='<label>'.t("Hierarchy").':</label>';
+	$htmlout .='<div>'.$fields['name']->content.'</div><ul>';
+	$count=0;
+	foreach($parentsAll as $parent) {
+		$htmlout .= "<li style='margin-left:".$count."px;'>".$parent->name."</li>";
+		$count= $count+5;
+	}
+	$htmlout .='</ul></div>';
+	
+	if ($termFields['rbota_referentiel']=='AFN') {
+		$htmlout .=_get_html_sources('<a href="http://www.ville-ge.ch/musinfo/bd/cjb/africa/details.php?id='.$term->tid.'" alt="CJB" >African Plant Database</a>', 'Referential');
+	}
+	
+	
+	$htmlout .='</div>';
+	return $htmlout;
+}
+
+function _get_html_gbifMap($term_name) {
+	gbifmap_init();
+	$gbifResponse =  gbifmap_ajax_callback($term_name);
+	$gbifMap =  $gbifResponse[0]['body'];
+	$gbifCitation =  $gbifResponse['citation'];
+	$htmlout = '<div class="fiche-taxon-content right-box gbif-map texte-gris" > <div>';
+	$htmlout .= $gbifMap;
+	$htmlout .= '</div>';
+	$htmlout .=_get_html_sources($gbifCitation);
+	$htmlout .='</div>';
+	return $htmlout;
+}
+
+
+function _get_html_flicker_main($term_name) {
+	flickr_init();
+	if (str_word_count($term_name) == 1) {
+		$term_name = $term_name.' sp';
+	}
+	//$flickrImages =flickr_ajax_callback($term_name, 1);
+   $flickrImages =flickr_fichetaxon_callback($term_name, 1);
+	if (!empty($flickrImages['urls']['urls'])) {
+		$htmlout .='<div class="fiche-taxon-content right-box main-picture texte-gris"><div>';
+		$mode = current($flickrImages);
+		$htmlout .='<img class="fiche-taxon-content main-picture" src="'.$mode['photo_url'].'"/>';
+		$htmlout .= '</div>';
+		$htmlout .=_get_html_sources('<a href="http://www.flickr.com" alt="flickr" > Flicker</a>');
+		$htmlout .='</div>';
+	}
+	return $htmlout;
+}
+	
+	
+function _get_html_flicker_thumb($term_name) {
+	flickr_init();
+	if (str_word_count($term_name) == 1) {
+		$term_name = $term_name.' sp';
+	}
+	//$flickrImages =flickr_ajax_callback($term_name, 20);
+   $flickrImages =flickr_fichetaxon_callback($term_name, 20);
+	if (!empty($flickrImages['urls']['urls'])) {
+		$htmlout .= '<div class="fiche-taxon-content flicker-thumb texte-gris" ><div class=" flicker-image">';
+		foreach ($flickrImages as $item) {
+			if ($item['body'] !="<"){
+				$htmlout .= $item['body'];
+			}
+
+		}
+		$htmlout .= '</div>';
+		$htmlout .=_get_html_sources('<a href="http://www.flickr.com" alt="flickr" > Flicker</a>');
+		$htmlout .= '</div>';
+	}
+	return $htmlout;
+}
+
+function _get_html_wikipedia($term_name) {
+	$wikitexte = wikipedia_ajax_callback($term_name);
+	if (!empty($wikitexte)) {
+		$htmlout .= '<div class="fiche-taxon-content  wikipedia texte-gris" >';
+		foreach ($wikitexte as $key=> $val) {
+			if (is_array($val)){
+				$htmlout .=	'<div>';
+				$htmlout .= $val['body'];
+				$htmlout .= '</div>';
+			}
+		}
+		$htmlout .= _get_html_sources( $wikitexte['citation']);
+		$htmlout .= '</div>';
+	}
+	return $htmlout;
+}
+
+function getTermNameDescription ($tid) {
+	$term = taxonomy_get_term($tid);
+	$termdesc='';
+	if (! empty($term)) {
+		//$termdesc = t($term->name);
+		$termdesc.=tt('taxonomy:term:'.$term->tid.':name',$term->name);
+		if ($term->description != '') {
+			return $termdesc.= ': '.tt('taxonomy:term:'.$term->tid.':description',$term->description);
+		}
+	}
+	else return $termdesc;
+}
+
+function _get_html_sources($texte, $title ='Sources') {
+		$out .= '<div class="fiche-sources">'	;
+		$out .= '<label class="field-label">'.t($title).' :</label> ';
+		$out .= $texte;
+		$out .= '</div>';
+		return $out;
+}
+
+function get_term_vocabulary($tid){
+	$result = db_result(db_query("SELECT vid FROM {term_data} WHERE tid = $tid"));
+	return $result;
+}
+
+function _get_node_type($vid) {
+/*64	Référentiel autres terrestres
+55	Référentiel Botanique
+28	Référentiel Chiroptères PIM
+56	Référentiel Entomo
+29	Référentiel Herpéto PIM
+26	Référentiel Mammifère terrestre non volant PIM
+21	Référentiel Ornithologie AERC*/
+	switch ($vid ){
+		case '21':
+			return 'bd_ni_ornithologie_present';
+			break;
+		case '26':
+			return 'bd_ni_mam_terrestres_present';
+			break;
+		case '29':
+			return 'bd_ni_herpetologie_present';
+			break;
+		case '56':
+			return 'bd_ni_entomo_present';
+			break;
+		case '28':
+			return 'bd_ni_chiroptere_present';
+			break;
+		case '55':
+			return 'bd_ni_botanique_present';
+			break;
+		case '64':
+			return 'bd_ni_autre_terrestre_present';
+			break;
+	}
+	
+}
+
+

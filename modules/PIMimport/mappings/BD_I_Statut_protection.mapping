@@ -1,0 +1,164 @@
+<?php 
+
+
+
+function _getTemplateField(  ) {
+    $templateFields= "Code_ile_ilot,Code_statut,Annee,Autre_statut,Aire_concernee,Commentaires";
+    return $templateFields;
+}
+
+function _getCheckFormatField() {
+    $checkFormatField= array();
+  /*$checkFormatField['Latitude']= array(
+    'type'=>'decimal',
+    'field'=> "REPLACE(`Latitude`, ',', '.')",
+    'message' => 'Valid latitude format : decimal ex(12.3)',
+  ) ;
+  $checkFormatField['Longitude']= array(
+    'type'=>'decimal',
+    'field'=> "REPLACE(`Longitude`, ',', '.')",
+    'message' => 'Valid longitude format : decimal ex(12.3)',
+  ) ;*/
+  
+    return $checkFormatField;
+}
+
+function _getSqlCheckValue($tableName) {
+    $sqlCheckValue = array();
+  $sqlCheckValue[]=  array(
+    'message' => t('Unknow island'),
+    'sql' => "SELECT importid+1 as importid, Code_ile_ilot as val 
+              FROM $tableName LEFT OUTER JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_code_ilot_ile
+        ON thes_code_ilot_ile.name = Code_ile_ilot WHERE thes_code_ilot_ile.tid IS NULL ",
+    'field' => 'val',
+    'mandatory'=> true,
+    );
+	$sqlCheckValue[]=  array(
+		'message' => t('Invalid value').": ".t('Concerned area'),
+		'description'=>t('Possible values (Terre, Mer, "Terre, Mer")'),
+		'sql' => "SELECT importid+1 as importid, `Aire_concernee` AS val 
+			FROM $tableName WHERE (`Aire_concernee` IS NULL OR NOT  `Aire_concernee`  ='' ) AND NOT  `Aire_concernee` IN('Terre','Mer', 'Terre, Mer') ",
+			'mandatory'=> true,
+			'field'=> 'val',
+	);
+
+    $sqlCheckValue[]=  array(
+        'message' => t('Code statut mandatory '),
+    //'description'=>t('Possible values ( observation, bibliographie, expert )'),
+    'type' => 'taxonomy', 
+    'field'=> 'Code_statut',
+    'vid'=> 54,
+    'mandatory'=> true,
+    );
+  $sqlCheckValue[]=  array(
+    'message' =>  t('Year  mandatory'),
+    'type' => 'int', 
+    'field'=> 'Annee',
+    'mandatory'=> true,
+    );
+  return $sqlCheckValue;
+}
+
+
+function  _getSqlCheckWarning($tableName) {
+    $sqlCheckWarning= array();
+	return $sqlCheckWarning;
+}
+
+function _getSqlCheckDuplicate($tableName) {
+  $sqlCheckDuplicate= array();
+  $sqlCheckDuplicate[0]=  "UPDATE $tableName SET isdoublon = false";
+  //$sqlCheckDuplicate[0]=  "UPDATE $tableName SET isdoublon = false";
+  return $sqlCheckDuplicate;
+}
+
+function _getMappingNodeSelectImportableData($tableName) {
+    $mapping = array();
+    $mapping['import_bd_i_statut_protection'] = array(
+        'name' => t('Island').' : '.t('Protection status'),
+        'contentType' => "bd_i_statut_de_protection",
+        'titleField' => 'Code_ile_ilot',
+    'update' =>true,
+    'updateSelectNid' =>"
+              SELECT nid 
+        FROM (
+          SELECT thes_code_st_protection.tid AS code_status, thes_code_ilot_ile.tid AS code_ile
+          FROM (SELECT * FROM $tableName WHERE importid=XXupdateSelectNidXX) AS PIMimport
+          JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_code_ilot_ile
+          ON thes_code_ilot_ile.name = Code_ile_ilot
+          JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 54) AS thes_code_st_protection
+          ON thes_code_st_protection.name = Code_statut
+        ) AS importTable 
+        JOIN {content_type_bd_i_statut_de_protection}  ON importTable.code_status = field_bdi_spt_statut_protection_value AND code_ile = field_bdi_spt_code_ile_ilot_value LIMIT 1",
+    'query'=>"SELECT 
+            importid,
+            thes_code_ilot_ile.tid AS field_bdi_spt_code_ile_ilot,
+            thes_code_st_protection.tid AS field_bdi_spt_statut_protection,
+            CONCAT(STR_TO_DATE(Annee, '%%Y') , ' 00:00:00') AS field_bdi_spt_annee,
+            `Autre_statut` AS field_bdi_spt_statut_autre, 
+            `Commentaires`  AS field_bdi_spt_statut_commentaire, 
+			Aire_concernee AS field_bdi_spt_aire_concernee
+          FROM ( 
+              SELECT 
+                *
+              FROM $tableName WHERE NOT isdoublon
+          ) AS importTable
+          JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_code_ilot_ile
+          ON thes_code_ilot_ile.name = Code_ile_ilot
+          JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 54) AS thes_code_st_protection
+          ON thes_code_st_protection.name = Code_statut",
+    'fields' => array (
+                0 => array (
+                    'name'=>'field_bdi_spt_code_ile_ilot',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_spt_code_ile_ilot',
+                    'type'=>'thesaurus',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'field_bdi_spt_code_ile_ilot',
+                ),
+                1 => array (
+                    'name'=>'field_bdi_spt_statut_protection',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_spt_statut_protection',
+                    'type'=>'thesaurus',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'field_bdi_spt_statut_protection',
+                ),
+              2 => array (
+                    'name'=>'field_bdi_spt_annee',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_spt_annee',
+                    'type'=>'date',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'field_bdi_spt_annee',
+                ),
+              3=> array (
+                'name'=>'field_bdi_spt_statut_commentaire',
+                'mutlivalue'=> false,
+                'contentField' => 'field_bdi_spt_statut_commentaire',
+                'type'=>'text',
+                'typeImpl'=>'value',
+                'importTableField'=>'field_bdi_spt_statut_commentaire',
+              ),
+              4=> array (
+                'name'=>'field_bdi_spt_statut_autre',
+                'mutlivalue'=> false,
+                'contentField' => 'field_bdi_spt_statut_autre',
+                'type'=>'text',
+                'typeImpl'=>'value',
+                'importTableField'=>'field_bdi_spt_statut_autre',
+              ),
+				5 => array (
+                   'name'=>'field_bdi_spt_aire_concernee',
+                    'mutlivalue'=> true,
+                    'contentField' => 'field_bdi_spt_aire_concernee',
+                    'type'=>'text',
+					'typeImpl'=>'value',
+					'importTableField'=>'field_bdi_spt_aire_concernee',
+                ),
+      )
+  );
+  return $mapping;
+}
+
+

@@ -1,0 +1,92 @@
+/**
+ * @file
+ * Navigation Styling
+ *
+ * Default menu styling (ul.menu) is defined in system-menus.css.
+ */
+
+
+/*
+ * The active item in a Drupal menu
+ */
+li a.active {
+  color: #000;
+}
+
+/*
+ * Navigation bar
+ */
+#navigation {
+}
+
+.region-navigation {
+}
+
+/*
+ * Primary and Secondary menu links
+ */
+#main-menu {
+}
+
+#secondary-menu {
+}
+
+/*
+ * Menu blocks
+ */
+.block-menu {
+}
+
+/*
+ * "Menu block" blocks. See http://drupal.org/project/menu_block
+ */
+.block-menu_block {
+}
+
+/* menu langue */
+#block-locale-0 .content ul{
+	font-size: 0.7em;
+}
+#block-locale-0 .content li {
+    border-right: 1px solid #CCCCCC;
+    display: inline;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+#block-locale-0 .content li a {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+}
+#block-locale-0 .content li a:hover {
+    text-decoration: underline;
+}
+
+ul.nice-menu-right { font-size: 0.8em; font-weight: normal; margin: 0; padding: 0; z-index: 50;}
+ul.nice-menu-right,
+ul.nice-menu-right ul,
+ul.nice-menu-right li,
+ul.nice-menu ul li { width: 153px; border: none; background: #fff url("../images/background/sub_nav.png") no-repeat left top;}
+
+ul.nice-menu-right { border-top: solid 1px #31569F;} 
+ul.nice-menu-right li { height: auto !important; height: 29px; min-height: 29px; border-bottom: solid 1px #31569F; border-top: 1px solid #FFFFFF;}
+
+ul.nice-menu-right li a { color: #31569F; text-decoration: none; padding-left: 35px; background: none;}
+ul.nice-menu-right li a:hover { color: #FF741C;}
+
+ul.nice-menu-right ul { left: 154px; margin: 1px 0 0 1px; padding: 0;}
+
+.region-header-left ul#nice-menu-2 ul,
+.region-header-left ul#nice-menu-2 li,
+.region-header-left ul#nice-menu-2 ul li { width: 154px;}
+.region-header-left ul#nice-menu-2 { border: none; z-index: 998;}
+.region-header-left ul#nice-menu-2 li{ color: #fff; background: #1a2277 url("../images/background/background-btn-menu-top.jpg") repeat-x left top; border: none;}
+.region-header-left ul#nice-menu-2 li a { color: #fff;}
+.region-header-left ul#nice-menu-2 li a:hover { color: #FF741C;}
+
+#block-menu-menu-connexion2 { font-size: 0.7em; font-weight: bold;}
+#block-menu-menu-connexion2 .menu li { list-style-image: url("../images/puce/header-puce.gif");}
+#block-menu-menu-connexion2 .menu a { color: #000; text-decoration: none;}
+#block-menu-menu-connexion2 .menu a:hover { text-decoration: underline;}
+
+

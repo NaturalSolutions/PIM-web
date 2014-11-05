@@ -1,0 +1,208 @@
+<?php 
+
+
+
+function _getTemplateField(  ) {
+    $templateFields= "Code_ile_ilot,Milieu_terrestre-Impact_frequentation_humaine,Milieu_terrestre-impact_envahissantes,Milieu_terrestre-Impact_usages,Milieu_terrestre-Especes_animales_envahissantes_impactantes,Milieu_terrestre-Especes_vegetales_envahissantes_impactantes,Milieu_terrestre-Menaces,Milieu_marin-Impact_frequentation_humaine,Milieu_marin-impact_envahissantes,Milieu_marin-Impact_usages,Milieu_marin-Especes_envahissantes_impactantes,Milieu_marin-Menaces";
+    return $templateFields;
+}
+
+function _getCheckFormatField() {
+    $checkFormatField= array();
+		
+    return $checkFormatField;
+}
+
+function _getSqlCheckValue($tableName) {
+	$sqlCheckValue = array();
+	$sqlCheckValue[]=  array(
+			'message' => t('Unknow island'),
+			'sql' => "SELECT importid+1 as importid, Code_ile_ilot as val 
+			FROM $tableName LEFT OUTER JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_Code_ile_ilot
+			ON thes_Code_ile_ilot.name = Code_ile_ilot WHERE thes_Code_ile_ilot.tid IS NULL ",
+			'field' => 'val',
+			'mandatory'=> true,
+			);
+	$sqlCheckValue[]=  array(
+			'message' =>  t('Invalid term').":".t('Milieu_terrestre-Especes_vegetales_envahissantes_impactantes'),
+			'type' => 'taxonomy', 
+			'field'=> 'Milieu_terrestre-Especes_vegetales_envahissantes_impactantes',
+			'vid'=>53,
+			'mandatory'=> false,
+			);
+	$sqlCheckValue[]=  array(
+			'message' =>  t('Invalid term').":".t('Milieu_terrestre-Especes_animales_envahissantes_impactantes'),
+			'type' => 'taxonomy', 
+			'field'=> 'Milieu_terrestre-Especes_animales_envahissantes_impactantes',
+			'vid'=>53,
+			'mandatory'=> false,
+			);
+	$sqlCheckValue[] = array(
+			'message' => t('Invalid term').":".t('Milieu_terrestre-Menaces'),
+			'type' => 'taxonomy',
+			'field' => 'Milieu_terrestre-Menaces',
+			'vid' => 52,
+			'mandatory' => false
+			);
+	$sqlCheckValue[] = array(
+			'message' => t('Invalid term').":".t('Milieu_marin-Menaces'),
+			'type' => 'taxonomy',
+			'field' => 'Milieu_marin-Menaces',
+			'vid' => 52,
+			'mandatory' => false
+			);
+	$sqlCheckValue[]=  array(
+			'message' =>  t('Invalid term').":".t('Milieu_marin-Especes_envahissantes_impactantes'),
+			'type' => 'taxonomy', 
+			'field'=> 'Milieu_marin-Especes_envahissantes_impactantes',
+			'vid'=>53,	'mandatory'=> false,
+			);
+	$sqlCheckValue[]=  array(
+			'message' => t('Invalid value').": ".t('Milieu_terrestre-Impact_frequentation_humaine'),
+			'description'=>t('Possible values (Fort, Moyen, Faible)'),
+			'sql' => "SELECT importid+1 as importid, `Milieu_terrestre-Impact_frequentation_humaine` AS val 
+			FROM $tableName WHERE (`Milieu_terrestre-Impact_frequentation_humaine` IS NULL OR NOT  `Milieu_terrestre-Impact_frequentation_humaine`  ='' ) AND NOT  `Milieu_terrestre-Impact_frequentation_humaine` IN('Fort', 'Moyen', 'Faible') ",
+			'mandatory'=> true,
+			'field'=> 'val',
+			);
+	$sqlCheckValue[]=  array(
+			'message' => t('Invalid value').": ".t('Milieu_terrestre-impact_envahissantes'),
+			'description'=>t('Possible values (Fort, Moyen, Faible)'),
+			'sql' => "SELECT importid+1 as importid, `Milieu_terrestre-impact_envahissantes` AS val 
+			FROM $tableName WHERE (`Milieu_terrestre-impact_envahissantes` IS NULL OR NOT  `Milieu_terrestre-impact_envahissantes`  ='' ) AND NOT `Milieu_terrestre-impact_envahissantes` IN('Fort', 'Moyen', 'Faible') ",
+			'mandatory'=> true,
+			'field'=> 'val',
+			);
+	$sqlCheckValue[]=  array(
+			'message' => t('Invalid value').": ".t('Milieu_terrestre-Impact_usages'),
+			'description'=>t('Possible values (Fort, Moyen, Faible)'),
+			'sql' => "SELECT importid+1 as importid, `Milieu_terrestre-Impact_usages` AS val 
+			FROM $tableName WHERE (`Milieu_terrestre-Impact_usages` IS NULL OR NOT  `Milieu_terrestre-Impact_usages`  ='' ) AND NOT `Milieu_terrestre-Impact_usages` IN('Fort', 'Moyen', 'Faible') ",
+			'mandatory'=> true,
+			'field'=> 'val',
+			);
+	$sqlCheckValue[]=  array(
+			'message' => t('Invalid value').": ".t('Milieu_marin-Impact_frequentation_humaine'),
+			'description'=>t('Possible values (Fort, Moyen, Faible)'),
+			'sql' => "SELECT importid+1 as importid, `Milieu_marin-Impact_frequentation_humaine` AS val 
+			FROM $tableName WHERE (`Milieu_marin-Impact_frequentation_humaine` IS NULL OR NOT  `Milieu_marin-Impact_frequentation_humaine`  ='' ) AND NOT `Milieu_marin-Impact_frequentation_humaine` IN('Fort', 'Moyen', 'Faible') ",
+			'mandatory'=> true,
+			'field'=> 'val',
+			);
+	$sqlCheckValue[]=  array(
+			'message' => t('Invalid value').": ".t('Milieu_marin-impact_envahissantes'),
+			'description'=>t('Possible values (Fort, Moyen, Faible)'),
+			'sql' => "SELECT importid+1 as importid, `Milieu_marin-impact_envahissantes` AS val 
+			FROM $tableName WHERE (`Milieu_marin-impact_envahissantes` IS NULL OR NOT  `Milieu_marin-impact_envahissantes`  ='' ) AND NOT `Milieu_marin-impact_envahissantes` IN('Fort', 'Moyen', 'Faible') ",
+			'mandatory'=> true,
+			'field'=> 'val',
+			);
+	$sqlCheckValue[]=  array(
+			'message' => t('Invalid value').": ".t('Milieu_marin-Impact_usages'),
+			'description'=>t('Possible values (Fort, Moyen, Faible)'),
+			'sql' => "SELECT importid+1 as importid, `Milieu_marin-Impact_usages` AS val 
+			FROM $tableName WHERE (`Milieu_marin-Impact_usages` IS NULL OR NOT  `Milieu_marin-Impact_usages`  ='' ) AND NOT `Milieu_marin-Impact_usages` IN('Fort', 'Moyen', 'Faible') ",
+			'mandatory'=> true,
+			'field'=> 'val',
+			);
+	return $sqlCheckValue;
+}
+
+
+function _getSqlCheckDuplicate($tableName) {
+    $sqlCheckDuplicate= array();
+	$sqlCheckDuplicate[0]=  "UPDATE $tableName SET isdoublon = false";
+	return $sqlCheckDuplicate;
+}
+
+function  _getSqlCheckWarning($tableName) {
+    $sqlCheckWarning= array();
+	return $sqlCheckWarning;
+}
+function _getMappingNodeSelectImportableData($tableName) {
+	$mapping = array();
+	$mapping['import_BD_I_Problemes_et_menaces'] = array(
+		'name' => t('Island').' : '.t('Physical description'),
+		'contentType' => "bd_i_problemes_et_menaces",
+		'titleField' => 'Code_ile_ilot',
+		'multivalueSeparator' =>';',
+		'update' =>true,
+		'updateSelectNid' =>"
+			SELECT nid 
+			FROM (
+				SELECT  thes_code_ilot_ile.tid AS code_ile
+				FROM (SELECT * FROM $tableName WHERE importid=XXupdateSelectNidXX) AS PIMimport
+				JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_code_ilot_ile
+				ON thes_code_ilot_ile.name = Code_ile_ilot
+			     ) AS importTable 
+			JOIN {content_type_bd_i_problemes_et_menaces}  ON code_ile = field_bdi_pm_code_ile_ilot_value LIMIT 1",
+		'query'=>"
+			SELECT  `importid`, `Code_ile_ilot`, thes_Code_ile_ilot.tid AS field_bdi_pm_code_ile_ilot, `Milieu_terrestre-Impact_frequentation_humaine`, `Milieu_terrestre-impact_envahissantes`, `Milieu_terrestre-Impact_usages`, `Milieu_terrestre-Especes_animales_envahissantes_impactantes`, `Milieu_terrestre-Especes_vegetales_envahissantes_impactantes`, `Milieu_terrestre-Menaces`, `Milieu_marin-Impact_frequentation_humaine`, `Milieu_marin-impact_envahissantes`, `Milieu_marin-Impact_usages`, `Milieu_marin-Especes_envahissantes_impactantes`, `Milieu_marin-Menaces` 
+			FROM ( 
+				SELECT *
+				FROM $tableName  WHERE NOT isdoublon
+			     ) AS importTable
+			JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_Code_ile_ilot
+			ON thes_Code_ile_ilot.name = Code_ile_ilot",
+		'fields' => array (
+			0 => array (
+				'name'=>'field_bdi_pm_code_ile_ilot',
+				'mutlivalue'=> false,
+				'contentField' => 'field_bdi_pm_code_ile_ilot',
+				'type'=>'thesaurus',
+				'typeImpl'=>'value',
+				'importTableField'=>'field_bdi_pm_code_ile_ilot',
+				),
+			1=> array( 'name'=> 'field_bdi_pm_ter_niv_freq_humain','mutlivalue'=>  false,'contentField' => 'field_bdi_pm_ter_niv_freq_humain','type'=> 'text','typeImpl'=> 'value','importTableField'=> 'Milieu_terrestre-Impact_frequentation_humaine'),
+			2=> array( 'name'=> 'field_bdi_pm_terre_impact_flore','mutlivalue'=>  false,'contentField' => 'field_bdi_pm_terre_impact_flore','type'=> 'text','typeImpl'=> 'value','importTableField'=> 'Milieu_terrestre-impact_envahissantes'),
+			3=> array( 'name'=> 'field_bdi_pm_terre_impact_faune','mutlivalue'=>  false,'contentField' => 'field_bdi_pm_terre_impact_faune','type'=> 'text','typeImpl'=> 'value','importTableField'=> 'Milieu_terrestre-Impact_usages'),
+			4=> array('name'=>'Milieu_terrestre-Especes_animales_envahissantes_impactantes',
+				'mutlivalue'=>true,
+				'contentField'=> 'field_bdi_pm_t_an_envahis',
+				'type'=>'taxonomy',
+				'taxonomyVoc'=>53,
+				'taxonomyOpen'=>false,
+				'typeImpl'=>'value',
+				'importTableField'=> 'Milieu_terrestre-Especes_animales_envahissantes_impactantes'),
+			5=> array('name'=>'Milieu_terrestre-Especes_vegetales_envahissantes_impactantes',
+				'mutlivalue'=>true,
+				'contentField'=> 'field_bdi_pm_t_veg_envahis',
+				'type'=>'taxonomy',
+				'taxonomyVoc'=>53,
+				'taxonomyOpen'=>false,
+				'typeImpl'=>'value',
+				'importTableField'=> 'Milieu_terrestre-Especes_vegetales_envahissantes_impactantes'),
+			6=> array('name'=>'Milieu_terrestre-Menaces',
+				'mutlivalue'=>true,
+				'contentField'=> 'field_bdi_pm_t_menaces',
+				'type'=>'taxonomy',
+				'taxonomyVoc'=>52,
+				'taxonomyOpen'=>false,
+				'typeImpl'=>'value',
+				'importTableField'=> 'Milieu_terrestre-Menaces'),
+			7=> array( 'name'=> 'field_bdi_pm_mer_niv_freq_humain','mutlivalue'=>  false,'contentField' => 'field_bdi_pm_mer_niv_freq_humain','type'=> 'text','typeImpl'=> 'value','importTableField'=> 'Milieu_marin-Impact_frequentation_humaine'),
+			8=> array( 'name'=> 'field_bdi_pm_mer_impact_flore','mutlivalue'=>  false,'contentField' => 'field_bdi_pm_mer_impact_flore','type'=> 'text','typeImpl'=> 'value','importTableField'=> 'Milieu_marin-impact_envahissantes'),
+			9=> array( 'name'=> 'field_bdi_pm_mer_impact_faune','mutlivalue'=>  false,
+				'contentField' => 'field_bdi_pm_mer_impact_faune','type'=> 'text','typeImpl'=> 'value','importTableField'=> 'Milieu_marin-Impact_usages'),		
+			10=> array('name'=>'Milieu_marin-Especes_envahissantes_impactantes',
+				'mutlivalue'=>true,
+				'contentField'=> 'field_bdi_pm_m_sp_envahissantes',
+				'type'=>'taxonomy',
+				'taxonomyVoc'=>53,
+				'taxonomyOpen'=>false,
+				'typeImpl'=>'value',
+				'importTableField'=> 'Milieu_marin-Especes_envahissantes_impactantes'),
+			11=> array('name'=>'Milieu_marin-Menaces',
+				'mutlivalue'=>true,
+				'contentField'=> 'field_bdi_pm_m_menaces',
+				'type'=>'taxonomy',
+				'taxonomyVoc'=>52,
+				'taxonomyOpen'=>false,
+				'typeImpl'=>'value',
+				'importTableField'=> 'Milieu_marin-Menaces'),
+			)
+		);
+	return $mapping;
+}
+
+

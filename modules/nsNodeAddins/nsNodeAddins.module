@@ -1,0 +1,82 @@
+<?php
+require_once('nsNodeAddins.inc');
+/**
+ * Implementation of hook_nodeapi().
+ */
+function nsNodeAddins_nodeapi(&$node, $op) {
+
+  //return;
+  /* a lieu avant node title */
+  if ($op == 'presave') {
+  
+    switch($node->type) {
+      case 'document':
+        /* to plain text */
+        $node->field_document_titre[0]['value'] = 
+            clean_textfield($node->field_document_titre[0]['value']);
+        $node->field_document_auteur[0]['value'] =
+            clean_textfield($node->field_document_auteur[0]['value']);
+        $node->field_document_mots_cles[0]['value'] =
+            clean_textfield($node->field_document_mots_cles[0]['value']);
+        $node->field_document_nom_de_la_revue[0]['value'] =
+            clean_textfield($node->field_document_nom_de_la_revue[0]['value']);
+            
+        /* to clean html */
+        $node->field_document_description[0]['value'] =
+            clean_htmlfield($node->field_document_description[0]['value']);
+            
+        /* to clean ext url */
+        $node->field_document_site_web[0]['value'] =
+            clean_exturlfield($node->field_document_site_web[0]['value']);
+      break;
+      
+    }
+    //drupal_set_message("cleaned text");
+  }
+
+  if ($op == 'load' && $node->type == 'bd_i_description_physique') {
+    $syns = taxonomy_get_synonyms($node->field_bdi_dp_nom_ile_code_ile[0]['value']);
+    $node->field_bdi_dp_autres_noms_calcules = array(array('value' => NULL));
+    if (count($syns) > 1) {
+      array_shift($syns); // Le premier synonyme est le nom principal
+      $node->field_bdi_dp_autres_noms_calcules[0]['value'] = implode(', ', $syns);
+    }
+  }
+
+  if (($op == 'insert' || $op == 'update') && $node->type == 'bd_i_description_physique') {
+      nsNodeAddins_update_synonyms_after_save($node);
+  }
+}
+
+function nsNodeAddins_form_alter(&$form, &$form_state, $form_id) {
+  if ('bd_i_description_physique_node_form' == $form_id) {
+      $form['field_bdi_dp_autres_noms'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Other(s) name(s)'),
+        '#size' => 60,
+        '#default_value' => $form['#node']->field_bdi_dp_autres_noms_calcules[0]['value'],
+        '#weight' => 32,
+        '#description' => t('Please type in island alternative names separated by commas (",").')
+      );
+
+      $form['#submit'][] = 'nsNodeAddins_bd_i_description_physique_submit';
+  }
+}
+
+function nsNodeAddins_file_download($filepath) {
+    $query  = "SELECT f.fid AS fid, ct.field_document_acces_restreint_value AS access ";
+    $query .= "FROM {content_type_document} ct, {files} f ";
+    $query .= "WHERE f.fid = ct.field_document_fichier_fid AND f.filepath = '%s'";
+
+    $doc = db_fetch_object(db_query($query, file_create_path($filepath)));
+    if (isset($doc) && $doc != FALSE && $doc->access === '1') {
+        // the downloaded file is attached to a node of type Document and this document-
+        // has restricted access. Now lets check is user is authenticated.
+
+        global $user;
+        if (! in_array('authenticated user', array_values($user->roles))) {
+            return -1;
+        }
+    }
+    return;
+}

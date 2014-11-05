@@ -1,0 +1,517 @@
+<?php
+
+function hook_alter_exposedFilter_menu() {
+	$items = array();
+	$items['hook_alter_exposedFilter/autocomplete'] = array(
+		'title' => t('hook_alter_exposedFilter'),
+		'page callback' => 'hook_alter_exposedFilter_autocomplete',
+		'access arguments' => array('access content'),
+		'type' => MENU_CALLBACK
+		);
+	return $items;
+}
+
+//--alter form - change select to textfield & autocomplete
+function hook_alter_exposedFilter_form_alter(&$form, $form_state, $form_id) {
+
+	if ($form['#id'] ==  'views-exposed-form-v-search-islands-archipelagos-page-1') {
+		if (empty($form_state['view']->exposed_input['Zone_Geographique'])) { 
+			$form_state['input']['Zone_Geographique'] = array(); 
+		} 
+		global $send_message_once;
+		$options = Array();
+		$vocab = (taxonomy_get_tree(4));
+		$options["All"] = '';
+		foreach ($vocab as $term) {
+			$options[$term->name] = $term->tid;
+		}
+		$exposed_filter_values = ($form_state['view']->get_exposed_input());
+		if (!($exposed_filter_values['Code_ile_ilot'])) {
+			$form['Code_ile_ilot']['#value']='All';
+			$form['Code_ile_ilot']['#attributes']= array('onfocus' => 'this.value=""');
+		}
+		else {
+		 if (!(array_key_exists(($exposed_filter_values['Code_ile_ilot']), $options))) {
+			 if (!($send_message_once)) {
+				 drupal_set_message('There are no Operators named "'. $exposed_filter_values['Code_ile_ilot'] .'"');
+				 $send_message_once=TRUE;
+				}
+			 $form['Code_ile_ilot']['#value']='All';
+			 $form['Code_ile_ilot']['#attributes']= array('onfocus' => 'this.value=""');
+		 }
+		}
+		$form['Code_ile_ilot']['#type']='textfield';
+		$form['Code_ile_ilot']['#autocomplete_path']='customAutocomplete/autocomplete/field_document_nom_ile_code_ile';
+		$form['Code_ile_ilot']['#size']='70';
+		$form['Code_ile_ilot']['#options'] = $options;
+		
+		$form['Zone_Geographique']['#type'] = "select";
+		$query = "SELECT DISTINCT  Zone_Geographique FROM  {v_export_bd_i_iles}  WHERE NOT Zone_Geographique ='' ORDER BY Zone_geographique";
+		$geographique = array();
+		$geographique['All'] = t('All');
+		$result = db_query($query);
+		if ($result != false) {
+			while ($comp = db_fetch_object($result)) {
+				$geographique[$comp->Zone_Geographique] = check_plain($comp->Zone_Geographique);
+			}
+		}
+		$form['Zone_Geographique']['#options'] = $geographique;
+		unset($form['Zone_Geographique']['#size']);
+    //Change le nom du bouton Appliquer
+    $form['submit']['#value'] = t('Search');
+	}
+	elseif ($form['#id'] ==  'views-exposed-form-v-search-inventory-page-1') {
+		if (empty($form_state['view']->exposed_input['compartiment'])) { 
+			$form_state['input']['compartiment'] = array(); 
+		} 
+		if (empty($form_state['view']->exposed_input['Zone_geographique'])) { 
+			$form_state['input']['Zone_geographique'] = array(); 
+		} 
+		if (empty($form_state['view']->exposed_input['Type'])) { 
+			$form_state['input']['Type'] = array(); 
+		} 
+		global $send_message_once;
+		$options = Array();
+		$vocab = (taxonomy_get_tree(4));
+		$options["All"] = '';
+		foreach ($vocab as $term) {
+			$options[$term->name] = $term->tid;
+		}
+		$exposed_filter_values = ($form_state['view']->get_exposed_input());
+		if (!($exposed_filter_values['Code_ile_ilot'])) {
+			$form['Code_ile_ilot']['#value']='All';
+			$form['Code_ile_ilot']['#attributes']= array('onfocus' => 'this.value=""');
+		}
+		else {
+		 if (!(array_key_exists(($exposed_filter_values['Code_ile_ilot']), $options))) {
+			 if (!($send_message_once)) {
+				 drupal_set_message('There are no Operators named "'. $exposed_filter_values['Code_ile_ilot'] .'"');
+				 $send_message_once=TRUE;
+				}
+			 $form['Code_ile_ilot']['#value']='All';
+			 $form['Code_ile_ilot']['#attributes']= array('onfocus' => 'this.value=""');
+		 }
+		}
+		$form['Code_ile_ilot']['#type']='textfield';
+		$form['Code_ile_ilot']['#autocomplete_path']='customAutocomplete/autocomplete/field_document_nom_ile_code_ile';
+		$form['Code_ile_ilot']['#size']='70';
+		$form['Code_ile_ilot']['#options'] = $options;
+		
+		$form['compartiment']['#type'] = "select";
+		$query = "SELECT DISTINCT  compartiment FROM  {v_sys_bd_ni_all_common_content_with_thesaurus} ORDER BY compartiment";
+		$compartiment = array();
+		$compartiment['All'] = t('All');
+		$result = db_query($query);
+		if ($result != false) {
+			while ($comp = db_fetch_object($result)) {
+				$compartiment[$comp->compartiment] = check_plain($comp->compartiment);
+			}
+		}
+		$form['compartiment']['#options'] = $compartiment;
+		unset($form['compartiment']['#size']);
+		
+		$form['Type']['#type'] = "select";
+		$query = "SELECT DISTINCT  Type FROM  {v_sys_bd_ni_all_common_content_with_thesaurus} ORDER BY Type";
+		$compartiment = array();
+		$compartiment['All'] = t('All');
+		$result = db_query($query);
+		if ($result != false) {
+			while ($comp = db_fetch_object($result)) {
+				$compartiment[$comp->Type] = check_plain($comp->Type);
+			}
+		}
+		$form['Type']['#options'] = $compartiment;
+		unset($form['Type']['#size']);
+		
+		
+		$form['Zone_geographique']['#type'] = "select";
+		$query = "SELECT DISTINCT  Zone_geographique FROM  {v_sys_bd_ni_all_common_content_with_thesaurus}  WHERE NOT Zone_geographique ='' ORDER BY Zone_geographique";
+		$geographique = array();
+		$geographique['All'] = t('All');
+		$result = db_query($query);
+		if ($result != false) {
+			while ($comp = db_fetch_object($result)) {
+				$geographique[$comp->Zone_geographique] = check_plain($comp->Zone_geographique);
+			}
+		}
+		$form['Zone_geographique']['#options'] = $geographique;
+		unset($form['Zone_geographique']['#size']);
+		
+		
+		$query = "SELECT DISTINCT  `Taxon` as id, COALESCE(CONCAT(s.name,' ',  CONCAT('(',taxon,')')), taxon)  as name
+				FROM {v_sys_bd_ni_all_present_common_content_with_thesaurus}
+				LEFT OUTER JOIN {term_synonym} s
+				ON TaxonID = tid AND NOT compartiment ='Faune flore marines'";
+		$optionT = Array();
+		$optionT["All"] = '';
+		$result = db_query($query);
+		if ($result != false) {
+			while ($comp = db_fetch_object($result)) {
+				$optionT[$comp->name] = $comp->id;
+				$optionT[$comp->id] = $comp->name;
+			}
+		}
+		if (!($exposed_filter_values['taxon'])) {
+			$form['taxon']['#value']='All';
+			$form['taxon']['#attributes']= array('onfocus' => 'this.value=""');
+		}
+
+		$form['taxon']['#size']='70';
+		
+		$form['taxon']['#type']='textfield';
+		$form['taxon']['#autocomplete_path']='customAutocompleteTaxon/autocomplete/Taxon';
+		$form['taxon']['#size']='70';
+		$form['taxon']['#options'] = $optionT;
+		
+    //Change le nom du bouton Appliquer
+    $form['submit']['#value'] = t('Search');
+	}
+	
+	elseif ($form['#id'] ==  'views-exposed-form-v-search-taxon-observed-page-1') {
+
+		if (empty($form_state['view']->exposed_input['compartiment'])) { 
+			$form_state['input']['compartiment'] = array(); 
+		} 
+		if (empty($form_state['view']->exposed_input['Zone_geographique'])) { 
+			$form_state['input']['Zone_geographique'] = array(); 
+		} 
+		global $send_message_once;
+		$options = Array();
+		$vocab = (taxonomy_get_tree(4));
+		$options["All"] = '';
+		foreach ($vocab as $term) {
+			$options[$term->name] = $term->tid;
+		}
+		$exposed_filter_values = ($form_state['view']->get_exposed_input());
+		if (!($exposed_filter_values['Code_ile_ilot'])) {
+			$form['Code_ile_ilot']['#value']='All';
+			$form['Code_ile_ilot']['#attributes']= array('onfocus' => 'this.value=""');
+		}
+		else {
+		 if (!(array_key_exists(($exposed_filter_values['Code_ile_ilot']), $options))) {
+			 if (!($send_message_once)) {
+				 drupal_set_message('There are no Operators named "'. $exposed_filter_values['Code_ile_ilot'] .'"');
+				 $send_message_once=TRUE;
+				}
+			 $form['Code_ile_ilot']['#value']='All';
+			 $form['Code_ile_ilot']['#attributes']= array('onfocus' => 'this.value=""');
+		 }
+		}
+		$form['Code_ile_ilot']['#type']='textfield';
+		$form['Code_ile_ilot']['#autocomplete_path']='customAutocomplete/autocomplete/field_document_nom_ile_code_ile';
+		$form['Code_ile_ilot']['#size']='70';
+		$form['Code_ile_ilot']['#options'] = $options;
+		
+		$form['compartiment']['#type'] = "select";
+		$query = "SELECT DISTINCT  compartiment FROM  {v_sys_bd_ni_all_present_common_content_with_thesaurus} ORDER BY compartiment";
+		$compartiment = array();
+		$compartiment['All'] = t('All');
+		$result = db_query($query);
+		if ($result != false) {
+			while ($comp = db_fetch_object($result)) {
+				$compartiment[$comp->compartiment] = check_plain($comp->compartiment);
+			}
+		}
+		$form['compartiment']['#options'] = $compartiment;
+		unset($form['compartiment']['#size']);
+		
+		$form['Zone_geographique']['#type'] = "select";
+		$query = "SELECT DISTINCT  Zone_geographique FROM  {v_sys_bd_ni_all_present_common_content_with_thesaurus}  WHERE NOT Zone_geographique ='' ORDER BY Zone_geographique";
+		$geographique = array();
+		$geographique['All'] = t('All');
+		$result = db_query($query);
+		if ($result != false) {
+			while ($comp = db_fetch_object($result)) {
+				$geographique[$comp->Zone_geographique] = check_plain($comp->Zone_geographique);
+			}
+		}
+		$form['Zone_geographique']['#options'] = $geographique;
+		unset($form['Zone_geographique']['#size']);
+		
+		$form['taxon']['#size']='70';
+		
+    //Change le nom du bouton Appliquer
+    $form['submit']['#value'] = t('Search');
+	}
+	elseif( $form['#id'] ==  'views-exposed-form-v-search-taxon-unfound-page-1') {
+	if (empty($form_state['view']->exposed_input['compartiment'])) { 
+			$form_state['input']['compartiment'] = array(); 
+		} 
+		if (empty($form_state['view']->exposed_input['Zone_geographique'])) { 
+			$form_state['input']['Zone_geographique'] = array(); 
+		} 
+		global $send_message_once;
+		$options = Array();
+		$vocab = (taxonomy_get_tree(4));
+		$options["All"] = '';
+		foreach ($vocab as $term) {
+			$options[$term->name] = $term->tid;
+		}
+		$exposed_filter_values = ($form_state['view']->get_exposed_input());
+		if (!($exposed_filter_values['Code_ile_ilot'])) {
+			$form['Code_ile_ilot']['#value']='All';
+			$form['Code_ile_ilot']['#attributes']= array('onfocus' => 'this.value=""');
+		}
+		else {
+		 if (!(array_key_exists(($exposed_filter_values['Code_ile_ilot']), $options))) {
+			 if (!($send_message_once)) {
+				 drupal_set_message('There are no Operators named "'. $exposed_filter_values['Code_ile_ilot'] .'"');
+				 $send_message_once=TRUE;
+				}
+			 $form['Code_ile_ilot']['#value']='All';
+			 $form['Code_ile_ilot']['#attributes']= array('onfocus' => 'this.value=""');
+		 }
+		}
+		$form['Code_ile_ilot']['#type']='textfield';
+		$form['Code_ile_ilot']['#autocomplete_path']='customAutocomplete/autocomplete/field_document_nom_ile_code_ile';
+		$form['Code_ile_ilot']['#size']='70';
+		$form['Code_ile_ilot']['#options'] = $options;
+		
+		$form['compartiment']['#type'] = "select";
+		$query = "SELECT DISTINCT  compartiment FROM  {v_sys_bd_ni_all_absent_common_content_with_thesaurus} ORDER BY compartiment";
+		$compartiment = array();
+		$compartiment['All'] = t('All');
+		$result = db_query($query);
+		if ($result != false) {
+			while ($comp = db_fetch_object($result)) {
+				$compartiment[$comp->compartiment] = check_plain($comp->compartiment);
+			}
+		}
+		$form['compartiment']['#options'] = $compartiment;
+		unset($form['compartiment']['#size']);
+		
+		$form['Zone_geographique']['#type'] = "select";
+		$query = "SELECT DISTINCT Zone_Geographique AS Zone_geographique FROM  {v_sys_bd_ni_all_absent_common_content_with_thesaurus} WHERE NOT Zone_Geographique ='' ORDER BY Zone_geographique";
+		$geographique = array();
+		$geographique['All'] = t('All');
+		$result = db_query($query);
+		if ($result != false) {
+			while ($comp = db_fetch_object($result)) {
+				$geographique[$comp->Zone_geographique] = check_plain($comp->Zone_geographique);
+			}
+		}
+		$form['Zone_geographique']['#options'] = $geographique;
+		unset($form['Zone_geographique']['#size']);
+		
+		$form['taxon']['#size']='70';
+	
+    //Change le nom du bouton Appliquer
+    $form['submit']['#value'] = t('Search');
+	}
+	elseif ($form['#id'] == 'views-exposed-form-v-search-protection-page-1') {
+
+		if (empty($form_state['view']->exposed_input['Zone_geographique'])) { 
+			$form_state['input']['Zone_geographique'] = array(); 
+		} 
+		global $send_message_once;
+		$options = Array();
+		$vocab = (taxonomy_get_tree(4));
+		$options["All"] = '';
+		foreach ($vocab as $term) {
+			$options[$term->name] = $term->tid;
+		}
+		$exposed_filter_values = ($form_state['view']->get_exposed_input());
+		if (!($exposed_filter_values['Code_ile_ilot'])) {
+			$form['Code_ile_ilot']['#value']='All';
+			$form['Code_ile_ilot']['#attributes']= array('onfocus' => 'this.value=""');
+		}
+		else {
+		 if (!(array_key_exists(($exposed_filter_values['Code_ile_ilot']), $options))) {
+			 if (!($send_message_once)) {
+				 drupal_set_message('There are no Operators named "'. $exposed_filter_values['Code_ile_ilot'] .'"');
+				 $send_message_once=TRUE;
+				}
+			 $form['Code_ile_ilot']['#value']='All';
+			 $form['Code_ile_ilot']['#attributes']= array('onfocus' => 'this.value=""');
+		 }
+		}
+		$form['Code_ile_ilot']['#type']='textfield';
+		$form['Code_ile_ilot']['#autocomplete_path']='customAutocomplete/autocomplete/field_document_nom_ile_code_ile';
+		$form['Code_ile_ilot']['#size']='70';
+		$form['Code_ile_ilot']['#options'] = $options;
+		
+		$form['Protection_statut_search']['#type']='textfield';
+		$form['Protection_statut_search']['#autocomplete_path']='customAutocomplete/autocomplete/field_bdi_spt_statut_protection';
+		$form['Protection_statut_search']['#size']='70';
+		
+		unset($form['Protection_statut_op']['#options']['contains']);
+		unset($form['Protection_statut_op']['#options']['word']);
+		unset($form['Protection_statut_op']['#options']['allwords']);
+		unset($form['Protection_statut_op']['#options']['starts']);
+		unset($form['Protection_statut_op']['#options']['not_starts']);
+		unset($form['Protection_statut_op']['#options']['ends']);
+		unset($form['Protection_statut_op']['#options']['not_ends']);
+		unset($form['Protection_statut_op']['#options']['not']);
+		
+		
+		$form['Zone_geographique']['#type'] = "select";
+		unset($form['Zone_geographique']['#size']);
+		$query = "SELECT DISTINCT Zone_Geographique FROM  {v_export_bd_i_st_protection} WHERE NOT Zone_Geographique='' ORDER BY Zone_Geographique";
+		$geographique = array();
+		
+		$geographique['All'] = t('All');
+		$result = db_query($query);
+		if ($result != false) {
+			while ($comp = db_fetch_object($result)) {
+				if ($comp->Zone_Geographique != '') {
+					$geographique[$comp->Zone_Geographique] = check_plain($comp->Zone_Geographique);
+				}
+			}
+		}
+		$form['Zone_geographique']['#default_value'] ='All';
+		$form['Zone_geographique']['#options'] = $geographique;
+    
+    //Change le nom du bouton Appliquer
+    $form['submit']['#value'] = t('Search');
+	}
+	elseif ($form['#id'] == 'views-exposed-form-Bibliotheque-page-2') { 
+		if (array_key_exists('view', $form_state)) {
+			if (array_key_exists('name', $form_state['view'])) {				 
+			//Modification du filtre exposé code_ile => transformation en autocomplete
+					global $send_message_once;
+					$options = Array();
+					$vocab = (taxonomy_get_tree(4));
+					$options["All"] = '';
+					foreach ($vocab as $term) {
+						$options[$term->name] = $term->tid;
+					}
+					$exposed_filter_values = ($form_state['view']->get_exposed_input());
+					if (!($exposed_filter_values['field_document_nom_ile_code_ile_value'])) {
+						$form['field_document_nom_ile_code_ile_value']['#value']='All';
+						$form['field_document_nom_ile_code_ile_value']['#attributes']= array('onfocus' => 'this.value=""');
+					}
+					else {
+					 if (!(array_key_exists(($exposed_filter_values['field_document_nom_ile_code_ile_value']), $options))) {
+						 if (!($send_message_once)) {
+							 drupal_set_message('There are no Operators named "'. $exposed_filter_values['field_document_nom_ile_code_ile_value'] .'"');
+							 $send_message_once=TRUE;
+							}
+						 $form['field_document_nom_ile_code_ile_value']['#value']='All';
+						 $form['field_document_nom_ile_code_ile_value']['#attributes']= array('onfocus' => 'this.value=""');
+					 }
+					}
+					$form['field_document_nom_ile_code_ile_value']['#type']='textfield';
+					$form['field_document_nom_ile_code_ile_value']['#autocomplete_path']='customAutocomplete/autocomplete/field_document_nom_ile_code_ile';
+					$form['field_document_nom_ile_code_ile_value']['#size']='70';
+					$form['field_document_nom_ile_code_ile_value']['#options'] = $options;
+		
+					//Change le nom du bouton Appliquer
+					$form['submit']['#value'] = t('Search');
+		
+					//Change la taille du controle titre
+					$form['titre']['#size'] = 70;
+					$form['titre']['#maxlength'] = 500;
+			}
+		}
+	}
+	elseif ($form['#id'] == 'views-exposed-form-v-search-manager-page-2') {
+		if (array_key_exists('view', $form_state)) {
+			if (array_key_exists('name', $form_state['view'])) {				 
+			//Modification du filtre exposé code_ile => transformation en autocomplete
+				global $send_message_once;
+				$form['field_bdi_g_nom_gestionnaire_value']['#size']='70';
+				//Change le nom du bouton Appliquer
+				$form['submit']['#value'] = t('Search');
+        
+			}
+		}
+	}
+  
+}
+
+
+//--process autocomplete - query db for matches and send back to form for display
+function hook_alter_exposedFilter_autocomplete($string = '') {
+	$matches = array();
+	if ($string) {
+		$string = trim($string);
+		{
+			//matches from the beginning of the title - use '%%%s%%' to match from anywhere in the title
+			$query = "
+				SELECT term_data.tid AS tid,
+				term_data.name AS term_data_name,
+				term_data.vid AS term_data_vid
+				FROM {term_data} term_data
+				LEFT JOIN {vocabulary} vocabulary ON term_data.vid = vocabulary.vid
+				WHERE vocabulary.vid = '4' and term_data.name like '%s%%'
+			";
+			$result = db_query_range($query,$string,0,10);
+			if ($result != false) {
+				while ($mytermname = db_fetch_object($result)) {
+					$matches[$mytermname->term_data_name] = check_plain($mytermname->term_data_name);
+				}
+			}
+		}
+	}
+	print drupal_to_js($matches);
+	exit();
+}
+
+//--change term names to tids.
+function hook_alter_exposedFilter_views_query_alter(&$view, &$query) {
+	$arrayclausetoAlter = array();
+	if ($view->name =='Bibliotheque')	{
+			$arrayclausetoAlter[] = array(
+				'type' => 'taxonomy',
+				'whereclause' => "node_data_field_document_nom_ile_code_ile.field_document_nom_ile_code_ile_value = '%s'",
+				'field' => 'field_document_nom_ile_code_ile',
+				'vid' => 4,
+			);
+    foreach ($arrayclausetoAlter as $clause) {
+      if (is_array($query->where)){
+        if (count($query->where) >= 1) {
+          if (in_array($clause['whereclause'], $query->where[0][clauses]) ){
+						$index_value = array_search($clause['whereclause'], $query->where[0][clauses]);
+            $mynodename_title = $query->where[0][args][$index_value];
+            if ($mynodename_title != '' && $mynodename_title != "**All**") {
+              $mynodename_nid = db_result(db_query("SELECT term_data.tid AS tid FROM {term_data} term_data WHERE (term_data.vid in ('%s')) AND (term_data.name = '%s')",$clause['vid'], $mynodename_title));
+              $query->where[0][args][$index_value] = $mynodename_nid;
+            }
+          }
+        }
+      }
+    }
+	}
+  elseif ( ($view->name == 'v_search_taxon_unfound')  ) {
+    if ($query->where[0]) {
+      $index_value = array_search("UPPER(v_sys_bd_ni_all_absent_common_content_with_thesaurus.Code_ile_ilot) LIKE UPPER('%s%%')", $query->where[0][clauses]);
+      if ($index_value > -1) { 
+        $query->where[0][args][$index_value] = code_ile_substr($value = $query->where[0][args][$index_value], $index_value);
+      }
+    }
+  }
+  elseif (( $view->name == 'v_search_taxon_observed')) {
+    if ($query->where[0]) {
+      $index_value = array_search("UPPER(v_sys_bd_ni_all_present_common_content_with_thesaurus.Code_ile_ilot) LIKE UPPER('%s%%')", $query->where[0][clauses]);
+      if ($index_value > -1) { 
+        $query->where[0][args][$index_value] = code_ile_substr($value = $query->where[0][args][$index_value], $index_value);
+      }
+    }
+  }
+  elseif (( $view->name == 'v_search_island_archipelago')) {
+    if ($query->where[0]) {
+      $index_value = array_search("(v_export_bd_i_iles.Code_ile_ilot) LIKE ('%s%%')", $query->where[0][clauses]);
+      if ($index_value > -1) { 
+        $query->where[0][args][$index_value] = code_ile_substr($value = $query->where[0][args][$index_value], $index_value);
+      }
+    }
+  }
+  elseif (( $view->name == 'v_search_protection')) {
+    if ($query->where[0]) {
+      $index_value = array_search("UPPER(v_export_bd_i_st_protection.Code_ile_ilot) LIKE UPPER('%s%%')", $query->where[0][clauses]);
+      if ($index_value > -1) { 
+        $query->where[0][args][$index_value] = code_ile_substr($value = $query->where[0][args][$index_value], $index_value);
+      }
+    }
+  }
+
+	//print_r($query);
+}
+
+function code_ile_substr ($value, $index_value) {
+    $subval = substr($value, -3);
+    if ( $subval ==  '000' ) {
+      $newVal = substr($value, 0, -1); 
+    }
+    return  $newVal ;
+}

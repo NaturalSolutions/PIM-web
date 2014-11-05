@@ -1,0 +1,29 @@
+<?php 
+function PIMimport_install(){
+	$results = drupal_install_schema('PIMimport');
+	foreach ($results as $result) {
+		if (!$result['success']) {
+			drupal_set_message('Schema failed to install. Error in SQL: ' . $result['query'], 'error');
+		}
+	}
+}
+
+function PIMimport_uninstall() {
+	drupal_uninstall_schema('PIMimport');
+}
+
+function PIMimport_schema() {
+	$schema['custom_import_logs'] = array(
+		'fields' => array(
+			'lid' => array(	'type' => 'serial','unsigned' => true,'not null' => true,'description' => t('Log identifier'),),
+			'uid' => array('type' => 'int','unsigned' => true,'not null' => true,'default' => 0,'description' => t('User foreign key'),),
+			'log_date' => array( 'type' => 'datetime','not null' => true,'default' => 0,'description' => t('Date of the import'),),
+			'nodes_created' => array('type' => 'varchar','length' => 250,'not null' =>false,'description' => t('Nid of the created node'),),
+			'nodes_updated' => array('type' => 'varchar','length' =>250,'not null' => false,'description' => t('Nid of the updated node'),),
+			'file_name' => array('type' => 'varchar','length' =>250,'not null' => true,'description' => t('Name of the import file'),),
+			'is_canceled' => array('type' => 'int','not null' => true,'default' => 0,'description' => t('Specify if the import was canceled'),),
+		),
+		'primary key' => array('lid'),
+	);
+	return $schema;
+}

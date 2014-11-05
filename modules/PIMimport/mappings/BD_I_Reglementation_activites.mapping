@@ -1,0 +1,140 @@
+<?php 
+
+
+
+function _getTemplateField(  ) {
+    $templateFields= "Code_ile_ilot,Existence_reglementation,Aire_concernee,Acces,Peche";
+    return $templateFields;
+}
+
+function _getCheckFormatField() {
+    $checkFormatField= array();
+    return $checkFormatField;
+}
+
+function  _getSqlCheckWarning($tableName) {
+    $sqlCheckWarning= array();
+	return $sqlCheckWarning;
+}
+function _getSqlCheckValue($tableName) {
+    $sqlCheckValue = array();
+	$sqlCheckValue[]=  array(
+    'message' => t('Unknow island'),
+    'sql' => "SELECT importid+1 as importid, Code_ile_ilot as val 
+              FROM $tableName LEFT OUTER JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_Code_ile_ilot
+        ON thes_Code_ile_ilot.name = Code_ile_ilot WHERE thes_Code_ile_ilot.tid IS NULL ",
+    'field' => 'val',
+    'mandatory'=> true,
+    );
+	
+	$sqlCheckValue[]=  array(
+		'message' => t('Invalid value').": ".t('Concerned area'),
+		'description'=>t('Possible values (Terre, Mer, "Terre, Mer")'),
+		'sql' => "SELECT importid+1 as importid, `Aire_concernee` AS val 
+			FROM $tableName WHERE (`Aire_concernee` IS NULL OR NOT  `Aire_concernee`  ='' ) AND NOT  `Aire_concernee` IN('Terre','Mer', 'Terre, Mer') ",
+			'mandatory'=> true,
+			'field'=> 'val',
+	);
+
+	$sqlCheckValue[]=  array(
+		'message' => t('Invalid value').": ".t('Existence_reglementation'),
+		'description'=>t('Possible values (Oui, Non, NC)'),
+		'sql' => "SELECT importid+1 as importid, `Existence_reglementation` AS val 
+			FROM $tableName WHERE (`Existence_reglementation` IS NULL OR NOT  `Existence_reglementation`  ='' ) AND NOT  `Existence_reglementation` IN('Oui', 'Non', 'NC') ",
+			'mandatory'=> true,
+			'field'=> 'val',
+	);
+	$sqlCheckValue[]=  array(
+		'message' => t('Invalid value').": ".t('Access'),
+		'description' => t('Possible values') . ': Autorisé, Réglementé, Interdit',
+		'sql' => "SELECT importid+1 as importid, `Acces` AS val
+		    FROM $tableName WHERE `Acces` NOT IN (Binary '', Binary 'Autorisé', Binary 'Réglementé', Binary 'Interdit') ",
+		'mandatory'=> true,
+		'field'=> 'val',
+	);
+	$sqlCheckValue[]=  array(
+		'message' => t('Invalid value').": ".t('Fishing'),
+		'description' => t('Possible values') . ': Autorisé, Réglementé, Interdit',
+		'sql' => "SELECT importid+1 as importid, `Peche` AS val
+		    FROM $tableName WHERE `Peche` NOT IN (Binary '', Binary 'Autorisé', Binary 'Réglementé', Binary 'Interdit') ",
+		'mandatory'=> true,
+		'field'=> 'val',
+	);
+	return $sqlCheckValue;
+}
+
+
+function _getSqlCheckDuplicate($tableName) {
+    $sqlCheckDuplicate= array();
+	$sqlCheckDuplicate[0]=  "UPDATE $tableName SET isdoublon = false";
+	return $sqlCheckDuplicate;
+}
+
+function _getMappingNodeSelectImportableData($tableName) {
+    $mapping = array();
+    $mapping['import_BD_I_Reglementation_activite'] = array(
+        'name' => t('Island').' : '.t('Activities regulation'),
+        'contentType' => "bd_i_reglementation_activite",
+        'titleField' => 'Code_ile_ilot',
+		'multivalueSeparator' =>',',
+		'update' =>true,
+		'updateSelectNid' =>"
+				SELECT nid 
+				FROM (
+				  SELECT  thes_code_ilot_ile.tid AS code_ile
+				  FROM (SELECT * FROM $tableName WHERE importid=XXupdateSelectNidXX) AS PIMimport
+				  JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_code_ilot_ile
+				  ON thes_code_ilot_ile.name = Code_ile_ilot
+				) AS importTable 
+				JOIN {content_type_bd_i_reglementation_activite}  ON code_ile = field_bdi_ra_code_ile_ilot_value LIMIT 1",
+		'query'=>"
+			SELECT importid, Code_ile_ilot, ti.tid AS field_bdi_ra_code_ile_ilot, Existence_reglementation, Aire_concernee AS field_bdi_ra_aire_concernee, Acces, Peche
+			FROM $tableName imp, {term_data} ti
+			WHERE NOT imp.isdoublon AND ti.vid = 4 AND ti.name = imp.Code_ile_ilot",
+		'fields' => array (
+			0 => array (
+                    'name'=>'code_ile',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_ra_code_ile_ilot',
+                    'type'=>'thesaurus',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'field_bdi_ra_code_ile_ilot',
+                ),
+			1 => array (
+				'name'=>'Existence_reglementation',
+				'mutlivalue'=> false,
+				'contentField' => 'field_bdi_ra_existence_reglement',
+				'type'=>'text',
+				'typeImpl'=>'value',
+				'importTableField'=>'Existence_reglementation',
+			),
+			2 => array (
+				'name'=>'field_bdi_ra_aire_concernee',
+				'mutlivalue'=> true,
+				'contentField' => 'field_bdi_ra_aire_concernee',
+				'type'=>'text',
+				'typeImpl'=>'value',
+				'importTableField'=>'field_bdi_ra_aire_concernee',
+			),
+		    3 => array (
+			'name'=>'Acces',
+			'mutlivalue'=> false,
+			'contentField' => 'field_bdi_ra_acces',
+			'type'=>'text',
+			'typeImpl'=>'value',
+			'importTableField'=>'Acces',
+		    ),
+		    4 => array (
+			'name'=>'Peche',
+			'mutlivalue'=> false,
+			'contentField' => 'field_bdi_ra_peche',
+			'type'=>'text',
+			'typeImpl'=>'value',
+			'importTableField'=>'Peche',
+		    ),
+		)
+	);
+    return $mapping;
+}
+
+

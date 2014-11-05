@@ -1,0 +1,249 @@
+<?php 
+
+
+
+function _getTemplateField(  ) {
+    $templateFields= "Code_ile_ilot,Ile_origine,Habitats_description_physionomique,Bioclimat,Vents_dominants,Temp_minimales,Annees_temp_minimales,Temp_maximales,Annees_temp_maximales,Pluviometrie,Annees_pluviometrie,Sol_rocheux,Sol_sableux,Sol_terreux,Ressources_eau,Nb_sources,Estimation_debit_annuel,Debit_annuel";
+    return $templateFields;
+}
+
+function _getCheckFormatField() {
+    $checkFormatField= array();
+	$checkFormatField['Temp_minimales']= array(
+		'type'=>'integer','field'=> "Temp_minimales",
+		'message' => t('Valid Temp minimales format : integer'),
+	) ;
+	$checkFormatField['Temp_maximales']= array(
+		'type'=>'integer',	'field'=> "Temp_maximales",
+		'message' => t('Valid Temp maximales format : integer'),
+	) ;
+	$checkFormatField['Temp_maximales']= array(
+		'type'=>'integer',	'field'=> "Temp_maximales",
+		'message' => t('Valid Temp maximales format : integer'),
+	) ;
+	$checkFormatField['Nb_sources']= array(
+		'type'=>'integer',	'field'=> "Nb_sources",
+		'message' => t('Valid sources number format : integer'),
+	) ;
+	$checkFormatField['Debit_annuel']= array(
+		'type'=>'integer',	'field'=> "Debit_annuel",
+		'message' => t('Valid debit format : integer'),
+	) ;
+    return $checkFormatField;
+}
+
+function _getSqlCheckValue($tableName) {
+    $sqlCheckValue = array();
+	$sqlCheckValue[]=  array(
+    'message' => t('Unknow island'),
+    'sql' => "SELECT importid+1 as importid, Code_ile_ilot as val 
+              FROM $tableName LEFT OUTER JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_Code_ile_ilot
+        ON thes_Code_ile_ilot.name = Code_ile_ilot WHERE thes_Code_ile_ilot.tid IS NULL ",
+    'field' => 'val',
+    'mandatory'=> true,
+    );
+	$sqlCheckValue[]=  array(
+		'message' =>  t('Invalid term').":".t('Ile_origine'),
+		'type' => 'taxonomy', 
+		'field'=> 'Ile_origine',
+		'vid'=>44,	'mandatory'=> false,
+    );	
+	$sqlCheckValue[]=  array(
+		'message' => t('Invalid value').": ".t('Ressources_eau'),
+		'description'=>t('Possible values (Oui, Non)'),
+		'sql' => "SELECT importid+1 as importid, `Ressources_eau` AS val 
+			FROM $tableName WHERE (`Ressources_eau` IS NULL OR NOT  `Ressources_eau`  ='' ) AND NOT `Ressources_eau` IN (Binary 'Oui', Binary 'Non') ",
+			'mandatory'=> true,
+			'field'=> 'val',
+	);
+	return $sqlCheckValue;
+}
+
+
+function _getSqlCheckDuplicate($tableName) {
+    $sqlCheckDuplicate= array();
+	$sqlCheckDuplicate[0]=  "UPDATE $tableName SET isdoublon = false";
+	return $sqlCheckDuplicate;
+}
+
+function  _getSqlCheckWarning($tableName) {
+    $sqlCheckWarning= array();
+	return $sqlCheckWarning;
+}
+
+function _getMappingNodeSelectImportableData($tableName) {
+    $mapping = array();
+    $mapping['import_BD_I_Carac_environnementales'] = array(
+        'name' => t('Island').' : '.t('Carac. environnementales'),
+        'contentType' => "bd_i_caracteristiques_environnem",
+        'titleField' => 'Code_ile_ilot',
+		'multivalueSeparator' =>';',
+		'update' =>true,
+		'updateSelectNid' =>"
+				SELECT nid 
+				FROM (
+				  SELECT  thes_code_ilot_ile.tid AS code_ile
+				  FROM (SELECT * FROM $tableName WHERE importid=XXupdateSelectNidXX) AS PIMimport
+				  JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_code_ilot_ile
+				  ON thes_code_ilot_ile.name = Code_ile_ilot
+				) AS importTable 
+				JOIN {content_type_bd_i_caracteristiques_environnem}  ON code_ile = field_bdi_ce_code_ile_ilot_value LIMIT 1",
+		'query'=>"
+					SELECT  `importid` ,  `Code_ile_ilot` ,thes_Code_ile_ilot.tid AS field_bdi_ce_code_ile_ilot,Ile_origine, Habitats_description_physionomique, Bioclimat, Vents_dominants, Temp_minimales, Annees_temp_minimales, Temp_maximales, Annees_temp_maximales,Pluviometrie, Annees_pluviometrie, Sol_rocheux, Sol_sableux, Sol_terreux, CONCAT(UCASE(SUBSTRING(Ressources_eau, 1, 1)),SUBSTRING(Ressources_eau, 2)) AS Ressources_eau, Nb_sources, Estimation_debit_annuel, Debit_annuel
+				FROM ( 
+					SELECT *
+					FROM $tableName  WHERE NOT isdoublon
+				) AS importTable
+				JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_Code_ile_ilot
+				ON thes_Code_ile_ilot.name = Code_ile_ilot",
+		'fields' => array (
+			0 => array (
+                    'name'=>'code_ile',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_ce_code_ile_ilot',
+                    'type'=>'thesaurus',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'field_bdi_ce_code_ile_ilot',
+                ),
+       1=> array(  'name'=>'Ile_origine',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_ce_origine_de_l_ile',
+                    'type'=>'taxonomy',
+                    'taxonomyVoc'=>63,
+                    'taxonomyOpen'=>true,
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Ile_origine'),
+       2 => array (
+                    'name'=>'Habitats_description_physionomique',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_ce_habitat_description',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Habitats_description_physionomique',
+                ), 
+       3 => array (
+                    'name'=>'Bioclimat',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_ce_dc_bioclimat',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Bioclimat',
+                ),      
+       4 => array (
+                    'name'=>'Vents_dominants',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_ce_dc_vent_dominant',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Vents_dominants',
+                ),  
+		5 => array (
+                    'name'=>'Temp_minimales',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_ce_dc_temp_min',
+                    'type'=>'int',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Temp_minimales'
+                ),
+       6 => array (
+                    'name'=>'Annees_temp_minimales',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_ce_dc_temp_min_annee',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Annees_temp_minimales',
+                ),  
+		7 => array (
+                    'name'=>'Temp_maximales',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_ce_dc_temp_max',
+                    'type'=>'int',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Temp_maximales'
+                ),
+       8 => array (
+                    'name'=>'Annees_temp_maximales',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_ce_dc_temp_max_anne',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Annees_temp_maximales',
+                ),  
+		9 => array (
+                    'name'=>'Pluviometrie',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_ce_dc_pluviometrie',
+                    'type'=>'int',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Pluviometrie'
+                ),
+       10 => array (
+                    'name'=>'Annees_pluviometrie',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_pluviometrie_annee',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Annees_pluviometrie',
+                ),  
+       11 => array (
+                    'name'=>'Sol_rocheux',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_ce_dc_sol_rocheux',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Sol_rocheux',
+                ),  
+       12 => array (
+                    'name'=>'Sol_sableux',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_ce_dc_sol_sableux',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Sol_sableux',
+                ),  
+       13 => array (
+                    'name'=>'Sol_terreux',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_ce_dc_sol_terreux',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Sol_terreux',
+                ),  
+       14 => array (
+                    'name'=>'Ressources_eau',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_ce_dc_ressource_eau',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Ressources_eau',
+                ),   
+		15 => array (
+                    'name'=>'Nb_sources',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_ce_dc_source_nb',
+                    'type'=>'int',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Nb_sources'
+                ),
+		16 => array (
+                    'name'=>'Debit_annuel',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_debit_annuel',
+                    'type'=>'int',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Debit_annuel'
+                ),
+		17 => array (
+                    'name'=>'Estimation_debit_annuel',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_ce_dc_debit_annuel_est',
+                    'type'=>'int',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Estimation_debit_annuel'
+                ),
+			),
+	);
+    return $mapping;
+}
+
+

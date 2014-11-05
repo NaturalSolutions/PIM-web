@@ -1,0 +1,244 @@
+<?php 
+
+
+
+function _getTemplateField(  ) {
+    $templateFields= "Code_archipel,Nom_Archipel,Code_ile_ilot,Nom_ile_ilot,Autre_Noms_ile";
+    return $templateFields;
+}
+
+function _getCheckFormatField() {
+    $checkFormatField= array();
+    return $checkFormatField;
+}
+
+function _getSqlCheckValue($tableName) {
+    $sqlCheckValue = array();
+	$sqlCheckValue[]=  array(
+		'message' =>  t('Island code  mandatory'),
+		'type' => 'text', 
+		'field'=> 'Code_ile_ilot',
+		'mandatory'=> true,
+    );
+	$sqlCheckValue[]=  array(
+		'message' =>  t('Island name  mandatory'),
+		'type' => 'text', 
+		'field'=> 'Nom_ile_ilot',
+		'mandatory'=> true,
+    );
+	return $sqlCheckValue;
+}
+
+
+function _getSqlCheckDuplicate($tableName) {
+    $sqlCheckDuplicate= array();
+	$sqlCheckDuplicate[]=  "UPDATE $tableName SET isdoublon = false";
+	return $sqlCheckDuplicate;
+}
+
+function _getMappingNodeSelectImportableData($tableName) {
+    $mapping = array();
+    $mapping['import_code_arhipelago_island_islet'] = array(
+        'name' => t('Taxonomy').' : '.t('Code Archipelago/Island'),
+        'contentType' => "Taxonomy",
+        'titleField' => 'Nom_ile_ilot',
+		'update' =>false,
+		'query'=>"
+			SELECT importid, NULL AS parent , Code_archipel AS Code_ile_ilot, Nom_Archipel AS Nom_ile_ilot, NULL AS Autre_Noms_ile, 1 AS is_archipel  FROM $tableName
+			UNION
+			SELECT importid, Code_archipel AS parent , Code_ile_ilot, Nom_ile_ilot,Autre_Noms_ile, 0 AS is_archipel FROM $tableName
+			WHERE NOT isdoublon ",
+			'fields' => array (
+                0 => array (
+                    'name'=>'Code_ile_ilot',
+                    'mutlivalue'=> false,
+                    'contentField' => 'Code_ile_ilot',
+                    'type'=>'taxonomy-name',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Code_ile_ilot',
+                ),
+                1 => array (
+                    'name'=>'Nom_ile_ilot',
+                    'mutlivalue'=> false,
+                    'contentField' => 'Nom_ile_ilot',
+                    'type'=>'taxonomy-description',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'field_bdni_o_p_localisation',
+                ),
+                2 => array (
+                    'name'=>'Autre_Noms_ile',
+                    'mutlivalue'=> true,
+                    'contentField' => 'Autre_Noms_ile',
+                    'type'=>'taxonomy-synonym',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Autre_Noms_ile',
+                ),
+                3 => array (
+                    'name'=>'is_archipel',
+                    'mutlivalue'=> true,
+                    'contentField' => 'is_archipel',
+                    'type'=>'taxonomy-termfield',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'is_archipel'
+                ),
+				4 => array (
+                    'name'=>'field_bdni_o_p_taxon',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdni_o_p_taxon',
+                    'type'=>'thesaurus',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'field_bdni_o_p_taxon'
+                ),
+               5 => array (
+                    'name'=>'field_bdni_o_p_redacteur',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdni_o_p_redacteur',
+                    'type'=>'taxonomy',
+                    'taxonomyVoc'=>40,
+                    'taxonomyOpen'=>true,
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'field_bdni_o_p_redacteur'
+                ),
+                6 => array (
+                   'name'=>'field_bdni_o_p_type_de_source',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdni_o_p_type_de_source',
+                    'type'=>'taxonomy',
+                    'taxonomyVoc'=>42,
+                    'taxonomyOpen'=>false,
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'field_bdni_o_p_type_de_source'
+                ),
+                7 => array (
+                    'name'=>'field_bdni_o_p_classe_effectifs',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdni_o_p_classe_effectifs',
+                    'type'=>'taxonomy',
+                    'taxonomyVoc'=>11,
+                    'taxonomyOpen'=>false,
+                    'typeImpl'=>'value',
+                    'default' => 'NC',
+                    'importTableField'=> 'field_bdni_o_p_classe_effectifs'
+                ),
+               8 => array (
+                    'name'=>'field_bdni_o_p_presence_value',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdni_o_p_presence',
+                    'type'=>'taxonomy',
+                    'taxonomyVoc'=>13,
+                    'taxonomyOpen'=>false,
+                    'typeImpl'=>'value',
+                    'default' => 'NC',
+                    'importTableField'=> 'field_bdni_o_p_presence_value'
+                ),
+				9 => array (
+                    'name'=>'field_bdni_o_p_reproducteur_value',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdni_o_p_reproducteur',
+                    'type'=>'taxonomy',
+                    'taxonomyVoc'=>12,
+                    'taxonomyOpen'=>false,
+                    'typeImpl'=>'value',
+                    'default' => 'NC',
+                    'importTableField'=> 'field_bdni_o_p_reproducteur'
+                ),
+                10 => array (
+                    'name'=>'field_bdni_o_p_observation',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdni_o_p_observation',
+                    'type'=>'taxonomy',
+                    'taxonomyVoc'=>16,
+                    'taxonomyOpen'=>false,
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'field_bdni_o_p_observation'
+                ),
+                11=> array (
+                    'name'=>'field_bdni_o_p_indice',
+                    'mutlivalue'=> true,
+                    'contentField' => 'field_bdni_o_p_indice',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'field_bdni_o_p_indice'
+                ),	
+				12=> array (
+                    'name'=>'field_bdni_o_p_fiable',
+                    'mutlivalue'=> true,
+                    'contentField' => 'field_bdni_o_p_fiable',
+                    'type'=>'int',
+                    'typeImpl'=>'value',
+                    'default' => 'F',
+                    'importTableField'=> 'field_bdni_o_p_fiable'
+                ),	
+				13=> array (
+                    'name'=>'field_bdni_o_p_lat_lon',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdni_o_p_lat_lon',
+                    'type'=>'geoData',
+                    'typeImpl'=>'geo',
+                    'importTableField'=> 'field_bdni_o_p_lat_lon'
+                ),
+				14=> array (
+                    'name'=>'field_bdni_o_p_source',
+                    'mutlivalue'=> true,
+                    'contentField' => 'field_bdni_o_p_source',
+                    'type'=>'noderef_id',
+                    'typeImpl'=>'nid',
+                    'importTableField'=> 'field_bdni_o_p_source'
+                ),
+				16=> array (
+                    'name'=>'field_bdni_o_p_protocole',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdni_o_p_protocole',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'field_bdni_o_p_protocole'
+                ),
+				17 => array (
+                    'name'=>'field_bdni_o_p_nb_individus_min',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdni_o_p_nb_individus_min',
+                    'type'=>'int',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'field_bdni_o_p_nb_individus_min'
+                ),
+				18 => array (
+                    'name'=>'field_bdni_o_p_nb_individus_max',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdni_o_p_nb_individus_max',
+                    'type'=>'int',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'field_bdni_o_p_nb_individus_max'
+                ),
+				19 => array (
+                    'name'=>'field_bdni_o_p_nb_couples_min',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdni_o_p_nb_couples_min',
+                    'type'=>'int',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'field_bdni_o_p_nb_couples_min'
+                ),
+				20 => array (
+                    'name'=>'field_bdni_o_p_nb_couples_max',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdni_o_p_nb_couples_max',
+                    'type'=>'int',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'field_bdni_o_p_nb_couples_max'
+                ),
+				21 => array (
+                   'name'=>'field_bd_t_introduit',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdni_o_p_introduit',
+                    'type'=>'taxonomy',
+                    'taxonomyVoc'=>17,
+                    'taxonomyOpen'=>false,
+                    'typeImpl'=>'value',
+                    'default' => 'NC',
+                    'importTableField'=> 'field_bdni_o_p_introduit'
+                ),
+			),
+	);
+    return $mapping;
+}
+
+

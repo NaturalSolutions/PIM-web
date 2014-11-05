@@ -1,0 +1,6 @@
+; $Id: ctools.info,v 1.2 2011/08/02  $
+name = nsNodeAddins
+description = 1) nettoie les champs text
+core = 6.x
+version = "6.x-1.0"
+package = "# NS Modules"

@@ -1,0 +1,147 @@
+
+
+/*****************************************************************************
+*************		Fonctions relatives aux taches d'import des données
+*************			Intéraction avec la BD
+*************			Création des noeuds
+******************************************************************************/
+/** Fonction général qui controle l'import
+**@param : $form_state Formulaire = Contient variable saisie par l'utilisateur
+**@return : Liste des message d'erreurs
+**/
+function PIMimport_importData(&$form_state) {
+
+	//Récupération du mapping d'import sélectionné par l'utilisateur
+	$importType =  $form_state['values']['import_type'];
+	include('mappings/'.$importType.'.mapping'); 	
+	global $user;
+	$tableName =$form_state['storage']['values']['tableName'];
+	//Réalisation de l'import
+	$fileName=$form_state['storage']['values']['fileName'];
+	$message = importableTable_to_node($tableName, $fileName) ;
+	foreach ($message as $key=>$messageUnit) {
+		$form_state['value']['message'][$key]=$messageUnit;
+	}
+	return $message;
+}
+
+/** Fonction qui importe les données et créer les noeuds drupal une fois que les données sont vérifiées
+*** Etape 1  -> Création des noeuds
+*** Etape 2  -> Suppression de la table d'import
+**@param : $tableName String = Nom de la table générée au cours du rpcessus de vérification
+**@param : $fileName String = Nom du fichier uploadé
+**@return : Liste des message d'erreurs
+**/
+function importableTable_to_node($tableName, $fileName){
+	//Création des noeuds de type inventaire espèce présente herpeto dans notre cas
+	$message['summary_import'] = create_cck_node_bd_i_herpetoP($tableName, $fileName);
+	$sql = _getSqlDropTempTable($tableName);
+	$result = update_sql($sql);
+	return $message;
+}
+
+
+/** Fonction qui créer les noeuds
+**@param : $records array() = Ensemble des données à importer
+**/
+function create_cck_node_bd_i_herpetoP($tableName, $fileName) {
+	$message=array();
+	//Paramètres globaux aux noeuds créés
+	global $user;
+	$uid = $user->uid;
+    // Récupération du mapping spécifiant l'import
+    $mappings = _getMappingNodeSelectImportableData($tableName);
+	//Paramètres de logs
+	$logCreated;
+	$logUpdated;
+     //Pour chaque mapping défini
+     // Une unité de mapping correspond à un type de contenu
+     foreach ($mappings as $key=>$mappingUnit) {
+		//Génération de la requête qui exporte des données dans le format adéquate pour l'import
+		$sql =$mappingUnit['query'] ;
+		$result = db_query($sql);
+		$messageUnitArray =generateNodeObject($key, $mappingUnit, $result,$uid, $logCreated, $logUpdated) ;
+		$messageUnitText = "<span class='field-label'>".$messageUnitArray['title']."</span><ul>";
+		$messageUnitText .= "<li><b>".t('Node created').": </b>".$messageUnitArray['create']."</li>";
+		$messageUnitText .= "<li><b>".t('Node updated').": </b>".$messageUnitArray['update']."</li>";
+		$messageUnitText .= "<li><b>".t('Error').": </b>".$messageUnitArray['error']."</li>";
+		$messageUnitText .= "</ul>";
+		$message[$key] =$messageUnitText;
+    }
+	insertLogs ( $uid, $logCreated, $logUpdated, $fileName) ;
+	return $message;
+}
+
+function generateNodeObject($key,$mappingUnit, $records, $uid, &$logCreated, &$logUpdated) {
+	//Paramètres globaux aux noeuds créés
+	$cfdebuglevel = 3; // 0 = no debug; 1 = error; 2 = warning; 3 = info; 4 = debug
+	$nodepromoted = 0;
+	$nodesticky = 0;
+	//Pour chaque mapping défini
+	// Une unité de mapping correspond à un type de contenu
+	$contenttype = $mappingUnit['contentType'];
+	$titleField = $mappingUnit['titleField'];
+	// Le charger node_load
+	//Le modifier
+	$isupdatable = $mappingUnit['update'];
+	$nodeLoadId= $mappingUnit['updateNidField'];
+	$message=array();
+	$message['title']= $mappingUnit['name'];		
+	$nbcreate=0;
+	$nbupdate=0;
+	$nberror=0;
+	//Pour chaque enregistrement => Création d'un noeud
+	while ($record = db_fetch_array($records)) {
+		$node = getOrCreateNode($isupdatable, $mappingUnit['updateSelectNid'] ,  $record['importid']);
+		$isNew = $node->is_new;
+		$node->type = $contenttype; 
+		$node->status = 1;
+		$node->title = $record[$titleField]; 
+		// Traitement des champs CCK
+		//Pour chaque champs
+		$fields = $mappingUnit['fields'];
+		foreach ($fields as $field) {
+			//print '<br/> A :'.$field['name'];
+			$recValue = $record[$field['importTableField']];
+			if(  ! ((! $isNew) && (getNodeFieldValue($node->$field['contentField'], $field['typeImpl']) !='' ) ) 
+								&& ((! is_null( $recValue)) || ($recValue !=''))){
+				$fieldvalue = generateFieldValue($field,  $recValue);
+				if ($fieldvalue) {
+					$node->$field['contentField'] = array();
+					$node->$field['contentField'] = $fieldvalue ;
+				}
+			}
+		}
+		//Création du noeud dans la base physiquement
+		try {
+			//node_validate($node);
+			$node = node_submit($node);
+			$node->uid = $uid;
+			$status = node_save($node); 
+			$nid = $node->nid;
+			//DEBUG Level Info
+			if (((is_null($initialChanged)) && (! is_null($node->changed ))) || ((! is_null($initialChanged)) && ($node->changed > $initialChanged)) ) {
+				if ($isNew ) {
+					$logCreated  .=$nid.",";
+					$nbcreate++;
+				}
+				else  {
+					$logUpdated.=$nid.",";
+					$nbupdate++;
+				}
+			}
+			else {
+				$nberror++;
+			}
+			$message['create'] = $nbcreate;
+			$message['update'] = $nbupdate;
+			$message['error'] = $nberror;
+		}
+		catch (Exception $e){
+			drupal_set_message("... Error: ".$e);
+		}
+	 }
+	return $message; 
+}
+
+

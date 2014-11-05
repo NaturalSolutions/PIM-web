@@ -1,0 +1,76 @@
+/**
+ * @file
+ * RTL companion for the pages.css file.
+ */
+
+
+/*
+ * Header
+ */
+
+/*
+ * Content
+ */
+.more-link /* Aggregator, blog, and forum more link */ {
+  text-align: left;
+}
+
+
+h1 .views-view-header-soustitre,
+h1 .accueil-soustitre-bleu-mini,
+h1 .page-soustitre-bleu { padding-right: 40px;}
+
+#footer { text-align: left;}
+#footer .menu li { 
+    border-left: solid 1px #666;
+    border-right: none;
+    padding: 0 5px 0 5px;
+}
+
+/* views actu RTL*/
+.views-view--topnews-attachment-1-content-image { float: right; margin: 0 0 6px 15px;}
+.views-view--DocsPIM-attachment-1-content-image{float: left; margin: 0 15px 6px 15px;}
+
+
+#block-menu-menu--acces-espace-collaboratif .menu li {
+    list-style-image: url("../images/puce/header-puce.gif");
+    border-right: none;
+    padding-right: 0em;
+}
+
+#block-menu-menu-logout-menu .menu li
+#block-block-9 .menu li { 
+    list-style-image: url("../images/puce/header-puce.gif");
+    border-left: 1px solid #CCCCCC;
+}
+#block-menu-menu-login-menu .content ul,
+#block-menu-menu-logout-menu .content ul,
+#block-block-9 .content ul {
+	margin-right: 0;
+    padding-right: 2em;
+}
+
+.bloc-gris-date,
+.views-view--topnews-attachment-1-header-date {
+	float: left;
+  text-align: left;
+}
+.bloc-gris-titre,
+.views-view--topnews-attachment-1-header-title {
+	float: right;
+}
+
+#block-views-Accueil_TroisDocs-block_1,
+#block-views-Accueil_FourNews-block_1 {
+	background-image: url("../images/background/box-front-grey-ar.png");
+}
+
+#block-views-Accueil_BDD-block_1 ul.nice-menu-right li a {
+    text-align: right;
+}
+
+/* visio news */
+.accueil-block-news-image { background-image: url("../images/background/news-shadow-ar.png");}
+
+/* visio docs */
+.accueil-block-docs-image { background-image: url("../images/background/doc-shadow-ar.png");}

@@ -1,0 +1,332 @@
+<?php
+
+#CCK hook_field_info()
+function autocomplete_worms_fld_field_info() {
+  return array(
+    'autocomplete_worms' => array(
+      'label' => t('WORMS automcomplete'),
+      'description' => t('Stores the lsid and the name of one marine taxa based on the WORMS referentiel webservices'),
+    )
+  );
+}
+
+#Core hook_install(), hook_uninstall(), hook_enable(), hook_disable()
+function autocomplete_worms_fld_install() {
+  content_notify('install', 'autocomplete_worms');
+}
+function autocomplete_worms_fld_uninstall() {
+  content_notify('uninstall', 'autocomplete_worms');
+}
+function autocomplete_worms_fld_enable() {
+  content_notify('enable', 'autocomplete_worms');
+}
+function autocomplete_worms_fld_disable() {
+  content_notify('disable', 'autocomplete_worms');
+}
+
+#CCK hook_field_settings()
+function autocomplete_worms_fld_field_settings( $op, $field ) {
+	switch ($op) {
+		// Create the form element to be used on the field 
+    // settings form. Field settings will be the same for 
+    // all shared instances of the same field and should 
+    // define the way the value will be stored 
+    // in the database.
+    case 'form':
+          
+    // Return an array of the names of the field settings 
+    // defined by this module. These are the items that 
+    // CCK will store in the field definition
+    // and they will be available in the $field array.
+    // This should match the items defined in 'form' above.
+    case 'save':
+    
+    // Define the database storage for this field using 
+    // the same construct used by schema API. Most fields
+    // have only one column, but there can be any number 
+    // of different columns. After the schema API values, 
+    // add two optional values to each column, 
+    //  'views', to define a Views field 
+    //  'sortable', to add a Views sort field
+    case 'database columns':
+      $columns['worms_name'] = array('type' => 'varchar', 'length' => 255, 'not null' => FALSE, 'sortable' => TRUE, 'default' => '');
+      $columns['worms_lsid'] = array('type' => 'varchar', 'length' => 255, 'not null' => FALSE, 'sortable' => TRUE, 'default' => '');
+      return $columns;
+    
+    // Optional: Make changes to the default $data array 
+    // created for Views. Omit this if no changes are 
+    // needed, use it to add a custom handler or make 
+    // other changes.
+    case 'views data':
+  }
+
+}
+
+
+/**
+ * Implementation of hook_field().
+ */
+function autocomplete_worms_fld_field($op, &$node, $field, &$items, $teaser, $page) {
+  switch ($op) {
+    // Do validation on the field values here. The widget 
+    // will do its own validation and you cannot make any 
+    // assumptions about what kind of widget has been used, 
+    // so don't validate widget values, only field values.
+    case 'validate':
+			if (is_array($items)) {
+		      foreach ($items as $delta => $item) {
+		        /*if ($item['worms_name'] != '') {
+		          form_set_error($field['field_name'],'Taxon could not be null');
+		        }*/
+		      }
+		   }
+		   break;
+
+    // This is where you make sure that user-provided 
+    // data is sanitized before being displayed.
+    case 'sanitize':
+      foreach ($items as $delta => $item) {
+        $example = check_plain($item['value']);
+        $items[$delta]['safe'] = $example;
+      }
+  }
+}
+
+/**
+ * Implementation of hook_content_is_empty().
+ * 
+ * CCK has no way to know if something like a zero is
+ * an empty value or a valid value, so return
+ * TRUE or FALSE to a populated field $item array.
+ * CCK uses this to remove empty multi-value elements
+ * from forms.
+ */
+function autocomplete_worms_fld_content_is_empty($item, $field) {
+  if (empty($item['worms_name'])) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+
+//==========================================//
+// DEFINING A WIDGET
+//==========================================//
+
+/**
+ * Implementation of hook_widget_info().
+ *
+ * Here we indicate that the content module will handle
+ * the default value and multiple values for these widgets.
+ *
+ * Callbacks can be omitted if default handing is used.
+ * They're included here just so this module can be used
+ * as an example for custom modules that might do things
+ * differently.
+ */
+function autocomplete_worms_fld_widget_info() {
+  return array(
+    // The machine name of the widget, no more than 32 
+    // characters.
+    'autocomplete_worms_widget' => array(
+      // The human-readable label of the field that will be 
+      // seen in the Manage fields screen.
+      'label' => t('WORMS autocomplete widget'),
+      // An array of the field types this widget can be 
+      // used with.
+      'field types' => array('autocomplete_worms'),
+      // Who will handle multiple values, default is core.
+      // 'CONTENT_HANDLE_MODULE' means the module does it.
+      // See optionwidgets for an example of a module that 
+      // handles its own multiple values.
+      'multiple values' => CONTENT_HANDLE_CORE,
+      'callbacks' => array(
+        // Who will create the default value, default is core.
+        // 'CONTENT_CALLBACK_CUSTOM' means the module does it.
+        // 'CONTENT_CALLBACK_NONE' means this widget has 
+        // no default value.
+        'default value' => CONTENT_CALLBACK_DEFAULT,
+      ),
+    ),
+  );
+}
+
+
+
+/**
+ * Implementation of hook_widget().
+ *
+ * Attach a single form element to the form. 
+ * 
+ * CCK core fields only add a stub element and builds 
+ * the complete item in #process so reusable elements 
+ * created by hook_elements can be plugged into any 
+ * module that provides valid $field information.
+ * 
+ * Custom widgets that don't care about using hook_elements
+ * can be built out completely at this time.
+ *
+ * If there are multiple values for this field and CCK is 
+ * handling multiple values, the content module will call 
+ * this function as many times as needed.
+ *
+ * @param $form
+ *   the entire form array, 
+ *   $form['#node'] holds node information
+ * @param $form_state
+ *   the form_state, 
+ *   $form_state['values'][$field['field_name']]
+ *   holds the field's form values.
+ * @param $field
+ *   the field array
+ * @param $items
+ *   array of default values for this field
+ * @param $delta
+ *   the order of this item in the array of 
+ *   subelements (0, 1, 2, etc)
+ *
+ * @return
+ *   the form item for a single element for this field
+*/
+function autocomplete_worms_fld_widget(&$form, &$form_state, $field, $items, $delta = 0) {
+  
+  $element['worms_lsid'] = array(
+    '#title' => t('LSID'),
+    '#type' => 'textfield',
+    '#default_value' => $defaults['worms_lsid'],
+    '#weight' => 2,
+  );
+
+  $element['worms_name'] = array(
+    '#title' => t('Name'),
+    '#type' => 'textfield',
+    '#default_value' => $defaults['worms_name'],
+    '#weight' => 3,
+  );
+  
+  // Used so that hook_field('validate') knows where to 
+  // flag an error in deeply nested forms.
+  if (empty($form['#parents'])) {
+    $form['#parents'] = array();
+  }
+  $element['_error_element'] = array(
+    '#type' => 'value',
+    '#value' => implode('][', array_merge($form['#parents'], array('value'))),
+  );
+  
+  return $element;
+}
+
+/**
+ * Implementation of Form API's hook_elements().
+ *
+ * Returns a skeleton Form API array that defines callbacks
+ * for the widget form.
+function autocomplete_worms_fld_elements() {
+  $elements = array('autocomplete_worms_entry' =>
+    array(
+      '#input' => TRUE,
+      '#process' => array('autocomplete_worms_fld_worms_entry_process'),
+    ),
+  );
+
+  return $elements;
+}
+ */
+/**
+ * Process callback for widget
+ *
+ * Returns a Forms API array that defines the widget's editing form.
+function autocomplete_worms_fld_worms_entry_process($element, $edit, &$form_state, $form) {
+
+  $defaults = $element['#value'];
+  $field = content_fields($element['#field_name'], $element['#type_name']);
+
+  $element['worms_lsid'] = array(
+    '#title' => t('LSID'),
+    '#type' => 'textfield',
+    '#default_value' => $defaults['worms_lsid'],
+    '#weight' => 2,
+  );
+
+  $element['worms_name'] = array(
+    '#title' => t('Name'),
+    '#type' => 'textfield',
+    '#default_value' => $defaults['worms_name'],
+    '#weight' => 3,
+  );
+  return $element;
+}
+
+ */
+/**
+ * Implementation of hook_theme().
+
+function autocomplete_worms_fld_theme() {
+  return array(
+    'autocomplete_worms_entry' => array(
+      'arguments' => array('element' => NULL),
+    ),
+    'autocomplete_worms_fld_formatter_default' => array(
+      'arguments' => array('element' => NULL),
+    ),
+  );
+}
+ */
+/**
+ * FAPI theme for an individual text elements.
+
+function theme_autocomplete_worms_entry($element) {
+  return $element['#children'];
+}
+ */
+/**
+ * Implementation of hook_widget().
+
+function autocomplete_worms_fld_widget(&$form, &$form_state, $field, $items, $delta = 0) {
+  $element = array(
+    '#type' => $field['widget']['type'],
+    '#default_value' => isset($items[$delta]) ? $items[$delta] : '',
+  );
+  return $element;
+}
+ */
+/**
+ * Implementation of CCK's hook_field_formatter_info().
+ *
+ * Returns information about available field formatters.
+
+function autocomplete_worms_fld_field_formatter_info() {
+  return array(
+    'default' => array(
+       'label' => t('Worms Taxon display'),
+       'field types' => array('worms'),
+    ),
+  );
+}
+ */
+/**
+ * Theme function for default formatter.
+
+*/
+function theme_autocomplete_worms_fld_formatter_default($element = NULL) {
+ 	if(empty($element['#item'])) {
+    return '';
+  }
+
+  $stuff = $element['#item'];
+
+  $flds = array('worms_lsid', 'worms_name');
+  $ret = '<div class="worms_taxon">';
+  $sep = '';
+  foreach($flds as $fld) {
+    if(!empty($stuff['safe_' . $fld ])) {
+      $ret .= $sep . '<span class="' . $fld . '">' . $stuff['safe_' . $fld ] . '</span>';
+      $sep = "<br />\n";
+    }
+  }
+  $ret .= '</div>';
+
+  return $ret;
+}
+

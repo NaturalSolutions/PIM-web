@@ -1,0 +1,35 @@
+<?php
+// $Id$
+/**
+ * @file views-view-unformatted.tpl.php
+ * Default simple view template to display a list of rows.
+ *
+ * @ingroup views_templates
+ */
+?>
+<?php if (!empty($title)): ?>
+  <h3><?php print $title; ?></h3>
+ <?php 
+	$sql = "SELECT DISTINCT field_bdi_g_adresse_gestionnaire_value  AS adresse  FROM {content_type_bd_i_gestionnaire} WHERE UPPER(field_bdi_g_nom_gestionnaire_value) LIKE UPPER('%s%')";
+	$cleantitle =  htmlspecialchars_decode($title, ENT_QUOTES);
+	$result = db_query($sql, $cleantitle);
+	if ($result->num_rows>0) {
+		while ($row = db_fetch_array($result)) {
+			print  '<div>'.$row['adresse'].'</div>';
+		}
+	}
+		print '<div>'. t('Number of managed island'). ': ';
+		print count($rows); 
+		print '</div>';
+	?>
+<?php else: ?>
+  <h3><?php print t('No manager'); ?></h3>
+<?php endif; ?>
+
+<div id="ficheile">
+	<table class="<?php print $classes[$id]; ?>">
+	<?php foreach ($rows as $id => $row): ?>
+		  <?php print $row; ?>
+	<?php endforeach; ?>
+	</table>
+</div>

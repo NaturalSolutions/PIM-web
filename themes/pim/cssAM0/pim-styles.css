@@ -1,0 +1,85 @@
+/**
+ * @file
+ * PIM Styles
+ */
+ 
+ /*----------------------------------------------------------------------------*/
+ /** inherited **
+ 
+ body {
+  margin: 0;
+  padding: 0;
+  color: #666666;
+  font-size: 100%;
+  font-family: Lucida Grande,Trebuchet MS,Arial,Helvetica,sans-serif;
+}
+
+#page-wrapper {
+	font-size: 1em;
+	line-height: 1em;
+}
+ */
+ 
+ 
+ /*----------------------------------------------------------------------------*/
+ /** View header / Node Chapeau / Node Programme **
+ /*----------------------------------------------------------------------------*/
+ /* used in templates: views-view-fields--page.tpl.php - node-pages_chapeau.tpl.php */
+ /** inherited **
+ h1 { font-size: 1em; font-weight: bold; }
+ */
+.views-view-header-titre,
+.views-view-header-soustitre { display: block; color: #003eac; font-family: Times New Roman; line-height: 1em;}
+.views-view-header-titre { font-size: 2.2em;}
+.views-view-header-soustitre { font-size: 3.4em; padding-left: 40px;}
+
+h2 { font-size: 1em;}
+.views-view-header-description{
+	color: #FF741C;
+    font-family: "Lucida Grande","Trebuchet MS",Arial,Helvetica,sans-serif;
+    font-size: 0.875em;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+    padding: 8px 6px 10px 0px;
+}
+
+/* views-view-header-texte = body + p */
+/** uses
+p { text-align: justify; font-size: 0.75em; margin-bottom: 1em;} */
+.views-view-header-texte{color : #666666;}
+
+/*----------------------------------------------------------------------------*/
+ /** View Attachment **
+ /*----------------------------------------------------------------------------*/
+ /* actualités */
+.view-ArchivesNews .views-row,
+.view-TopNews .views-row { clear: both; margin-top: 15px;}
+.views-view--topnews-attachment-1-header { background-color: #ddd; color: #31569F; margin-top: 10px; padding: 3px; font-size: 0.875em;} 
+
+.views-view--topnews-attachment-1-header-date {
+	display: block;
+	/* float: right; =LTR  keep in pages.css */
+	font-size: 0.85em;
+	width: 67px;
+}
+.views-view--topnews-attachment-1-header-title {
+	display: block;
+	/* float: left; =LTR keep in pages.css */
+	width: 550px;
+	font-weight:bold;
+}
+
+.views-view--topnews-attachment-1-content-text { color: #666;}
+.views-view--topnews-attachment-1-content-text a { color: #666;}
+.views-view--topnews-attachment-1-content-text a:hover { color: #FF741C;}
+
+.views-view--topnews-attachment-1-content-image { width: 250px; } /* { float: left; margin: 0 15px 6px 0;} */
+.views-view--topnews-attachment-1-content-text { color: #666;}
+.views-view--topnews-attachment-1-content { clear: both; margin-top: 15px;}
+
+
+/*bandeau*/
+.view-Bandeau .view-content li { display: none;}
+.view-Bandeau .view-content li.views-row-first { display: block;}
+ 

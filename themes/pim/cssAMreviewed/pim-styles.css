@@ -1,0 +1,240 @@
+/**
+ * @file
+ * PIM Styles
+ */
+ 
+ /*----------------------------------------------------------------------------*/
+ /** inherited styles **/
+ 
+ body {
+  color: #666666;
+  font-size: 100%;
+  font-family: Trebuchet MS,Lucida Grande,Arial,Helvetica,sans-serif;
+}
+/*
+#page-wrapper {
+	font-size: 1em;
+	line-height: 1em;
+}
+ */
+ 
+ 
+ /*----------------------------------------------------------------------------*/
+ /** View header / Node Chapeau / Node Programme **
+ /*----------------------------------------------------------------------------*/
+ /* used in templates: 
+    views-view-fields--page.tpl.php 
+    node-pages_chapeau.tpl.php
+    node-programme.tpl.php
+*/
+ 
+
+ h1 { font-size: 1em; font-weight: bold; }
+ /* 
+ ini:
+.views-view-header-titre,
+.views-view-header-soustitre
+*/
+.page-titre-bleu,
+.page-soustitre-bleu { display: block; 
+                       color: #003eac; 
+                       font-family: Trebuchet MS,"Lucida Grande",Arial,Times New Roman;
+                       line-height: 1em;}
+
+.page-titre-bleu { font-size: 2.2em;}
+
+.page-soustitre-bleu { font-size: 3.4em}
+
+h2 { font-size: 1em;}
+/*ini: .views-view-header-description */
+.description-orange {
+	color: #FF741C;
+    font-family: "Lucida Grande","Trebuchet MS",Arial,Helvetica,sans-serif;
+    font-size: 0.875em;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+}
+
+
+p { text-align: justify;  margin-bottom: 1em;}
+/* .views-view-header-texte */ 
+.texte-gris,
+.texte-gris-em,
+.texte-gris-gras,
+.texte-gris-grossi,
+.texte-gris-grossi-gras {/* color : #666666; */
+                         font-size: 0.75em;
+						 font-family: Trebuchet MS,Lucida Grande,Arial,Helvetica,sans-serif;}
+/* ini: views-view-header-texte, views-view--topnews-attachment-1-content-text */
+
+.texte-gris a { color: #666;}
+.texte-gris a:hover { color: #FF741C;}
+
+
+.texte-gris-em {font-style: italic; font-weight: bold;}
+.texte-gris-gras {font-weight: bold;}
+.texte-gris-grossi {font-size: 0.77em;}
+.texte-gris-grossi-gras {font-size: 0.77em;font-weight: bold;}
+
+.texte-orange,
+.texte-orange-em,
+.texte-orange-gras,
+.texte-orange-grossi,
+.texte-orange-grossi-gras {color : #FF741C;
+                         font-size: 0.75em;
+						 font-family: Trebuchet MS,Lucida Grande,Arial,Helvetica,sans-serif;}
+
+.texte-orange-em {font-style: italic; font-weight: bold;}
+.texte-orange-gras {font-weight: bold;}
+.texte-orange-grossi {font-size: 0.77em;}
+.texte-orange-grossi-gras {font-size: 0.77em;font-weight: bold;}
+
+
+/*----------------------------------------------------------------------------*/
+ /** Styles liés aux Actualités **
+ /*----------------------------------------------------------------------------*/
+ 
+/* .views-view--topnews-attachment-1-header */
+.bloc-gris { background-color: #ddd; 
+            color: #31569F; 
+            margin-top: 10px; 
+            padding: 3px; 
+            font-size: 0.875em;} 
+
+/* .views-view--topnews-attachment-1-header-date */
+.bloc-gris-date {
+	display: block;
+	font-size: 0.85em;
+	width: 67px;
+}
+
+/* .views-view--topnews-attachment-1-header-title */
+.bloc-gris-titre {
+	display: block;
+	width: 550px;
+	font-weight:bold;
+}
+
+/*----------------------------------------------------------------------------*/
+ /** Styles liés aux Tables des Articles **
+ /*----------------------------------------------------------------------------*/
+
+.view-Equipe  .views-view-grid td {
+    width: 33%;
+}
+
+/*----------------------------------------------------------------------------*/
+ /** Tests **
+ /*----------------------------------------------------------------------------*/
+
+ 
+ /* tests font
+.page-titre-Verdana,
+.page-soustitre-Verdana { display: block; 
+                       color: #003eac; 
+                       font-family: Verdana,Times New Roman;
+                       line-height: 1em;}
+.page-titre-Georgia,
+.page-soustitreGeorgia { display: block; 
+                       color: #003eac; 
+                       font-family: Georgia,Times New Roman;
+                       line-height: 1em;}
+.page-titre-Trebuchet,
+.page-soustitre-Trebuchet { display: block; 
+                       color: #003eac; 
+                       font-family: "Trebuchet MS",Times New Roman;
+                       line-height: 1em;}
+.page-titre-Candara,
+.page-soustitre-Candara { display: block; 
+                       color: #003eac; 
+                       font-family: "Candara", Times New Roman;
+                       line-height: 1em;}
+.page-titre-Calibri,
+.page-soustitre-Calibri { display: block; 
+                       color: #003eac; 
+                       font-family: "Calibri",Times New Roman;
+                       line-height: 1em;}
+*/
+
+/* tests titres font
+.page-titre-Verdana,
+.page-titre-Georgia,
+.page-titre-Trebuchet,
+.page-titre-Candara,
+.page-titre-Calibri,
+*/
+
+/* tests titres font
+.page-soustitre-Verdana,
+.page-soustitreGeorgia,
+.page-soustitre-Trebuchet,
+.page-soustitre-Candara,
+.page-soustitre-Calibri,
+*/
+
+
+/****** Slideshow **************/
+.view_photo_slideshow {
+	position: relative;
+	margin-top: 30px; 
+	margin-bottom: 50px; 
+}
+
+.views-slideshow-controls-top {
+		display: inline;
+}
+
+.views_slideshow_singleframe_teaser_section {
+	position: relative;
+	height: 216px;
+  width: 573px;
+	margin-left: auto;
+  margin-right: auto;   
+}
+	
+.views_slideshow_singleframe_previous, .views_slideshow_singleframe_next {
+	width:48px;
+	height:0px;
+	padding-top:48px;
+	position:absolute;
+	top:100px;
+	overflow:hidden;	
+}
+.views_slideshow_singleframe_previous {
+  background:url('/~PIM/drupal_PIM_model_6-22/sites/all/themes/pim/images/fleche-gauche-icone-48.png');
+  left:0px;
+}
+.views_slideshow_singleframe_next {
+  background:url('/~PIM/drupal_PIM_model_6-22/sites/all/themes/pim/images/fleche-droite-icone-48.png');
+  right:0px;
+
+}
+
+.views_slideshow_singleframe_pause {
+  display:none;
+}
+
+.content-fields-slideshow-image {
+	position:absolute;
+	left:0px;
+	width:320px;
+	height:216px;
+}
+
+.content-fields-slideshow-text{
+	position:absolute;
+	left:320px;
+	text-align: justify;
+	margin-left:10px;
+	padding-left:10px;
+	width:250px;
+	height:216px;
+}
+
+.content-fields-slideshow-text-meta{
+	position: absolute;
+	bottom: 0;
+}
+
+

@@ -1,0 +1,267 @@
+/**
+ * @file
+ * Block Styling
+ */
+
+
+.block /* Block wrapper */ {
+  margin-bottom: 0;
+}
+
+.block.first /* The first block in the region */ {
+}
+
+.block.last /* The last block in the region */ {
+}
+
+.block.region-odd /* Zebra striping for each block in the region */ {
+}
+
+.block.region-even /* Zebra striping for each block in the region */ {
+}
+
+.block.odd /* Zebra striping independent of each region */ {
+}
+
+.block.even /* Zebra striping independent of each region */ {
+}
+
+.region-count-1 /* Incremental count for each block in the region */ {
+}
+
+.count-1 /* Incremental count independent of each region */ {
+}
+
+.block h2.title /* Block title */ {
+}
+
+.block .content /* Block's content wrapper */ {
+}
+
+#block-aggregator-category-1 /* Block for the latest news items in the first category */ {
+}
+
+#block-aggregator-feed-1 /* Block for the latest news items in the first feed */ {
+}
+
+#block-block-1 /* First administrator-defined block */ {
+}
+
+#block-blog-0 /* "Recent blog posts" block */ {
+}
+
+#block-book-0 /* "Book navigation" block for the current book's table of contents */ {
+}
+
+#block-comment-0 /* "Recent comments" block */ {
+}
+
+#block-forum-0 /* "Active forum topics" block */ {
+}
+
+#block-forum-1 /* "New forum topics" block */ {
+}
+
+#block-menu-primary-links /* "Primary links" block */ {
+}
+
+#block-menu-secondary-links /* "Secondary links" block */ {
+}
+
+#block-node-0 /* "Syndicate" block for primary RSS feed */ {
+}
+
+#block-poll-0 /* "Most recent poll" block */ {
+}
+
+#block-profile-0 /* "Author information" block for the profile of the page's author */ {
+}
+
+#block-search-0 /* "Search form" block */ {
+}
+
+#block-statistics-0 /* "Popular content" block */ {
+}
+
+#block-user-0 /* "User login form" block */ {
+}
+
+#block-user-1 /* "Navigation" block for Drupal navigation menu */ {
+}
+
+#block-user-2 /* "Who's new" block for a list of the newest users */ {
+}
+
+#block-user-3 /* "Who's online" block for a list of the online users */ {
+}
+
+#block-views-Bandeau-block_1 { text-align: right;}
+#block-views-Bandeau-block_1 ul,
+#block-views-Bandeau-block_1 ul li { margin: 0; padding: 0; list-style: none;}
+
+/*bloc réseaux sociaux*/
+#block-block-3 { float: right; width: 50px; text-align: right;}
+#block-block-3 .content ul li { list-style: none; display: inline;}
+
+/* blocs header */
+#block-locale-0 { float: right; width: 360px; text-align: right;}
+#block-menu-menu--acces-espace-collaboratif { float: right; width: 155px;}
+#block-menu-menu-connexion2 { float: right; width: 60px;}
+
+
+/**
+ * @file
+ * Views Styling
+ */
+
+ /* actualités */
+/* move property to .views-view-header ? */
+/*
+.view-ArchivesNews .views-row,
+.view-TopNews .views-row,
+.view-Bibliotheque  .views-row,
+.view-Partenaires-Bailleurs  .views-row,
+.view-Equipe  .views-row,
+.view-Corege  .views-row,
+.view-DocPIM  .views-row,
+.view-phototheque .views-row,
+*/
+.views-row,
+.openlayers-views-map,
+.page-header { clear: both; margin-top: 15px;}
+
+/* ini: .views-view--topnews-attachment-1-content, */
+.views-view--content-apresblocgris,
+.page-content { clear: both; margin-top: 15px;}
+
+
+/*bandeau*/
+.view-Bandeau .view-content li { display: none;}
+.view-Bandeau .view-content li.views-row-first { display: block;}
+
+/**
+ * @file
+ * Navigation Styling
+ *
+ * Default menu styling (ul.menu) is defined in system-menus.css.
+ */
+
+
+/*
+ * The active item in a Drupal menu
+ */
+li a.active {
+  color: #000;
+}
+
+/*
+ * Navigation bar
+ */
+#navigation {
+}
+
+.region-navigation {
+}
+
+/*
+ * Primary and Secondary menu links
+ */
+#main-menu {
+}
+
+#secondary-menu {
+}
+
+/*
+ * Menu blocks
+ */
+.block-menu {
+}
+
+/*
+ * "Menu block" blocks. See http://drupal.org/project/menu_block
+ */
+.block-menu_block {
+}
+
+/* menu langue */
+#block-locale-0 .content ul{
+	font-size: 0.7em;
+}
+#block-locale-0 .content li {
+    border-right: 1px solid #CCCCCC;
+    display: inline;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+#block-locale-0 .content li a {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+}
+#block-locale-0 .content li a:hover {
+    text-decoration: underline;
+}
+
+/* menu niveau 2 */
+ul.nice-menu-right { font-size: 0.8em; font-weight: normal; margin: 0; padding: 0; z-index: 50;}
+ul.nice-menu-right,
+ul.nice-menu-right ul,
+ul.nice-menu-right li,
+ul.nice-menu ul li { width: 153px; border: none; background: #fff url("../images/background/sub_nav.png") no-repeat left top;}
+/* new Cécile
+ul.nice-menu ul li { width: 153px; border: none; background: #fff url("../images/puce/Fleches_n2_31569f_4x7.png") no-repeat 20px 8px;}
+*/
+
+ul.nice-menu-right { border-top: solid 1px #31569F;} 
+ul.nice-menu-right li { height: auto !important; height: 26px; min-height: 26px; border-bottom: solid 1px #31569F; border-top: 1px solid #FFFFFF;}
+
+ul.nice-menu-right li a { color: #31569F; text-decoration: none; padding-left: 35px; background: none;}
+ul.nice-menu-right li a:hover { color: #FF741C;}
+
+ul.nice-menu-right ul { left: 154px; margin: 1px 0 0 1px; padding: 0;}
+
+
+.region-header-left ul#nice-menu-2 ul,
+.region-header-left ul#nice-menu-2 li,
+.region-header-left ul#nice-menu-2 ul li { width: 154px;}
+
+
+
+
+
+.region-header-left ul#nice-menu-2 { border: none; z-index: 998;}
+.region-header-left ul#nice-menu-2 li { color: #fff; background: #1a2277 url("../images/background/background-btn-menu-top.jpg") repeat-x left top; border: none; height: auto !important; height: 29px; min-height: 29px; }
+.region-header-left ul#nice-menu-2 li a { color: #fff; background: url("../images/background/fleche_nav.png") no-repeat 5px 3px; height: auto !important; height: 26px; min-height: 26px; padding-top: 3px; padding-bottom:0;}
+/* new Cécile
+.region-header-left ul#nice-menu-2 li a { color: #fff; background: url("../images/puce/Fleche_n1_5x9.png") no-repeat 20px 7px; height: auto !important; height: 26px; min-height: 26px; padding-top: 3px; padding-bottom:0;}
+*/
+.region-header-left ul#nice-menu-2 li a:hover { color: #FF741C; background-image: url("../images/background/fleche_nav_roll.png");}
+/* new Cécile
+.region-header-left ul#nice-menu-2 li a:hover { color: #FF741C; background-image: url("../images/puce/Fleche_n1_hover_ff6633_5x9.png");}
+*/
+
+/* 2ème niveau */
+.region-header-left ul#nice-menu-2 ul { border-top: solid 1px #31569F;}
+.region-header-left ul#nice-menu-2 ul li { width: 153px; border: none; background: #fff url("../images/background/sub_nav.png") no-repeat left top; border-bottom: solid 1px #31569F; border-top: 1px solid #FFFFFF; height: auto !important; height: 26px; min-height: 26px;}
+/* new Cécile
+.region-header-left ul#nice-menu-2 ul li { width: 143px; border: none; background: #fff url("../images/puce/Fleches_n2_31569f_3x5.png") no-repeat 5px 9px; border-bottom: solid 1px #31569F; border-top: 1px solid #FFFFFF; height: auto !important; height: 26px; min-height: 26px;}
+*/
+.region-header-left ul#nice-menu-2 ul li a { color: #31569F; text-decoration: none; padding-left: 35px; background: none; height: auto !important; height: 24px; min-height: 24px;}
+/* new Cécile
+.region-header-left ul#nice-menu-2 ul li a { color: #31569F; text-decoration: none; padding-left: 15px; background: none; height: auto !important; height: 24px; min-height: 24px;}
+*/
+.region-header-left ul#nice-menu-2 ul li a:hover { color: #FF741C; background-image: none;}
+
+#block-menu-menu--acces-espace-collaboratif,
+#block-menu-menu-connexion2 { font-size: 0.7em; font-weight: bold;}
+#block-menu-menu--acces-espace-collaboratif .menu li,
+#block-menu-menu-connexion2 .menu li { list-style-image: url("../images/puce/header-puce.gif");}
+#block-menu-menu--acces-espace-collaboratif .menu a,
+#block-menu-menu-connexion2 .menu a { color: #000; text-decoration: none; background: none;}
+#block-menu-menu--acces-espace-collaboratif .menu a:hover,
+#block-menu-menu-connexion2 .menu a:hover { text-decoration: underline;}
+
+
+/*Elliott*/
+.block h2.title { padding-top : 15px;}

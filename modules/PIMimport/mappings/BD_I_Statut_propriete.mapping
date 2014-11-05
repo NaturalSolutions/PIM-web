@@ -1,0 +1,155 @@
+<?php 
+
+
+
+function _getTemplateField(  ) {
+    $templateFields= "Code_ile_ilot,Existence_proprietaire_public,Nom_proprietaire_public,Pourcentage_terrestre_proprietaire_public,Annee_acquisition,Existence_proprietaire_prive,Pourcentage_terrestre_proprietaire_prive";
+    return $templateFields;
+}
+
+function _getCheckFormatField() {
+    $checkFormatField= array();
+	$checkFormatField['Pourcentage_terrestre_proprietaire_public']= array(
+		'type'=>'integer','field'=> "Pourcentage_terrestre_proprietaire_public",
+		'message' => t('Valid Pourcentage terrestre acquis par le propriétaire public format : integer'),
+	) ;
+	$checkFormatField['Pourcentage_terrestre_proprietaire_prive']= array(
+		'type'=>'integer',	'field'=> "Pourcentage_terrestre_proprietaire_prive",
+		'message' => t('Valid Pourcentage terrestre acquis par le(s) propriétaire(s) privé(s) : integer'),
+	) ;
+	$checkFormatField['Annee_acquisition']= array(
+		'type'=>'integer',	'field'=> "Annee_acquisition",
+		'message' => t('Valid Année  acquisition format : year'),
+	) ;
+    return $checkFormatField;
+}
+
+function _getSqlCheckValue($tableName) {
+    $sqlCheckValue = array();
+	$sqlCheckValue[]=  array(
+    'message' => t('Unknow island'),
+    'sql' => "SELECT importid+1 as importid, Code_ile_ilot as val 
+              FROM $tableName LEFT OUTER JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_Code_ile_ilot
+        ON thes_Code_ile_ilot.name = Code_ile_ilot WHERE thes_Code_ile_ilot.tid IS NULL ",
+    'field' => 'val',
+    'mandatory'=> true,
+    );
+	$sqlCheckValue[]=  array(
+		'message' => t('Invalid value').": ".t('Existence_proprietaire_public'),
+		'description'=>t('Possible values (Oui, Non)'),
+		'sql' => "SELECT importid+1 as importid, `Existence_proprietaire_public` AS val 
+			FROM $tableName WHERE (`Existence_proprietaire_public` IS NULL OR NOT  `Existence_proprietaire_public`  ='' ) AND NOT  `Existence_proprietaire_public` IN (Binary 'Oui', Binary 'Non') ",
+			'mandatory'=> true,
+			'field'=> 'val',
+	);
+	$sqlCheckValue[]=  array(
+		'message' => t('Invalid value').": ".t('Existence_proprietaire_prive'),
+		'description'=>t('Possible values (Oui, Non)'),
+		'sql' => "SELECT importid+1 as importid, `Existence_proprietaire_prive` AS val 
+			FROM $tableName WHERE (`Existence_proprietaire_prive` IS NULL OR NOT  `Existence_proprietaire_public`  ='' ) AND NOT  `Existence_proprietaire_prive` IN (Binary 'Oui', Binary 'Non') ",
+			'mandatory'=> true,
+			'field'=> 'val',
+	);
+	return $sqlCheckValue;
+}
+
+
+function _getSqlCheckDuplicate($tableName) {
+    $sqlCheckDuplicate= array();
+	$sqlCheckDuplicate[0]=  "UPDATE $tableName SET isdoublon = false";
+	return $sqlCheckDuplicate;
+}
+
+function  _getSqlCheckWarning($tableName) {
+    $sqlCheckWarning= array();
+	return $sqlCheckWarning;
+}
+
+function _getMappingNodeSelectImportableData($tableName) {
+    $mapping = array();
+    $mapping['import_BD_I_Statut_propriete'] = array(
+        'name' => t('Island').' : '.t('Property status'),
+        'contentType' => "bd_i_statut_de_propriete",
+        'titleField' => 'Code_ile_ilot',
+		'multivalueSeparator' =>';',
+		'update' =>true,
+		'updateSelectNid' =>"
+				SELECT nid 
+				FROM (
+				  SELECT  thes_code_ilot_ile.tid AS code_ile
+				  FROM (SELECT * FROM $tableName WHERE importid=XXupdateSelectNidXX) AS PIMimport
+				  JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_code_ilot_ile
+				  ON thes_code_ilot_ile.name = Code_ile_ilot
+				) AS importTable 
+				JOIN {content_type_bd_i_statut_de_propriete}  ON code_ile = field_bdi_sp_code_ile_ilot_value LIMIT 1",
+		'query'=>"
+					SELECT  `importid` ,  `Code_ile_ilot` ,thes_Code_ile_ilot.tid AS field_bdi_sp_code_ile_ilot,CONCAT(UCASE(SUBSTRING(Existence_proprietaire_public, 1, 1)),SUBSTRING(Existence_proprietaire_public, 2)) AS Existence_proprietaire_public, Nom_proprietaire_public, Pourcentage_terrestre_proprietaire_public,STR_TO_DATE( Annee_acquisition, '%%Y') AS  Annee_acquisition, CONCAT(UCASE(SUBSTRING(Existence_proprietaire_prive, 1, 1)), SUBSTRING(Existence_proprietaire_prive, 2)) AS Existence_proprietaire_prive, Pourcentage_terrestre_proprietaire_prive
+				FROM ( 
+					SELECT *
+					FROM $tableName  WHERE NOT isdoublon
+				) AS importTable
+				JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_Code_ile_ilot
+				ON thes_Code_ile_ilot.name = Code_ile_ilot",
+		'fields' => array (
+			0 => array (
+                    'name'=>'code_ile',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_sp_code_ile_ilot',
+                    'type'=>'thesaurus',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'field_bdi_sp_code_ile_ilot',
+                ),
+       2 => array (
+                    'name'=>'Existence_proprietaire_public',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_sp_public',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Existence_proprietaire_public',
+                ), 
+       3 => array (
+                    'name'=>'Nom_proprietaire_public',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_sp_p_nom_proprietaire',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Nom_proprietaire_public',
+                ), 
+		4 => array (
+                    'name'=>'Pourcentage_terrestre_proprietaire_public',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_sp_p_terre_pourcent',
+                    'type'=>'int',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Pourcentage_terrestre_proprietaire_public'
+                ), 
+		5 => array (
+                    'name'=>'Annee_acquisition',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_sp_p_acquisition_annee',
+                    'type'=>'date',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Annee_acquisition'
+                ),      
+       6 => array (
+                    'name'=>'Existence_proprietaire_prive',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_sp_privee',
+                    'type'=>'text',
+                    'typeImpl'=>'value',
+                    'importTableField'=>'Existence_proprietaire_prive',
+                ), 
+		7 => array (
+                    'name'=>'Pourcentage_terrestre_proprietaire_prive',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_sp_priv_terre_pourcent',
+                    'type'=>'int',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Pourcentage_terrestre_proprietaire_prive'
+                ),   
+			),
+	);
+    return $mapping;
+}
+
+

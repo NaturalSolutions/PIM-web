@@ -1,0 +1,44 @@
+/**
+ * @file
+ * RTL companion for the pages.css file.
+ */
+
+
+/*
+ * Header
+ */
+#logo /* Wrapping link for logo */ {
+  float: right;
+}
+
+/*
+ * Content
+ */
+.more-link /* Aggregator, blog, and forum more link */ {
+  text-align: left;
+}
+
+
+h1 .views-view-header-soustitre,
+h1 .page-soustitre-bleu { padding-right: 40px;}
+
+#footer { text-align: left;}
+
+/* views actu RTL*/
+.views-view--topnews-attachment-1-content-image { float: right; margin: 0 0 6px 15px;}
+.views-view--DocsPIM-attachment-1-content-image{float: left; margin: 0 15px 6px 0;}
+
+#block-menu-menu--acces-espace-collaboratif .content ul,
+#block-menu-menu-connexion2 .content ul {
+	margin-right: 0;
+    padding-right: 2em;
+}
+
+.bloc-gris-date,
+.views-view--topnews-attachment-1-header-date {
+	float: left;
+}
+.bloc-gris-titre,
+.views-view--topnews-attachment-1-header-title {
+	float: right;
+}

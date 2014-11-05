@@ -1,0 +1,377 @@
+<?php
+// $Id:$
+
+require_once('worms.inc'); 
+
+/**
+ * @file
+ * This is a Drupal Module - autocomplete_worms Field
+ * It implements a autocomplete_worms field for CCK
+ *
+ * Copyright 2009 Jennifer Hodgdon, Poplar ProductivityWare LLC
+ *
+ * Licensed under the GNU Public License
+ */
+
+
+/**
+ * Implementation of CCK's hook_field_info().
+ *
+ * Returns basic information about this CCK field.
+ */
+function autocomplete_worms_fld_field_info() {
+  return array(
+    'autocomplete_worms' => array(
+      'label' => t('WORMS taxonomy (external)'),
+      'description' => t('Stores information about a autocomplete_worms'),
+    )
+  );
+}
+
+
+/**
+ * Implementation of hook_install().
+ *
+ * Lets CCK take care of this.
+ */
+function autocomplete_worms_fld_install() {
+  content_notify('install', 'autocomplete_worms');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ *
+ * Lets CCK take care of this.
+ */
+function autocomplete_worms_fld_uninstall() {
+  content_notify('uninstall', 'autocomplete_worms');
+}
+
+/**
+ * Implementation of hook_enable().
+ *
+ * Lets CCK take care of this.
+ */
+function autocomplete_worms_fld_enable() {
+  content_notify('enable', 'autocomplete_worms');
+}
+
+/**
+ * Implementation of hook_disable().
+ *
+ * Lets CCK take care of this.
+ */
+function autocomplete_worms_fld_disable() {
+  content_notify('disable', 'autocomplete_worms');
+}
+
+/**
+ * Implementation of CCK hook_field_settings().
+ */
+function autocomplete_worms_fld_field_settings($op, $field) {
+  switch ($op) {
+    case 'database columns':
+      $columns['worms_lsid'] = array('type' => 'varchar', 'length' => 255, 'not null' => FALSE, 'sortable' => TRUE, 'default' => '');
+      $columns['worms_name'] = array('type' => 'varchar', 'length' => 255, 'not null' => FALSE, 'sortable' => TRUE, 'default' => '');
+      return $columns;
+  }
+}
+
+
+/**
+ * Implementation of CCK hook_field().
+ */
+function autocomplete_worms_fld_field($op, &$node, $field, &$items, $teaser, $page) {
+  switch ($op) {
+    case 'validate':
+      /*if (is_array($items)) {
+        foreach ($items as $delta => $item) {
+      		#print "\n\n----------bla ----------------\n<br/>";
+      		#print_r($item);
+      		#print "\n\n---------- bli----------------\n<br/>";
+        	$error_element = isset($item['_error_element']) ? $item['_error_element'] : '';
+          if (is_array($item) && isset($item['_error_element'])) unset($item['_error_element']);
+          	if (!empty($item['worms_name'])) {
+          		
+      				#print $node->field_test_worms['0']['worms_lsid'];
+      				//$node->$field['field_name'][$delta]['worms_lsid'] = get_worms_AphiaID_with_validName($item['worms_name']);
+      				#print "\n\n--------------------------\n";
+              #form_set_error($error_element,  get_worms_AphiaID_with_validName($item['worms_name']));
+            }
+        }
+     }*/
+    break;
+    case 'presave':
+			if (is_array($items)) {
+				foreach ($items as $delta => $item) {
+					if (!empty($item['worms_name'])) {
+						$lsid = get_worms_AphiaID_with_validName($item['worms_name']);
+						$items[$delta]['worms_lsid']= $lsid;
+
+					}
+				}
+			}
+    break;
+    case 'sanitize':
+      foreach ($items as $delta => $item) {
+        foreach ($item as $col => $dat) { 
+          $items[$delta]['safe_' . $col ] = check_plain($item[ $col ]);
+        }
+      }
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_content_is_empty().
+ */
+function autocomplete_worms_fld_content_is_empty($item, $field) {
+  if (empty($item['worms_lsid'])) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+* Implementation of hook_token_list()
+* and hook_token_values().
+*
+* Optional, provide token values for this field.
+*/
+function autocomplete_worms_fld_token_list($type = 'all') {
+  if ($type == 'field' || $type == 'all') {
+    $tokens = array();
+		$tokens['worms_name']['raw']       = t('Raw, unfiltered text');
+    $tokens['worms_name']['formatted'] = t('Formatted and filtered text');
+    return $tokens;
+  }
+}
+
+function autocomplete_worms_fld_token_values($type, $object = NULL) {
+  if ($type == 'field') {
+    $item = $object[0];
+    $tokens['raw']  = $item['worms_name'];
+    $tokens['formatted'] = isset($item['view']) ? $item['view'] : '';
+    return $tokens;
+  }
+}
+
+
+/**
+ * Implementation of hook_widget_info().
+ */
+function autocomplete_worms_fld_widget_info() {
+  return array(
+    'autocomplete_worms_entry' => array(
+      'label' => t('Autocomplete'),
+      'field types' => array('autocomplete_worms'),
+      'multiple values' => CONTENT_HANDLE_CORE,
+      'callbacks' => array(
+        'default value' => CONTENT_CALLBACK_DEFAULT,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implementation of Form API's hook_elements().
+ *
+ * Returns a skeleton Form API array that defines callbacks
+ * for the widget form.
+ */
+function autocomplete_worms_fld_elements() {
+  $elements = array(
+		'autocomplete_worms_entry' =>
+		  array(
+		    '#input' => TRUE,
+		    '#process' => array('autocomplete_worms_fld_autocomplete_worms_entry_process'),
+		  ),
+  );
+	drupal_add_js(drupal_get_path('module', 'autocomplete_worms_fld') .'/autocomplete_worms_fld.js');
+  return $elements;
+}
+
+/**
+ * Process callback for widget
+ *
+ * Returns a Forms API array that defines the widget's editing form.
+ */
+function autocomplete_worms_fld_autocomplete_worms_entry_process($element, $edit, &$form_state, $form) {
+  $defaults = $element['#value'];
+  $field = content_fields($element['#field_name'], $element['#type_name']);
+  $element['worms_lsid'] = array(
+    '#title' => t('LSID'),
+    '#type' => 'hidden',
+    '#default_value' => $defaults['worms_lsid'],
+    '#weight' => 2,
+  );
+  $element['worms_name'] = array(
+    '#title' => t('WORMS taxon'),
+    '#type' => 'textfield',
+    '#default_value' => $defaults['worms_name'],
+    '#autocomplete_path' => 'autocomplete_worms_fld/autocomplete/node',
+    '#weight' => 3,
+    /*'#attributes' => array(
+      'onChange' =>  "splitWormsAutocomplete(this);",
+      ),*/
+  );
+  return $element;
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function autocomplete_worms_fld_theme() {
+  return array(
+    'autocomplete_worms_entry' => array(
+      'arguments' => array('element' => NULL),
+    ),
+    'autocomplete_worms_fld_formatter_default' => array(
+      'arguments' => array('element' => NULL),
+    ),  
+    'autocomplete_worms_fld_formatter_link' => array(
+      'arguments' => array('element' => NULL),
+    ),
+    'autocomplete_worms_fld_formatter_fiche' => array(
+      'arguments' => array('element' => NULL),
+    ),
+  );
+}
+
+/**
+ * FAPI theme for an individual text elements.
+ */
+function theme_autocomplete_worms_entry($element) {
+  return $element['#children'];
+}
+
+/**
+ * Implementation of hook_widget().
+ */
+function autocomplete_worms_fld_widget(&$form, &$form_state, $field, $items, $delta = 0) {
+  $element = array(
+    '#type' => $field['widget']['type'],
+    '#default_value' => isset($items[$delta]) ? $items[$delta] : '',
+  );
+  return $element;
+}
+
+/**
+ * Implementation of CCK's hook_field_formatter_info().
+ *
+ * Returns information about available field formatters.
+ */
+function autocomplete_worms_fld_field_formatter_info() {
+  return array(
+    'default' => array(
+       'label' => t('autocomplete_worms display'),
+       'field types' => array('autocomplete_worms'),
+    ),
+    'link' => array(
+       'label' => t('autocomplete_worms link to WORMS'),
+       'field types' => array('autocomplete_worms'),
+    ),
+    'fiche' => array(
+       'label' => t('autocomplete_worms link to fiche'),
+       'field types' => array('autocomplete_worms'),
+    ),
+  );
+}
+
+/**
+ * Theme function for default formatter.
+ */
+function theme_autocomplete_worms_fld_formatter_default($element = NULL) {
+  if(empty($element['#item'])) {
+    return '';
+  }
+  $stuff = $element['#item'];
+  $flds = array('worms_lsid', 'worms_name');
+  $ret = '<div class="staff_info">';
+  $sep = '';
+  foreach($flds as $fld) {
+  if(!empty($stuff['safe_' . $fld ])) {
+      $ret .= $sep . '<span class="' . $fld . '">' . $stuff['safe_' . $fld ] . '</span>';
+      $sep = "<br />\n";
+    }
+  }
+  $ret .= '</div>';
+
+  return $ret;
+}
+
+
+/**
+ * Theme function for link formatter.
+ */
+function theme_autocomplete_worms_fld_formatter_link($element = NULL) {
+  if(empty($element['#item'])) {
+    return '';
+  }
+  $stuff = $element['#item'];
+  $ret = '<div class="staff_info">';
+  $sep = '';
+  if(!empty($stuff['safe_worms_name'])) {
+    $ret .= $sep . '<a href="http://www.marinespecies.org/aphia.php?p=taxdetails&id=' . $stuff['safe_worms_lsid'] . '">' . $stuff['safe_worms_name'] . '</a>';
+    $sep = "<br />\n";
+  }
+  $ret .= '</div>';
+
+  return $ret;
+}
+
+
+/**
+ * Theme function for link formatter.
+ */
+function theme_autocomplete_worms_fld_formatter_fiche($element = NULL) {
+	global $base_url;
+  if(empty($element['#item'])) {
+    return '';
+  }
+  $stuff = $element['#item'];
+  $ret = '<div class="staff_info">';
+  $sep = '';
+  if(!empty($stuff['safe_worms_name'])) {
+    $ret .= $sep . '<a href="'.$base_url.'/fiche-worms/' . $stuff['safe_worms_lsid'] . '">' . $stuff['safe_worms_name'] . '</a>';
+    $sep = "<br />\n";
+  }
+  $ret .= '</div>';
+
+  return $ret;
+}
+
+
+function autocomplete_worms_fld_menu() {
+  $items[] = array();
+  $items['autocomplete_worms_fld/autocomplete/node'] = array(
+    'title' => t('WORMS Autocomplete'),
+    'page callback' => 'autocomplete_worms_fld_autocomplete_node',
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,   
+  );
+   return $items;
+ }
+
+
+function autocomplete_worms_fld_autocomplete_node($taxonString) {
+  if (strlen($taxonString)>2) {
+		$taxon=search_worms_AphiaRecords_by_likeName($taxonString);
+		// loop through the results and create an associative array
+		$results = array();
+			foreach ($taxon as $key => $value) {
+				if ($value->scientificname == $value->valid_name) {
+					//$results[$value->AphiaID."|".$value->valid_name] ="<i>".$value->valid_name."</i>";
+					$results[$value->valid_name] ="<i>".$value->valid_name."</i>";
+				}
+				else {
+					$results[$value->valid_name] ="<i>".$value->scientificname."</i> (<i>".$value->valid_name."</i>)";
+				}
+			}
+	}
+	// output the results in javascript
+	print drupal_to_js($results);
+  // exit, to prevent your results form hitting the theme layer
+  exit();
+}
+

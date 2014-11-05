@@ -1,0 +1,503 @@
+<?php
+
+require_once('Log.inc'); 	
+require_once('CustomImportBatch.inc'); 	
+/*********************************************************************
+ * Implementation of hook_menu().
+ ** -> 3 hooks pages : 
+ ***	customImport Default : Liste des imports réalisés
+ ***	customImport/cancel : Anulation des imports
+ ***	customImport/newImport : Nouvel import
+ ********************************************************************/
+function PIMimport_menu() {
+	$items=array();
+	$items['customImport'] = array(
+		'title' =>  t('New import'),
+		'page callback' => 'PIMimport',
+		'access callback' => 'customimport_menu_access_import_content',
+		'file'=> 'PIMimport.inc',
+	);  
+	$items['customImport/cancel'] = array(
+		'title' =>  t('Cancel import'),
+		'type' => MENU_LOCAL_TASK,
+		'weight'=>4,
+		'page callback' => 'PIMimportCancel',
+		'access callback' => 'customimport_menu_access_cancel_import',
+	);  
+	$items['customImport/logs'] = array(
+		'title' =>  t('Logs Import'),
+		'type' =>MENU_LOCAL_TASK,
+		'weight'=>3,
+		'page callback' => 'PIMimportLog',
+		'access arguments' => array('import content')
+	);  
+	$items['customImport/newImport'] = array(
+		'title' =>  t('New import'),
+		'type' => MENU_DEFAULT_LOCAL_TASK,
+		'weight'=>2,
+		'page callback' => 'PIMimport',
+		'access callback' => 'customimport_menu_access_import_content',
+		'file'=> 'PIMimport.inc',
+	);
+	return $items; 
+}
+
+/**************************************************************************************
+ ******************				Implementation of hook_Theme().
+**************************************************************************************/
+
+/** Association du tableau liste des imports avec son thème**/
+function PIMimport_theme() {
+  $theme = array  (
+		//Thème de tableau pour les logs.Utilisé dans le formulaire Cancel et La Liste des Logs
+		'PIMimport_cancel_form_theme' => array (
+			'arguments' => array('form' => NULL),
+		),
+  );
+  return $theme;
+} 
+
+
+/**************************************************************************************
+ ******************				Implementation of hook_form().
+**************************************************************************************/
+function PIMimport() {
+	$output = '<h1><span class="page-titre-bleu">'.t('Import').' : </span> <span class="page-soustitre-bleu">'. t('PIM database').'</span> </h1>';
+	$output .=  drupal_get_form('PIMimport_form', &$form_state);
+	return $output; 
+}
+
+function PIMimportCancel() {
+	return drupal_get_form('PIMimport_cancel_form');
+}
+
+function PIMimportLog() {
+	return drupal_get_form('PIMimport_log_form');
+}
+
+
+/**************************************************************************************
+ ******************								FORMULAIRE D'IMPORT									*****************
+ **************************************************************************************/
+/** 
+**Construction du formulaire de Réalisation d'un nouvel import
+**@param : $form_state Formulaire = Contient variable saisie par l'utilisateur
+**/
+function PIMimport_form(&$form_state) { 
+	//Ajout de la css : mise en forme des messages
+	drupal_add_css(drupal_get_path('module','PIMimport').'/css/PIMimport.css');
+	drupal_add_js(drupal_get_path('module', 'PIMimport') .'/js/PIMimport.js');
+	$form['#attributes'] = array('enctype' => 'multipart/form-data');
+	//Liste des imports réalisable
+	//TODO : rendre dynamique la construction de la liste
+	$form['import_type'] = array(
+		'#type' => 'select',
+		'#title' => t('Import type'),
+		'#id' => 'import_type',
+		'#options' => array(
+			'BD_NI_Bota_Present' => t('Botanique - espèces présentes'),
+			'BD_NI_Bota_Absent' => t('Botanique - espèces recherchées non observées'),
+			'BD_NI_Arthropode_Present' => t('Arthropodes - espèces présentes'),
+			'BD_NI_Arthropode_Absent' => t('Arthropodes - espèces recherchées non observées'),
+			'BD_NI_Autre_terrestre_Present' => t('Autres espèces terrestres - espèces présentes'),
+			'BD_NI_Autre_terrestre_Absent' => t('Autres espèces terrestres - espèces recherchées non observées'),
+			'BD_NI_Herpeto_Present' => t('Herpetologie - espèces présentes'),
+			'BD_NI_Herpeto_Absent' => t('Herpetologie - espèces recherchées non observées'),
+			'BD_NI_Ornitho_Present' => t('Ornithologie - espèces présentes'),
+			'BD_NI_Ornitho_Absent' => t('Ornithologie - espèces recherchées non observées'),
+			'BD_NI_FFM_Present' => t('Faune et flore marines - espèces présentes'),
+			'BD_NI_FFM_Absent' => t('Faune et flore marines - espèces recherchées non observées'),
+			'BD_NI_Chiro_Present' => t('Chiroptères - espèces présentes'),
+			'BD_NI_Chiro_Absent' => t('Chiroptères - espèces recherchées non observées'),
+			'BD_NI_MTNV_Present' => t('Mammifères terrestres non volants - espèces présentes'),
+			'BD_NI_MTNV_Absent' => t('Mammifères terrestres non volants - espèces recherchées non observées'),  
+			
+      'BD_I_Description_physique' => t('Contenu ile - Description physique'),  
+      'BD_I_Carac_environnementales' => t('Contenu ile - Caractéristiques environnementales'), 
+      'BD_I_Occupation' => t('Contenu ile - Occupation'),  
+      'BD_I_Population' => t('Contenu ile - Population'),   
+      'BD_I_Statut_propriete' => t('Contenu ile - Statut de propriété'), 
+      'BD_I_Statut_protection' => t('Contenu ile - Statut de protection'),
+      'BD_I_Reglementation_activites' => t('Contenu ile - Reglementation des activités'), 
+      'BD_I_Problemes_menaces' => t('Contenu ile - Problèmes et menaces'), 
+      'BD_I_Gestionnaire' => t('Contenu ile - Action de gestion'),    
+		),
+		'#description' => t('Select import type template.'). '<span><a id="getTemplate" class="blank " onMouseOver="getTemplateLink();" href="">'.t('Get template').'</a> 
+					  <a id="getNotice_FR" class="blank" onMouseOver="getNoticeLink(\'FR\');" href="">'.t('Get notice').' (fr)</a>
+					  <a id="getNotice_EN" class="blank" onMouseOver="getNoticeLink(\'EN\');" href="">'.t('Get notice').' (en)</a></span>',
+		'#default_value' =>$form_state['storage']['values']['import_type'],
+	);	
+	$form['PIMimport_file_upload'] = array(
+    '#type' => 'file',
+    '#title' => t('File to import'),
+		'#default_value' =>$form_state['storage']['values']['PIMimport_file_upload'],
+	);
+	$form['checkData'] = array(
+		'#type' => 'submit',
+		'#value' => t('Check'),
+		'#submit' => array('PIMimport_form_submit'),
+	);
+	/*
+	$form['deleteData'] = array(
+		'#type' => 'submit',
+		'#value' => t('!!! Delete All Inventory !!!'),
+		'#submit' => array('PIMimport_form_submit'),
+	);
+	*/
+	return $form;
+}
+
+/**
+**Validation du formulaire d'import
+**@param : $form associative array = Stucture du formulaire
+**@param : $form_state keyed array = Contient variable saisie par l'utilisateur
+**@param : $form_id String = Indentifiant du fomulaire courrant
+**/
+function PIMimport_form_alter(&$form, &$form_state, $form_id) {
+	if($form_id == 'PIMimport_form') {
+		//Variable de fonction qui indique si les étapes de validation des données se sont correctement déroulées
+		$importDisable = FALSE;
+		
+		//Si la variable non de la table est absente => Import impossible
+		if (!$form_state['storage']['values']['tableName']) $importDisable = TRUE;
+		
+		//#Récupération des messages
+		//Messages généraux
+		$messages=$form_state['storage']['values']['messages'];
+		//Message généré pendant le batch d'import
+		if ( $_SESSION['custom_import_results']['message']['summary_result']) {
+			$messages['summary_import'] = $_SESSION['custom_import_results']['message']['summary_result'];
+		}
+		unset($_SESSION['custom_import_results']['message']['summary_result']);
+		
+		//#Traitement des messages
+		if ($messages) {
+			foreach($messages as $key => $value) {
+				 $importDisable= _generateMessageField($key, $value, $form);
+			}
+		}
+		if (!$importDisable) {
+			 $form['message']['summary'] = array(
+					'#prefix' => '<div class="import_check">',
+					'#value'=>t("Data are ready for import"),
+					'#suffix' => '</div>',
+			);
+		}
+		elseif(! empty($messages['summary_import'])) {
+			 $form['message']['summary'] = array(
+					'#prefix' => '<div class="import_check">',
+					'#value'=>t("Import done !"),
+					'#suffix' => '</div>',
+			);
+		}
+		$form['importData'] = array(
+			'#type' => 'submit',
+			'#value' => t('Import'),
+			'#disabled' => $importDisable,
+		);
+	}
+}
+
+/**
+**Validation du formulaire d'import
+**@param : $form associative array = Stucture du formulaire
+**@param : $form_state keyed array = Contient variable saisie par l'utilisateur
+**/
+function PIMimport_form_validate($form, &$form_state) {
+	if ($form_state['values']['import_type'] == '') {
+		form_set_error('[import_type]', t('You must select a import type.'));
+	}
+}
+
+/**
+**Fonction de soumission du formulaire de réalisation d'un import
+** Le formulaire est utilisé pour : 
+***			- Valider les données
+***			- Insérer les données validées dans la base
+**@param : $form associative array = Stucture du formulaire
+**@param : $form_state keyed array = Contient variable saisie par l'utilisateur
+**/
+function PIMimport_form_submit($form, &$form_state) {
+	//Vérification des données
+	if($form_state['clicked_button']['#value'] == $form_state['values']['checkData'])   {
+		// Bump up the limits
+		ini_set('max_execution_time',360);
+		//Lancement de la procedure d'import
+		$message = PIMimport_check( $form_state);
+	}
+	//Insertion des données des données
+	else if($form_state['clicked_button']['#value'] == $form_state['values']['importData']) {
+		//$message =PIMimport_importData($form_state);
+		 custom_import_batch($form, $form_state);
+	}
+	//Insertion des données des données
+	else if($form_state['clicked_button']['#value'] == $form_state['values']['deleteData']) {
+		//$message =PIMimport_importData($form_state);
+		 trash_NI();
+	}
+	
+	//Récupération des messages générés pendant l'une des deux opérations
+	$form_state['storage']['values'] = $form_state['values'];
+	if (! empty($message)) {
+		foreach ($message as $key=>$messageUnit) {
+				$form_state['storage']['values']['messages'][$key]=$messageUnit;
+		}
+	}
+	//Lance la reconstruction du formulaire
+	$form_state['rebuild'] = true;
+}
+
+function trash_NI() {
+		//Contenu à supprimer : 
+	/*$node_types = array('bd_ni_botanique_absent',
+		'bd_ni_botanique_present',
+		'bd_ni_chiroptere_absent',
+		'bd_ni_chiroptere_present',
+		'bd_ni_entomo_absent',
+		'bd_ni_entomo_present',
+		'bd_ni_faune_flore_marine_absent',
+		'bd_ni_faune_flore_marine_present',
+		'bd_ni_herpetologie_absent',
+		'bd_ni_herpetologie_present',
+		'bd_ni_mam_terrestres_absent',
+		'bd_ni_mam_terrestres_present',
+		'bd_i_occupation',
+		'bd_ni_ornithologie_absent',
+		'bd_ni_ornithologie_present',
+		'bd_p_herpeto_diurne',
+		'bd_t_fichetaxon');*/
+		/*$node_types = array(
+		'bd_ni_herpetologie_present');
+
+		foreach($node_types as $type) {
+			print $type;
+			$query = db_query("SELECT n.nid FROM {node} n WHERE trim(n.type) = '".$type."' ");
+			while ($n = db_fetch_object($query)) {
+					node_delete($n->nid);
+			}
+		}*/
+    
+    $node = array (26644,26645,26646,26647,26648,26649,
+    26650,26651,26652,26653,26654,26655,26656,26657,26658,26659,26660,26661,26662,26663,26664,26665,26666,26667,26668,26669,26670,26671,
+    26672,26673,26674,26675,26676,26677,26678,26679,26680,26681,26682,26683,26684,26685,26686,26687,26688,26689,26690,26691,26692,26693);
+    foreach ($node as $nid) {
+		print $nid;
+        node_delete($nid);
+    }
+}
+
+
+/**************************************************************************************
+ ******************					FORMULAIRES LOGS		 (LIST/CANCEL)				*****************
+ **************************************************************************************/
+ 
+/**
+** Construction du formulaire de Liste des logs
+**/
+function PIMimport_log_form() {
+	//Récupération des logs
+	global $user;
+	$userLog;
+	if (user_access('cancel my own import')) $userLog=$user->uid;
+	else $userLog=-1;
+	$logs=getAllLogs ($userLog);
+	if  ($logs) {
+		foreach($logs as $key => $value) {
+			$form['logs']['lid'][$key] = array ('#type' => 'hidden','#value' => $key );
+			$form['logs'][$key]['uid'] = array('#value' => getUserName($value['uid']));
+			$form['logs'][$key]['log_date'] = array( '#value' => $value['log_date']);
+			$form['logs'][$key]['file_name'] = array('#value' => $value['file_name']);
+		}
+	}
+	$form['#theme'] = 'PIMimport_cancel_form_theme'; 
+	return $form;
+}
+/**
+** Construction du formulaire d'annulation des logs
+**/
+function PIMimport_cancel_form() {
+	//Récupération des logs
+	global $user;
+	$userLog;
+	if (user_access('cancel my own import')) $userLog=$user->uid;
+	else $userLog=-1;
+	$logs=getCancelLogs (0, $userLog);
+	if  ($logs) {
+		foreach($logs as $key => $value) {
+			$checkboxes[$key] = ''; 
+			$form['logs'][$key]['uid'] = array('#value' => getUserName($value['uid']));
+			$form['logs'][$key]['log_date'] = array( '#value' => $value['log_date']);
+			$form['logs'][$key]['file_name'] = array('#value' => $value['file_name']);
+		}
+		$form['logs']['lid'] = array (
+			'#type' => 'radios',
+			'#options' => $checkboxes, 
+		);
+		$form['submit'] = array(
+			'#type' => 'submit',
+			'#value' => t('Cancel import'),
+		);
+	}
+	$form['#theme'] = 'PIMimport_cancel_form_theme'; 
+	return $form;
+}
+/**
+**Fonction de soumission du formulaire d'annulation d'un import
+**@param : $form associative array = Stucture du formulaire
+**@param : $form_state keyed array = Contient variable saisie par l'utilisateur
+**/
+function PIMimport_cancel_form_submit($form, &$form_state) {
+	//Récupération de l'identifiant du log à supprimer
+	$lid = $form_state['values']['lid'];
+	//Annulation=> supprime tous les noeuds créés
+	cancelOneLog($lid);
+	drupal_set_message(t("Deleting $lid"));
+}
+
+
+function PIMimport_cancel_form_validate($form, &$form_state) {
+	if ($form_state['values']['lid'] =='') {
+			form_set_error( t('You must select a log to cancel.'));
+	}
+}
+
+/***********************************************************************
+					Fonction Thème
+***********************************************************************/
+
+function theme_PIMimport_cancel_form_theme  ($form){
+	$rows = array();
+
+	foreach(element_children($form['logs']['lid']) as $lid)  {
+		$row = array(); 
+		$row[] = drupal_render($form['logs']['lid'][$lid]); 
+		$row[] = drupal_render($form['logs'][$lid]['uid']); 
+		$row[] = drupal_render($form['logs'][$lid]['log_date']); 
+		$row[] = drupal_render($form['logs'][$lid]['file_name']); 
+		$rows[] = $row;
+	}
+	if(count($rows))  {
+		$header = array(theme('table_select_header_cell') , t('user'), t('date') , t('file')); 
+	}
+	else  {
+		$header = array(t('user'), t('date') , t('file')); 
+		$row = array();
+		$row[] = array(
+		  'data' => t('No logs were found'),
+		  'colspan' => 3,
+		  'style' => 'text-align:center',
+		);
+		$rows[] = $row;
+	}
+	$output = theme('table', $header, $rows);
+	return $output . drupal_render($form); 
+}
+
+
+/**************************************************************************************
+ ******************												DIVERS												*****************
+ **************************************************************************************/
+
+/****
+* Fonction qui traite les messages renvoyés par les fonctions d'import
+*** les formate et ajoute les messages au formulaires
+**@param : $key = identifiant du message
+**@param : $value = valeur du message
+**@param : $form associative array = Stucture du formulaire
+
+***/
+function _generateMessageField($key, $value, &$form) {
+	$importDisable = FALSE;
+	switch ($key ){
+			case 'error_system':
+				$importDisable = TRUE;
+				$classe = 'messages error';
+				$message=t('Error system');
+			break;
+			case 'error_data':
+				$importDisable = TRUE;
+				$classe = 'messages error';
+				$message=t('Error in data');
+			break;
+			case 'error_format':
+				$importDisable = TRUE;
+				$classe = 'messages error';
+				$message=t('Error in format');
+			break;
+			case 'warning_data':
+				$classe = 'messages warning';
+				$message=t('Warnig in data');
+			break;
+			case 'duplicate_data':
+				$classe = 'messages warning';
+				$message=t('Warnig duplicate');
+			break;
+			case 'warning_data':
+				$classe = 'messages warning';
+				$message=t('Warnig data');
+			break;
+			case 'summary_import':
+				$importDisable = TRUE;
+				$classe = 'messages info';
+				$message=t('Import repport');
+			break;
+		}
+	
+		$messageField = array(
+			'importDisable'=>$importDisable,
+			'classe'=>$classe,
+			'message'=>$message,
+			'key'=>$key,
+		);
+		$form['message'][$key] = array(
+			'#type' => 'fieldset',
+			'#title' => $messageField['message'],
+			'#collapsible' => TRUE,
+			'#weight' => 30,
+			'#attributes'=> array('id'=>$key),
+		);
+		//Formate le message
+		if (is_array($value)) {
+			$text='<ul class="form-item">';
+			foreach($value as $valueUnit) {
+				$text.='<li class="field">'.$valueUnit.'</li>';
+			}
+			$text.='</ul>';
+		}
+		else $text=$value;
+		if ($text == '') $text='No data';
+		$form['message'][$key]['text'] = array(
+			'#prefix' => '<div>',
+			'#value'=>$text,
+			'#suffix' => '</div>',
+		);
+	return $importDisable ;
+}
+
+/***********************************************************************
+					Fonction Permissions
+***********************************************************************/
+
+function PIMimport_perm() {
+  return array(t('import content'), t('cancel my own import'),  t('cancel all import'));
+}
+
+
+function customimport_menu_access_cancel_import() {
+	if(user_access('cancel my own import') || user_access( 'cancel all import')) {
+	   return true;
+	} 
+	else {
+	   return false;
+	}
+}
+
+function customimport_menu_access_import_content() {
+	if(user_access('import content')) {
+	   return true;
+	} 
+	else {
+	   return false;
+	}
+}
+

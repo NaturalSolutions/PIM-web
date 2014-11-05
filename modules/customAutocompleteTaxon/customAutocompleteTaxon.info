@@ -1,0 +1,6 @@
+; $Id: ctools.info,v 1.2 2011/08/02  $
+name = observed taxon autocomplete
+description = observed taxon list
+core = 6.x
+version = "6.x-0"
+package = "# NS Modules"

@@ -1,0 +1,426 @@
+/**
+ * @file
+ * Block Styling
+ */
+
+
+.block /* Block wrapper */ {
+  margin-bottom: 0;
+}
+
+.block.first /* The first block in the region */ {
+}
+
+.block.last /* The last block in the region */ {
+}
+
+.block.region-odd /* Zebra striping for each block in the region */ {
+}
+
+.block.region-even /* Zebra striping for each block in the region */ {
+}
+
+.block.odd /* Zebra striping independent of each region */ {
+}
+
+.block.even /* Zebra striping independent of each region */ {
+}
+
+.region-count-1 /* Incremental count for each block in the region */ {
+}
+
+.count-1 /* Incremental count independent of each region */ {
+}
+
+.block h2.title /* Block title */ {
+}
+
+.block .content /* Block's content wrapper */ {
+}
+
+#block-aggregator-category-1 /* Block for the latest news items in the first category */ {
+}
+
+#block-aggregator-feed-1 /* Block for the latest news items in the first feed */ {
+}
+
+#block-block-1 /* First administrator-defined block */ {
+}
+
+#block-blog-0 /* "Recent blog posts" block */ {
+}
+
+#block-book-0 /* "Book navigation" block for the current book's table of contents */ {
+}
+
+#block-comment-0 /* "Recent comments" block */ {
+}
+
+#block-forum-0 /* "Active forum topics" block */ {
+}
+
+#block-forum-1 /* "New forum topics" block */ {
+}
+
+#block-menu-primary-links /* "Primary links" block */ {
+}
+
+#block-menu-secondary-links /* "Secondary links" block */ {
+}
+
+#block-node-0 /* "Syndicate" block for primary RSS feed */ {
+}
+
+#block-poll-0 /* "Most recent poll" block */ {
+}
+
+#block-profile-0 /* "Author information" block for the profile of the page's author */ {
+}
+
+#block-search-0 /* "Search form" block */ {
+}
+
+#block-statistics-0 /* "Popular content" block */ {
+}
+
+#block-user-0 /* "User login form" block */ {
+}
+
+#block-user-1 /* "Navigation" block for Drupal navigation menu */ {
+}
+
+#block-user-2 /* "Who's new" block for a list of the newest users */ {
+}
+
+#block-user-3 /* "Who's online" block for a list of the online users */ {
+}
+
+#block-views-Bandeau-block_1 { text-align: right;}
+#block-views-Bandeau-block_1 ul,
+#block-views-Bandeau-block_1 ul li { margin: 0; padding: 0; list-style: none;}
+
+/*bloc réseaux sociaux*/
+#block-block-3 { float: right; width: 5%; text-align: right; margin-right: 10px;}
+#block-block-3 .content ul li { list-style: none; display: inline;}
+
+/* blocs header */
+#block-locale-0 { 
+    float: left;
+    width: 45%;
+    text-align: right;
+    padding-right: 0.5em;
+	margin-left: 350px;
+}
+.logged-in #block-locale-0 { margin-left: 200px;}
+
+#block-menu-menu--acces-espace-collaboratif { 
+    float: left; 
+    width: 18%;
+}
+.i18n-ar #block-menu-menu--acces-espace-collaboratif  { width: 10%;}
+/* logIn */
+#block-menu-menu-login-menu { float: left; width: 9%;}
+/* logOut */
+#block-block-9,
+#block-menu-menu-logout-menu { float: left; width: 8%;}
+.i18n-ar #block-block-9,
+.i18n-ar #block-menu-menu-logout-menu  { width: 10%;}
+
+#block-menu-menu--acces-espace-collaboratif,
+#block-menu-menu-login-menu,
+#block-menu-menu-logout-menu,
+#block-block-9 { font-size: 0.7em; font-weight: bold;}
+
+
+
+#block-menu-menu--acces-espace-collaboratif .menu a,
+#block-menu-menu-login-menu .menu a,
+#block-menu-menu-logout-menu .menu a,
+#block-block-9 .menu a { color: #000; text-decoration: none; background: none;}
+
+#block-menu-menu--acces-espace-collaboratif .menu a:hover,
+#block-menu-menu-login-menu .menu a:hover,
+#block-menu-menu-logout-menu .menu a:hover,
+#block-block-9 .menu a:hover { text-decoration: underline;}
+
+
+/* menu langue */
+#block-locale-0 .content ul{
+	font-size: 0.7em;
+	margin: 0; 
+	padding: 0;
+}
+#block-locale-0 .content li {
+    border-right: 1px solid #CCCCCC;
+    float: left;
+	width: 17%;
+    padding-left: 5px;
+    padding-right: 5px;
+	list-style: none;
+}
+
+#block-locale-0 .content li a {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+}
+#block-locale-0 .content li a:hover {
+    text-decoration: underline;
+}
+
+/* Log In Page */
+#user-login-form {
+    text-align: left;
+    padding-left: 180px;
+    padding-top: 15px;
+}
+#user-login-form  .item-list ul {
+    border: medium none;
+    list-style: none outside none;
+    padding-top: 15px;
+}
+#user-login-form .item-list a { 
+    color: #666666;
+    text-decoration: none; 
+    background: none;
+    padding-top: 15px;
+}
+#user-login-form .item-list a:hover { text-decoration: underline;}
+
+/**
+ * @file
+ * Views Styling
+ */
+
+ /* actualités */
+/* move property to .views-view-header ? */
+/*
+.view-ArchivesNews .views-row,
+.view-TopNews .views-row,
+.view-Bibliotheque  .views-row,
+.view-Partenaires-Bailleurs  .views-row,
+.view-Equipe  .views-row,
+.view-Corege  .views-row,
+.view-DocPIM  .views-row,
+.view-phototheque .views-row,
+*/
+.views-row,
+.openlayers-views-map,
+.page-header { clear: both; margin-top: 15px;}
+
+.front .views-row { margin-top: 0;}
+
+/* ini: .views-view--topnews-attachment-1-content, */
+.views-view--content-apresblocgris,
+.page-content { clear: both; margin-top: 15px;}
+
+/*Elliott*/
+.block h2.title { padding-top : 15px;}
+
+
+/*bandeau*/
+.view-Bandeau .view-content li { display: none;}
+.view-Bandeau .view-content li.views-row-first { display: block;}
+
+/**
+ * @file
+ * Navigation Styling
+ *
+ * Default menu styling (ul.menu) is defined in system-menus.css.
+ */
+
+
+/*
+ * The active item in a Drupal menu
+ */
+li a.active {
+  color: #000;
+}
+
+/*
+ * Navigation bar
+ */
+#navigation {
+}
+
+.region-navigation {
+}
+
+/*
+ * Primary and Secondary menu links
+ */
+#main-menu {
+}
+
+#secondary-menu {
+}
+
+/*
+ * Menu blocks
+ */
+.block-menu {
+}
+
+/*
+ * "Menu block" blocks. See http://drupal.org/project/menu_block
+ */
+.block-menu_block {
+}
+
+#block-nice_menus-1 .content {
+    /* background-color: #74797d; */
+    background-color: none;
+}
+
+
+/* menu niveau 2 */
+ul.nice-menu-right { font-size: 0.8em; font-weight: normal; margin: 0; padding: 0; z-index: 50;}
+ul.nice-menu-right,
+ul.nice-menu-right ul,
+ul.nice-menu-right li,
+/* ul.nice-menu ul li { width: 153px; border: none; background: #fff url("../images/background/sub_nav.png") no-repeat left top;} */
+/* ul.nice-menu ul li { width: 153px; border: none; background: #fff url("../images/puce/Fleches_n2_31569f_4x7.png") no-repeat 20px 8px;} */
+ul.nice-menu ul li { 
+    width: 153px; 
+    border: none; 
+    background:  url("../images/puce/Fleches_n2_31569f_4x7.png") no-repeat 20px 10px;
+}
+
+
+ul.nice-menu-right { 
+    /* border-top: solid 1px #31569F; */
+    border-top: solid 1px #cccccc;
+} 
+ul.nice-menu-right li { 
+    height: auto !important; 
+    /* height: 26px; */
+    min-height: 26px; 
+    /* border-bottom: solid 1px #31569F; */
+    border-bottom: solid 1px #cccccc;
+    border-top: 1px solid #FFFFFF;
+}
+
+#block-views-Accueil_BDD-block_1 ul.nice-menu-right li a {
+    height: 27px;
+    /* text-align: left; */
+}
+
+ul.nice-menu-right li a { color: #31569F; text-decoration: none; padding-left: 35px; background: none;}
+ul.nice-menu-right li a:hover { color: #FF741C;}
+
+ul.nice-menu-right ul { left: 154px; margin: 1px 0 0 1px; padding: 0;}
+
+/* menu niveau 1 */
+.region-header-left ul#nice-menu-2 ul,
+.region-header-left ul#nice-menu-2 ul li { width: 144px;}
+
+
+
+.region-header-left ul#nice-menu-2 { border: none; z-index: 998;}
+.region-header-left ul#nice-menu-2 li { 
+    color: #fff; 
+    font-size: 1.1em;
+    background: #1a2277 url("../images/background/background-btn-menu-top.jpg") repeat-x left top; 
+    border: none; 
+    height: auto !important; 
+    height: 29px; 
+    min-height: 29px; 
+}
+
+/* .region-header-left ul#nice-menu-2 li a { color: #fff; background: url("../images/background/fleche_nav.png") no-repeat 5px 3px; height: auto !important; height: 26px; min-height: 26px; padding-top: 3px; padding-bottom:0;} */
+.region-header-left ul#nice-menu-2 li a { 
+    color: #fff; 
+    background: url("../images/puce/Fleche_n1_5x9.png") no-repeat 20px 7px; 
+    height: auto !important; height: 26px; 
+    min-height: 26px; 
+    padding-top: 3px; padding-bottom:0;
+}
+
+/* .region-header-left ul#nice-menu-2 li a:hover { color: #FF741C; background-image: url("../images/background/fleche_nav_roll.png");} */
+.region-header-left ul#nice-menu-2 li a:hover { color: #FF741C; background-image: url("../images/puce/Fleche_n1_hover_ff6633_5x9.png");}
+
+/* menu flottant */
+.region-header-left ul#nice-menu-2 ul,
+.region-sidebar-first ul#nice-menu-11 ul { 
+    /* border-top: solid 1px #31569F; */
+    border-top: solid 1px #cccccc; 
+    /* background: url("../images/background/pixel-transparent-blue.png"); */
+    background: url("../images/background/pixel-bleu-f5f8fa-trans-90-gimp.png"); 
+}
+
+/* .region-header-left ul#nice-menu-2 ul li { width: 153px; border: none; background: #fff url("../images/background/sub_nav.png") no-repeat left top; border-bottom: solid 1px #31569F; border-top: 1px solid #FFFFFF; height: auto !important; height: 26px; min-height: 26px;} */
+/*                                                                                                                       3x5*/
+.region-header-left ul#nice-menu-2 ul li,
+.region-sidebar-first ul#nice-menu-11 ul li { 
+	border: none; 
+	background: url("../images/puce/Fleches_n2_31569f_4x7.png") no-repeat 5px 9px; 
+	/* border-bottom: solid 1px #31569F; */
+    border-bottom: solid 1px #cccccc; 
+    border-top: 1px solid #FFFFFF; 
+	height: auto !important; height: 26px; 
+	min-height: 26px;
+    font-size: 0.94em;
+}
+/* .region-header-left ul#nice-menu-2 ul li a { color: #31569F; text-decoration: none; padding-left: 35px; background: none; height: auto !important; height: 24px; min-height: 24px;} */
+.region-header-left ul#nice-menu-2 ul li a { color: #31569F; text-decoration: none; padding-left: 15px; background: none; height: auto !important; height: 24px; min-height: 24px;}
+.region-header-left ul#nice-menu-2 ul li a:hover { color: #FF741C; background-image: none;}
+
+#block-menu-menu-menu-accueil-titrebloc-news,
+#block-menu-menu-menu-accueil-titrebloc-docs,
+#block-menu-menu-accueil-titrebloc-partners,
+#block-menu-menu-accueil-titrebloc-data { 
+	padding: 7px 14px;
+	background: url("../images/background/background-front-title-block.png") no-repeat left top;
+	width: 126px;
+	font-size: 1em;
+}
+#block-menu-menu-menu-accueil-titrebloc-news ul,
+#block-menu-menu-menu-accueil-titrebloc-docs ul,
+#block-menu-menu-accueil-titrebloc-partners ul,
+#block-menu-menu-accueil-titrebloc-data ul { margin: 0; padding: 0;}
+
+#block-menu-menu-menu-accueil-titrebloc-news ul li,
+#block-menu-menu-menu-accueil-titrebloc-docs ul li,
+#block-menu-menu-accueil-titrebloc-partners ul li, 
+#block-menu-menu-accueil-titrebloc-data ul li { margin: 0; padding: 0; list-style-type: none; list-style-image: none;}
+
+#block-menu-menu-menu-accueil-titrebloc-news ul li a,
+#block-menu-menu-menu-accueil-titrebloc-docs ul li a,
+#block-menu-menu-accueil-titrebloc-partners ul li a,
+#block-menu-menu-accueil-titrebloc-data ul li a { 
+	text-decoration: none; 
+	color: #fff; 
+	/* background: url("../images/puce/Fleche_n1_5x9.png") no-repeat scroll 3px center; */
+    background: url("../images/puce/Fleche_n1_5x9.png") no-repeat 0px 10px; 
+    /* height: auto !important; height: 26px; 
+    min-height: 26px; */
+    padding-top: 3px;
+    padding-left: 12px;
+    padding-bottom: 0; 
+	/* padding-left: 15px; */
+}
+
+#block-menu-menu-menu-accueil-titrebloc-news ul li a:hover,
+#block-menu-menu-menu-accueil-titrebloc-docs ul li a:hover,
+#block-menu-menu-accueil-titrebloc-partners  ul li a:hover,
+#block-menu-menu-accueil-titrebloc-data ul li a:hover { 
+	color: #FF741C; 
+	background-image: url("../images/puce/Fleche_n1_hover_ff6633_5x9.png");
+}
+
+
+#block-block-20,
+#block-views-Accueil_BDD-block_1 { 
+	text-align: center; 
+	background: url("../images/background/box-front-white.png") no-repeat left top;
+	width: 154px;
+	margin-bottom: 20px;
+	height: 184px;
+}
+
+
+
+#block-block-20 { padding-top: 46px; height: 142px;}
+#block-block-20 .views_view { padding-bottom: 10px;}
+
+.accueil-blocgris-content { margin-top: 20px;/*26px;*/ /*16px;*/}
