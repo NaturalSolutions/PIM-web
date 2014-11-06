@@ -1,6 +1,0 @@
-; $Id: ctools.info,v 1.2 2011/08/02  $
-name = Custom taxonomy autocomplete 
-description = Pre-execute hooks sur view afin de réécrire les requêtes sql
-core = 6.x
-version = "6.x-1.2"
-package = "# NS Modules"
