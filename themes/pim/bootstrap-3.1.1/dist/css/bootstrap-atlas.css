@@ -476,13 +476,11 @@ body.section-projet-atlas.node-type-book-sous-bassin div#header {
   position: fixed;
 }
 body.section-projet-atlas.node-type-book-sous-bassin div#content-area {
-  /*margin-top: 30%;*/
   margin-top: 34%;
   top: 33%;
 }
 body.section-projet-atlas.node-type-book-sous-bassin div.region.region-sidebar-first.column.sidebar {
   position: fixed;
-  /*top: 193px;*/
   top: 230px;
 }
 /*TAB RECAP ILE CLUSTER */

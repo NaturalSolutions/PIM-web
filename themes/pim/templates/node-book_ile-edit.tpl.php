@@ -34,6 +34,7 @@ global $base_url, $language, $node;
 	<?php $form['author']['name']['#description'] = 'Add your name here, please use comma separator for multiple authors'; ?>
 <?php endif; ?>	
 
+<?php print drupal_render($form['field_ile_code']); ?>
 <?php print drupal_render($form['title']); ?>
 <?php print drupal_render($form['author']); ?>
 <?php print drupal_render($form['field_ile_autor']); ?>
@@ -58,6 +59,7 @@ global $base_url, $language, $node;
 <div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ile_gest_conserv']); ?></div>
 
 <div class='contenerRelatif'><span class='btnShowDocs' title='Add a document'>B</span><?php print drupal_render($form['field_ile_biblio']); ?></div>
+
 
 
 
@@ -134,12 +136,8 @@ $( document ).ready(function() {
 				
 				$('select#edit-menu-parent-hierarchical-select-selects-1').val('menu-menu-atlas-hp:13558'); 
 				$("select#edit-menu-parent-hierarchical-select-selects-1 option[value='menu-menu-atlas-hp:13558']").trigger("change");
-				
-				setTimeout(function(){
-					$( document ).scrollTop( 0 );   
-				},2000);
-
-			},2000);
+		
+			},3000);
 			
 		});
 		
@@ -155,7 +153,7 @@ $( document ).ready(function() {
 			$('.addEncadre, .addSection, .addLegend').fadeIn();
 			$( document ).scrollTop( 0 );  
 		});
-	},3000);	
+	},5000);	
 
 	//Renseigne automatiqument le titre dans le champ titre de l'url pour menu
 	$('#edit-submit').click(function(){
@@ -163,8 +161,12 @@ $( document ).ready(function() {
 		var titre = $('#edit-title').val();
 		$('#edit-menu-link-title').val(titre);
 
+	});
 
-
+	//Alteration du titre - Menu section
+	jQuery('div.hierarchical-select-wrapper-wrapper label').text("Ajoutez votre page au Menu de l'atlas");
+	jQuery('legend.collapse-processed a').each(function(){
+		if($(this).text() == 'Paramètres du menu') $(this).text('Emplacement de votre page dans le menu');
 	});
 
 
@@ -174,19 +176,6 @@ $( document ).ready(function() {
 	$('#edit-menu-weight-wrapper .description').text('Dans le menu, les éléments à la position la plus élevé seront positionnés vers le bas. A l\'inverse les éléments aux positions faibles seront positionnés plus haut (Facultatif).');
 
 
-
-		// parcour des iframe et ajout de la propriete scroll et ajout style si encadre
-	setTimeout(function(){
-
-		$('iframe').each(function(){
-			
-			$( this ).contents().find( "body" ).css('overflowY','scroll');
- 			$( this ).contents().find( ".encadreStyle" ).css('backgroundColor','orange').css('padding','6px').css('border','1px solid black');
-     			
-		});
-
-	},3000);
-	
 
 	// si on click sur ajouter un encadre ou une section ou legend
 	$('.addEncadre, .addSection, .addLegend').click(function(){ 	

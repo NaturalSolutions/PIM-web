@@ -30,20 +30,21 @@ jQuery( document ).ready(function() {
 	var mafonction = function(){
 		
 		var lang = '<?php echo $language->language; ?>';
+		var base_url = '<?php echo $base_url; ?>';
 
 
 		if(lang == 'fr') {
 		
 			jQuery('#edit-field-title-fr-0-value-wrapper').show();
 			jQuery('#edit-field-body-fr-0-value-wrapper').show();
-			jQuery('.tabs.primary.clearfix > li > a').attr('href','/projet-atlas');
+			jQuery('.tabs.primary.clearfix > li > a').attr('href', base_url+'/projet-atlas');
 
 		}
 		else {
 
 			jQuery('#edit-field-title-en-0-value-wrapper').show();
 			jQuery('#edit-field-body-en-0-value-wrapper').show();
-			jQuery('.tabs.primary.clearfix > li > a').attr('href','/en/projet-atlas');		
+			jQuery('.tabs.primary.clearfix > li > a').attr('href', base_url+'/en/projet-atlas');		
 			
 		}
 		

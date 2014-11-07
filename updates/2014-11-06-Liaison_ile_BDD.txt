@@ -1,0 +1,24 @@
+1- Ajout d'un champ #
+#####################
+-> Dans admin/content/node-type/book-ile/fields
+-> Nouveau champ => Étiquette=[Nom ou code île/îlot/archipel] - Nom du champ=[field_ile_code] -  Type de données à stocker=[Champs de Content Taxonomy] - Elément du formulaire pour l'édition des données=[Autocomplétion]
+-> Configuration du camps : 
+	=> Paramètres d'Etiquetage libre (Freetagging) -> Refuser tout nouveau terme
+	=> Paramètres globaux -> Non Requis
+	=> Nombre de valeurs -> 1
+	=> Vocabulaire -> Code Ile
+	=> Décocher -> Enregistrer les valeurs en plus dans le système core de taxonomie (dans la table 'term_node').
+-> Donner les droits pour un "Contributeur Atlas" en édition && visibilité du champs nouvellement créer : ctrl+f -> field_ile_code (admin/user/permissions)	
+
+2- Ajout d'un champ #
+#####################
+-> Dans admin/content/node-type/book-cluster/fields
+-> Nouveau champ => Étiquette=[Lier une île existante :] - Nom du champ=[field_cluster_code] -  Type de données à stocker=[Champs de Content Taxonomy] - Elément du formulaire pour l'édition des données=[Autocomplétion]
+-> Configuration du camps : 
+	=> Texte d'aide -> Nom ou code île/îlot/archipel séparé par une virgule pour associer plusieurs îles
+	=> Paramètres d'Etiquetage libre (Freetagging) -> Refuser tout nouveau terme
+	=> Paramètres globaux -> Non Requis
+	=> Nombre de valeurs -> illimité 
+	=> Vocabulaire -> Code Ile
+	=> Décocher -> Enregistrer les valeurs en plus dans le système core de taxonomie (dans la table 'term_node').
+-> Donner les droits pour un "Contributeur Atlas" en édition && visibilité du champs nouvellement créer : ctrl+f -> field_cluster_code (admin/user/permissions)	
