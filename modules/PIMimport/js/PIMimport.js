@@ -1,12 +1,10 @@
 
 function getTemplateLink() {
-	var lnk=document.getElementById("getTemplate");
-	var importType=document.getElementById("import_type");
-	URLstring =  'http://'+document.location.host+''+Drupal.settings.basePath+'sites/default/files/customImport/template/';
-	URLstring += importType.value+'.xls';
-	href = URLstring;
-	lnk.href=href;
-} 
+    var lnk = document.getElementById("getTemplate"),
+        importType = document.getElementById("import_type"),
+        baseURL = Drupal.settings.basePath + 'sites/default/files/Espace-Collaboratif/modles_import/';
+    lnk.href = baseURL + importType.value + '.xls';
+}
 
 function getNoticeLink(lg) {
     var lnk = document.getElementById("getNotice_"+lg),
@@ -18,7 +16,4 @@ function getNoticeLink(lg) {
     } else {
         lnk.href = baseURL + 'BD_I_PIM_Notice_' + lg + '.doc';
     }
-} 
-
-
-
+}

@@ -1,0 +1,41 @@
+1. Ajouter un groupe dans l'espace collaboratif :
+- aller à /node/add/og-group
+- saisir :
+    Group name : Modèles import
+    Description : Modèles de fichier Excel pour les imports (Attention : interdit de modifier la première feuille !)
+    Décocher Lister dans le répertoire des groupes
+    Cocher Groupe privé
+    Demandes d'adhésion: Fermé
+
+2. Corriger les droits sur le répertoire créé (en tant qu'administrateur) :
+    chown <nom user>:www-data sites/default/files/Espace-Collaboratif/modles_import
+    chmod 770 sites/default/files/Espace-Collaboratif/modles_import
+
+3. Déplacer les fichiers existants avec la commande suivante :
+    mv sites/all/modules/nsModules/PIMimport/userfiles/template/*.xls sites/default/files/Espace-Collaboratif/modles_import/
+
+4. Corriger les droits sur les fichiers déplacés (en tant qu'administrateur) :
+    chown www-data:www-data sites/default/files/Espace-Collaboratif/modles_import/*.xls
+    chmod 664 sites/default/files/Espace-Collaboratif/modles_import/*.xls
+
+5. Référencer les fichiers dans la BD de Drupal :
+    for f in sites/default/files/Espace-Collaboratif/modles_import/*.xls; do
+        mysql -hlocalhost -upim -ppim -DpimGilles -e "INSERT INTO drp_webfm_file (uid, fpath, fsize, fmime, fcreatedate, perm) VALUES (44, '$f', `stat -c%s\"$f\"`, 'application/vnd.ms-excel', `stat -c%Y \"$f\"`, 3);"
+    done
+
+Au passage faire les étapes que j'avais oublié pour les notices d'import...
+
+6. Corriger les droits sur le répertoire des notices (en tant qu'administrateur) :
+    chown <nom user>:www-data sites/default/files/Espace-Collaboratif/notices_import
+    chmod 770 sites/default/files/Espace-Collaboratif/notices_import
+
+7. Corriger les droits sur les fichiers Notices (en tant qu'administrateur) :
+    chown www-data:www-data sites/default/files/Espace-Collaboratif/notices_import/*.doc
+    chmod 664 sites/default/files/Espace-Collaboratif/notices_import/*.doc
+
+8. Référencer les fichiers dans la BD de Drupal :
+    for f in sites/default/files/Espace-Collaboratif/notices_import/*.doc; do
+        mysql -hlocalhost -upim -ppim -DpimGilles -e "INSERT INTO drp_webfm_file (uid, fpath, fsize, fmime, fcreatedate, perm) VALUES (4, '$f', `stat -c%s \"$f\"`, 'application/msword', `stat -c%Y \"$f\"`, 3);"
+    done
+
+9. Vider le cache (seul le cache "page requisites" est nécessaire)
