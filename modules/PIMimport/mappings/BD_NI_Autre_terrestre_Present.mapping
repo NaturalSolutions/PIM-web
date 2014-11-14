@@ -260,7 +260,7 @@ function _getMappingNodeSelectImportableData($tableName) {
                 ),
                 10=> array (
 					'name'=>'field_bdni_at_p_indice',
-                    'mutlivalue'=> true,
+                    'mutlivalue'=> false,
                     'contentField' => 'field_bdni_at_p_indice',
                     'type'=>'text',
                     'typeImpl'=>'value',
