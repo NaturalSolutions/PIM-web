@@ -88,8 +88,6 @@ function checkXlsTemplate($filePath, $delimiter=";") {
 		$fileFields = preg_replace("/(.*[a-z],),*$/", "\\1", $fileFields);
 		$templateFields=  _getTemplateField( ).",";
 		if ($fileFields != $templateFields) {
-		  print "<pre>"; print "xls fds: ".$fileFields; print "</pre>";
-		  print "<pre>"; print "map fds: ".$templateFields; print "</pre>";
 		  return false;
 		}
 		else {
