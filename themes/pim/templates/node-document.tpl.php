@@ -383,7 +383,7 @@
             </td>
             <td class="nodepageview-field-content">
               <div class="texte-gris">
-                <?php-
+                <?php
                     print $node->field_document_acces_restreint[0]['view'];
                 ?>
               </div>
