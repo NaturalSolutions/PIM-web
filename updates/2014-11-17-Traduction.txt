@@ -511,7 +511,7 @@ $handler->override_option('block_caching', -1);
 8- Création de 4 champs dans le type de contenu book_glossaire #
  #############################################################
 
- -> En tant qu'Admin, sur cette url (admin/content/node-type/book-charte/fields) ajouter les champs suivant :
+ -> En tant qu'Admin, sur cette url (admin/content/node-type/book-glossaire/fields) ajouter les champs suivant :
  :> Titre  	 field_book_glossaire_title_fr     Texte       Champs texte
  :> Corps	 field_book_glossaire_body_fr 	   Texte 	   Zone de texte à plusieurs lignes
  :> Title 	 field_book_glossaire_title_en     Texte 	   Champs texte
