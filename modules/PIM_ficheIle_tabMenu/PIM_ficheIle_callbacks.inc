@@ -352,7 +352,7 @@ function pim_fi_view_bd_i_documents_callback ($tid) {
           
   $sql = "SELECT d.field_document_titre_value as titre,
           d.field_document_auteur_value as auteur,
-          year(d.field_document_annee_value),
+          year(d.field_document_annee_value) as annee,
           d.nid as nid
           from drp_content_type_document d
           inner join drp_content_field_document_nom_ile_code_ile iles
@@ -361,7 +361,7 @@ function pim_fi_view_bd_i_documents_callback ($tid) {
           UNION
           SELECT d.field_document_titre_value as titre,
           d.field_document_auteur_value as auteur,
-          year(d.field_document_annee_value),
+          year(d.field_document_annee_value) as annee,
           d.nid as nid
           from drp_content_type_document d
           Where d.field_document_mots_cles_value like '%%%s%%'";
@@ -369,7 +369,7 @@ function pim_fi_view_bd_i_documents_callback ($tid) {
   $args = array($list_islands, $synonyms[0]);
 
   $query = sprintf($sql,$args[0],$args[1]);
-  //print $query;
+  print $query;
   
   $sql_count = "select count(*) from (".$sql.")T";  
   $sql .= tablesort_sql($head);
