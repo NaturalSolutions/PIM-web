@@ -41,31 +41,31 @@ global $base_url, $language;
 <?php print drupal_render($form['field_ss_bassin_author']); ?>
 <?php print drupal_render($form['field_ss_bassin_pic_of_map']); ?>
 
-<h4>1 - <?php if($language->language == 'fr') echo "Présentation et caractéristiques générales"; else echo "Presentation and general properties"; ?></h4>
+<h4>1 - <?php if($language->language == 'fr') echo "Présentation et caractéristiques générales"; else echo "Presentation of the sub-basin and general characteristics"; ?></h4>
 <div class='indentRight1'>
 	<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ss_bassin_caract_env']); ?></div>
 	<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ss_bassin_context_eco']); ?></div>
 	<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ss_bassin_occupation_hum']); ?></div>
 </div>
 
-<h4>2 - <?php if($language->language == 'fr') echo "Usages contemporains et pressions"; else echo "Habilities and preasure"; ?></h4>
+<h4>2 - <?php if($language->language == 'fr') echo "Usages contemporains et pressions"; else echo "Contemporary human activities and pressures existing on the sub-basin"; ?></h4>
 <div class='indentRight1'>
 	<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ss_bassin_dom_terrestre']); ?></div>
 	<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ss_bassin_dom_marrin']); ?></div>
 </div>
 
-<h4>3 - <?php if($language->language == 'fr') echo "Etat des connaissances sur la biodiversité et enjeux de conservation"; else echo "State of data on biodiversity"; ?></h4>
+<h4>3 - <?php if($language->language == 'fr') echo "Etat des connaissances sur la biodiversité et enjeux de conservation"; else echo "State of knowledge concerning biodiversity and its conservation stakes"; ?></h4>
 <div class='indentRight1'>
 	<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ss_bassin_dom_terrestre_e']); ?></div>
 	<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ss_bassin_dom_marin_e']); ?></div>
 </div>
 
-<h4>4 - <?php if($language->language == 'fr') echo "Status de conservation et gestion"; else echo "State of conservation and management"; ?></h4>
+<h4>4 - <?php if($language->language == 'fr') echo "Status de conservation et gestion"; else echo "Protection statuses and management issues"; ?></h4>
 <div class='indentRight1'>
 	<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ss_bassin_status_conserv']); ?></div>
 </div>
 
-<h4>5 - <?php if($language->language == 'fr') echo "Stratégie de conservation"; else echo "Strategy of conservation"; ?></h4>
+<h4>5 - <?php if($language->language == 'fr') echo "Stratégie de conservation"; else echo "Preservation strategy"; ?></h4>
 <div class='indentRight1'>
 	<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ss_bassin_strat_conserv']); ?></div>
 </div>
@@ -97,17 +97,28 @@ $( document ).ready(function() {
 // Handler for .ready() called.
 
 
-	//language
+	//language, traduction
 	var lang = '<?php echo $language->language; ?>';
 	if(lang == 'en'){
-		$('div#edit-field-ss-bassin-caract-env-0-value-wrapper label').text('1.1 General properties');
-		$('div#edit-field-ss-bassin-context-eco-0-value-wrapper label').text('1.2 Ecology context');
-		$('div#edit-field-ss-bassin-occupation-hum-0-value-wrapper label').text('1.3 Human occupation and history of environement');
-		$('div#edit-field-ss-bassin-dom-terrestre-0-value-wrapper label').text('2.1 Terrestre domain');
-		$('div#edit-field-ss-bassin-dom-marrin-0-value-wrapper label').text('2.2 Marine domain');
-		$('div#edit-field-ss-bassin-dom-terrestre-e-0-value-wrapper label').text('3.1 Terrestre domain');
-		$('div#edit-field-ss-bassin-dom-marin-e-0-value-wrapper label').text('3.2 Marine domain');
-		$('table#field_ss_bassin_pic_of_map_values th').text('Image of map');
+		
+		$('table#field_ss_bassin_pic_of_map_values > thead > tr > th').text('Map:');
+		$('div#edit-title-wrapper label').html('Title: <span class="form-required" title="This field is requier.">*</span>');
+		$('div#edit-field-ss-bassin-author-0-value-wrapper label').text('Auhtor(s):');
+		$('div#edit-field-ss-bassin-author-0-value-wrapper .description').text('[Add your name with a coma separator]');
+		$('div#edit-field-ss-bassin-caract-env-0-value-wrapper label').text('1.1 Environment characteristics ');
+		$('div#edit-field-ss-bassin-context-eco-0-value-wrapper label').text('1.2 Ecological context  et natural heritage');
+		$('div#edit-field-ss-bassin-occupation-hum-0-value-wrapper label').text('1.3 Ancient human activities and environment history');
+		$('div#edit-field-ss-bassin-dom-terrestre-0-value-wrapper label').text('2.1 Terrestrial environment');
+		$('div#edit-field-ss-bassin-dom-marrin-0-value-wrapper label').text('2.2 Marine environment');
+		$('div#edit-field-ss-bassin-dom-terrestre-e-0-value-wrapper label').text('3.1 Terrestrial environment');
+		$('div#edit-field-ss-bassin-dom-marin-e-0-value-wrapper label').text('3.2 Marine environment');
+
+		var inputBrouillon = $('#edit-brouillon-wrapper input');
+		var inputAvalider = $('#edit-avalider-wrapper input');
+		var inputTerminer = $('#edit-termine-wrapper input');
+		$('#edit-brouillon-wrapper label').empty().append(inputBrouillon).append('<span> Draft</span>');
+		$('#edit-avalider-wrapper label').empty().append(inputAvalider).append('<span> To be validated</span>');
+		$('#edit-termine-wrapper label').empty().append(inputTerminer).append('<span> Complete</span>');
 	}
 
 	// Pour remplir le champ titre	
@@ -120,25 +131,13 @@ $( document ).ready(function() {
 	});
 
 	//Pour forcer la selection de format d'entre sur PiM Atlas
-	setTimeout(function(){
-		$('.wysiwyg.wysiwyg-format-6').each(function(){
-			$(this).change();
-			$('.addEncadre, .addSection, .addLegend').fadeIn();
-		});
-	},3000);	
+	//setTimeout(function(){
+	$('.wysiwyg.wysiwyg-format-6').each(function(){
+		$(this).change();
+		$('.addEncadre, .addSection, .addLegend').fadeIn();
+	});
+	//},3000);	
 
-	// parcour des iframe et ajout de la propriete scroll et ajout style si encadre
-	setTimeout(function(){
-
-		$('iframe').each(function(){
-			
-			$( this ).contents().find( "body" ).css('overflowY','scroll');
- 			$( this ).contents().find( ".encadreStyle" ).css('backgroundColor','orange').css('padding','6px').css('border','1px solid black');
-     			
-		});
-
-	},3000);
-	
 
 	// si on click sur ajouter un encadre ou une section ou legend
 	$('.addEncadre, .addSection, .addLegend').click(function(){ 	

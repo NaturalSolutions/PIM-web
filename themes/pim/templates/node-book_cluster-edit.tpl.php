@@ -16,11 +16,11 @@ global $base_url, $language, $node;
 
 <?php if($current_url[ count($current_url) - 2] == 'add'): ?>
 
-	<h1 class='titleCluster'>Création d'une fiche cluster</h1>
+	<h1 class='titleCluster'><?php if($language->language == 'fr') echo "Création d'une fiche cluster"; else echo "[New cluster's factsheets ]";?></h1>
 
 <?php elseif($current_url[ count($current_url) - 1] == 'edit'): ?>
 
-	<h1 class='titleCluster'>Édition d'une fiche cluster</h1>
+	<h1 class='titleCluster'><?php if($language->language == 'fr') echo "Édition d'une fiche cluster"; else echo "[Edition of clsuter's factsheets ]";?></h1>
 
 <?php endif; ?>
 
@@ -57,7 +57,7 @@ global $base_url, $language, $node;
 
 
 <div id='dialog2' title="Documents liés à l'Atlas" class='contenerRelatif'>
-	<a href='<?php echo $base_url; ?>/Bibliotheque' target='_blank'>Voir tous les documents</a>
+	<a href='<?php echo $base_url; ?>/Bibliotheque' target='_blank'><?php if($language->language == 'fr') echo 'Voir tous les documents'; else echo 'See all documents'; ?></a>
 	<?php print views_embed_view('v_atlas_display_docs', 'block_1'); ?>
 </div>
        
@@ -74,16 +74,34 @@ global $base_url, $language, $node;
 $( document ).ready(function() {
 // Handler for .ready() called.
 	
-	// jQuery('textarea.tinymce').tinymce({
- //       script_url : 'http://www.initiative-pim.org/sites/all/libraries/tinymce/jscripts/tiny_mce/tiny_mce.js',
- //       theme : "simple"
- //    });
-
 	var lang = '<?php echo $language->language; ?>';
 	var nid = document.URL;
 	nid = nid.split('/');
 
-		//Lors de clics sur ajout references biblio
+	if(lang == 'en'){
+		$('#edit-field-cluster-code-value-wrapper label').text('Archipelago/Island/islet name or code:');
+		$('table#field_cluster_image_values > thead > tr > th').text('Map:');
+		$('div#edit-field-cluster-autor-0-value-wrapper label').text('Auhtor(s):');
+		$('div#edit-field-cluster-autor-0-value-wrapper .description').text('[Add your name with a coma separator]');
+		$('div#edit-title-wrapper label').html('Title: <span class="form-required" title="This field is requier.">*</span>');
+		$('div#edit-field-cluster-tab-0-value-wrapper label').text('[Tab]:');
+		$('div#edit-field-cluster-desc-gen-0-value-wrapper label').text('General description:');
+		$('div#edit-field-cluster-connaiss-0-value-wrapper label').text('State of knowledge:');
+		$('div#edit-field-cluster-interet-0-value-wrapper label').text('Interest:');
+		$('div#edit-field-cluster-pression-0-value-wrapper label').text('Pressure and threats:');
+		$('div#edit-field-cluster-gest-conserv-0-value-wrapper label').text('Managment / Conservation:');
+		$('div#edit-field-cluster-biblio-0-value-wrapper label').text('Main bibliographic references:');
+
+		var inputBrouillon = $('#edit-brouillon-wrapper input');
+		var inputAvalider = $('#edit-avalider-wrapper input');
+		var inputTerminer = $('#edit-termine-wrapper input');
+		$('#edit-brouillon-wrapper label').empty().append(inputBrouillon).append('<span> Draft</span>');
+		$('#edit-avalider-wrapper label').empty().append(inputAvalider).append('<span> To be validated</span>');
+		$('#edit-termine-wrapper label').empty().append(inputTerminer).append('<span> Complete</span>');
+	}
+
+
+	//Lors de clics sur ajout references biblio
 	$('.btnShowDocs').click(function(){
 		$("#dialog2").dialog();
 	 	$('#dialog2').show();
@@ -132,7 +150,7 @@ $( document ).ready(function() {
 				
 				$('select#edit-menu-parent-hierarchical-select-selects-1').val('menu-menu-atlas-hp:13558'); 
 				$("select#edit-menu-parent-hierarchical-select-selects-1 option[value='menu-menu-atlas-hp:13558']").trigger("change");
-				
+				setTimeout(function(){	$( document ).scrollTop( 0 ); },2000);
 			},3000);
 			
 		});
@@ -144,16 +162,16 @@ $( document ).ready(function() {
 	}
 
 	//Pour forcer la selection de format d'entre sur PiM Atlas
-	setTimeout(function(){
-		$('.wysiwyg.wysiwyg-format-6').each(function(){
-			$(this).change();
-			$('.addEncadre, .addSection, .addLegend').fadeIn();
-			$( document ).scrollTop( 0 );  
-		});
-	},5000);
+	$('.wysiwyg.wysiwyg-format-6').each(function(){
+		$(this).change();
+		$('.addEncadre, .addSection, .addLegend').fadeIn();
+		
+	});
+
 
 	//label sur champs image
-	$('div#field-cluster-image-items').before('<p class="labelFieldImages">Une carte et une photo générale</p>');
+	if(lang == 'fr') $('div#field-cluster-image-items').before('<p class="labelFieldImages">Une carte, une photo générale et une photo aérienne</p>');
+	else $('div#field-cluster-image-items').before('<p class="labelFieldImages">[A map or a picture]</p>');
 
 	//Maj automatique du titre pour l'affichage du menu
 	$('#edit-submit').click(function(){
@@ -165,9 +183,12 @@ $( document ).ready(function() {
 	});
 
 	//Alteration du titre - Menu section
-	jQuery('div.hierarchical-select-wrapper-wrapper label').text("Ajoutez votre page au Menu de l'atlas");
+	if(lang == 'fr') jQuery('div.hierarchical-select-wrapper-wrapper label').text("Ajoutez votre page au Menu de l'atlas");
+	else jQuery('div.hierarchical-select-wrapper-wrapper label').text("Add your page item in the Atlas menu");
+
 	jQuery('legend.collapse-processed a').each(function(){
 		if($(this).text() == 'Paramètres du menu') $(this).text('Emplacement de votre page dans le menu');
+		if($(this).text() == 'Menu settings') $(this).text('Position of your page item in the menu');
 	});
 
 	

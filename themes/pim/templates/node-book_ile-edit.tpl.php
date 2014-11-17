@@ -16,11 +16,11 @@ global $base_url, $language, $node;
 
 <?php if($current_url[ count($current_url) - 2] == 'add'): ?>
 
-	<h1 class='titleIle'>Création d'une fiche île</h1>
+	<h1 class='titleIle'><?php if($language->language == 'fr') echo "Création d'une fiche île"; else echo "[New island's factsheets ]";?></h1>
 
 <?php elseif($current_url[ count($current_url) - 1] == 'edit'): ?>
 
-	<h1 class='titleIle'>Édition d'une fiche île</h1>
+	<h1 class='titleIle'><?php if($language->language == 'fr') echo "Édition d'une fiche île"; else echo "[Edition of island's factsheets ]";?></h1>
 
 <?php endif; ?>
 
@@ -64,7 +64,7 @@ global $base_url, $language, $node;
 
 
 <div id='dialog2' title="Documents liés à l'Atlas" class='contenerRelatif'>
-	<a href='<?php echo $base_url; ?>/Bibliotheque' target='_blank'>Voir tous les documents</a>
+	<a href='<?php echo $base_url; ?>/Bibliotheque' target='_blank'><?php if($language->language == 'fr') echo 'Voir tous les documents'; else echo 'See all documents'; ?></a>
 	<?php print views_embed_view('v_atlas_display_docs', 'block_1'); ?>
 </div>
 
@@ -83,6 +83,29 @@ $( document ).ready(function() {
 	var lang = '<?php echo $language->language; ?>';
 	var nid = document.URL;
 	nid = nid.split('/');
+
+
+	if(lang == 'en'){
+		$('#edit-field-ile-code-value-wrapper label').text('Archipelago/Island/islet name or code:');
+		$('table#field_ile_image_values > thead > tr > th').text('Map:');
+		$('div#edit-field-ile-autor-0-value-wrapper label').text('Auhtor(s):');
+		$('div#edit-field-ile-autor-0-value-wrapper .description').text('[Add your name with a coma separator]');
+		$('div#edit-title-wrapper label').html('Title: <span class="form-required" title="This field is requier.">*</span>');
+		$('div#edit-field-ile-tab-0-value-wrapper label').text('[Tab]:');
+		$('div#edit-field-ile-desc-gen-0-value-wrapper label').text('General description:');
+		$('div#edit-field-ile-connaiss-0-value-wrapper label').text('State of knowledge:');
+		$('div#edit-field-ile-interet-0-value-wrapper label').text('Interest:');
+		$('div#edit-field-ile-pression-0-value-wrapper label').text('Pressure and threats:');
+		$('div#edit-field-ile-gest-conserv-0-value-wrapper label').text('Managment / Conservation:');
+		$('div#edit-field-ile-biblio-0-value-wrapper label').text('Main bibliographic references:');
+
+		var inputBrouillon = $('#edit-brouillon-wrapper input');
+		var inputAvalider = $('#edit-avalider-wrapper input');
+		var inputTerminer = $('#edit-termine-wrapper input');
+		$('#edit-brouillon-wrapper label').empty().append(inputBrouillon).append('<span> Draft</span>');
+		$('#edit-avalider-wrapper label').empty().append(inputAvalider).append('<span> To be validated</span>');
+		$('#edit-termine-wrapper label').empty().append(inputTerminer).append('<span> Complete</span>');
+	}
 		
 
 	//Lors de clics sur ajout references biblio
@@ -104,7 +127,8 @@ $( document ).ready(function() {
 	
 
 	//label sur champs image
-	$('div#field-ile-image-items').before('<p class="labelFieldImages">Une carte, une photo générale et une photo aérienne</p>');
+	if(lang == 'fr') $('div#field-ile-image-items').before('<p class="labelFieldImages">Une carte, une photo générale et une photo aérienne</p>');
+	else $('div#field-ile-image-items').before('<p class="labelFieldImages">[A map or a picture]</p>');
 
 	//Lors de l'ajout d'une ile : add/
 	if( nid[ nid.length - 1] != 'edit' ){
@@ -136,7 +160,7 @@ $( document ).ready(function() {
 				
 				$('select#edit-menu-parent-hierarchical-select-selects-1').val('menu-menu-atlas-hp:13558'); 
 				$("select#edit-menu-parent-hierarchical-select-selects-1 option[value='menu-menu-atlas-hp:13558']").trigger("change");
-		
+				setTimeout(function(){	$( document ).scrollTop( 0 ); },2000);
 			},3000);
 			
 		});
@@ -147,14 +171,12 @@ $( document ).ready(function() {
 	}
 
 	//Pour forcer la selection de format d'entre sur PiM Atlas
-	setTimeout(function(){
-		$('.wysiwyg.wysiwyg-format-6').each(function(){
-			$(this).change();
-			$('.addEncadre, .addSection, .addLegend').fadeIn();
-			$( document ).scrollTop( 0 );  
-		});
-	},5000);	
-
+	$('.wysiwyg.wysiwyg-format-6').each(function(){
+		$(this).change();
+		$('.addEncadre, .addSection, .addLegend').fadeIn();
+		 
+	});
+	
 	//Renseigne automatiqument le titre dans le champ titre de l'url pour menu
 	$('#edit-submit').click(function(){
 
@@ -164,17 +186,20 @@ $( document ).ready(function() {
 	});
 
 	//Alteration du titre - Menu section
-	jQuery('div.hierarchical-select-wrapper-wrapper label').text("Ajoutez votre page au Menu de l'atlas");
+	if(lang == 'fr') jQuery('div.hierarchical-select-wrapper-wrapper label').text("Ajoutez votre page au Menu de l'atlas");
+	else jQuery('div.hierarchical-select-wrapper-wrapper label').text("Add your page item in the Atlas menu");
+
 	jQuery('legend.collapse-processed a').each(function(){
 		if($(this).text() == 'Paramètres du menu') $(this).text('Emplacement de votre page dans le menu');
+		if($(this).text() == 'Menu settings') $(this).text('Position of your page item in the menu');
 	});
 
 
 
 	/* Comment récupérer la bonne valeur du select généré ? pour automatiser encoer plus le menu */
 	$('#edit-menu-weight-wrapper label').text('Position');
-	$('#edit-menu-weight-wrapper .description').text('Dans le menu, les éléments à la position la plus élevé seront positionnés vers le bas. A l\'inverse les éléments aux positions faibles seront positionnés plus haut (Facultatif).');
-
+	if(lang == 'fr') $('#edit-menu-weight-wrapper .description').text('Dans le menu, les éléments à la position la plus élevé seront positionnés vers le bas. A l\'inverse les éléments aux positions faibles seront positionnés plus haut (Facultatif).');
+	else $('#edit-menu-weight-wrapper .description').text('[In the menu items to the highest position will be positioned down. Conversely elements will be positioned at low positions above ( Optional) .]');
 
 
 	// si on click sur ajouter un encadre ou une section ou legend

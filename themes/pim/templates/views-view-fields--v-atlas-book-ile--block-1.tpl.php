@@ -25,7 +25,7 @@
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
-  global $base_url;
+  global $base_url, $language;
 ?>
 
 <?php foreach ($fields as $id => $field): ?>
@@ -112,62 +112,92 @@
 
 <?php endforeach; ?>
 
-<a class='titleIsland' title='Editer' href="<?php echo $base_url; ?>/node/<?php echo $nid; ?>/edit"><h1><?php echo $title; ?></h1></a>
-<br/>Rédigé par : <i><?php echo $author; ?></i>
+<?php if($language->language == 'fr'): ?>
 
-<br/>
-<br/>
-<?php if($url_picture): ?>
+  <a class='titleIsland' title='Editer' href="<?php echo $base_url; ?>/node/<?php echo $nid; ?>/edit"><h1><?php echo $title; ?></h1></a>
+  <br/>Rédigé par : <i><?php echo $author; ?></i>
 
-  <div>
-    <?php echo $url_picture; ?>
+  <br/>
+  <br/>
+  <?php if($url_picture): ?>
+
+    <div>
+      <?php echo $url_picture; ?>
+    </div>
+    
+  <?php endif; ?>
+  <br/>
+
+
+  <?php echo $tab; ?>
+
+  <h3> Description générale</h3>
+
+  <?php echo $descGen; ?>
+
+  <h4>Connaissances :</h4>
+
+  <?php echo $connaissances; ?>
+
+  <h4>Intérêts :</h4>
+  <?php echo $interet; ?>
+    
+  <h4>Pressions :</h4>
+  <?php echo $pression; ?>
+
+  <h4>Gestion / conservation :</h4>
+  <?php echo $gestion; ?>
+    
+
+  <h3>Principales ressources bibliographiques :</h3>
+  <div class='indentRight1'>
+    
+    <?php echo $biblio; ?>
+    
   </div>
-  <!--  <img class='imageMap' src="<?php //echo $base_url.'/sites/default/files/atlas/ss_bassin/'.$url_picture; ?>" alt='' title='' /> -->
+
+<?php else: ?>
+
+  <a class='titleIsland' title='Edit' href="<?php echo $base_url; ?>/node/<?php echo $nid; ?>/edit"><h1><?php echo $title; ?></h1></a>
+  <br/>Written by: <i><?php echo $author; ?></i>
+
+  <br/>
+  <br/>
+  <?php if($url_picture): ?>
+
+    <div>
+      <?php echo $url_picture; ?>
+    </div>
+    
+  <?php endif; ?>
+  <br/>
+
+
+  <?php echo $tab; ?>
+
+  <h3>General description</h3>
+
+  <?php echo $descGen; ?>
+
+  <h4>State of knowledge:</h4>
+
+  <?php echo $connaissances; ?>
+
+  <h4>Interest:</h4>
+  <?php echo $interet; ?>
+    
+  <h4>Pressure and threats:</h4>
+  <?php echo $pression; ?>
+
+  <h4>Managment / Conservation:</h4>
+  <?php echo $gestion; ?>
+    
+
+  <h3>Main bibliographic references:</h3>
+  <div class='indentRight1'>
+    
+    <?php echo $biblio; ?>
+    
+  </div>
 
 <?php endif; ?>
-<br/>
-
-
-<?php echo $tab; ?>
-
-<h3> Description générale</h3>
-
-<?php echo $descGen; ?>
-
-<h4>Connaissances :</h4>
-
-<?php echo $connaissances; ?>
-
-<h4>Intérêts :</h4>
-<?php echo $interet; ?>
-  
-<h4>Pressions :</h4>
-<?php echo $pression; ?>
-
-<h4>Gestion / conservation :</h4>
-<?php echo $gestion; ?>
-  
-
-
-
-<h3>Principales ressources bibliographiques :</h3>
-<div class='indentRight1'>
-  
-  <?php echo $biblio; ?>
-  
-</div>
-
-<!-- <h3>Est présent dans le sous bassin :</h3> -->
-<!-- <div class='indentRight1'> -->
- 
- <!-- <?php // echo $have_ss_bassin; ?>`-->
-  
-<!-- </div> -->
-
-<!-- <h3>Est présent dans le cluster :</h3>
-<div class='indentRight1'> -->
- 
- <!-- <?php //if($have_ss_cluster) echo $have_ss_cluster; else echo 'Aucun'; ?> -->
-  
-<!-- </div> -->
-

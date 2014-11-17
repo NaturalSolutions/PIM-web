@@ -4,7 +4,7 @@ $( document ).ready(function() {
 		//Pour cacher le bouton vers l'atlas
 		$('body.not-logged-in li.menu-13519.menu-path-node-56082 ').hide();
 
-		// Script pour ajouter le menu dans la page des commentaires
+		// Script pour ajouter le menu dans la page des commentaires   ->>>>>  MARCHE EN PROD
 
 		
 		//On va chercher le nidID dans l'url

@@ -1,0 +1,736 @@
+1- Edition d'un contenu #
+#########################
+
+-> Se connecter en user:123456 et mettre à jour le contenu Zembra (url: cluster-atlas/56653R805)
+-> En bas de la page d'édition du contenu, il est possible de modifier ou ce contenu sera accessible :> L'objectif est de lier ce contenu au menu de l'Atlas soit il suffit de séléctionner sur les liste déroulante :
+ :> Menu de l'Atlas 
+ :> Atlas 
+ :> sous-bassin "Tunisie-Nord"
+ :>Enregistrer
+
+2- Edition d'un contenu #
+#########################
+
+-> Se connecter en user:123456 et mettre à jour le contenu Cluster : Iles de lérins (url: cluster-atlas/56652R217)
+-> En bas de la page d'édition du contenu, il est possible de modifier ou ce contenu sera accessible :> L'objectif est de lier ce contenu au menu de l'Atlas soit il suffit de séléctionner sur les liste déroulante :
+ :> Menu de l'Atlas 
+ :> Atlas 
+ :> sous-bassin "Tunisie-Nord"
+ :>Enregistrer
+
+ 3- Edition d'un contenu #
+ #########################
+ 
+-> Se connecter en user:123456 et mettre à jour le contenu de la page d'accueil de l'Atlas en anglais (url: en/node/57242/edit)
+ texte à coller dans le champs Body : 
+
+{{
+CONTEXT
+
+Following the last meeting of the CoRèGe members (Research and Management Committee) of PIM Initiative during the 4th Meeting on Mediterranean Small Islands (Bizerte, Tunisia, April 2012), a great interest has been focused on the realization of an encyclopedic Atlas on western Mediterranean small islands, at the horizon 2016.
+
+This reference work will summarize the accumulated knowledge on these territories, covering their evolution, their heritage (natural, historical, cultural ...) and their management. This document will ultimately provide a tool for evaluation of the issues and pressures on these areas, with the aim of elaborate a conservation strategy for island territories, led the country with the support of the PIM initiative.
+
+Meetings were held since 2012 to initiate the process and reflections on this project.
+
+ 
+
+OBJECTIVES OF THE ATLAS
+
+This work will serve as the strategic rationale for the intervention of the countries and the PIM initiative, by synthesizing existing data generated and collected within the program. The encyclopedic Atlas will be a state of knowledge, by summarizing what we know and what we do not know. It will allow stakeholders (local, national and international) to be guided in their conservation strategy of island territories (marine and coastal stakes).
+
+The challenge is also to link science and various themes and concepts together, in order to show " par l’entrelacement des racines et par celui des branches, l’impossibilité de bien connaitre quelques parties de ce tout, sans remonter ou descendre à beaucoup d’autres" [1].
+
+"The book will consist of a 1st part ("encyclopedic" part) of synthesis, reflections and geographic and thematic analyzes and a 2nd part ("atlas" part), divided by sub-basin, integrating data and sheets-islands/clusters. It thus addresses an enlightened public policy makers, managers and scientists.
+}}
+
+ :>Enregistrer
+
+ 4- Edition des labels des item du menu de l'Atlas #
+ ###################################################
+
+ -> En tant qu'Admin, l'objectif est de traduire les éléments du menu:
+ :> Aller sur admin/build/menu/item/13555/edit 
+ :> Editer le champs "Titre du lien dans le menu" en -> Homepage
+ :> Aller sur admin/build/menu/item/13556/edit
+ :> Editer le champs "Titre du lien dans le menu" en -> Encyclopedic part
+ :> Aller sur admin/build/menu/item/13558/edit
+ :> Editer le champs "Titre du lien dans le menu" en -> Atlas part
+ :> Aller sur admin/build/menu/item/13573/edit
+ :> Editer le champs "Titre du lien dans le menu" en -> Charter of contributors
+ :> Aller sur admin/build/menu/item/13574/edit
+ :> Editer le champs "Titre du lien dans le menu" en -> Drafting standards
+
+ 5- Création de 4 champs dans le type de contenu book_normes #
+ #############################################################
+
+ -> En tant qu'Admin, sur cette url (admin/content/node-type/book-normes/fields) ajouter les champs suivant :
+ :> Titre  	field_book_normes_title_fr      Texte      Champs texte
+ :> Corps	field_book_normes_body_fr 		Texte 	   Zone de texte à plusieurs lignes
+ :> Title 	field_book_normes_title_en      Texte 	   Champs texte
+ :> Body	field_book_normes_body_en 		Texte 	   Zone de texte à plusieurs lignes
+
+ -> Tous ces champs peuvent etre enregistrer avec la configuration par défaut de Drupal c'est à dire : 60 taille de champs texte, non-requis, texte brut (texte filtré pour Corps & Body), 1 valeur.
+
+ :> Donner les droits d'accès en visualisation et édition pour ces 4 champs aux rôles "Mega Admin" et "Contributeur Atlas" (admin/user/permissions)
+
+ 5- Importer la vue v_atlas_normes #
+ ###################################
+ 
+$view = new view;
+$view->name = 'v_atlas_normes';
+$view->description = 'Affiche le texte des normes de rédactions';
+$view->tag = 'atlas';
+$view->view_php = '';
+$view->base_table = 'node';
+$view->is_cacheable = FALSE;
+$view->api_version = 2;
+$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+$handler = $view->new_display('default', 'Paramètres par défaut', 'default');
+$handler->override_option('fields', array(
+  'field_book_normes_title_en_value' => array(
+    'label' => '',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'link_class' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'target' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+      'strip_tags' => 0,
+    ),
+    'empty' => '',
+    'hide_empty' => 0,
+    'empty_zero' => 0,
+    'link_to_node' => 0,
+    'label_type' => 'none',
+    'format' => 'default',
+    'multiple' => array(
+      'group' => TRUE,
+      'multiple_number' => '',
+      'multiple_from' => '',
+      'multiple_reversed' => FALSE,
+    ),
+    'exclude' => 0,
+    'id' => 'field_book_normes_title_en_value',
+    'table' => 'node_data_field_book_normes_title_en',
+    'field' => 'field_book_normes_title_en_value',
+    'override' => array(
+      'button' => 'Supplanter',
+    ),
+    'relationship' => 'none',
+  ),
+  'field_book_normes_title_fr_value' => array(
+    'label' => '',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'link_class' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'target' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+      'strip_tags' => 0,
+    ),
+    'empty' => '',
+    'hide_empty' => 0,
+    'empty_zero' => 0,
+    'link_to_node' => 0,
+    'label_type' => 'none',
+    'format' => 'default',
+    'multiple' => array(
+      'group' => TRUE,
+      'multiple_number' => '',
+      'multiple_from' => '',
+      'multiple_reversed' => FALSE,
+    ),
+    'exclude' => 0,
+    'id' => 'field_book_normes_title_fr_value',
+    'table' => 'node_data_field_book_normes_title_fr',
+    'field' => 'field_book_normes_title_fr_value',
+    'override' => array(
+      'button' => 'Supplanter',
+    ),
+    'relationship' => 'none',
+  ),
+  'field_book_normes_body_fr_value' => array(
+    'label' => '',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'link_class' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'target' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+      'strip_tags' => 0,
+    ),
+    'empty' => '',
+    'hide_empty' => 0,
+    'empty_zero' => 0,
+    'link_to_node' => 0,
+    'label_type' => 'none',
+    'format' => 'default',
+    'multiple' => array(
+      'group' => TRUE,
+      'multiple_number' => '',
+      'multiple_from' => '',
+      'multiple_reversed' => FALSE,
+    ),
+    'exclude' => 0,
+    'id' => 'field_book_normes_body_fr_value',
+    'table' => 'node_data_field_book_normes_body_fr',
+    'field' => 'field_book_normes_body_fr_value',
+    'override' => array(
+      'button' => 'Supplanter',
+    ),
+    'relationship' => 'none',
+  ),
+  'field_book_normes_body_en_value' => array(
+    'label' => '',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'link_class' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'target' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+      'strip_tags' => 0,
+    ),
+    'empty' => '',
+    'hide_empty' => 0,
+    'empty_zero' => 0,
+    'link_to_node' => 0,
+    'label_type' => 'none',
+    'format' => 'default',
+    'multiple' => array(
+      'group' => TRUE,
+      'multiple_number' => '',
+      'multiple_from' => '',
+      'multiple_reversed' => FALSE,
+    ),
+    'exclude' => 0,
+    'id' => 'field_book_normes_body_en_value',
+    'table' => 'node_data_field_book_normes_body_en',
+    'field' => 'field_book_normes_body_en_value',
+    'override' => array(
+      'button' => 'Supplanter',
+    ),
+    'relationship' => 'none',
+  ),
+));
+$handler->override_option('filters', array(
+  'type' => array(
+    'operator' => 'in',
+    'value' => array(
+      'book_normes' => 'book_normes',
+    ),
+    'group' => '0',
+    'exposed' => FALSE,
+    'expose' => array(
+      'operator' => FALSE,
+      'label' => '',
+    ),
+    'id' => 'type',
+    'table' => 'node',
+    'field' => 'type',
+    'override' => array(
+      'button' => 'Supplanter',
+    ),
+    'relationship' => 'none',
+  ),
+));
+$handler->override_option('access', array(
+  'type' => 'none',
+));
+$handler->override_option('cache', array(
+  'type' => 'none',
+));
+$handler = $view->new_display('block', 'Bloc', 'block_1');
+$handler->override_option('block_description', '');
+$handler->override_option('block_caching', -1);
+
+
+6- Création de 4 champs dans le type de contenu book_charte #
+ #############################################################
+
+ -> En tant qu'Admin, sur cette url (admin/content/node-type/book-charte/fields) ajouter les champs suivant :
+ :> Titre  	 field_book_charte_title_fr     Texte      Champs texte
+ :> Corps	 field_book_charte_body_fr 		Texte 	   Zone de texte à plusieurs lignes
+ :> Title 	 field_book_charte_title_en     Texte 	   Champs texte
+ :> Body	 field_book_charte_body_en 		Texte 	   Zone de texte à plusieurs lignes
+
+ -> Tous ces champs peuvent etre enregistrer avec la configuration par défaut de Drupal c'est à dire : 60 taille de champs texte, non-requis, texte brut (texte filtré pour Corps & Body), 1 valeur.
+
+ :> Donner les droits d'accès en visualisation et édition pour ces 4 champs aux rôles "Mega Admin" et "Contributeur Atlas" (admin/user/permissions)
+
+ 7- Importer la vue v_atlas_charte #
+ ###################################
+	
+$view = new view;
+$view->name = 'v_atlas_charte';
+$view->description = 'Affiche le texte de la partie charte';
+$view->tag = 'atlas';
+$view->view_php = '';
+$view->base_table = 'node';
+$view->is_cacheable = FALSE;
+$view->api_version = 2;
+$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+$handler = $view->new_display('default', 'Paramètres par défaut', 'default');
+$handler->override_option('fields', array(
+  'field_book_charte_title_fr_value' => array(
+    'label' => '',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'link_class' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'target' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+      'strip_tags' => 0,
+    ),
+    'empty' => '',
+    'hide_empty' => 0,
+    'empty_zero' => 0,
+    'link_to_node' => 0,
+    'label_type' => 'none',
+    'format' => 'default',
+    'multiple' => array(
+      'group' => TRUE,
+      'multiple_number' => '',
+      'multiple_from' => '',
+      'multiple_reversed' => FALSE,
+    ),
+    'exclude' => 0,
+    'id' => 'field_book_charte_title_fr_value',
+    'table' => 'node_data_field_book_charte_title_fr',
+    'field' => 'field_book_charte_title_fr_value',
+    'override' => array(
+      'button' => 'Supplanter',
+    ),
+    'relationship' => 'none',
+  ),
+  'field_book_charte_body_fr_value' => array(
+    'label' => '',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'link_class' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'target' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+      'strip_tags' => 0,
+    ),
+    'empty' => '',
+    'hide_empty' => 0,
+    'empty_zero' => 0,
+    'link_to_node' => 0,
+    'label_type' => 'none',
+    'format' => 'default',
+    'multiple' => array(
+      'group' => TRUE,
+      'multiple_number' => '',
+      'multiple_from' => '',
+      'multiple_reversed' => FALSE,
+    ),
+    'exclude' => 0,
+    'id' => 'field_book_charte_body_fr_value',
+    'table' => 'node_data_field_book_charte_body_fr',
+    'field' => 'field_book_charte_body_fr_value',
+    'override' => array(
+      'button' => 'Supplanter',
+    ),
+    'relationship' => 'none',
+  ),
+  'field_book_charte_title_en_value' => array(
+    'label' => '',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'link_class' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'target' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+      'strip_tags' => 0,
+    ),
+    'empty' => '',
+    'hide_empty' => 0,
+    'empty_zero' => 0,
+    'link_to_node' => 0,
+    'label_type' => 'none',
+    'format' => 'default',
+    'multiple' => array(
+      'group' => TRUE,
+      'multiple_number' => '',
+      'multiple_from' => '',
+      'multiple_reversed' => FALSE,
+    ),
+    'exclude' => 0,
+    'id' => 'field_book_charte_title_en_value',
+    'table' => 'node_data_field_book_charte_title_en',
+    'field' => 'field_book_charte_title_en_value',
+    'override' => array(
+      'button' => 'Supplanter',
+    ),
+    'relationship' => 'none',
+  ),
+  'field_book_charte_body_en_value' => array(
+    'label' => '',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'link_class' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'target' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+      'strip_tags' => 0,
+    ),
+    'empty' => '',
+    'hide_empty' => 0,
+    'empty_zero' => 0,
+    'link_to_node' => 0,
+    'label_type' => 'none',
+    'format' => 'default',
+    'multiple' => array(
+      'group' => TRUE,
+      'multiple_number' => '',
+      'multiple_from' => '',
+      'multiple_reversed' => FALSE,
+    ),
+    'exclude' => 0,
+    'id' => 'field_book_charte_body_en_value',
+    'table' => 'node_data_field_book_charte_body_en',
+    'field' => 'field_book_charte_body_en_value',
+    'override' => array(
+      'button' => 'Supplanter',
+    ),
+    'relationship' => 'none',
+  ),
+));
+$handler->override_option('filters', array(
+  'type' => array(
+    'operator' => 'in',
+    'value' => array(
+      'book_charte' => 'book_charte',
+    ),
+    'group' => '0',
+    'exposed' => FALSE,
+    'expose' => array(
+      'operator' => FALSE,
+      'label' => '',
+    ),
+    'id' => 'type',
+    'table' => 'node',
+    'field' => 'type',
+    'override' => array(
+      'button' => 'Supplanter',
+    ),
+    'relationship' => 'none',
+  ),
+));
+$handler->override_option('access', array(
+  'type' => 'none',
+));
+$handler->override_option('cache', array(
+  'type' => 'none',
+));
+$handler = $view->new_display('block', 'Bloc', 'block_1');
+$handler->override_option('block_description', '');
+$handler->override_option('block_caching', -1);
+
+8- Création de 4 champs dans le type de contenu book_glossaire #
+ #############################################################
+
+ -> En tant qu'Admin, sur cette url (admin/content/node-type/book-charte/fields) ajouter les champs suivant :
+ :> Titre  	 field_book_glossaire_title_fr     Texte       Champs texte
+ :> Corps	 field_book_glossaire_body_fr 	   Texte 	   Zone de texte à plusieurs lignes
+ :> Title 	 field_book_glossaire_title_en     Texte 	   Champs texte
+ :> Body	 field_book_glossaire_body_en 	   Texte 	   Zone de texte à plusieurs lignes
+
+ -> Tous ces champs peuvent etre enregistrer avec la configuration par défaut de Drupal c'est à dire : 60 taille de champs texte, non-requis, texte brut (texte filtré pour Corps & Body), 1 valeur.
+
+ :> Donner les droits d'accès en visualisation et édition pour ces 4 champs aux rôles "Mega Admin" et "Contributeur Atlas" (admin/user/permissions)
+
+ 9- Importer la vue v_atlas_glossaire #
+ ######################################
+	
+$view = new view;
+$view->name = 'v_atlas_glossaire';
+$view->description = 'Affiche le texte de la partie glossaire';
+$view->tag = 'atlas';
+$view->view_php = '';
+$view->base_table = 'node';
+$view->is_cacheable = FALSE;
+$view->api_version = 2;
+$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+$handler = $view->new_display('default', 'Paramètres par défaut', 'default');
+$handler->override_option('fields', array(
+  'field_book_glossaire_title_fr_value' => array(
+    'label' => '',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'link_class' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'target' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+      'strip_tags' => 0,
+    ),
+    'empty' => '',
+    'hide_empty' => 0,
+    'empty_zero' => 0,
+    'link_to_node' => 0,
+    'label_type' => 'none',
+    'format' => 'default',
+    'multiple' => array(
+      'group' => TRUE,
+      'multiple_number' => '',
+      'multiple_from' => '',
+      'multiple_reversed' => FALSE,
+    ),
+    'exclude' => 0,
+    'id' => 'field_book_glossaire_title_fr_value',
+    'table' => 'node_data_field_book_glossaire_title_fr',
+    'field' => 'field_book_glossaire_title_fr_value',
+    'override' => array(
+      'button' => 'Supplanter',
+    ),
+    'relationship' => 'none',
+  ),
+  'field_book_glossaire_body_fr_value' => array(
+    'label' => '',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'link_class' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'target' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+      'strip_tags' => 0,
+    ),
+    'empty' => '',
+    'hide_empty' => 0,
+    'empty_zero' => 0,
+    'link_to_node' => 0,
+    'label_type' => 'none',
+    'format' => 'default',
+    'multiple' => array(
+      'group' => TRUE,
+      'multiple_number' => '',
+      'multiple_from' => '',
+      'multiple_reversed' => FALSE,
+    ),
+    'exclude' => 0,
+    'id' => 'field_book_glossaire_body_fr_value',
+    'table' => 'node_data_field_book_glossaire_body_fr',
+    'field' => 'field_book_glossaire_body_fr_value',
+    'override' => array(
+      'button' => 'Supplanter',
+    ),
+    'relationship' => 'none',
+  ),
+  'field_book_glossaire_title_en_value' => array(
+    'label' => '',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'link_class' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'target' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+      'strip_tags' => 0,
+    ),
+    'empty' => '',
+    'hide_empty' => 0,
+    'empty_zero' => 0,
+    'link_to_node' => 0,
+    'label_type' => 'none',
+    'format' => 'default',
+    'multiple' => array(
+      'group' => TRUE,
+      'multiple_number' => '',
+      'multiple_from' => '',
+      'multiple_reversed' => FALSE,
+    ),
+    'exclude' => 0,
+    'id' => 'field_book_glossaire_title_en_value',
+    'table' => 'node_data_field_book_glossaire_title_en',
+    'field' => 'field_book_glossaire_title_en_value',
+    'override' => array(
+      'button' => 'Supplanter',
+    ),
+    'relationship' => 'none',
+  ),
+  'field_book_glossaire_body_en_value' => array(
+    'label' => '',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'link_class' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'target' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+      'strip_tags' => 0,
+    ),
+    'empty' => '',
+    'hide_empty' => 0,
+    'empty_zero' => 0,
+    'link_to_node' => 0,
+    'label_type' => 'none',
+    'format' => 'default',
+    'multiple' => array(
+      'group' => TRUE,
+      'multiple_number' => '',
+      'multiple_from' => '',
+      'multiple_reversed' => FALSE,
+    ),
+    'exclude' => 0,
+    'id' => 'field_book_glossaire_body_en_value',
+    'table' => 'node_data_field_book_glossaire_body_en',
+    'field' => 'field_book_glossaire_body_en_value',
+    'override' => array(
+      'button' => 'Supplanter',
+    ),
+    'relationship' => 'none',
+  ),
+));
+$handler->override_option('filters', array(
+  'type' => array(
+    'operator' => 'in',
+    'value' => array(
+      'book_glossaire' => 'book_glossaire',
+    ),
+    'group' => '0',
+    'exposed' => FALSE,
+    'expose' => array(
+      'operator' => FALSE,
+      'label' => '',
+    ),
+    'id' => 'type',
+    'table' => 'node',
+    'field' => 'type',
+    'override' => array(
+      'button' => 'Supplanter',
+    ),
+    'relationship' => 'none',
+  ),
+));
+$handler->override_option('access', array(
+  'type' => 'none',
+));
+$handler->override_option('cache', array(
+  'type' => 'none',
+));
+$handler = $view->new_display('block', 'Bloc', 'block_1');
+$handler->override_option('block_description', '');
+$handler->override_option('block_caching', -1);
+
+
+ 10- Vider les caches #
+ ######################

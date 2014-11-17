@@ -1604,6 +1604,18 @@ body.node-type-book-charte .teaser-checkbox{
 body.node-type-book-charte #edit-preview{
   display: none;
 }
+body.node-type-book-charte  #edit-title-wrapper{
+  display: none;
+}
+body.node-type-book-charte  #edit-body-wrapper{
+  display: none;
+}
+body.node-type-book-charte.i18n-fr  #edit-field-book-charte-title-en-0-value-wrapper, body.node-type-book-charte.i18n-fr  #edit-field-book-charte-body-en-0-value-wrapper {
+  display: none;
+}
+body.node-type-book-charte.i18n-en  #edit-field-book-charte-title-fr-0-value-wrapper, body.node-type-book-charte.i18n-en  #edit-field-book-charte-body-fr-0-value-wrapper{
+  display: none;
+}
 /***************************************************************************/
 /***************************************************************************/
 /*                             VISU CHARTE                                */
@@ -1649,6 +1661,18 @@ body.node-type-book-glossaire  .teaser-checkbox{
 body.node-type-book-glossaire  #edit-preview{
   display: none;
 }
+body.node-type-book-glossaire  #edit-title-wrapper{
+  display: none;
+}
+body.node-type-book-glossaire  #edit-body-wrapper{
+  display: none;
+}
+body.node-type-book-glossaire.i18n-fr  #edit-field-book-glossaire-title-en-0-value-wrapper, body.node-type-book-glossaire.i18n-fr  #edit-field-book-glossaire-body-en-0-value-wrapper {
+  display: none;
+}
+body.node-type-book-glossaire.i18n-en  #edit-field-book-glossaire-title-fr-0-value-wrapper, body.node-type-book-glossaire.i18n-en  #edit-field-book-glossaire-body-fr-0-value-wrapper{
+  display: none;
+}
 /***************************************************************************/
 /***************************************************************************/
 /*                             VISU GLOSSAIRE                              */
@@ -1692,6 +1716,18 @@ body.node-type-book-normes  .teaser-checkbox{
   display: none;
 }
 body.node-type-book-normes  #edit-preview{
+  display: none;
+}
+body.node-type-book-normes  #edit-title-wrapper{
+  display: none;
+}
+body.node-type-book-normes  #edit-body-wrapper{
+  display: none;
+}
+body.node-type-book-normes.i18n-fr  #edit-field-book-normes-title-en-0-value-wrapper, body.node-type-book-normes.i18n-fr  #edit-field-book-normes-body-en-0-value-wrapper {
+  display: none;
+}
+body.node-type-book-normes.i18n-en  #edit-field-book-normes-title-fr-0-value-wrapper, body.node-type-book-normes.i18n-en  #edit-field-book-normes-body-fr-0-value-wrapper{
   display: none;
 }
 /***************************************************************************/

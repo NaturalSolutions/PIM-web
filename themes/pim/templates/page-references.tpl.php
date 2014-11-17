@@ -224,8 +224,8 @@
         <?php endif; ?>
         
         <div id="content-area">
-          <h1>Références du projet Atlas</h1>
-          <p>Ici les documents présents en tant que référence bibliographique dans l'atlas des PIM</p>
+          <h1><?php if($language->language == 'fr') echo 'Références du projet Atlas'; else echo 'Atlas project references'; ?></h1>
+          <p><?php if($language->language == 'fr') echo "Ici les documents présents en tant que référence bibliographique dans l'atlas des PIM"; else echo 'Here, documents used as references in the atlas project'; ?></p>
           <?php print views_embed_view('v_atlas_display_docs', 'block_2'); ?>
         </div>
 

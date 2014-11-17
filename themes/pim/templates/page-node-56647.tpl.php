@@ -246,13 +246,13 @@
           ?>
           
           <div class='firstLineOFHpAtlas'>
-          <?php if($language->language == 'fr') echo "<p>Atlas des PIM</p>"; else echo "<p>Atlas of PIM</p>"; ?>
+          <?php if($language->language == 'fr') echo "<p>Atlas des PIM</p>"; else echo "<p>Atlas on western Mediterranean small islands</p>"; ?>
           </div> 
           <div class='secondLineOFHpAtlas'></div> 
             
             
             <?php print views_embed_view('v_atlas_presentation', 'block_1'); ?>
-            <a id="btnImprim" href="<?php echo $base_url; ?>/book/export/html/56647"><?php if( $language->language == 'en') echo 'See all the Atlas'; else echo 'Voir tout l\'atlas'; ?></a>
+            <a id="btnImprim" href="<?php echo $base_url; ?>/book/export/html/56647"><?php if( $language->language == 'en') echo 'View all'; else echo 'Voir tout l\'atlas'; ?></a>
             
   
             <h2 class='dashboardLabel'><?php if( $language->language == 'fr') echo 'Tableau de bord'; else echo 'Dashboard'; ?> </h2>
@@ -262,7 +262,7 @@
              <?php if($language->language == 'fr'): ?>
               <h2 class='titleCommentaire'>Derniers commentaires</h2>
             <?php else: ?>
-              <h2 class='titleCommentaire'>Last comments</h2>
+              <h2 class='titleCommentaire'>Latest comments</h2>
             <?php endif;  ?>
             <?php print views_embed_view('v_atlas_affiche_comment_in_hp', 'block_1'); ?>
 

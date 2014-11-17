@@ -243,14 +243,21 @@ global $user, $base_url, $language;
         
         <div id="content-area" class='containerOfNormes'>
           
-    
-            <h1><?php echo $title; ?></h1>
-            <?php echo $content; ?>
+          
+            <?php $url = explode('/', $_SERVER['REQUEST_URI']); ?>
+            <?php $url = $url[count($url) - 1]; ?>
+            
+            <?php if($url == 'edit'): ?>
 
-     
+              <?php echo $content; ?>
+            
+            <?php else: ?>
+              
+              <?php print views_embed_view('v_atlas_normes', 'block_1'); ?>
 
-
-
+            <?php endif; ?>
+            
+            
         </div>
 
         <?php print $content_bottom; ?>
