@@ -1,0 +1,24 @@
+1- Edition de label de l'Atlas #
+################################
+
+En tant qu'Admin, 
+
+sur admin/build/menu/item/13555/edit :> Titre du lien dans le menu -> Home 
+:> Enregistrer la configuration
+
+sur admin/build/menu/item/13556/edit :> Titre du lien dans le menu -> Encyclopedia 
+:> Enregistrer la configuration
+
+sur admin/build/menu/item/13558/edit :> Titre du lien dans le menu -> Atlas
+:> Enregistrer la configuration
+
+sur admin/build/menu/item/13569/edit :> Langue -> Francais (Charte des contributeurs)
+:> Enregistrer la configuration
+
+sur admin/build/menu/item/13570/edit :> Langue -> Francais (Norme de rédaction)
+:> Enregistrer la configuration
+
+sur admin/build/menu/item/13568/edit :> Langue -> Francais (Glossaire)
+:> Enregistrer la configuration
+
+sur admin/content/node-type/book-cluster/fields/field_cluster_have_ile :> Étiquette  -> Ajouter une île au cluster

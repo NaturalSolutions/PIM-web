@@ -234,7 +234,7 @@ global $user, $base_url, $language;
               if(lang == 'fr'){
                 $('ul.tabs.primary.clearfix').append("<li><a href='"+base_url+"/comment/reply/"+nodeID+"#comment-form'><span class='tab'>Commenter</span></a></li>");
               }else{
-                $('ul.tabs.primary.clearfix').append("<li><a href='"+base_url+"/comment/reply/"+nodeID+"#comment-form'><span class='tab'>Comment</span></a></li>");
+                $('ul.tabs.primary.clearfix').append("<li><a href='"+base_url+"/en/comment/reply/"+nodeID+"#comment-form'><span class='tab'>Comment</span></a></li>");
               }
               </script>
                        

@@ -16,11 +16,11 @@ global $base_url, $language, $node;
 
 <?php if($current_url[ count($current_url) - 2] == 'add'): ?>
 
-	<h1 class='titleIle'><?php if($language->language == 'fr') echo "Création d'une fiche île"; else echo "[New island's factsheets ]";?></h1>
+	<h1 class='titleIle'><?php if($language->language == 'fr') echo "Création d'une fiche île"; else echo "New island sheet";?></h1>
 
 <?php elseif($current_url[ count($current_url) - 1] == 'edit'): ?>
 
-	<h1 class='titleIle'><?php if($language->language == 'fr') echo "Édition d'une fiche île"; else echo "[Edition of island's factsheets ]";?></h1>
+	<h1 class='titleIle'><?php if($language->language == 'fr') echo "Édition d'une fiche île"; else echo "Edition of the island sheet";?></h1>
 
 <?php endif; ?>
 
@@ -46,17 +46,17 @@ global $base_url, $language, $node;
 
 <?php print drupal_render($form['field_ile_id_cluster']); ?>
 
-<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ile_tab']); ?></div>
+<div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_ile_tab']); ?></div>
 
-<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ile_desc_gen']); ?></div>
+<div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_ile_desc_gen']); ?></div>
 
-<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ile_connaiss']); ?></div>
+<div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_ile_connaiss']); ?></div>
 
-<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ile_interet']); ?></div>
+<div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_ile_interet']); ?></div>
 
-<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ile_pression']); ?></div>
+<div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_ile_pression']); ?></div>
 
-<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ile_gest_conserv']); ?></div>
+<div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_ile_gest_conserv']); ?></div>
 
 <div class='contenerRelatif'><span class='btnShowDocs' title='Add a document'>B</span><?php print drupal_render($form['field_ile_biblio']); ?></div>
 
@@ -88,16 +88,17 @@ $( document ).ready(function() {
 	if(lang == 'en'){
 		$('#edit-field-ile-code-value-wrapper label').text('Archipelago/Island/islet name or code:');
 		$('table#field_ile_image_values > thead > tr > th').text('Map:');
-		$('div#edit-field-ile-autor-0-value-wrapper label').text('Auhtor(s):');
-		$('div#edit-field-ile-autor-0-value-wrapper .description').text('[Add your name with a coma separator]');
+		$('div#edit-field-ile-autor-0-value-wrapper label').text('Author(s):');
+		$('div#edit-field-ile-autor-0-value-wrapper .description').text('Add your name with a coma separator');
 		$('div#edit-title-wrapper label').html('Title: <span class="form-required" title="This field is requier.">*</span>');
-		$('div#edit-field-ile-tab-0-value-wrapper label').text('[Tab]:');
+		$('div#edit-field-ile-tab-0-value-wrapper label').text('Table:');
 		$('div#edit-field-ile-desc-gen-0-value-wrapper label').text('General description:');
 		$('div#edit-field-ile-connaiss-0-value-wrapper label').text('State of knowledge:');
 		$('div#edit-field-ile-interet-0-value-wrapper label').text('Interest:');
 		$('div#edit-field-ile-pression-0-value-wrapper label').text('Pressure and threats:');
 		$('div#edit-field-ile-gest-conserv-0-value-wrapper label').text('Managment / Conservation:');
 		$('div#edit-field-ile-biblio-0-value-wrapper label').text('Main bibliographic references:');
+		$('div#edit-field-ile-biblio-0-value-wrapper .description').html("Please follow these examples:<br><p><b>Books</b>: Médail F., 2008. Plantes du littoral. In : Cruon R. (ed.). <i>Le Var et sa flore, plantes rares ou protégées. </i>Naturalia Publications, Turriers : pp. 477-488. Revue : Cheylan G., 1984. Les mammifères des îles de Provence et de Méditerranée occidentale : un exemple de peuplement insulaire non équilibré ? <i>Revue d' Ecologie (Terre et Vie), </i>39 : 37-54.<br><b>Proceedings</b>: Collectif (Pasqualini M., Arnaud P. et Varaldo C., dirs.), 2003.<i> Des îles côte à côte. Histoire du peuplement des îles de l’Antiquité au Moyen Âge (Provence, Alpes-Maritimes, Ligurie, Toscane). In : </i>Actes de la table ronde de Bordighera, 12-13 décembre 1997. In : Actes de la table ronde de Bordighera, 12-13 décembre 1997. <i>Bulletin archéologique de Provence, </i>supplément 1 : 250 p.<br><b>Scientific reports</b>: Pasqualini M., 2013. Les îles d’Hyères et les îles du littoral provençal. Recherches sur leur peuplement de la Protohistoire au Moyen Âge. <i>Scientific Reports of the Port-Cros national Park,</i> 27 : 53-65.<br><b>Training period reports</b>: Fouchard M., 2013. <i>La biodiversité des petites îles de Provence-Côte d’Azur : éléments de synthèse en vue d'une stratégie régionale de conservation.</i> Rapport de stage, Master 2 Sciences de la biodiversité et écologie, Parcours professionnel Expertise écologique et gestion de la biodiversité (EEGB). Aix-Marseille Université, Aix-en-Provence, 35 p. + 1 vol. d'annexes : 22 p. + 1 CD-Rom.</p>");
 
 		var inputBrouillon = $('#edit-brouillon-wrapper input');
 		var inputAvalider = $('#edit-avalider-wrapper input');
@@ -128,7 +129,7 @@ $( document ).ready(function() {
 
 	//label sur champs image
 	if(lang == 'fr') $('div#field-ile-image-items').before('<p class="labelFieldImages">Une carte, une photo générale et une photo aérienne</p>');
-	else $('div#field-ile-image-items').before('<p class="labelFieldImages">[A map or a picture]</p>');
+	else $('div#field-ile-image-items').before('<p class="labelFieldImages">A map or a picture</p>');
 
 	//Lors de l'ajout d'une ile : add/
 	if( nid[ nid.length - 1] != 'edit' ){
@@ -194,12 +195,19 @@ $( document ).ready(function() {
 		if($(this).text() == 'Menu settings') $(this).text('Position of your page item in the menu');
 	});
 
+	//alteration de labels - Menu 
+	if(lang == 'fr'){
 
+		$('#edit-menu-weight-wrapper label').text('Poids');
+		$('#edit-menu-weight-wrapper .description').text("Associer des poids aux éléments (clusters ou îles) permet les ordonner dans le menu de l'atlas. Un élément avec un poids élevé sera positionné dans le bas du menu. A l'inverse, un élément associé à un poids faible sera positionné dans le haut du menu (facultatif).");
 
-	/* Comment récupérer la bonne valeur du select généré ? pour automatiser encoer plus le menu */
-	$('#edit-menu-weight-wrapper label').text('Position');
-	if(lang == 'fr') $('#edit-menu-weight-wrapper .description').text('Dans le menu, les éléments à la position la plus élevé seront positionnés vers le bas. A l\'inverse les éléments aux positions faibles seront positionnés plus haut (Facultatif).');
-	else $('#edit-menu-weight-wrapper .description').text('[In the menu items to the highest position will be positioned down. Conversely elements will be positioned at low positions above ( Optional) .]');
+	}else{
+
+		$('#edit-menu-weight-wrapper label').text('Weights');
+		$('#edit-menu-weight-wrapper .description').text("Associate weights to the elements (clusters or islands) allows you to organize them in the atlas menu. An element with a high weight will be positioned in the bottom of the menu. Conversely, an element associated with a low weight will be positioned in the top of the menu (optional).");
+		
+	}
+
 
 
 	// si on click sur ajouter un encadre ou une section ou legend

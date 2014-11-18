@@ -21,8 +21,8 @@ global $base_url, $language;
 <?php $nid = explode('/', $nid ); ?>
 <?php $nid = $nid[ count($nid) - 2]; ?>
 
-<a class='addButton' title='Ajouter une ile' href="<?php echo $base_url; ?>/node/add/book-ile?id=<?php echo $nid; ?>" target='_blank'><?php if($language->language == 'fr') echo "Une ile"; else echo "A island"; ?></a>
-<a class='addButton' title='Ajouter un cluster' href="<?php echo $base_url; ?>/node/add/book-cluster?id=<?php echo $nid; ?>" target='_blank'><?php if($language->language == 'fr') echo "Un cluster"; else echo "A cluster"; ?></a>
+<a class='addButton' title='Ajouter une ile' href="<?php echo $base_url; if($language->language == 'en') echo '/en'; ?>/node/add/book-ile?id=<?php echo $nid; ?>" target='_blank'><?php if($language->language == 'fr') echo "Une ile"; else echo "An island"; ?></a>
+<a class='addButton' title='Ajouter un cluster' href="<?php echo $base_url; if($language->language == 'en') echo '/en'; ?>/node/add/book-cluster?id=<?php echo $nid; ?>" target='_blank'><?php if($language->language == 'fr') echo "Un cluster"; else echo "A cluster"; ?></a>
 
 <br/>
 <br/>
@@ -43,36 +43,36 @@ global $base_url, $language;
 
 <h4>1 - <?php if($language->language == 'fr') echo "Présentation et caractéristiques générales"; else echo "Presentation of the sub-basin and general characteristics"; ?></h4>
 <div class='indentRight1'>
-	<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ss_bassin_caract_env']); ?></div>
-	<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ss_bassin_context_eco']); ?></div>
-	<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ss_bassin_occupation_hum']); ?></div>
+	<div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_ss_bassin_caract_env']); ?></div>
+	<div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_ss_bassin_context_eco']); ?></div>
+	<div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_ss_bassin_occupation_hum']); ?></div>
 </div>
 
 <h4>2 - <?php if($language->language == 'fr') echo "Usages contemporains et pressions"; else echo "Contemporary human activities and pressures existing on the sub-basin"; ?></h4>
 <div class='indentRight1'>
-	<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ss_bassin_dom_terrestre']); ?></div>
-	<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ss_bassin_dom_marrin']); ?></div>
+	<div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_ss_bassin_dom_terrestre']); ?></div>
+	<div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_ss_bassin_dom_marrin']); ?></div>
 </div>
 
 <h4>3 - <?php if($language->language == 'fr') echo "Etat des connaissances sur la biodiversité et enjeux de conservation"; else echo "State of knowledge concerning biodiversity and its conservation stakes"; ?></h4>
 <div class='indentRight1'>
-	<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ss_bassin_dom_terrestre_e']); ?></div>
-	<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ss_bassin_dom_marin_e']); ?></div>
+	<div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_ss_bassin_dom_terrestre_e']); ?></div>
+	<div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_ss_bassin_dom_marin_e']); ?></div>
 </div>
 
 <h4>4 - <?php if($language->language == 'fr') echo "Status de conservation et gestion"; else echo "Protection statuses and management issues"; ?></h4>
 <div class='indentRight1'>
-	<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ss_bassin_status_conserv']); ?></div>
+	<div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_ss_bassin_status_conserv']); ?></div>
 </div>
 
 <h4>5 - <?php if($language->language == 'fr') echo "Stratégie de conservation"; else echo "Preservation strategy"; ?></h4>
 <div class='indentRight1'>
-	<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ss_bassin_strat_conserv']); ?></div>
+	<div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_ss_bassin_strat_conserv']); ?></div>
 </div>
 
 
 <div class='indentRight1'>
-	<div class='contenerRelatif'><span class='addLegend' title='Add a legend'>L</span><span class='addEncadre' title='Add a block'>E</span><span class='addSection' title='Ajouter une section'>S</span><?php print drupal_render($form['field_ss_bassin_biblio']); ?></div>
+	<div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_ss_bassin_biblio']); ?></div>
 </div>
 
 
@@ -103,15 +103,17 @@ $( document ).ready(function() {
 		
 		$('table#field_ss_bassin_pic_of_map_values > thead > tr > th').text('Map:');
 		$('div#edit-title-wrapper label').html('Title: <span class="form-required" title="This field is requier.">*</span>');
-		$('div#edit-field-ss-bassin-author-0-value-wrapper label').text('Auhtor(s):');
-		$('div#edit-field-ss-bassin-author-0-value-wrapper .description').text('[Add your name with a coma separator]');
-		$('div#edit-field-ss-bassin-caract-env-0-value-wrapper label').text('1.1 Environment characteristics ');
-		$('div#edit-field-ss-bassin-context-eco-0-value-wrapper label').text('1.2 Ecological context  et natural heritage');
-		$('div#edit-field-ss-bassin-occupation-hum-0-value-wrapper label').text('1.3 Ancient human activities and environment history');
-		$('div#edit-field-ss-bassin-dom-terrestre-0-value-wrapper label').text('2.1 Terrestrial environment');
-		$('div#edit-field-ss-bassin-dom-marrin-0-value-wrapper label').text('2.2 Marine environment');
-		$('div#edit-field-ss-bassin-dom-terrestre-e-0-value-wrapper label').text('3.1 Terrestrial environment');
-		$('div#edit-field-ss-bassin-dom-marin-e-0-value-wrapper label').text('3.2 Marine environment');
+		$('div#edit-field-ss-bassin-author-0-value-wrapper label').text('Author(s):');
+		$('div#edit-field-ss-bassin-author-0-value-wrapper .description').text('Add your name with a coma separator');
+		$('div#edit-field-ss-bassin-caract-env-0-value-wrapper label').text('1.1 Environment characteristics:');
+		$('div#edit-field-ss-bassin-context-eco-0-value-wrapper label').text('1.2 Ecological context  et natural heritage:');
+		$('div#edit-field-ss-bassin-occupation-hum-0-value-wrapper label').text('1.3 Ancient human activities and environment history:');
+		$('div#edit-field-ss-bassin-dom-terrestre-0-value-wrapper label').text('2.1 Terrestrial environment:');
+		$('div#edit-field-ss-bassin-dom-marrin-0-value-wrapper label').text('2.2 Marine environment:');
+		$('div#edit-field-ss-bassin-dom-terrestre-e-0-value-wrapper label').text('3.1 Terrestrial environment:');
+		$('div#edit-field-ss-bassin-dom-marin-e-0-value-wrapper label').text('3.2 Marine environment:');
+		$('div#edit-field-ss-bassin-biblio-0-value-wrapper label').text('Main bibliographic references:');
+		$('div#edit-field-ss-bassin-biblio-0-value-wrapper .description').html("Please follow these examples:<br><p><b>Books</b>: Médail F., 2008. Plantes du littoral. In : Cruon R. (ed.). <i>Le Var et sa flore, plantes rares ou protégées. </i>Naturalia Publications, Turriers : pp. 477-488. Revue : Cheylan G., 1984. Les mammifères des îles de Provence et de Méditerranée occidentale : un exemple de peuplement insulaire non équilibré ? <i>Revue d' Ecologie (Terre et Vie), </i>39 : 37-54.<br><b>Proceedings</b>: Collectif (Pasqualini M., Arnaud P. et Varaldo C., dirs.), 2003.<i> Des îles côte à côte. Histoire du peuplement des îles de l’Antiquité au Moyen Âge (Provence, Alpes-Maritimes, Ligurie, Toscane). In : </i>Actes de la table ronde de Bordighera, 12-13 décembre 1997. In : Actes de la table ronde de Bordighera, 12-13 décembre 1997. <i>Bulletin archéologique de Provence, </i>supplément 1 : 250 p.<br><b>Scientific reports</b>: Pasqualini M., 2013. Les îles d’Hyères et les îles du littoral provençal. Recherches sur leur peuplement de la Protohistoire au Moyen Âge. <i>Scientific Reports of the Port-Cros national Park,</i> 27 : 53-65.<br><b>Training period reports</b>: Fouchard M., 2013. <i>La biodiversité des petites îles de Provence-Côte d’Azur : éléments de synthèse en vue d'une stratégie régionale de conservation.</i> Rapport de stage, Master 2 Sciences de la biodiversité et écologie, Parcours professionnel Expertise écologique et gestion de la biodiversité (EEGB). Aix-Marseille Université, Aix-en-Provence, 35 p. + 1 vol. d'annexes : 22 p. + 1 CD-Rom.</p>");
 
 		var inputBrouillon = $('#edit-brouillon-wrapper input');
 		var inputAvalider = $('#edit-avalider-wrapper input');

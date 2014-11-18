@@ -11,16 +11,26 @@ $( document ).ready(function() {
 		var pathname = window.location.pathname;
 		var href = window.location.href;
 
+	  	pathBase = href.split('/');
+	  	pathBase = pathBase[0] +'//'+ pathBase[1] +'/'+ pathBase[2] +'/'+ pathBase[3]; // == http://192.168.1.102/pim-pierre
+	  			
+
+	  	//alert(pathBase);
+
 		href = href.split('/');
 		href = href[href.length - 4];
 
+		
 		pathname = pathname.split('/');
 	  	pathname = pathname[pathname.length -1];
 
-		var nodeID = pathname;
-		
-		var bar = "<div class='tabs'><ul class='tabs primary clearfix'><li><a href='/node/"+nodeID+"'><span class='tab'>Voir</span></a></li><li><a href='/node/"+nodeID+"/edit'><span class='tab'>Modifier</span></a></li><li class='tab'><a href='/node/"+nodeID+"/revisions' class='tab'><span class='tab'>Révisions</span></a></li><li class='active'><a href='/comment/reply/"+nodeID+"#comment-form' class='active'><span class='tab'>Commenter</span></a></li></div>";
 
+
+		var nodeID = pathname;
+		var lang = $('html').attr('lang');
+        
+        if(lang == 'fr') var bar = "<div class='tabs'><ul class='tabs primary clearfix'><li><a href='"+pathBase+"/node/"+nodeID+"'><span class='tab'>Voir</span></a></li><li><a href='"+pathBase+"/node/"+nodeID+"/edit'><span class='tab'>Modifier</span></a></li><li class='tab'><a href='"+pathBase+"/node/"+nodeID+"/revisions' class='tab'><span class='tab'>Révisions</span></a></li><li class='active'><a href='"+pathBase+"/comment/reply/"+nodeID+"#comment-form' class='active'><span class='tab'>Commenter</span></a></li></div>";
+		else var bar = "<div class='tabs'><ul class='tabs primary clearfix'><li><a href='"+pathBase+"/en/node/"+nodeID+"'><span class='tab'>View</span></a></li><li><a href='"+pathBase+"/en/node/"+nodeID+"/edit'><span class='tab'>Edit</span></a></li><li class='tab'><a href='"+pathBase+"/en/node/"+nodeID+"/revisions' class='tab'><span class='tab'>Revisions</span></a></li><li class='active'><a href='"+pathBase+"/en/comment/reply/"+nodeID+"#comment-form' class='active'><span class='tab'>Comment</span></a></li></div>";
 
 		$('body.section-comment #content .section').before(bar);
 });
