@@ -111,7 +111,7 @@ require_once('phpFlickr-3.1/phpFlickr.php');
 function flickr_fichetaxon_callback($term_name, $limit = 50, $offset = 0, $cached_urls = array()) {
   $api_key = "ba88ef4277c659b1f36682238edfc2e7";
   $perPage =  $limit;
-  $url = 'http://api.flickr.com/services/rest/?method=flickr.photos.search';
+  $url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search';
   $url.= '&api_key='.$api_key;
   $url.= '&per_page='.$perPage;
   $url.= '&text='.urlencode ($term_name);
