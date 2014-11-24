@@ -1,132 +1,129 @@
-<?php 
+<?php
 
-
-
-function _getTemplateField(  ) {
+function _getTemplateField() {
     $templateFields= "Date,Code_ilot_ile,Lon,Lat,Localisation,Protocole,Taxon,Taxon_Nom_Observateur,Remarque,Classe_effectifs,Nb_indiv,Stade,Observation,Indice,Fiabilite,Introduit,Introduit2,Observateurs,Redacteur,Source_type,Bibliographie_annee,Bibliographie_titre,Donnees_publique";
     return $templateFields;
 }
 
 function _getCheckFormatField() {
-    $checkFormatField= array();
-	$checkFormatField['Latitude']= array(
-		'type'=>'decimal',
-		'field'=> "REPLACE(`Lat`, ',', '.')",
-		'message' => t('Valid latitude format : decimal ex(12.3)'),
-	) ;
-	$checkFormatField['Longitude']= array(
-		'type'=>'decimal',
-		'field'=> "REPLACE(`Lon`, ',', '.')",
-		'message' => t('Valid longitude format : decimal ex(12.3)'),
-	) ;
-	$checkFormatField['Date']= array(
-		'format'=>'^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$',
-		'field'=> "`Date`",
-		'message' => t('Valid date format : dd/mm/yyyy (12/01/2010)'),
-	) ;
+    $checkFormatField = array();
+    $checkFormatField['Latitude'] = array(
+        'type' => 'decimal',
+        'field' => "REPLACE(`Lat`, ',', '.')",
+        'message' => t('Valid latitude format : decimal ex(12.3)'),
+    ) ;
+    $checkFormatField['Longitude'] = array(
+        'type' => 'decimal',
+        'field' => "REPLACE(`Lon`, ',', '.')",
+        'message' => t('Valid longitude format : decimal ex(12.3)'),
+    ) ;
+    $checkFormatField['Date'] = array(
+        'format' => '^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$',
+        'field' => "`Date`",
+        'message' => t('Valid date format : dd/mm/yyyy (12/01/2010)'),
+    ) ;
     return $checkFormatField;
 }
 
 function _getSqlCheckValue($tableName) {
     $sqlCheckValue = array();
-  $sqlCheckValue[]=  array(
+    $sqlCheckValue[] = array(
         'message' => t('Unknown taxon'),
         'sql' => "SELECT  importid+1 as importid, fct_sys_import_taxon_clean_prefix(`Taxon`) as val
-            FROM $tableName LEFT OUTER JOIN (SELECT * FROM {term_data} WHERE vid = 29) AS thes_taxons
-            ON fct_sys_import_taxon_clean_prefix(`Taxon`) = thes_taxons.name WHERE thes_taxons.tid IS NULL ",
+                  FROM $tableName LEFT OUTER JOIN (SELECT * FROM {term_data} WHERE vid = 29) AS thes_taxons
+                  ON fct_sys_import_taxon_clean_prefix(`Taxon`) = thes_taxons.name WHERE thes_taxons.tid IS NULL ",
         'field' => 'val',
-    );	
-	$sqlCheckValue[]=  array(
-    'message' => t('Unknown island'),
-    'sql' => "SELECT importid+1 as importid, Code_ilot_ile as val 
-              FROM $tableName LEFT OUTER JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_code_ilot_ile
-        ON thes_code_ilot_ile.name = Code_ilot_ile WHERE thes_code_ilot_ile.tid IS NULL ",
-    'field' => 'val',
-    'mandatory'=> true,
     );
-	$sqlCheckValue[]=  array(
-    'message' =>  t('Classe effectifs mandatory.'),
-		'description'=>t('Possible values ( 1;2;3;4;5;NC)'),
-		'type' => 'taxonomy', 
-		'field'=> 'Classe_effectifs',
-		'vid'=> 11,
-		'mandatory'=> true,
-    'hasDefault'=> true,
+    $sqlCheckValue[] = array(
+        'message' => t('Unknown island'),
+        'sql' => "SELECT importid+1 as importid, Code_ilot_ile as val
+                  FROM $tableName LEFT OUTER JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_code_ilot_ile
+                  ON thes_code_ilot_ile.name = Code_ilot_ile WHERE thes_code_ilot_ile.tid IS NULL ",
+        'field' => 'val',
+        'mandatory' => true,
     );
-	$sqlCheckValue[]=  array(
-    'message' =>  t('Date mandatory'),
-		'type' => 'date', 
-		'field'=> 'Date',
-		'mandatory'=> true,
+    $sqlCheckValue[] = array(
+        'message' =>  t('Classe effectifs mandatory.'),
+        'description' => t('Possible values ( 1;2;3;4;5;NC)'),
+        'type' => 'taxonomy',
+        'field' => 'Classe_effectifs',
+        'vid' => 11,
+        'mandatory' => true,
+        'hasDefault' => true,
     );
-	$sqlCheckValue[]=  array(
-    'message' =>  t('Fiabilité mandatory.'),
-		'description'=>t('Possible values  (F; D)'),
-		'type' => 'boolean', 
-		'field'=> 'Fiabilite',
-		'mandatory'=> true,
-    'hasDefault'=> true,
+    $sqlCheckValue[] = array(
+        'message' => t('Date mandatory'),
+        'type' => 'date',
+        'field' => 'Date',
+        'mandatory' => true,
     );
-	$sqlCheckValue[]=  array(
-    'message' =>  t('Observateurs mandatory'),
-		'type' => 'text', 
-		'field'=> 'Observateurs',
-		'mandatory'=> true,
+    $sqlCheckValue[] = array(
+        'message' => t('Fiabilité mandatory.'),
+        'description' => t('Possible values  (F; D)'),
+        'type' => 'boolean',
+        'field' => 'Fiabilite',
+        'mandatory' => true,
+        'hasDefault' => true,
     );
-	$sqlCheckValue[]=  array(
-    'message' =>  t('Redacteur mandatory'),
-		'type' => 'text', 
-		'field'=> 'Redacteur',
-		'mandatory'=> true,
+    $sqlCheckValue[] = array(
+        'message' => t('Observateurs mandatory'),
+        'type' => 'text',
+        'field' => 'Observateurs',
+        'mandatory' => true,
     );
-	$sqlCheckValue[]=  array(
-    'message' => t('Type de source mandatory. '),
-		'description'=>t('Possible values (Observation,Bibliographie, Collection, BD)'),
-		'type' => 'taxonomy', 
-		'field'=> 'Source_type',
-		'vid'=> 42,
-		'mandatory'=> true,
+    $sqlCheckValue[] = array(
+        'message' => t('Redacteur mandatory'),
+        'type' => 'text',
+        'field' => 'Redacteur',
+        'mandatory' => true,
     );
-   
-  $sqlCheckValue[]=  array(
-     'message' => t('Unknown Introduit '),
-		'description'=>t('Possible values ( O, N, NC )'),
-		'sql' => "SELECT importid+1 as importid 
-				FROM $tableName WHERE NOT Introduit IS NULL  AND NOT Introduit IN ( 'O', 'N', 'NC' )",
-    'mandatory'=> false,
+    $sqlCheckValue[] = array(
+        'message' => t('Type de source mandatory. '),
+        'description' => t('Possible values (Observation,Bibliographie, Collection, BD)'),
+        'type' => 'taxonomy',
+        'field' => 'Source_type',
+        'vid' => 42,
+        'mandatory' => true,
     );
-	
-  $sqlCheckValue[]=  array(
-     'message' => t('Unknown Public data value '),
-		'description'=>t('Possible values ( O, N )'),
-		'sql' => "SELECT importid+1 as importid 
-				FROM $tableName WHERE NOT Donnees_publique IS NULL  AND NOT Donnees_publique IN ( 'O', 'N' )",
-    'mandatory'=> false,
+
+    $sqlCheckValue[] = array(
+        'message' => t('Unknown Introduit '),
+        'description' => t('Possible values ( O, N, NC )'),
+        'sql' => "SELECT importid+1 as importid
+                  FROM $tableName WHERE NOT Introduit IS NULL  AND NOT Introduit IN ('O', 'N', 'NC')",
+        'mandatory' => false,
     );
-	return $sqlCheckValue;
+    $sqlCheckValue[] = array(
+        'message' => t('Unknown Public data value '),
+        'description' => t('Possible values (O, N)'),
+        'sql' => "SELECT importid+1 as importid
+                  FROM $tableName WHERE NOT Donnees_publique IS NULL  AND NOT Donnees_publique IN ('O', 'N')",
+        'mandatory' => false,
+    );
+    return $sqlCheckValue;
 }
 
 
 function _getSqlCheckDuplicate($tableName) {
-  $sqlCheckDuplicate= array();
-	$sqlCheckDuplicate[0]=  "UPDATE $tableName SET isdoublon = false";
-	return $sqlCheckDuplicate;
+    $sqlCheckDuplicate = array();
+    $sqlCheckDuplicate[0] = "UPDATE $tableName SET isdoublon = false";
+    return $sqlCheckDuplicate;
 }
 
 
 function _getSqlCheckWarning($tableName) {
-  $sqlCheckWarning= array();
-	$sqlCheckWarning[]= array(
-    'message' => t('Unknown bibliography'),
-    'sql' => "SELECT GROUP_CONCAT(importid+1) as importid, concat($tableName.Bibliographie_titre, '--', $tableName.Bibliographie_annee) as val
-          FROM $tableName 
-          LEFT OUTER JOIN {content_type_document} as node_ref_biblio
-          ON  trim(node_ref_biblio.field_document_titre_value)  = $tableName.Bibliographie_titre AND  YEAR(node_ref_biblio.field_document_annee_value) = STR_TO_DATE($tableName.Bibliographie_annee , '%%Y')
-          WHERE node_ref_biblio.nid IS NULL  AND $tableName.Source_type='Bibliographie' 
-          GROUP BY  concat($tableName.Bibliographie_titre, '--', $tableName.Bibliographie_annee) ",
-    'field' => 'val',
+    $sqlCheckWarning= array();
+    $sqlCheckWarning[]= array(
+        'message' => t('Unknown bibliography'),
+        'sql' => "SELECT GROUP_CONCAT(importid+1) as importid, concat($tableName.Bibliographie_titre, '--', $tableName.Bibliographie_annee) as val
+                  FROM $tableName
+                  LEFT OUTER JOIN {content_type_document} as node_ref_biblio
+                  ON  trim(node_ref_biblio.field_document_titre_value)  = $tableName.Bibliographie_titre AND  YEAR(node_ref_biblio.field_document_annee_value) = STR_TO_DATE($tableName.Bibliographie_annee , '%%Y')
+                  WHERE node_ref_biblio.nid IS NULL  AND $tableName.Source_type='Bibliographie'
+                  GROUP BY  concat($tableName.Bibliographie_titre, '--', $tableName.Bibliographie_annee) ",
+        'field' => 'val',
     );
-	return $sqlCheckWarning;
+    return $sqlCheckWarning;
 }
 
 
@@ -136,247 +133,246 @@ function _getMappingNodeSelectImportableData($tableName) {
         'name' => t('Inventory').' : '.t('Herpetology').' '.t('Observed Species'),
         'contentType' => "bd_ni_herpetologie_present",
         'titleField' => 'field_bdni_h_p_date',
-		'update' =>false,
-		'query'=>"
-				SELECT 
-					importid,
-					thes_code_ilot_ile.tid AS field_bdni_h_p_code_ile_ilot, 
-					`Localisation`AS field_bdni_h_p_localisation,
-					STR_TO_DATE(Date, '%%d/%%m/%%Y')AS field_bdni_h_p_date,
-					`Observateurs` AS field_bdni_h_p_observateurs,
-					thes_taxons.tid AS field_bdni_h_p_taxon,
-					fct_sys_import_taxon_get_prefix (`Taxon`)  AS field_bdni_h_p_taxon_prefix,
-					`Redacteur` AS field_bdni_h_p_redacteur,
-					`Source_type` AS field_bdni_h_p_type_de_source,
-					`Classe_effectifs` AS field_bdni_h_p_classe_effectifs,
-					`Nb_indiv`AS field_bdni_h_p_nb_individus,
-					`Stade` AS field_bdni_h_p_stade,
-					`Observation` AS field_bdni_h_p_observation,
-					`Indice`AS field_bdni_h_p_indice,
-					`codeFiabilite` AS field_bdni_h_p_fiable,
-					IF ((FLat AND Flon), CONCAT(`FLat`, ' ',  `FLon`), CONCAT(Y(`field_bdi_dp_coordonnees_geo`),' ', X(`field_bdi_dp_coordonnees_geo`))) AS field_bdni_h_p_lat_lon,
-					CASE `Introduit`   WHEN 'O' THEN 'Oui' WHEN 'N' THEN 'Non' ELSE null END AS field_bdni_h_p_introduit,
-					`Introduit2` AS field_bdni_h_p_introduit2,
-					node_ref_biblio.nid AS field_bdni_h_p_source,
-					`Protocole` AS  field_bdni_h_p_protocole,
-					Taxon_Nom_Observateur as 	field_bdni_h_p_taxon_initialnam, 
-					CASE 
-						WHEN node_ref_biblio.nid IS NULL AND NOT importTable.Bibliographie_titre ='' THEN  concat(`Remarque` , ' [Bibliographie : ', importTable.Bibliographie_titre, '--', importTable.Bibliographie_annee, ']')
-						ELSE `Remarque`
-					end  AS field_bdni_h_p_remarque,
-					CASE `Donnees_publique` WHEN 'N' THEN 'Donnée privée' ELSE 'Donnée publique' END AS field_bdni_h_p_donnees_publique
-				FROM ( 
-						SELECT 
-							*, 
-							CASE Fiabilite  WHEN 'F' THEN 1 WHEN 'D' THEN 0 ELSE null END AS codeFiabilite,
-							IF (`Lat`,REPLACE(`Lat`, ',', '.')-0.0, NULL ) AS FLat,
-							IF (`Lon`,REPLACE(`Lon`, ',', '.')-0.0, NULL ) AS FLon
-						FROM $tableName WHERE NOT isdoublon
-				) AS importTable
-				JOIN (SELECT * FROM {term_data} WHERE vid = 29) AS thes_taxons
-				ON fct_sys_import_taxon_clean_prefix(`Taxon`) = thes_taxons.name
-				JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_code_ilot_ile
-				ON thes_code_ilot_ile.name = Code_ilot_ile
-				LEFT OUTER JOIN {content_type_document} as node_ref_biblio
-				ON  trim(node_ref_biblio.field_document_titre_value)  = importTable.Bibliographie_titre AND  YEAR(node_ref_biblio.field_document_annee_value) = STR_TO_DATE(importTable.Bibliographie_annee , '%%Y')
-				LEFT OUTER JOIN {content_type_bd_i_description_physique} 
-				ON thes_code_ilot_ile.tid = field_bdi_dp_nom_ile_code_ile_value ",
+        'update' => false,
+        'query' => "
+            SELECT
+                importid,
+                thes_code_ilot_ile.tid AS field_bdni_h_p_code_ile_ilot,
+                `Localisation`AS field_bdni_h_p_localisation,
+                STR_TO_DATE(Date, '%%d/%%m/%%Y')AS field_bdni_h_p_date,
+                `Observateurs` AS field_bdni_h_p_observateurs,
+                thes_taxons.tid AS field_bdni_h_p_taxon,
+                fct_sys_import_taxon_get_prefix (`Taxon`)  AS field_bdni_h_p_taxon_prefix,
+                `Redacteur` AS field_bdni_h_p_redacteur,
+                `Source_type` AS field_bdni_h_p_type_de_source,
+                `Classe_effectifs` AS field_bdni_h_p_classe_effectifs,
+                `Nb_indiv`AS field_bdni_h_p_nb_individus,
+                `Stade` AS field_bdni_h_p_stade,
+                `Observation` AS field_bdni_h_p_observation,
+                `Indice`AS field_bdni_h_p_indice,
+                `codeFiabilite` AS field_bdni_h_p_fiable,
+                IF ((FLat AND Flon), CONCAT(`FLat`, ' ',  `FLon`), CONCAT(Y(`field_bdi_dp_coordonnees_geo`),' ', X(`field_bdi_dp_coordonnees_geo`))) AS field_bdni_h_p_lat_lon,
+                CASE `Introduit` WHEN 'O' THEN 'Oui' WHEN 'N' THEN 'Non' ELSE null END AS field_bdni_h_p_introduit,
+                `Introduit2` AS field_bdni_h_p_introduit2,
+                node_ref_biblio.nid AS field_bdni_h_p_source,
+                `Protocole` AS  field_bdni_h_p_protocole,
+                Taxon_Nom_Observateur as field_bdni_h_p_taxon_initialnam,
+                CASE
+                    WHEN node_ref_biblio.nid IS NULL AND NOT importTable.Bibliographie_titre ='' THEN  concat(`Remarque` , ' [Bibliographie : ', importTable.Bibliographie_titre, '--', importTable.Bibliographie_annee, ']')
+                    ELSE `Remarque`
+                end  AS field_bdni_h_p_remarque,
+                CASE `Donnees_publique` WHEN 'N' THEN 'Donnée privée' ELSE 'Donnée publique' END AS field_bdni_h_p_donnees_publique
+            FROM (
+                SELECT *,
+                    CASE Fiabilite  WHEN 'F' THEN 1 WHEN 'D' THEN 0 ELSE null END AS codeFiabilite,
+                    IF (`Lat`,REPLACE(`Lat`, ',', '.')-0.0, NULL ) AS FLat,
+                    IF (`Lon`,REPLACE(`Lon`, ',', '.')-0.0, NULL ) AS FLon
+                FROM $tableName WHERE NOT isdoublon
+            ) AS importTable
+            JOIN (SELECT * FROM {term_data} WHERE vid = 29) AS thes_taxons
+            ON fct_sys_import_taxon_clean_prefix(`Taxon`) = thes_taxons.name
+            JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_code_ilot_ile
+            ON thes_code_ilot_ile.name = Code_ilot_ile
+            LEFT OUTER JOIN {content_type_document} as node_ref_biblio
+            ON  trim(node_ref_biblio.field_document_titre_value)  = importTable.Bibliographie_titre AND  YEAR(node_ref_biblio.field_document_annee_value) = STR_TO_DATE(importTable.Bibliographie_annee , '%%Y')
+            LEFT OUTER JOIN {content_type_bd_i_description_physique}
+            ON thes_code_ilot_ile.tid = field_bdi_dp_nom_ile_code_ile_value ",
         'fields' => array (
-                0 => array (
-                    'name'=>'field_bdni_h_p_code_ile_ilot',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdni_h_p_code_ile_ilot',
-                    'type'=>'thesaurus',
-                    'typeImpl'=>'value',
-                    'importTableField'=>'field_bdni_h_p_code_ile_ilot',
-                ),
-                1 => array (
-                    'name'=>'field_bdni_h_p_localisation',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdni_h_p_localisation',
-                    'type'=>'text',
-                    'typeImpl'=>'value',
-                    'importTableField'=>'field_bdni_h_p_localisation',
-                ),
-                2 => array (
-                    'name'=>'field_bdni_h_p_date',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdni_h_p_date',
-                    'type'=>'date',
-                    'typeImpl'=>'value',
-                    'importTableField'=>'field_bdni_h_p_date',
-                ),
-                3 => array (
-                    'name'=>'field_bdni_h_p_observateurs',
-                    'mutlivalue'=> true,
-                    'contentField' => 'field_bdni_h_p_observateurs',
-                    'type'=>'taxonomy',
-                    'taxonomyVoc'=>39,
-                    'taxonomyOpen'=>true,
-                    'typeImpl'=>'value',
-                    'importTableField'=> 'field_bdni_h_p_observateurs'
-                ),
-				4 => array (
-                    'name'=>'field_bdni_h_p_taxon',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdni_h_p_taxon',
-                    'type'=>'thesaurus',
-                    'typeImpl'=>'value',
-                    'importTableField'=> 'field_bdni_h_p_taxon'
-                ),
-               5 => array (
-                    'name'=>'field_bdni_h_p_redacteur',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdni_h_p_redacteur',
-                    'type'=>'taxonomy',
-                    'taxonomyVoc'=>40,
-                    'taxonomyOpen'=>true,
-                    'typeImpl'=>'value',
-                    'importTableField'=> 'field_bdni_h_p_redacteur'
-                ),
-                6 => array (
-                   'name'=>'field_bdni_h_p_type_de_source',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdni_h_p_type_de_source',
-                    'type'=>'taxonomy',
-                    'taxonomyVoc'=>42,
-                    'taxonomyOpen'=>false,
-                    'typeImpl'=>'value',
-                    'importTableField'=> 'field_bdni_h_p_type_de_source'
-                ),
-                7 => array (
-                    'name'=>'field_bdni_h_p_classe_effectifs',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdni_h_p_classe_effectifs',
-                    'type'=>'taxonomy',
-                    'taxonomyVoc'=>11,
-                    'taxonomyOpen'=>false,
-                    'typeImpl'=>'value',
-                    'default' => 'NC',
-                    'importTableField'=> 'field_bdni_h_p_classe_effectifs'
-                ),
-               8 => array (
-                    'name'=>'field_bdni_h_p_stade',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdni_h_p_stade',
-                    'type'=>'taxonomy',
-                    'taxonomyVoc'=>18,
-                    'taxonomyOpen'=>false,
-                    'typeImpl'=>'value',
-                    'default' => 'NC',
-                    'importTableField'=> 'field_bdni_h_p_stade'
-                ),
-                9 => array (
-                    'name'=>'field_bdni_h_p_observation',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdni_h_p_observation',
-                    'type'=>'taxonomy',
-                    'taxonomyVoc'=>16,
-                    'taxonomyOpen'=>false,
-                    'typeImpl'=>'value',
-                    'importTableField'=> 'field_bdni_h_p_observation'
-                ),
-                10=> array (
-					'name'=>'field_bdni_h_p_indice',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdni_h_p_indice',
-                    'type'=>'text',
-                    'typeImpl'=>'value',
-                    'importTableField'=> 'field_bdni_h_p_indice'
-                ),	
-				11=> array (
-                    'name'=>'field_bdni_h_p_fiable',
-                    'mutlivalue'=> true,
-                    'contentField' => 'field_bdni_h_p_fiable',
-                    'type'=>'int',
-                    'typeImpl'=>'value',
-                    'default' => 'F',
-                    'importTableField'=> 'field_bdni_h_p_fiable'
-                ),	
-				12=> array (
-                    'name'=>'field_bdni_h_p_lat_lon',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdni_h_p_lat_lon',
-                    'type'=>'geoData',
-                    'typeImpl'=>'geo',
-                    'importTableField'=> 'field_bdni_h_p_lat_lon'
-                ),
-				13 => array (
-                   'name'=>'field_bd_t_introduit',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdni_h_p_introduit',
-                    'type'=>'taxonomy',
-                    'taxonomyVoc'=>17,
-                    'taxonomyOpen'=>false,
-                    'typeImpl'=>'value',
-                    'default' => 'NC',
-                    'importTableField'=> 'field_bdni_h_p_introduit'
-                ),
-				14 => array (
-                    'name'=>'field_bd_t_introduit_2',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdni_h_p_introduit2',
-                    'type'=>'text',
-                    'typeImpl'=>'value',
-                    'importTableField'=>'field_bdni_h_p_introduit2',
-                ),
-				15=> array (
-                    'name'=>'field_bdni_h_p_source',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdni_h_p_source',
-                    'type'=>'noderef_id',
-                    'typeImpl'=>'nid',
-                    'importTableField'=> 'field_bdni_h_p_source'
-                ),
-				16=> array (
-                    'name'=>'field_bdni_h_p_protocole',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdni_h_p_protocole',
-                    'type'=>'text',
-                    'typeImpl'=>'value',
-                    'importTableField'=> 'field_bdni_h_p_protocole'
-                ),
-				17 => array (
-                    'name'=>'field_bdni_h_p_nb_individus',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdni_h_p_nb_individus',
-                    'type'=>'int',
-                    'typeImpl'=>'value',
-                    'importTableField'=> 'field_bdni_h_p_nb_individus'
-                ),
-				18 => array (
-                    'name'=>'field_bdni_h_p_taxon_prefix',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdni_h_p_taxon_prefix',
-                    'type'=>'text',
-                    'typeImpl'=>'value',
-                    'importTableField'=>'field_bdni_h_p_taxon_prefix',
-                ),				
-				30 => array (
-                    'name'=>'field_bdni_h_p_remarque',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdni_h_p_remarque',
-                    'type'=>'text',
-                    'typeImpl'=>'value',
-                    'importTableField'=>'field_bdni_h_p_remarque',
-                ),
-				31 => array (
-                    'name'=>'field_bdni_h_p_donnees_publique',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdni_h_p_donnees_publique',
-                    'type'=>'text',
-                    'typeImpl'=>'value',
-                    'importTableField'=>'field_bdni_h_p_donnees_publique',
-                ),
-				32 => array (
-                    'name'=>'field_bdni_h_p_taxon_initialnam',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdni_h_p_taxon_initialnam',
-                    'type'=>'text',
-                    'typeImpl'=>'value',
-                    'importTableField'=>'field_bdni_h_p_taxon_initialnam',
-                ), 	 	
-			),
-	);
+            0 => array (
+                'name' => 'field_bdni_h_p_code_ile_ilot',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_h_p_code_ile_ilot',
+                'type' => 'thesaurus',
+                'typeImpl' => 'value',
+                'importTableField' => 'field_bdni_h_p_code_ile_ilot',
+            ),
+            1 => array (
+                'name' => 'field_bdni_h_p_localisation',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_h_p_localisation',
+                'type' => 'text',
+                'typeImpl' => 'value',
+                'importTableField' => 'field_bdni_h_p_localisation',
+            ),
+            2 => array (
+                'name' => 'field_bdni_h_p_date',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_h_p_date',
+                'type' => 'date',
+                'typeImpl' => 'value',
+                'importTableField' => 'field_bdni_h_p_date',
+            ),
+            3 => array (
+                'name' => 'field_bdni_h_p_observateurs',
+                'mutlivalue' => true,
+                'contentField' => 'field_bdni_h_p_observateurs',
+                'type' => 'taxonomy',
+                'taxonomyVoc' => 39,
+                'taxonomyOpen' => true,
+                'typeImpl' => 'value',
+                'importTableField' => 'field_bdni_h_p_observateurs'
+            ),
+            4 => array (
+                'name' => 'field_bdni_h_p_taxon',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_h_p_taxon',
+                'type' => 'thesaurus',
+                'typeImpl' => 'value',
+                'importTableField' => 'field_bdni_h_p_taxon'
+            ),
+            5 => array (
+                'name' => 'field_bdni_h_p_redacteur',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_h_p_redacteur',
+                'type' => 'taxonomy',
+                'taxonomyVoc' => 40,
+                'taxonomyOpen' => true,
+                'typeImpl' => 'value',
+                'importTableField' => 'field_bdni_h_p_redacteur'
+            ),
+            6 => array (
+                'name' => 'field_bdni_h_p_type_de_source',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_h_p_type_de_source',
+                'type' => 'taxonomy',
+                'taxonomyVoc' => 42,
+                'taxonomyOpen' => false,
+                'typeImpl' => 'value',
+                'importTableField' => 'field_bdni_h_p_type_de_source'
+            ),
+            7 => array (
+                'name' => 'field_bdni_h_p_classe_effectifs',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_h_p_classe_effectifs',
+                'type' => 'taxonomy',
+                'taxonomyVoc' => 11,
+                'taxonomyOpen' => false,
+                'typeImpl' => 'value',
+                'default' => 'NC',
+                'importTableField' => 'field_bdni_h_p_classe_effectifs'
+            ),
+            8 => array (
+                'name' => 'field_bdni_h_p_stade',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_h_p_stade',
+                'type' => 'taxonomy',
+                'taxonomyVoc' => 18,
+                'taxonomyOpen' => false,
+                'typeImpl' => 'value',
+                'default' => 'NC',
+                'importTableField' => 'field_bdni_h_p_stade'
+            ),
+            9 => array (
+                'name' => 'field_bdni_h_p_observation',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_h_p_observation',
+                'type' => 'taxonomy',
+                'taxonomyVoc' => 16,
+                'taxonomyOpen' => false,
+                'typeImpl' => 'value',
+                'importTableField' => 'field_bdni_h_p_observation'
+            ),
+            10=> array (
+                'name' => 'field_bdni_h_p_indice',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_h_p_indice',
+                'type' => 'text',
+                'typeImpl' => 'value',
+                'importTableField' => 'field_bdni_h_p_indice'
+            ),
+            11=> array (
+                'name' => 'field_bdni_h_p_fiable',
+                'mutlivalue' => true,
+                'contentField' => 'field_bdni_h_p_fiable',
+                'type' => 'int',
+                'typeImpl' => 'value',
+                'default' => 'F',
+                'importTableField' => 'field_bdni_h_p_fiable'
+            ),
+            12=> array (
+                'name' => 'field_bdni_h_p_lat_lon',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_h_p_lat_lon',
+                'type' => 'geoData',
+                'typeImpl' => 'geo',
+                'importTableField' => 'field_bdni_h_p_lat_lon'
+            ),
+            13 => array (
+                'name' => 'field_bd_t_introduit',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_h_p_introduit',
+                'type' => 'taxonomy',
+                'taxonomyVoc' => 17,
+                'taxonomyOpen' => false,
+                'typeImpl' => 'value',
+                'default' => 'NC',
+                'importTableField' => 'field_bdni_h_p_introduit'
+            ),
+            14 => array (
+                'name' => 'field_bd_t_introduit_2',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_h_p_introduit2',
+                'type' => 'text',
+                'typeImpl' => 'value',
+                'importTableField' => 'field_bdni_h_p_introduit2',
+            ),
+            15=> array (
+                'name' => 'field_bdni_h_p_source',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_h_p_source',
+                'type' => 'noderef_id',
+                'typeImpl' => 'nid',
+                'importTableField' => 'field_bdni_h_p_source'
+            ),
+            16=> array (
+                'name' => 'field_bdni_h_p_protocole',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_h_p_protocole',
+                'type' => 'text',
+                'typeImpl' => 'value',
+                'importTableField' => 'field_bdni_h_p_protocole'
+            ),
+            17 => array (
+                'name' => 'field_bdni_h_p_nb_individus',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_h_p_nb_individus',
+                'type' => 'int',
+                'typeImpl' => 'value',
+                'importTableField' => 'field_bdni_h_p_nb_individus'
+            ),
+            18 => array (
+                'name' => 'field_bdni_h_p_taxon_prefix',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_h_p_taxon_prefix',
+                'type' => 'text',
+                'typeImpl' => 'value',
+                'importTableField' => 'field_bdni_h_p_taxon_prefix',
+            ),
+            30 => array (
+                'name' => 'field_bdni_h_p_remarque',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_h_p_remarque',
+                'type' => 'text',
+                'typeImpl' => 'value',
+                'importTableField' => 'field_bdni_h_p_remarque',
+            ),
+            31 => array (
+                'name' => 'field_bdni_h_p_donnees_publique',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_h_p_donnees_publique',
+                'type' => 'text',
+                'typeImpl' => 'value',
+                'importTableField' => 'field_bdni_h_p_donnees_publique',
+            ),
+            32 => array (
+                'name' => 'field_bdni_h_p_taxon_initialnam',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_h_p_taxon_initialnam',
+                'type' => 'text',
+                'typeImpl' => 'value',
+                'importTableField' => 'field_bdni_h_p_taxon_initialnam',
+            ),
+        ),
+    );
     return $mapping;
 }
