@@ -368,5 +368,13 @@ global $user, $base_url, $language;
   ga('create', 'UA-28879746-1', 'initiative-pim.org');
   ga('send', 'pageview');
 
+
+  jQuery( document ).ready(function() {
+
+    //Pour cacher le tableau recap du status de protection nationnal si aucunes valeurs
+    if(jQuery('table.tableRecapIleN tbody tr').length > 1) jQuery('table.tableRecapIleN').show();
+    if(jQuery('table.tableRecapIleA tbody tr').length > 1) jQuery('table.tableRecapIleA').show();
+
+  });
 </script>
 </html>

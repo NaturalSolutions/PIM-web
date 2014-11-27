@@ -72,21 +72,16 @@ global $base_url, $language;
 
 
 <div class='indentRight1'>
-	<div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_ss_bassin_biblio']); ?></div>
+	<div class='contenerRelatif'><span class='btnShowDocs' title='Add a document'>B</span><?php print drupal_render($form['field_ss_bassin_biblio']); ?></div>
 </div>
 
+<div id='dialog2' title="Documents liés à l'Atlas" class='contenerRelatif'>
+	<a href='<?php echo $base_url; ?>/Bibliotheque' target='_blank'><?php if($language->language == 'fr') echo 'Voir tous les documents'; else echo 'See all documents'; ?></a>
+	<?php print views_embed_view('v_atlas_display_docs', 'block_1'); ?>
+</div>
 
 <?php print drupal_render($form['options']); ?>
 <?php print drupal_render($form['buttons']); ?>
-
-
-
-<!-- <div id="dialog">
-  <label for='input1'>Titre :</label><input type="text" id="input1" value='Votre titre ici'/><br/>
-  <label for='input2' id='label4TextAera'>texte :</label><TEXTAREA type="text" id="input2" value='Votre texte ici'></TEXTAREA><br/>
-  <label for='input3'>Autheur :</label><input type="text" id="input3" value='Votre nom ici'/>
-</div> -->
-
 <?php print drupal_render($form); ?>
 
 <script>
@@ -122,6 +117,22 @@ $( document ).ready(function() {
 		$('#edit-avalider-wrapper label').empty().append(inputAvalider).append('<span> To be validated</span>');
 		$('#edit-termine-wrapper label').empty().append(inputTerminer).append('<span> Complete</span>');
 	}
+
+	//Lors de clics sur ajout references biblio
+	$('.btnShowDocs').click(function(){
+		$("#dialog2").dialog();
+	 	$('#dialog2').show();
+	 	
+	 	$('.ui-dialog-titlebar-close').addClass('closeDialog2');
+		$('div.views-field-field-document-titre-value a').each(function(){
+			$( this ).attr('target','_blank');
+		});
+		$('.ui-dialog-titlebar-close').click(function(){
+
+			$("#dialog2").dialog("destroy");
+			
+		});
+	});
 
 	// Pour remplir le champ titre	
 	$('#edit-submit').click(function(){

@@ -109,8 +109,24 @@
   <?php endif; ?>
 <?php endif;?>
 
+<?php if ($id == 'field_ile_code_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $code_ile = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'tid') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $tid = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
 
 <?php endforeach; ?>
+
+<?php //echo $code_ile; ?>
+<?php //echo $tid; ?>
+
 
 <?php if($language->language == 'fr'): ?>
 
@@ -127,7 +143,71 @@
     
   <?php endif; ?>
   <br/>
+  
+  <?php if($tid != ''): ?>
+    <!-- Status description physique -->
+    <?php print views_embed_view('v_atlas_tab_data_ile', 'block_1', $tid); ?>
+    
+    <!-- Status de propriete fonciere -->
+    <TABLE class='tableRecapIle'>
+      <?php print views_embed_view('v_atlas_tab_data_ile', 'block_2', $tid); ?>
+    </TABLE>
 
+    <!-- Status de protection internationnal-->
+    <br/>
+    <TABLE class='tableRecapIle'>
+      <TR>
+        <td></td>
+        <td>Nom</td>
+        <td>Année</td>
+        <td>Zone concernée</td>        
+      </TR>
+        <?php print views_embed_view('v_atlas_tab_data_ile', 'block_3', $tid); ?>
+    </TABLE>
+    
+
+    <!-- Status de protection nationnal-->
+    <br/>
+    <TABLE class='tableRecapIleN'>
+      <TR>
+        <td></td>
+        <td>Nom</td>
+        <td>Année</td>
+        <td>Zone concernée</td>        
+      </TR>
+        <?php print views_embed_view('v_atlas_tab_data_ile', 'block_5', $tid); ?>
+    </TABLE>
+    <br/>
+    <!-- AUCUN STATUT 
+    <br/>
+    <TABLE class='tableRecapIleA'>
+      <TR>
+        <td></td>
+        <td>Nom</td>
+        <td>Année</td>
+        <td>Zone concernée</td>        
+      </TR>
+        <?php //print views_embed_view('v_atlas_tab_data_ile', 'block_6', $tid); ?>
+    </TABLE>-->
+    
+       
+    <!-- Status de Gestion -->
+    <?php $countNbTotalItem = views_get_view_result('v_atlas_tab_data_ile', 'block_4', $tid); ?>
+    <?php if(!(empty($countNbTotalItem[0]))): ?>
+    <table class='tableRecapIle'>
+      <TR>
+        <td></td>
+        <td>Nom du gestionnaire</td>
+        <td>Année de début de gestion</td>
+        <td>Type d'accord</td>
+      </TR>
+      <?php print views_embed_view('v_atlas_tab_data_ile', 'block_4', $tid); ?> 
+      
+    </table>
+    <br/>
+    <?php endif; ?>
+    
+  <?php endif; ?>
 
   <?php echo $tab; ?>
 
@@ -172,6 +252,58 @@
   <?php endif; ?>
   <br/>
 
+  <?php if($tid != ''): ?>
+    <!-- Status description physique -->
+    <?php print views_embed_view('v_atlas_tab_data_ile', 'block_1', $tid); ?>
+    
+    <!-- Status de propriete fonciere -->
+    <TABLE class='tableRecapIle'>
+      <?php print views_embed_view('v_atlas_tab_data_ile', 'block_2', $tid); ?>
+    </TABLE>
+
+    <!-- Status de protection internationnal-->
+    <br/>
+    <TABLE class='tableRecapIle'>
+      <TR>
+        <td></td>
+        <td>Nom</td>
+        <td>Année</td>
+        <td>Zone concernée</td>        
+      </TR>
+        <?php print views_embed_view('v_atlas_tab_data_ile', 'block_3', $tid); ?>
+    </TABLE>
+    
+
+    <!-- Status de protection nationnal-->
+    <br/>
+    <TABLE class='tableRecapIleN'>
+      <TR>
+        <td></td>
+        <td>Nom</td>
+        <td>Année</td>
+        <td>Zone concernée</td>        
+      </TR>
+        <?php print views_embed_view('v_atlas_tab_data_ile', 'block_5', $tid); ?>
+    </TABLE>
+    
+       
+    <!-- Status de Gestion -->
+    <?php $countNbTotalItem = views_get_view_result('v_atlas_tab_data_ile', 'block_4', $tid); ?>
+    <?php if(!(empty($countNbTotalItem[0]))): ?>
+    <table class='tableRecapIle'>
+      <TR>
+        <td></td>
+        <td>Nom du gestionnaire</td>
+        <td>Année de début de gestion</td>
+        <td>Type d'accord</td>
+      </TR>
+      <?php print views_embed_view('v_atlas_tab_data_ile', 'block_4', $tid); ?> 
+      
+    </table>
+    <br/>
+    <?php endif; ?>
+    
+  <?php endif; ?>
 
   <?php echo $tab; ?>
 

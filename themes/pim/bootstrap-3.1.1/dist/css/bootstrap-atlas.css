@@ -1438,6 +1438,19 @@ body.node-type-book-cluster.section-node-edit div.views-field-field-document-aut
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+div.containerOfCluster table.tableRecapIle, div.containerOfCluster table.tableRecapIle tr, div.containerOfCluster table.tableRecapIle tr td, div.containerOfCluster table.tableRecapIle tr th{
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  padding-left: 15px;
+  font-size: small;
+  font-weight: normal;
+  text-align: center;
+}
+div.containerOfCluster table.tableRecapIle tr th, div.containerOfMyIsland table.tableRecapIleN tr th{
+  background-color: #f1f1f1;
+  text-align: left;
+}
 div.containerOfCluster a.titleCulster {
   background: url(../../../images/iconePalmier2b.png) no-repeat 100% 64%;
   display: block;
@@ -1485,6 +1498,39 @@ div.containerOfCluster div.views-row-last div.containerOfOneComment {
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+div.containerOfMyIsland table.tableRecapIle,div.containerOfMyIsland table.tableRecapIleN{
+  width: 100%;
+  border: 1px solid #ccc;
+}
+div.containerOfMyIsland table.tableRecapIleN, div.containerOfMyIsland table.tableRecapIleA{
+  display: none;
+}
+div.containerOfMyIsland table.tableRecapIle tr,div.containerOfMyIsland table.tableRecapIle tr td,div.containerOfMyIsland table.tableRecapIle tr th{
+  border: 1px solid #ccc;
+  padding: 10px;
+  padding-left: 15px;
+  font-size: small;
+  font-weight: normal;
+  text-align: center;
+}
+div.containerOfMyIsland table.tableRecapIle tr th, div.containerOfMyIsland table.tableRecapIleN tr th{
+  background-color: #f1f1f1;
+  width: 30%;
+  text-align: left;
+}
+div.containerOfMyIsland table.tableRecapIleN tr, div.containerOfMyIsland table.tableRecapIleN tr td, div.containerOfMyIsland table.tableRecapIleN tr th{
+  border: 1px solid #ccc;
+  padding: 10px;
+   padding-left: 15px;
+  font-size: small;
+  font-weight: normal;
+  text-align: center;
+}
+div.containerOfMyIsland table.tableRecapIleA tr, div.containerOfMyIsland table.tableRecapIleA tr td, div.containerOfMyIsland table.tableRecapIleA tr th{
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
 div.containerOfMyIsland a.titleIsland {
   background: url(../../../images/iconePalmierb.png) no-repeat 100% 50%;
   display: block;

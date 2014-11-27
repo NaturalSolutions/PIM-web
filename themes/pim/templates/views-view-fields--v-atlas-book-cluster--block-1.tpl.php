@@ -20,7 +20,7 @@
  */
 /***************************************************************************/
 /***************************************************************************/
-/*                   VUE AFFICHE FIELDS OF ILE                             */
+/*                   VUE AFFICHE FIELDS OF CLUSTER                         */
 /*                                                                         */
 /***************************************************************************/
 /*********************************  ****************************************/
@@ -110,11 +110,19 @@
   <?php endif; ?>
 <?php endif;?>
 
-
-
 <?php endforeach; ?>
 
+<!-- Vu qui récupere tout les tid -->
+<?php $res = views_get_view_result('v_atlas_book_cluster', 'block_2', $nid); ?>
 
+<?php 
+for($i=0;$i<count($res);$i++){ 
+  
+  if($i == count($res) - 1) $allTid .= $res[$i]->term_data_node_data_field_cluster_code_tid;
+  else $allTid .= $res[$i]->term_data_node_data_field_cluster_code_tid.',';
+}
+//print_r($allTid);
+?>
 <?php if($language->language == 'fr'): ?>
 
   <a class='titleCulster' title='Editer' href="<?php echo $base_url; ?>/node/<?php echo $nid; ?>/edit"><h1><?php echo $title; ?></h1></a>
@@ -127,10 +135,218 @@
     <div>
       <?php echo $url_picture; ?>
     </div>
-    <!--  <img class='imageMap' src="<?php //echo $base_url.'/sites/default/files/atlas/ss_bassin/'.$url_picture; ?>" alt='' title='' /> -->
 
   <?php endif; ?>
   <br/>
+
+  <?php if($allTid != ''): ?>
+    
+    <!-- Recherche des noms d'îles associé aux cluster en BDD-->
+    <?php $names = views_get_view_result('v_atlas_tab_data_cluster', 'block_5', $allTid); ?>
+    
+    <?php 
+    for($i=0; $i<count($names); $i++){
+      
+      if($i == 0) {
+        $allNamesIles .= "<a href='".$base_url."/fiche-Ile/".$names[0]->term_data_node_data_field_bdi_dp_nom_ile_code_ile_name."' target='_blank'>".$names[0]->term_data_node_data_field_bdi_dp_nom_ile_code_ile__term_synonym_name.'</a><br/>'; 
+        $v_nid = $names[0]->nid;
+      }elseif($v_nid != $names[$i]->nid){ 
+        $allNamesIles .= "<a href='".$base_url."/fiche-Ile/".$names[$i]->term_data_node_data_field_bdi_dp_nom_ile_code_ile_name."' target='_blank'>".$names[$i]->term_data_node_data_field_bdi_dp_nom_ile_code_ile__term_synonym_name.'</a><br/>'; 
+        $v_nid = $names[$i]->nid;
+      }
+    
+    } 
+    ?>
+    
+    <!-- Calcul de la surface emmergé cummulé -->
+    <?php $surface = views_get_view_result('v_atlas_tab_data_cluster', 'block_1', $allTid); ?>
+    
+    <?php 
+    $surfaceCumule = 0;
+    for($i=0; $i<count($surface); $i++){
+      if(!empty($surface[$i]->node_data_field_bdi_dp_nom_ile_code_ile_field_bdi_dp_sup_terrestre_ha_value)) $surfaceCumule += $surface[$i]->node_data_field_bdi_dp_nom_ile_code_ile_field_bdi_dp_sup_terrestre_ha_value;
+    } 
+    ?>
+
+    <!-- Recherche du nombre d'îles avec au moins 1 statut de protection -->
+    <?php $StatutProtection = views_get_view_result('v_atlas_tab_data_cluster', 'block_2', $allTid); ?>
+        
+    <?php 
+    $cptStatut = 0;
+    for($i=0; $i<count($StatutProtection); $i++){
+      if(!empty($StatutProtection[$i]->term_data_term_hierarchy_name)){
+
+        if($i == 0) {
+
+          $codeIles = $StatutProtection[0]->term_data_node_data_field_bdi_spt_code_ile_ilot_name;
+          $allNamesIles2 .= "<a href='".$base_url."/fiche-Ile/".$codeIles."' target='_blank'>".$StatutProtection[0]->term_data_node_data_field_bdi_spt_code_ile_ilot__term_synonym_name.'</a><br/>';
+
+          $v_tid = $StatutProtection[0]->term_data_node_data_field_bdi_spt_code_ile_ilot_name;
+          $v_statutProtection = $StatutProtection[0]->term_data_node_data_field_bdi_spt_code_ile_ilot__term_synonym_name;
+          $cptStatut++;
+
+        }elseif($v_tid != $StatutProtection[$i]->term_data_node_data_field_bdi_spt_code_ile_ilot_name && $v_statutProtection != $StatutProtection[$i]->term_data_node_data_field_bdi_spt_code_ile_ilot__term_synonym_name){ 
+
+          $codeIles = $StatutProtection[$i]->term_data_node_data_field_bdi_spt_code_ile_ilot_name;
+          $allNamesIles2 .= "<a href='".$base_url."/fiche-Ile/".$codeIles."' target='_blank'>".$StatutProtection[$i]->term_data_node_data_field_bdi_spt_code_ile_ilot__term_synonym_name.'</a><br/>';
+          
+          $v_tid = $StatutProtection[$i]->term_data_node_data_field_bdi_spt_code_ile_ilot_name;
+          $v_statutProtection = $StatutProtection[$i]->term_data_node_data_field_bdi_spt_code_ile_ilot__term_synonym_name;
+          $cptStatut++;
+        
+        }
+      } 
+    }
+    ?>
+    
+     <!-- Recherche du nombre d'îles avec au moins 1 statut de gestion -->
+    <?php $StatutGestion = views_get_view_result('v_atlas_tab_data_cluster', 'block_3', $allTid); ?>
+    
+    <?php 
+    $cptGestion = 0;
+    for($i=0; $i<count($StatutGestion); $i++){
+      if($StatutGestion[$i]->node_data_field_bdi_g_code_ile_ilot_field_bdi_g_exist_gestionnaire_value == 'Oui'){
+
+        if($i == 0) {
+
+          $codeIles = $StatutGestion[0]->term_data_node_data_field_bdi_g_code_ile_ilot_name;
+          $allNamesIles3 .= "<a href='".$base_url."/fiche-Ile/".$codeIles."' target='_blank'>".$StatutGestion[0]->term_data_node_data_field_bdi_g_code_ile_ilot__term_synonym_name.'</a><br/>';
+
+          $v_tid = $StatutGestion[0]->term_data_node_data_field_bdi_g_code_ile_ilot_name;
+          $v_statutProtection = $StatutGestion[0]->term_data_node_data_field_bdi_g_code_ile_ilot__term_synonym_name;
+          $cptGestion++;
+
+        }elseif($v_tid != $StatutGestion[$i]->term_data_node_data_field_bdi_g_code_ile_ilot_name && $v_statutProtection != $StatutGestion[$i]->term_data_node_data_field_bdi_g_code_ile_ilot__term_synonym_name){ 
+
+          $codeIles = $StatutGestion[$i]->term_data_node_data_field_bdi_g_code_ile_ilot_name;
+          $allNamesIles3 .= "<a href='".$base_url."/fiche-Ile/".$codeIles."' target='_blank'>".$StatutGestion[$i]->term_data_node_data_field_bdi_g_code_ile_ilot__term_synonym_name.'</a><br/>';
+          
+          $v_tid = $StatutGestion[$i]->term_data_node_data_field_bdi_g_code_ile_ilot_name;
+          $v_statutProtection = $StatutGestion[$i]->term_data_node_data_field_bdi_g_code_ile_ilot__term_synonym_name;
+          $cptGestion++;
+        
+        }
+      } 
+    }
+    ?>
+
+     <!-- Recherche du nombre d'îles avec au moins 1 statut propriete publique -->
+    <?php $StatutPropriete_publique = views_get_view_result('v_atlas_tab_data_cluster', 'block_4', $allTid); ?>
+
+    <?php 
+    $cptPropriete_publique = 0;
+    for($i=0; $i<count($StatutPropriete_publique); $i++){
+      if($StatutPropriete_publique[$i]->node_data_field_bdi_sp_code_ile_ilot_field_bdi_sp_public_value == 'Oui'){
+
+        if($i == 0) {
+
+          $codeIles = $StatutPropriete_publique[0]->term_data_node_data_field_bdi_sp_code_ile_ilot_name;
+          $allNamesIles4 .= "<a href='".$base_url."/fiche-Ile/".$codeIles."' target='_blank'>".$StatutPropriete_publique[0]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name.'</a><br/>';
+
+          $v_tid = $StatutPropriete_publique[0]->term_data_node_data_field_bdi_sp_code_ile_ilot_name;
+          $v_statutProtection = $StatutPropriete_publique[0]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name;
+          $cptPropriete_publique++;
+
+        }elseif($v_tid != $StatutPropriete_publique[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot_name && $v_statutProtection != $StatutPropriete_publique[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name){ 
+
+          $codeIles = $StatutPropriete_publique[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot_name;
+          $allNamesIles4 .= "<a href='".$base_url."/fiche-Ile/".$codeIles."' target='_blank'>".$StatutPropriete_publique[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name.'</a><br/>';
+          
+          $v_tid = $StatutPropriete_publique[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot_name;
+          $v_statutProtection = $StatutPropriete_publique[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name;
+          $cptPropriete_publique++;
+        
+        }
+      } 
+    }
+    ?>
+
+    <!-- Recherche du nombre d'îles avec au moins 1 statut propriete prive -->
+    <?php $StatutPropriete_prive = views_get_view_result('v_atlas_tab_data_cluster', 'block_6', $allTid); ?>
+    
+    <?php 
+    $cptPropriete_prive = 0;
+    for($i=0; $i<count($StatutPropriete_prive); $i++){
+      if($StatutPropriete_prive[$i]->node_data_field_bdi_sp_code_ile_ilot_field_bdi_sp_privee_value == 'Oui'){
+
+        if($i == 0) {
+
+          $codeIles = $StatutPropriete_prive[0]->term_data_node_data_field_bdi_sp_code_ile_ilot_name;
+          $allNamesIles5 .= "<a href='".$base_url."/fiche-Ile/".$codeIles."' target='_blank'>".$StatutPropriete_prive[0]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name.'</a><br/>';
+
+          $v_tid = $StatutPropriete_prive[0]->term_data_node_data_field_bdi_sp_code_ile_ilot_name;
+          $v_statutProtection = $StatutPropriete_prive[0]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name;
+          $cptPropriete_prive++;
+
+        }elseif($v_tid != $StatutPropriete_prive[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot_name && $v_statutProtection != $StatutPropriete_prive[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name){ 
+
+          $codeIles = $StatutPropriete_prive[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot_name;
+          $allNamesIles5 .= "<a href='".$base_url."/fiche-Ile/".$codeIles."' target='_blank'>".$StatutPropriete_prive[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name.'</a><br/>';
+          
+          $v_tid = $StatutPropriete_prive[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot_name;
+          $v_statutProtection = $StatutPropriete_prive[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name;
+          $cptPropriete_prive++;
+        
+        }
+      } 
+    }
+    ?>
+
+    <!-- Recherche du nombre d'îles avec au moins 1 statut propriete prive/publique -->
+    <?php $StatutPropriete_prive_publique = views_get_view_result('v_atlas_tab_data_cluster', 'block_7', $allTid); ?>
+    
+    <?php 
+    $cptPropriete_prive_publique = 0;
+    for($i=0; $i<count($StatutPropriete_prive_publique); $i++){
+      if($StatutPropriete_prive_publique[$i]->node_data_field_bdi_sp_code_ile_ilot_field_bdi_sp_privee_value == 'Oui' && $StatutPropriete_prive_publique[$i]->node_data_field_bdi_sp_code_ile_ilot_field_bdi_sp_public_value == 'Oui'){
+
+        if($i == 0) {
+
+          $codeIles = $StatutPropriete_prive_publique[0]->term_data_node_data_field_bdi_sp_code_ile_ilot_name;
+          $allNamesIles6 .= "<a href='".$base_url."/fiche-Ile/".$codeIles."' target='_blank'>".$StatutPropriete_prive_publique[0]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name.'</a><br/>';
+
+          $v_tid = $StatutPropriete_prive_publique[0]->term_data_node_data_field_bdi_sp_code_ile_ilot_name;
+          $v_statutProtection = $StatutPropriete_prive_publique[0]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name;
+          $cptPropriete_prive_publique++;
+
+        }elseif($v_tid != $StatutPropriete_prive_publique[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot_name && $v_statutProtection != $StatutPropriete_prive_publique[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name){ 
+
+          $codeIles = $StatutPropriete_prive_publique[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot_name;
+          $allNamesIles6 .= "<a href='".$base_url."/fiche-Ile/".$codeIles."' target='_blank'>".$StatutPropriete_prive_publique[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name.'</a><br/>';
+          
+          $v_tid = $StatutPropriete_prive_publique[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot_name;
+          $v_statutProtection = $StatutPropriete_prive_publique[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name;
+          $cptPropriete_prive_publique++;
+        
+        }
+      } 
+    }
+    ?>
+    
+      
+    <!--  Recap Cluster -->
+    <TABLE class='tableRecapIle'>
+      <TR>
+        <th>Nom des îles</th>
+        <th>Surface emmergé cumulé</th>
+        <th>Nombre d'îles avec au moins 1 statut de protection</th>
+        <th>Nombre d'îles avec au moins 1 gestionnaire</th>
+        <th>Nombre d'îles publique</th>
+        <th>Nombre d'îles privé</th>
+        <th>Nombre d'îles privé/publique</th>
+      </TR>
+      <TR>
+        <td><?php if(!empty($allNamesIles)) echo $allNamesIles; else echo '-'; ?></td>
+        <td><center><?php echo $surfaceCumule; ?></center></td>
+        <td><center><?php echo $cptStatut; ?><br/><small><?php if(!empty($allNamesIles2)) echo $allNamesIles2; ?></small></center></td>
+        <td><center><?php echo $cptGestion; ?><br/><small><?php if(!empty($allNamesIles3)) echo $allNamesIles3; ?></small></center></td>
+        <td><center><?php echo $cptPropriete_publique; ?><br/><small><?php if(!empty($allNamesIles4)) echo $allNamesIles4; ?></small></center></td>
+        <td><center><?php echo $cptPropriete_prive; ?><br/><small><?php if(!empty($allNamesIles5)) echo $allNamesIles5; ?></small></center></td>
+        <td><center><?php echo $cptPropriete_prive_publique; ?><br/><small><?php if(!empty($allNamesIles6)) echo $allNamesIles6; ?></small></center></td>
+      </TR>
+      
+    </TABLE>
+  <?php endif; ?>
 
 
   <?php echo $tab; ?>
