@@ -1,7 +1,7 @@
 <?php
 
 function _getTemplateField() {
-    $templateFields = "Date,Code_ilot_ile,Groupe,Classe,Taxon,Taxon_Nom_Observateur,Remarque,Protocole,Potentiel,Potentiel2,Introduit,Introduit2,Observateurs,Redacteur,Source_type,Expert,Bibliographie_annee,Bibliographie_titre,Donnees_publique";
+    $templateFields = "Date,Code_ilot_ile,Referentiel_taxonomique,Groupe,Classe,Taxon,Taxon_Nom_Observateur,Remarque,Protocole,Potentiel,Potentiel2,Introduit,Introduit2,Observateurs,Redacteur,Source_type,Expert,Bibliographie_annee,Bibliographie_titre,Donnees_publique";
     return $templateFields;
 }
 
@@ -18,6 +18,15 @@ function _getCheckFormatField() {
 function _getSqlCheckValue($tableName) {
     $sqlCheckValue = array();
     $sqlCheckValue[] = array(
+        'message' => t('Unknown taxonomic reference'),
+        'description' => t('Please verify your taxonomic references, you either have misspelled them or have used unknown references. In the later case, you must contact an administrator and ask him if this reference could be added for your taxonomic domain.'),
+        'type' => 'taxonomy',
+        'field' => 'Referentiel_taxonomique',
+        'vid' => 68,
+        'mandatory' => true,
+        'hasDefault' => false,
+    );
+    $sqlCheckValue[] = array(
         'message' => t('Unknown island'),
         'sql' => "SELECT importid+1 as importid , Code_ilot_ile AS val
                   FROM $tableName LEFT OUTER JOIN (SELECT DISTINCT * FROM {term_data} WHERE vid = 4) AS thes_code_ilot_ile
@@ -27,7 +36,7 @@ function _getSqlCheckValue($tableName) {
     );
     $sqlCheckValue[] = array(
         'message' => t('Group mandatory '),
-        'sql' => "SELECT importid+1 as importid, fct_sys_import_taxon_clean_prefix(`Taxon`) AS val 
+        'sql' => "SELECT importid+1 as importid, fct_sys_import_taxon_clean_prefix(`Taxon`) AS val
                   FROM $tableName WHERE groupe IS NULL ",
         'mandatory' => true,
         'field' => 'val',
@@ -92,13 +101,18 @@ function _getSqlCheckWarning($tableName) {
                   GROUP BY concat($tableName.Bibliographie_titre, '--', $tableName.Bibliographie_annee) ",
         'field' => 'val',
     );
+    $sqlCheckWarning[] = array(
+        'message' => t('The following taxa will be added to "Référentiel autres terrestres"'),
+        'sql' => "SELECT GROUP_CONCAT(imp.importid+1) as importid, imp.`Taxon` as val FROM $tableName imp LEFT OUTER JOIN (SELECT * FROM {term_data} WHERE vid = 64) AS t ON fct_sys_import_taxon_clean_prefix(imp.`Taxon`) = t.name WHERE t.tid IS NULL GROUP BY imp.`Taxon`",
+        'field' => 'val',
+    );
     return $sqlCheckWarning;
 }
 
 function _getMappingNodeSelectImportableData($tableName) {
     $mapping = array();
     $mapping['import_inventory_autre_terrestre_absent'] = array(
-        'name' => t('Inventory').' : '.t('Other terrestrial sp.').' '.t('Observed Species'),
+        'name' => t('Inventory').' : '.t('Other terrestrial sp.').' '.t('Unfound Species'),
         'contentType' => "bd_ni_autre_terrestre_absent",
         'titleField' => 'field_bdni_at_a_date',
         'update' => false,
@@ -108,6 +122,7 @@ function _getMappingNodeSelectImportableData($tableName) {
                     thes_code_ilot_ile.tid AS field_bdni_at_a_code_ile_ilot,
                     STR_TO_DATE(Date, '%%d/%%m/%%Y')AS field_bdni_at_a_date,
                     `Observateurs` AS field_bdni_at_a_observateurs,
+                    `Referentiel_taxonomique` AS ref_taxo,
                     `Groupe` AS field_bdni_at_a_group,
                     CONCAT(`Groupe`, '>',`Classe` , '>', fct_sys_import_taxon_clean_prefix(`Taxon`) ) AS field_bdni_at_a_taxon,
                     fct_sys_import_taxon_get_prefix (`Taxon`)  AS field_bdni_at_a_taxon_prefix,
@@ -180,7 +195,7 @@ function _getMappingNodeSelectImportableData($tableName) {
                 'typeImpl' => 'value',
                 'importTableField' => 'field_bdni_at_a_taxon'
             ),
-           5 => array (
+            5 => array (
                 'name' => 'field_bdni_at_a_redacteur',
                 'mutlivalue' => false,
                 'contentField' => 'field_bdni_at_a_redacteur',
@@ -200,8 +215,18 @@ function _getMappingNodeSelectImportableData($tableName) {
                 'typeImpl' => 'value',
                 'importTableField' => 'field_bdni_at_a_type_de_source'
             ),
+            7 => array (
+                'name' => 'field_bdni_at_a_referentiel',
+                'mutlivalue' => false,
+                'contentField' => 'field_bdni_at_a_referentiel',
+                'type' => 'taxonomy',
+                'taxonomyVoc' => 68,
+                'taxonomyOpen' => false,
+                'typeImpl' => 'value',
+                'importTableField' => 'ref_taxo'
+            ),
             8 => array (
-               'name' => 'field_bdni_at_a_potentiel',
+                'name' => 'field_bdni_at_a_potentiel',
                 'mutlivalue' => false,
                 'contentField' => 'field_bdni_at_a_potentiel',
                 'type' => 'taxonomy',

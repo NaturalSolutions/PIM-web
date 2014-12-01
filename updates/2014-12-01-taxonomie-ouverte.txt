@@ -1,0 +1,70 @@
+1. Créer un nouveau vocabulaire avec les informations suivantes :
+- Formulaire : /admin/content/taxonomy/add/vocabulary
+- Nom du vocabulaire : Référentiels taxonomiques
+- Nom système : referentiels_taxo
+- Décocher "Allow relationships between terms in this vocabulary."
+- Laisser les valeurs par défaut pour le reste
+
+
+2. Modifier les champs taxonomiques suivants :
+- /admin/content/node-type/bd-ni-autre-terrestre-absent/fields/field_bdni_at_a_taxon
+- /admin/content/node-type/bd-ni-chiroptere-absent/fields/field_bdni_c_a_taxon
+- /admin/content/node-type/bd-ni-chiroptere-present/fields/field_bdni_c_p_taxon
+- /admin/content/node-type/bd-ni-herpetologie-absent/fields/field_bdni_h_a_taxon
+- /admin/content/node-type/bd-ni-herpetologie-present/fields/field_bdni_h_p_taxon
+- /admin/content/node-type/bd-ni-mam-terrestres-absent/fields/field_bdni_mt_a_taxon
+- /admin/content/node-type/bd-ni-mam-terrestres-present/fields/field_bdni_mt_p_taxon
+- /admin/content/node-type/bd-ni-ornithologie-absent/fields/field_bdni_o_a_taxon
+- /admin/content/node-type/bd-ni-ornithologie-present/fields/field_bdni_o_p_taxon
+- /admin/content/node-type/bd-t-fichetaxon/fields/field_bd_t_taxon_ornitho
+- /admin/content/node-type/bd-t-fichetaxon/fields/field_bd_t_taxon_herpeto
+- /admin/content/node-type/bd-t-fichetaxon/fields/field_bd_t_taxon_chiroptere
+- /admin/content/node-type/bd-t-fichetaxon/fields/field_bd_t_taxon_mam_terrestre
+
+Pour chacun, choisir "Autoriser et insérer de nouveaux termes..." dans la section "Paramètres pour les Autocomplétions" puis enregistrer.
+
+3. Modifier les types de contenu suivants :
+- /admin/content/node-type/bd-ni-autre-terrestre-absent/fields/
+- /admin/content/node-type/bd-ni-autre-terrestre-present/fields/
+- /admin/content/node-type/bd-ni-botanique-absent/fields/
+- /admin/content/node-type/bd-ni-botanique-present/fields/
+- /admin/content/node-type/bd-ni-chiroptere-absent/fields/
+- /admin/content/node-type/bd-ni-chiroptere-present/fields/
+- /admin/content/node-type/bd-ni-entomo-absent/fields/
+- /admin/content/node-type/bd-ni-entomo-present/fields/
+- /admin/content/node-type/bd-ni-herpetologie-absent/fields/
+- /admin/content/node-type/bd-ni-herpetologie-present/fields/
+- /admin/content/node-type/bd-ni-mam-terrestres-absent/fields/
+- /admin/content/node-type/bd-ni-mam-terrestres-present/fields/
+- /admin/content/node-type/bd-ni-ornithologie-absent/fields/
+- /admin/content/node-type/bd-ni-ornithologie-present/fields/
+- /admin/content/node-type/bd-t-fichetaxon/fields/
+
+Pour chacun, ajouter un champ ayant les caractéristiques suivantes :
+- étiquette = Référentiel taxonomique
+- nom du champ = field_<prefixe>_referentiel
+- type de donnée = champ de Content Taxonomy
+- élément du formulaire = Liste Déroulante
+Dans le formulaire détaillé, choisir le vocabulaire "Référentiels taxonomiques",
+cocher "Requis" et Enregistrer
+Positionner le champs juste avant le champ existant "Taxon"
+
+4. Modifier les modèles suivants (dans l'Espace collaboratif) :
+- BD_NI_Arthropode_Absent.xls
+- BD_NI_Arthropode_Present.xls
+- BD_NI_Autre_terrestre_Absent.xls
+- BD_NI_Autre_terrestre_Present.xls
+- BD_NI_Bota_Absent.xls
+- BD_NI_Bota_Present.xls
+- BD_NI_Chiro_Absent.xls
+- BD_NI_Chiro_Present.xls
+- BD_NI_Herpeto_Absent.xls
+- BD_NI_Herpeto_Present.xls
+- BD_NI_MTNV_Absent.xls
+- BD_NI_MTNV_Present.xls
+- BD_NI_Ornitho_Absent.xls
+- BD_NI_Ornitho_Present.xls
+
+Ajouter une colonne "Référentiel taxonomique" juste avant la colonne "Taxon" ou
+juste avant la colonne "Groupe" lorsqu'elle existe.
+
