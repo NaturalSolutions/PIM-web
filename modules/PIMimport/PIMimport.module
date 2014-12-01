@@ -426,20 +426,16 @@ function _generateMessageField($key, $value, &$form) {
 			break;
 			case 'warning_data':
 				$classe = 'messages warning';
-				$message=t('Warnig in data');
+				$message=t('Warning in data');
 			break;
 			case 'duplicate_data':
 				$classe = 'messages warning';
-				$message=t('Warnig duplicate');
-			break;
-			case 'warning_data':
-				$classe = 'messages warning';
-				$message=t('Warnig data');
+				$message=t('Warning duplicate');
 			break;
 			case 'summary_import':
 				$importDisable = TRUE;
 				$classe = 'messages info';
-				$message=t('Import repport');
+				$message=t('Import report');
 			break;
 		}
 	
