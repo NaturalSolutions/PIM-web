@@ -74,6 +74,13 @@ function pim_fi_node2bd($node_type, $return_bdfields = FALSE) {
   }
   $result = array();
   
+  /*
+   * ATTENTION : le code appelant est susceptible de trier le tableau avec 
+   * ksort() en utilisant le champs "order". Par conséquent, si deux champs ont la 
+   * même valeur de "order", seul le dernier est conservé.
+   * Note GB 03/12/2014
+   */
+
   /* Common fields */
   $result['node_table'] = array('field'=> 'content_type_' . $node_type, 'storage'=>'');
   
@@ -82,7 +89,8 @@ function pim_fi_node2bd($node_type, $return_bdfields = FALSE) {
     $result['ile_term_field'] = array('field'=>"field_" . $bd_prefix . "_nom_ile_code_ile", 'storage'=>'value', 'display'=>'view', 'order'=>6);
   }
   
-  $result['node_taxon'] = array('field'=>"field_" .$bd_prefix."_taxon", 'storage'=>'value', 'display'=>'view', 'order'=>1);  
+  $result['referentiel'] = array('field'=>"field_" .$bd_prefix."_referentiel", 'storage'=>'value', 'display'=>'view', 'order'=>2);
+  $result['node_taxon'] = array('field'=>"field_" .$bd_prefix."_taxon", 'storage'=>'value', 'display'=>'view', 'order'=>1);
   $result['taxon_initial_name'] = array('field'=>"field_" .$bd_prefix."_taxon_initialnam", 'storage'=>'value', 'display'=>'view', 'order'=>5);
   
   $result['node_date'] = array('field'=>"field_" .$bd_prefix."_date", 'storage'=>'value', 'display'=>'view', 'order'=>8);
