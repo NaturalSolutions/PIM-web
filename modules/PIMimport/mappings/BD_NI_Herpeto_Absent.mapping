@@ -153,7 +153,7 @@ function _getMappingNodeSelectImportableData($tableName) {
             1 => array (
                 'name' => 'field_bdni_h_a_referentiel',
                 'mutlivalue' => false,
-                'contentField' => 'field_bdni_b_p_referentiel',
+                'contentField' => 'field_bdni_h_a_referentiel',
                 'type' => 'taxonomy',
                 'taxonomyVoc' => 68,
                 'taxonomyOpen' => false,
