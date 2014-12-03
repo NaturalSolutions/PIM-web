@@ -1,0 +1,6 @@
+1. Renommer le répertoire :
+    mv sites/default/files/Espace-Collaboratif/modles_import sites/default/files/Espace-Collaboratif/modeles_import/
+
+2. Corriger les références dans la base :
+    mysql -hlocalhost -upim -ppim -DpimGilles -e "UPDATE drp_webfm_file SET fpath = replace(fpath, 'modles', 'modeles') WHERE fpath LIKE '%modles_import%';"
+
