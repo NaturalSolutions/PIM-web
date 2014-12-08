@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @file
  * Theme implementation to display a single Drupal page.
@@ -105,15 +105,16 @@
  * @see template_preprocess_page()
  * @see zen_preprocess()
  * @see zen_process()
- */                                                       
+ */
 /***************************************************************************/
 /***************************************************************************/
-/*                        PAGE PROJET-ATLAS                                */
+/*                        PAGE TYPE SOUS BASSIN                            */
 /*                                                                         */
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
-  global $base_url, $language;
+
+global $user, $base_url, $language;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language; ?>" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>">
@@ -127,6 +128,7 @@
 
  
 </head>
+
 
 <!-- recuperation de ladresse courante pr tester si on est en mode edition / visu -->
 <?php $current_url = request_uri(); ?>
@@ -197,9 +199,9 @@
   <div class="mr-propre"></div>
 
     <div id="main-wrapper" class="clearfix">
-    <!--<div id="main" class="clearfix">-->
-    <div id="main" class="clearfix<?php if ($primary_links || $navigation) { print ' with-navigation'; } ?>">
-    
+		<!--<div id="main" class="clearfix">-->
+		<div id="main" class="clearfix<?php if ($primary_links || $navigation) { print ' with-navigation'; } ?>">
+		
     <?php if($content_intro): ?>
       <div id="content-intro" class="column"><div class="section">
       <?php print $content_intro; ?>
@@ -217,7 +219,27 @@
         <?php print $breadcrumb; ?>
         <?php print $messages; ?>
         <?php if ($tabs): ?>
-          <div class="tabs"><?php if($current_url === 'edit' || $user->roles[11] == 'Mega Admin') print $tabs; ?></div>
+          <div class="tabs">
+            <?php 
+            /*if($current_url === 'edit' || $user->roles[11] == 'Mega Admin')*/ 
+            print $tabs;
+            if ( $user->uid ): ?>
+            
+              <!-- Pour ajouter le bouton commenter -->
+              <script> 
+              
+              var nodeID = "<?php echo $node->nid; ?>";
+              var base_url = "<?php echo $base_url; ?>";
+              var lang = "<?php echo $language->language; ?>";
+              if(lang == 'fr'){
+                $('ul.tabs.primary.clearfix').append("<li><a href='"+base_url+"/comment/reply/"+nodeID+"#comment-form'><span class='tab'>Commenter</span></a></li>");
+              }else{
+                $('ul.tabs.primary.clearfix').append("<li><a href='"+base_url+"/en/comment/reply/"+nodeID+"#comment-form'><span class='tab'>Comment</span></a></li>");
+              }
+              </script>
+                       
+          <?php endif; ?>
+          </div>
         <?php endif; ?>
         <?php print $help; ?>
         
@@ -233,42 +255,44 @@
           <?php print $content_top; ?>
         <?php endif; ?>
         
-        <!-- le contenu commence ici         -->
-        <div id="content-area">
+        
+        <div id="content-area" class='containerOfEncplodiePart'>
           
-          <!-- On va chercher les infos dans les vues -->
-          <?php 
-            
-            // $view = views_get_view('v_hp_atlas');
-            // $display = $view->execute_display('block_1');
-            // $textIntro = $display['content'];
-            
-          ?>
-          
-          <div class='firstLineOFHpAtlas'>
-          <?php if($language->language == 'fr') echo "<p>Atlas des PIM</p>"; else echo "<p>Atlas on western Mediterranean small islands</p>"; ?>
-          </div> 
-          <div class='secondLineOFHpAtlas'></div> 
-            
-            
-            <?php print views_embed_view('v_atlas_presentation', 'block_1'); ?>
-            <a id="btnImprim" href="<?php echo $base_url; ?>/book/export/html/56647"><?php if( $language->language == 'en') echo 'View all'; else echo 'Voir tout l\'atlas'; ?></a>
-            
-            <br/>
-            <a href="<?php echo $base_url; ?>/admin/build/menu-customize/menu-menu-atlas-hp" target='_blank' title='Editer le menu' alt='Editer le menu'>Editer le menu</a>
-            
-            <h2 class='dashboardLabel'><?php if( $language->language == 'fr') echo 'Tableau de bord'; else echo 'Dashboard'; ?> </h2> 
-            <div id='map_hp'></div>
+    
+          <!-- si on edit alors affiche content  -->
+          <?php if($current_url === 'edit' || $user->roles[11] == 'Mega Admin' || $current_url === 'revisions' || $current_url === 'view' || $current_url === 'revert'): ?>
 
+            <!-- Dans le cas ou on est dans la page qui demande confirmation pour revenir ancienne verion de révision -->
+            <?php if($current_url === 'revert') echo "<p>Êtes vous certain de vouloir renevir à cette version ?</p>"; ?>
+            <!-- Ajout d un titre dans la page vu des anciennes versions -->
+            <?php if($current_url === 'view') echo '<a href="revert" title="Revenir à cette version" class="LikeAtitle">'.$title.'</a>'; ?>  
 
-             <?php if($language->language == 'fr'): ?>
-              <h2 class='titleCommentaire'>Derniers commentaires</h2>
+            <!-- On affiche tout le contenu -->
+            <?php  print $content; ?>
+                             
+          <!-- sinon affiche vue -->
+          <?php else: ?>
+
+            <!-- Recuperation du l'iD de la node courante -->
+            <?php $nid = $node->nid; ?>
+            <!-- Envoie de l'ID dans la vue templaté -->
+            <?php print views_embed_view('v_atlas_encyplopedie_part', 'default', $nid); ?>
+            
+            <?php if($language->language == 'fr'): ?>
+              <h2 class='titleCommentaire'>Commentaires</h2>
             <?php else: ?>
-              <h2 class='titleCommentaire'>Latest comments</h2>
+              <h2 class='titleCommentaire'>Comments</h2>
             <?php endif;  ?>
-            <?php print views_embed_view('v_atlas_affiche_comment_in_hp', 'block_1'); ?>
+            <?php print views_embed_view('v_atlas_affiche_comment', 'block_1', $nid); ?>
 
-         </div><!-- fin content-area -->
+           
+
+            <?php //echo $content; ?>
+          <?php endif; ?>          
+
+
+
+        </div>
 
         <?php print $content_bottom; ?>
 
@@ -285,7 +309,7 @@
      <div class="mr-propre"></div>
 
     </div>
-    </div><!-- /#main, /#main-wrapper -->
+		</div><!-- /#main, /#main-wrapper -->
   
   <div class="mr-propre"></div>
 

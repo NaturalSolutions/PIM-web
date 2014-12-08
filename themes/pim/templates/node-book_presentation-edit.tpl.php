@@ -58,6 +58,16 @@ jQuery( document ).ready(function() {
 	}
 	
 	init(); // true	
+
+	//Pour forcer la selection de format d'entre sur PiM Atlas
+	setTimeout(function(){
+	$('.wysiwyg.wysiwyg-format-6').each(function(){
+		$(this).change();
+		//$('.addEncadre, .addSection, .addLegend').fadeIn();
+	});
+	},1000);
+
+	
 });
 
 </script>

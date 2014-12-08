@@ -144,12 +144,12 @@ $( document ).ready(function() {
 	});
 
 	//Pour forcer la selection de format d'entre sur PiM Atlas
-	//setTimeout(function(){
+	setTimeout(function(){
 	$('.wysiwyg.wysiwyg-format-6').each(function(){
 		$(this).change();
 		$('.addEncadre, .addSection, .addLegend').fadeIn();
 	});
-	//},3000);	
+	},1000);	
 
 
 	// si on click sur ajouter un encadre ou une section ou legend
@@ -165,7 +165,7 @@ $( document ).ready(function() {
 			}
 			
 			var legend = "<p style='padding-left: 30px;' data-mce-style='padding-left: 30px;'><span style='font-size: small;'><em>"+textLegend+"</em></span></p>";
-			if(textLegend) $( this ).nextAll('.form-item').find('iframe').contents().find( "p:last" ).append(legend);
+			if(textLegend) $( this ).nextAll('.form-item').find('iframe').contents().find( ".cke_show_borders" ).append(legend);
 
 		}else if($(this).hasClass( "addSection" )) {
 
@@ -178,7 +178,7 @@ $( document ).ready(function() {
 			}
 			
 			var section = "<p><strong>"+titre+"</strong></p><p>"+texte+"</p>";   					    	
-	  	    if(texte || titre) $( this ).nextAll('.form-item').find('iframe').contents().find( "p:last" ).append(section);	    	
+	  	    if(texte || titre) $( this ).nextAll('.form-item').find('iframe').contents().find( ".cke_show_borders" ).append(section);	    	
      	
      	}
      	else if($(this).hasClass( "addEncadre" )) {
@@ -196,7 +196,7 @@ $( document ).ready(function() {
 			
 			var encadre = "<p class='encadreStyle'><strong>"+titre+"</strong><br/>"+texte+"<br/><em>"+auteur+"</em></p><p>&nbsp;</p><p>&nbsp;</p>";   		
 			
-			if(texte || titre) $( this ).nextAll('.form-item').find('iframe').contents().find( "p:last" ).append(encadre);
+			if(texte || titre) $( this ).nextAll('.form-item').find('iframe').contents().find( ".cke_show_borders" ).append(encadre);
 	    	if(texte || titre) $( this ).nextAll('.form-item').find('iframe').contents().find( ".encadreStyle" ).css('backgroundColor','orange').css('padding','6px').css('border','1px solid black');
      	
      	}

@@ -1,0 +1,550 @@
+1- Ajout d'un type de contenu #
+###############################
+
+:> En tant qu'admin, sur l'url : admin/content/types/add
+:> Nom : book_encyclopedie_part
+:> Type : book_encyclopedie_part
+:> Description : Ce type de contenu correspond aux parties du projet Atlas Partie Encyclopédie
+:> Procédures de publication : decocher -> "Promu en page d'accueil"
+:> Procédures de publication : desactiver -> "Fichiers attachés"
+:> Paramètres des commentaires : Mode d'affichage par défaut -> "A plat - déplié"
+:> Paramètres des commentaires : Gestion des commentaires -> "Afficher au-dessus des commentaires"
+:> Paramètres des commentaires : Champ sujet du commentaire -> "Désactivé"
+:> Paramètres des commentaires : Aperçu du commentaire -> "Facultatif"
+:> Enregistrer
+
+
+2- Ajout Types de contenu pouvant faire partie d'un livre #
+###########################################################
+
+:> En tant qu'admin, sur l'url : admin/content/book/settings
+:> Cocher book_encyclopedie_part
+:> Enregistrer
+
+
+3- Ajout d'option de publication supplémentaires pour le nouveau type de contenu #
+##################################################################################
+
+:> En tant qu'admin, sur l'url : admin/content/custom_pub
+:> Clic sur "Edit" de la ligne "Brouillon" et cocher "book_encyclopedie_part"
+:> Enregistrer
+
+:> En tant qu'admin, sur l'url : admin/content/custom_pub
+:> Clic sur "Edit" de la ligne "A valider" et cocher "book_encyclopedie_part"
+:> Enregistrer
+
+:> En tant qu'admin, sur l'url : admin/content/custom_pub
+:> Clic sur "Edit" de la ligne "Terminé" et cocher "book_encyclopedie_part"
+:> Enregistrer
+
+
+4a- Modification d'un label #
+############################
+
+:> En tant qu'admin, sur l'url : admin/content/node-type/book-cluster/fields/field_cluster_code
+:> Clic sur "Éditer les informations de base"
+:> Etiquette -> Noms ou codes îles/îlots/archipels
+:> Enregistrer
+
+4b- Modification d'un label #
+############################
+
+:> En tant qu'admin, sur l'url : admin/content/node-type/book-cluster/fields/field_cluster_autor
+:> Texte d'aide -> Séparer les noms par une virgule
+:> Enregistrer les paramètres du champs
+
+4c- Modification d'un label #
+#############################
+
+:> En tant qu'admin, sur l'url : admin/content/node-type/book-encyclopedie-part/fields/field_encylop_author
+:> Texte d'aide -> Séparer les noms par une virgule
+:> Enregistrer les paramètres du champs
+
+4d- Modification d'un label #
+############################
+
+:> En tant qu'admin, sur l'url : admin/content/node-type/book-cluster/fields/field_cluster_code
+:> Texte d'aide -> Espacer vos valeurs par une virgule
+:> Enregistrer les paramètres du champs
+
+5a- Ajout de champs dans le nouveau type de contenu #
+####################################################
+
+:> En tant qu'admin, sur l'url : admin/content/node-type/book-encyclopedie-part/fields
+:> Etiquette -> Auteurs 
+:> Nom du champ -> field_encylop_author 
+:> Type de champ -> texte, champs texte
+:> Enregistrer
+
+# Paramètre du champs :  
+:> Texte d'aide -> Ajoutez votre nom séparé par une virgule
+:> Enregistrer les paramètres du champs
+
+5b- Ajout de champs dans le nouveau type de contenu #
+####################################################
+
+:> En tant qu'admin, sur l'url : admin/content/node-type/book-encyclopedie-part/fields
+:> Etiquette -> Corps 
+:> Nom du champ -> field_encylop_body
+:> Type de champ -> texte, zone de texte (plusieurs lignes)
+:> Enregistrer
+
+# Paramètre du champs :  
+:> Rangées -> 20
+:> Traitement du texte -> Texte filtré (l'utilisateur choisit le format d'entrée)
+:> Enregistrer les paramètres du champs
+
+6- Attribution de droits pour gérer le nouveau type de contenu #
+################################################################
+
+:> En tant qu'admin, sur l'url : admin/user/permissions
+:> cocher create book_encyclopedie_part content -> Contributeur Atlas && Mega Admin
+:> cocher edit any book_encyclopedie_part content -> Contributeur Atlas && Mega Admin
+:> cocher enter book_encyclopedie_part revision log entry -> Contributeur Atlas && Mega Admin
+:> cocher override book_encyclopedie_part published option -> Contributeur Atlas && Mega Admin
+:> cocher override book_encyclopedie_part revision option -> Contributeur Atlas && Mega Admin
+:> cocher edit field_encylop_author -> Contributeur Atlas && Mega Admin
+:> cocher view field_encylop_author -> Contributeur Atlas && Mega Admin
+:> cocher edit field_encylop_body -> Contributeur Atlas && Mega Admin
+:> cocher view field_encylop_body -> Contributeur Atlas && Mega Admin
+:> Enregistrer
+
+
+7a- Créer un contenu book_encyclopedie_part # 
+#############################################
+
+:> En tant qu'admin, sur l'url : node/add/book-encyclopedie-part
+:> Titre -> INTRODUCTION
+:> Paramètres du menu : Titre du lien dans le menu -> Introduction
+:> Paramètres du menu : Élément parent -> Menue de l'Atlas - Encyclopédie
+:> Corps -> ... 
+:> Option de publication -> Brouillon
+:> Format d'entrée -> PiM Atlas
+:> Structure du livre : Livre -> Projet Atlas
+:> Structure du livre : Élément parent  -> Encyclopédie
+:> Informations sur les révisions : cocher "Créer une nouvelle révision"
+:> Paramètres des chemins d'URL -> encyclopedie/introduction
+:> Enregistrer
+
+7b- Créer un contenu book_encyclopedie_part # 
+#############################################
+
+:> En tant qu'admin, sur l'url : node/add/book-encyclopedie-part
+:> Titre -> ASPECTS GEOGRAPHIQUES ET ENVIRONNEMENTAUX
+:> Paramètres du menu : Titre du lien dans le menu -> Géographie & Environnement
+:> Paramètres du menu : Élément parent -> Menue de l'Atlas - Encyclopédie
+:> Corps -> ... 
+:> Option de publication -> Brouillon
+:> Format d'entrée -> PiM Atlas
+:> Structure du livre : Livre -> Projet Atlas
+:> Structure du livre : Élément parent  -> Encyclopédie
+:> Informations sur les révisions : cocher "Créer une nouvelle révision"
+:> Paramètres des chemins d'URL -> encyclopedie/geographie_environnement
+:> Enregistrer
+
+7c- Créer un contenu book_encyclopedie_part # 
+#############################################
+
+:> En tant qu'admin, sur l'url : node/add/book-encyclopedie-part
+:> Titre -> UNE HISTOIRE BIOGEOGRAPHIQUE TOURMENTEE, GENERATRICE DE BIODIVERSITES
+:> Paramètres du menu : Titre du lien dans le menu -> Histoire
+:> Paramètres du menu : Élément parent -> Menue de l'Atlas - Encyclopédie
+:> Corps -> ... 
+:> Option de publication -> Brouillon
+:> Format d'entrée -> PiM Atlas
+:> Structure du livre : Livre -> Projet Atlas
+:> Structure du livre : Élément parent  -> Encyclopédie
+:> Informations sur les révisions : cocher "Créer une nouvelle révision"
+:> Paramètres des chemins d'URL -> encyclopedie/histoire
+:> Enregistrer*
+
+
+7d- Créer un contenu book_encyclopedie_part # 
+#############################################
+
+:> En tant qu'admin, sur l'url : node/add/book-encyclopedie-part
+:> Titre -> DES PETITES ILES A LA MARGE DES HOMMES
+:> Paramètres du menu : Titre du lien dans le menu -> Iles à la marge
+:> Paramètres du menu : Élément parent -> Menue de l'Atlas - Encyclopédie
+:> Corps -> ... 
+:> Option de publication -> Brouillon
+:> Format d'entrée -> PiM Atlas
+:> Structure du livre : Livre -> Projet Atlas
+:> Structure du livre : Élément parent  -> Encyclopédie
+:> Informations sur les révisions : cocher "Créer une nouvelle révision"
+:> Paramètres des chemins d'URL -> encyclopedie/iles_en_marge
+:> Enregistrer
+
+7e- Créer un contenu book_encyclopedie_part # 
+#############################################
+
+:> En tant qu'admin, sur l'url : node/add/book-encyclopedie-part
+:> Titre -> ENJEUX DE CONSERVATION ACTUELS ET PRESSIONS ENVIRONNEMENTALES
+:> Paramètres du menu : Titre du lien dans le menu -> Enjeux
+:> Paramètres du menu : Élément parent -> Menue de l'Atlas - Encyclopédie
+:> Corps -> ... 
+:> Option de publication -> Brouillon
+:> Format d'entrée -> PiM Atlas
+:> Structure du livre : Livre -> Projet Atlas
+:> Structure du livre : Élément parent  -> Encyclopédie
+:> Informations sur les révisions : cocher "Créer une nouvelle révision"
+:> Paramètres des chemins d'URL -> encyclopedie/enjeux
+:> Enregistrer
+
+7f- Créer un contenu book_encyclopedie_part # 
+#############################################
+
+:> En tant qu'admin, sur l'url : node/add/book-encyclopedie-part
+:> Titre -> STRATEGIES DE CONSERVATION ET DE GESTION
+:> Paramètres du menu : Titre du lien dans le menu -> Stratégie
+:> Paramètres du menu : Élément parent -> Menue de l'Atlas - Encyclopédie
+:> Corps -> ... 
+:> Option de publication -> Brouillon
+:> Format d'entrée -> PiM Atlas
+:> Structure du livre : Livre -> Projet Atlas
+:> Structure du livre : Élément parent  -> Encyclopédie
+:> Informations sur les révisions : cocher "Créer une nouvelle révision"
+:> Paramètres des chemins d'URL -> encyclopedie/strategie
+:> Enregistrer
+
+8- Importer la vue v_atlas_encyplopedie_part #
+##############################################
+
+$view = new view;
+$view->name = 'v_atlas_encyplopedie_part';
+$view->description = 'Affiche le contenu d\'une partie de l\'encyplopédie';
+$view->tag = 'atlas';
+$view->view_php = '';
+$view->base_table = 'node';
+$view->is_cacheable = FALSE;
+$view->api_version = 2;
+$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+$handler = $view->new_display('default', 'Paramètres par défaut', 'default');
+$handler->override_option('fields', array(
+  'field_encylop_author_value' => array(
+    'label' => 'Auteurs',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'link_class' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'target' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+      'strip_tags' => 0,
+    ),
+    'empty' => '',
+    'hide_empty' => 0,
+    'empty_zero' => 0,
+    'link_to_node' => 0,
+    'label_type' => 'widget',
+    'format' => 'default',
+    'multiple' => array(
+      'group' => TRUE,
+      'multiple_number' => '',
+      'multiple_from' => '',
+      'multiple_reversed' => FALSE,
+    ),
+    'exclude' => 0,
+    'id' => 'field_encylop_author_value',
+    'table' => 'node_data_field_encylop_author',
+    'field' => 'field_encylop_author_value',
+    'relationship' => 'none',
+  ),
+  'nid' => array(
+    'label' => 'Nid',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'link_class' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'target' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+      'strip_tags' => 0,
+    ),
+    'empty' => '',
+    'hide_empty' => 0,
+    'empty_zero' => 0,
+    'link_to_node' => 0,
+    'exclude' => 0,
+    'id' => 'nid',
+    'table' => 'node',
+    'field' => 'nid',
+    'relationship' => 'none',
+  ),
+  'field_encylop_body_value' => array(
+    'label' => 'Corps',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'link_class' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'target' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+      'strip_tags' => 0,
+    ),
+    'empty' => '',
+    'hide_empty' => 0,
+    'empty_zero' => 0,
+    'link_to_node' => 0,
+    'label_type' => 'widget',
+    'format' => 'default',
+    'multiple' => array(
+      'group' => TRUE,
+      'multiple_number' => '',
+      'multiple_from' => '',
+      'multiple_reversed' => FALSE,
+    ),
+    'exclude' => 0,
+    'id' => 'field_encylop_body_value',
+    'table' => 'node_data_field_encylop_body',
+    'field' => 'field_encylop_body_value',
+    'relationship' => 'none',
+  ),
+  'title' => array(
+    'label' => 'Titre',
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'link_class' => '',
+      'alt' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'target' => '',
+      'help' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 1,
+      'ellipsis' => 1,
+      'html' => 0,
+      'strip_tags' => 0,
+    ),
+    'empty' => '',
+    'hide_empty' => 0,
+    'empty_zero' => 0,
+    'link_to_node' => 0,
+    'exclude' => 0,
+    'id' => 'title',
+    'table' => 'node',
+    'field' => 'title',
+    'relationship' => 'none',
+  ),
+));
+$handler->override_option('arguments', array(
+  'nid' => array(
+    'default_action' => 'ignore',
+    'style_plugin' => 'default_summary',
+    'style_options' => array(),
+    'wildcard' => 'all',
+    'wildcard_substitution' => 'Tous / Toutes',
+    'title' => '',
+    'breadcrumb' => '',
+    'default_argument_type' => 'fixed',
+    'default_argument' => '',
+    'validate_type' => 'none',
+    'validate_fail' => 'not found',
+    'break_phrase' => 0,
+    'not' => 0,
+    'id' => 'nid',
+    'table' => 'node',
+    'field' => 'nid',
+    'validate_user_argument_type' => 'uid',
+    'validate_user_roles' => array(
+      '2' => 0,
+      '9' => 0,
+      '5' => 0,
+      '12' => 0,
+      '6' => 0,
+      '11' => 0,
+    ),
+    'relationship' => 'none',
+    'default_options_div_prefix' => '',
+    'default_argument_fixed' => '',
+    'default_argument_user' => 0,
+    'default_argument_image_size' => '_original',
+    'default_argument_php' => '',
+    'validate_argument_node_type' => array(
+      'image' => 0,
+      'mapcontext' => 0,
+      'wms' => 0,
+      'book_cluster' => 0,
+      'book_ile' => 0,
+      'book_sous_bassin' => 0,
+      'book_super_partie' => 0,
+      'ispecies' => 0,
+      'bandeau' => 0,
+      'bd_i_caracteristiques_environnem' => 0,
+      'bd_i_description_physique' => 0,
+      'bd_i_gestionnaire' => 0,
+      'bd_i_multipop' => 0,
+      'bd_i_occupation' => 0,
+      'bd_i_photos_illustrations' => 0,
+      'bd_i_population' => 0,
+      'bd_i_problemes_et_menaces' => 0,
+      'bd_i_reglementation_activite' => 0,
+      'bd_i_statut_de_propriete' => 0,
+      'bd_i_statut_de_protection' => 0,
+      'bd_ni_autre_terrestre_absent' => 0,
+      'bd_ni_autre_terrestre_present' => 0,
+      'bd_ni_botanique_absent' => 0,
+      'bd_ni_botanique_present' => 0,
+      'bd_ni_chiroptere_absent' => 0,
+      'bd_ni_chiroptere_present' => 0,
+      'bd_ni_entomo_absent' => 0,
+      'bd_ni_entomo_present' => 0,
+      'bd_ni_faune_flore_marine_absent' => 0,
+      'bd_ni_faune_flore_marine_present' => 0,
+      'bd_ni_herpetologie_absent' => 0,
+      'bd_ni_herpetologie_present' => 0,
+      'bd_ni_mam_terrestres_absent' => 0,
+      'bd_ni_mam_terrestres_present' => 0,
+      'bd_ni_ornithologie_absent' => 0,
+      'bd_ni_ornithologie_present' => 0,
+      'bd_p_herpeto_diurne' => 0,
+      'bd_t_fichetaxon' => 0,
+      'book' => 0,
+      'book_charte' => 0,
+      'book_encyclopedie_part' => 0,
+      'book_glossaire' => 0,
+      'book_normes' => 0,
+      'book_presentation' => 0,
+      'contenu_test' => 0,
+      'document' => 0,
+      'image_logo' => 0,
+      'membres' => 0,
+      'news' => 0,
+      'og_group' => 0,
+      'page' => 0,
+      'pages_chapeau' => 0,
+      'partenaire_bailleur' => 0,
+      'photos' => 0,
+      'profile' => 0,
+      'programme' => 0,
+      'region' => 0,
+      'story' => 0,
+    ),
+    'validate_argument_node_access' => 0,
+    'validate_argument_nid_type' => 'nid',
+    'validate_argument_vocabulary' => array(
+      '4' => 0,
+      '11' => 0,
+      '10' => 0,
+      '38' => 0,
+      '14' => 0,
+      '17' => 0,
+      '7' => 0,
+      '15' => 0,
+      '13' => 0,
+      '63' => 0,
+      '59' => 0,
+      '66' => 0,
+      '24' => 0,
+      '53' => 0,
+      '41' => 0,
+      '57' => 0,
+      '39' => 0,
+      '44' => 0,
+      '51' => 0,
+      '52' => 0,
+      '40' => 0,
+      '36' => 0,
+      '56' => 0,
+      '64' => 0,
+      '55' => 0,
+      '28' => 0,
+      '29' => 0,
+      '26' => 0,
+      '21' => 0,
+      '37' => 0,
+      '12' => 0,
+      '27' => 0,
+      '25' => 0,
+      '23' => 0,
+      '18' => 0,
+      '54' => 0,
+      '20' => 0,
+      '65' => 0,
+      '5' => 0,
+      '46' => 0,
+      '16' => 0,
+      '1' => 0,
+      '3' => 0,
+      '43' => 0,
+      '42' => 0,
+      '58' => 0,
+      '8' => 0,
+    ),
+    'validate_argument_type' => 'tid',
+    'validate_argument_transform' => 0,
+    'validate_user_restrict_roles' => 0,
+    'image_size' => array(
+      '_original' => '_original',
+      'thumbnail' => 'thumbnail',
+      'preview' => 'preview',
+    ),
+    'validate_argument_is_member' => 'OG_VIEWS_DO_NOT_VALIDATE_MEMBERSHIP',
+    'validate_argument_group_node_type' => array(
+      'og_group' => 0,
+    ),
+    'validate_argument_php' => '',
+  ),
+));
+$handler->override_option('filters', array(
+  'type' => array(
+    'operator' => 'in',
+    'value' => array(
+      'book_encyclopedie_part' => 'book_encyclopedie_part',
+    ),
+    'group' => '0',
+    'exposed' => FALSE,
+    'expose' => array(
+      'operator' => FALSE,
+      'label' => '',
+    ),
+    'id' => 'type',
+    'table' => 'node',
+    'field' => 'type',
+    'relationship' => 'none',
+  ),
+));
+$handler->override_option('access', array(
+  'type' => 'none',
+));
+$handler->override_option('cache', array(
+  'type' => 'none',
+));
+$handler->override_option('items_per_page', 0);
+
+
+
+
+
+

@@ -327,13 +327,13 @@ for($i=0;$i<count($res);$i++){
     <!--  Recap Cluster -->
     <TABLE class='tableRecapIle'>
       <TR>
-        <th>Nom des îles</th>
-        <th>Surface emmergé cumulé</th>
+        <th><center>îles</center></th>
+        <th>Surface emergée cumulée<br/><br/><center>(ha)</center></th>
         <th>Nombre d'îles avec au moins 1 statut de protection</th>
         <th>Nombre d'îles avec au moins 1 gestionnaire</th>
-        <th>Nombre d'îles publique</th>
-        <th>Nombre d'îles privé</th>
-        <th>Nombre d'îles privé/publique</th>
+        <th>Nombre d'îles publiques</th>
+        <th>Nombre d'îles privées</th>
+        <th>Nombre d'îles <br/>privées/<br/>publiques</th>
       </TR>
       <TR>
         <td><?php if(!empty($allNamesIles)) echo $allNamesIles; else echo '-'; ?></td>

@@ -115,15 +115,18 @@ function _zen_theme(&$existing, $type, $theme, $path) {
       'book_charte_node_form' => array(
          'arguments' => array('form' => NULL),
          'template' => 'templates/node-book_charte-edit'),
-      'book_charte_node_form' => array(
+      'book_glossaire_node_form' => array(
          'arguments' => array('form' => NULL),
          'template' => 'templates/node-book_glossaire-edit'), 
-      'book_charte_node_form' => array(
+      'book_normes_node_form' => array(
          'arguments' => array('form' => NULL),
          'template' => 'templates/node-book_normes-edit'), 
       'book_presentation_node_form' => array(
          'arguments' => array('form' => NULL),
-         'template' => 'templates/node-book_presentation-edit'), 
+         'template' => 'templates/node-book_presentation-edit'),
+      'book_encyclopedie_part_node_form' => array(
+         'arguments' => array('form' => NULL),
+         'template' => 'templates/node-book_encyclopedie_part-edit'), 
      
    ); 
 }
