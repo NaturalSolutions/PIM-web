@@ -180,6 +180,8 @@
             <?php   
             //$parts = explode(':', $field_bdi_dp_archipel_rendered, 2);
             //print $parts[0];
+
+            //print $node->nid;
             if ($is_archipel) {
               print t("Archipel's Islands");
             } else {

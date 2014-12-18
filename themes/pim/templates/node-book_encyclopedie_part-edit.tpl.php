@@ -41,13 +41,11 @@ $( document ).ready(function() {
 // Handler for .ready() called.
 
 	//Pour faire correspondre l'etat "Promu en page d'accueil" avec "A valider" et l'état "Epinglé en haut des listes" avec "Terminé"
-	$('#edit-avalider-wrapper input').change(function(){
-		//alert(  $(this).attr('checked')  );
+	$('#edit-avalider-wrapper input').change(function(){	
 		if($(this).attr('checked') == true) $('#edit-promote-wrapper input').attr('checked',true);
 		else $('#edit-promote-wrapper input').attr('checked',false);
 	});
 	$('#edit-termine-wrapper input').change(function(){
-		//alert(  $(this).attr('checked')  );
 		if($(this).attr('checked') == true) $('#edit-sticky-wrapper input').attr('checked',true);
 		else $('#edit-sticky-wrapper input').attr('checked',false);
 	});

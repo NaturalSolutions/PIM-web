@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @file
  * Theme implementation to display a single Drupal page.
@@ -105,21 +105,13 @@
  * @see template_preprocess_page()
  * @see zen_preprocess()
  * @see zen_process()
- */                                                       
-/***************************************************************************/
-/***************************************************************************/
-/*                        PAGE PROJET-ATLAS                                */
-/*                                                                         */
-/***************************************************************************/
-/*********************************  ****************************************/
-/*********************************  ****************************************/
-  global $base_url, $language;
+ */
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language; ?>" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>">
 
 <head>
-  <title><?php print $head_title; ?></title>
+  <title><?php print "ENCADRE | Initiative PIM"; ?></title>
   
   <?php print $head; ?>
   <?php print $styles; ?>
@@ -127,13 +119,6 @@
 
  
 </head>
-
-<!-- recuperation de ladresse courante pr tester si on est en mode edition / visu -->
-<?php $current_url = request_uri(); ?>
-<?php $current_url = explode('/', $current_url ); ?>
-<?php $current_url = $current_url[ count($current_url) - 1]; ?>
-
-
 <body class="<?php print $classes; ?>">
 
   <?php if ($primary_links): ?>
@@ -197,9 +182,9 @@
   <div class="mr-propre"></div>
 
     <div id="main-wrapper" class="clearfix">
-    <!--<div id="main" class="clearfix">-->
-    <div id="main" class="clearfix<?php if ($primary_links || $navigation) { print ' with-navigation'; } ?>">
-    
+		<!--<div id="main" class="clearfix">-->
+		<div id="main" class="clearfix<?php if ($primary_links || $navigation) { print ' with-navigation'; } ?>">
+		
     <?php if($content_intro): ?>
       <div id="content-intro" class="column"><div class="section">
       <?php print $content_intro; ?>
@@ -217,7 +202,7 @@
         <?php print $breadcrumb; ?>
         <?php print $messages; ?>
         <?php if ($tabs): ?>
-          <div class="tabs"><?php if($current_url === 'edit' || $user->roles[11] == 'Mega Admin') print $tabs; ?></div>
+          <div class="tabs"><?php print $tabs; ?></div>
         <?php endif; ?>
         <?php print $help; ?>
         
@@ -233,41 +218,12 @@
           <?php print $content_top; ?>
         <?php endif; ?>
         
-        <!-- le contenu commence ici         -->
         <div id="content-area">
-          
-          <!-- On va chercher les infos dans les vues -->
-          <?php 
-            
-            // $view = views_get_view('v_hp_atlas');
-            // $display = $view->execute_display('block_1');
-            // $textIntro = $display['content'];
-            
-          ?>
-          
-          <div class='firstLineOFHpAtlas'>
-          <?php if($language->language == 'fr') echo "<p>Atlas des PIM</p>"; else echo "<p>Atlas on western Mediterranean small islands</p>"; ?>
-          </div> 
-          <div class='secondLineOFHpAtlas'></div> 
-            
-            
-            <?php print views_embed_view('v_atlas_presentation', 'block_1'); ?>
-            <a id="btnImprim" href="<?php echo $base_url; ?>/book/export/html/56647"><?php if( $language->language == 'en') echo 'View all'; else echo 'Voir tout l\'atlas'; ?></a>
-            
-            <br/>
-                        
-            <h2 class='dashboardLabel'><?php if( $language->language == 'fr') echo 'Tableau de bord'; else echo 'Dashboard'; ?> </h2> 
-            <div id='map_hp'></div>
-
-
-             <?php if($language->language == 'fr'): ?>
-              <h2 class='titleCommentaire'>Derniers commentaires</h2>
-            <?php else: ?>
-              <h2 class='titleCommentaire'>Latest comments</h2>
-            <?php endif;  ?>
-            <?php print views_embed_view('v_atlas_affiche_comment_in_hp', 'block_1'); ?>
-
-         </div><!-- fin content-area -->
+          <?php //print $content; ?>
+          <h1>Les encadrés</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <?php print views_embed_view('v_atlas_affiche_all_encadre', 'block_1'); ?>
+        </div>
 
         <?php print $content_bottom; ?>
 
@@ -284,7 +240,7 @@
      <div class="mr-propre"></div>
 
     </div>
-    </div><!-- /#main, /#main-wrapper -->
+		</div><!-- /#main, /#main-wrapper -->
   
   <div class="mr-propre"></div>
 
@@ -341,5 +297,40 @@
   ga('create', 'UA-28879746-1', 'initiative-pim.org');
   ga('send', 'pageview');
 
+
+
+//Show / Hide du texte de l'encadre
+jQuery( document ).ready(function() {
+
+ //Clic sur en savoir+
+ jQuery('.enSavoirPlus').click(function(){
+
+    var encadre = jQuery(this).prevAll('.encadreStyle');
+
+    //Si état = hide
+    if(jQuery(this).text() == 'Voir+'){
+
+      encadre.children().css( "display", "inline" );
+      encadre.css('color','#666666').css('height','auto').css('minHeight','16px');
+
+      encadre.find('em').css('float','none').css('paddingLeft','0');
+
+      jQuery(this).text('Réduire');
+
+    //si état == visible
+    }else{
+    
+      encadre.children().not('strong, em').css( "display", "none" );
+      encadre.css('color','#FFA500').css('height','16px');
+
+      encadre.find('em').css('float','left').css('paddingLeft','10px');
+
+      jQuery(this).text('Voir+');
+
+    }
+
+ });
+ 
+});
 </script>
 </html>
