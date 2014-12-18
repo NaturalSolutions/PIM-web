@@ -36,7 +36,7 @@ function PIMimport_check(&$form_state) {
 		}
 		else {
 			global $base_url;
-			$href =  $base_url.'/sites/default/files/Espace-Collaboratif/modles_import/'.$importType.'.xls';
+			$href =  $base_url.'/sites/default/files/Espace-Collaboratif/modeles_import/'.$importType.'.xls';
 			$message['error_system'] = t('Invalid template. Import impossible ! <a id="getTemplate" class="blank cleanlink" href="'.$href .'">Get template</a>');
 		}
 	}

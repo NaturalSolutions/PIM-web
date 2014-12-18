@@ -2,7 +2,7 @@
 function getTemplateLink() {
     var lnk = document.getElementById("getTemplate"),
         importType = document.getElementById("import_type"),
-        baseURL = Drupal.settings.basePath + 'sites/default/files/Espace-Collaboratif/modles_import/';
+        baseURL = Drupal.settings.basePath + 'sites/default/files/Espace-Collaboratif/modeles_import/';
     lnk.href = baseURL + importType.value + '.xls';
 }
 
