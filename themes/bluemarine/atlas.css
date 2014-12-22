@@ -1,0 +1,36 @@
+/***************************************************************************/
+/***************************************************************************/
+/*                           PAGE MENU ATLAS                               */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.not-admin.menuAtlas ul.tabs.primary li.active{
+	display: block;
+}
+body.not-admin.menuAtlas table.sticky-enabled.tabledrag-processed.sticky-table{
+	width: 100%;
+}
+body.not-admin.menuAtlas td#sidebar-right li.ar, body.not-admin.menuAtlas td#sidebar-right li.it, body.not-admin.menuAtlas td#sidebar-right li.es {
+	display: none;
+}
+body.not-admin.menuAtlas ul.tabs.primary li{
+	display: none;
+}
+body.not-admin.menuAtlas table#menu-overview tr td:last-child, body.not-admin.menuAtlas table#menu-overview tr th.checkbox, body.not-admin.menuAtlas table#menu-overview tr th:nth-child(3){
+	display: none;
+}
+body.not-admin.menuAtlas table#menu-overview tr td:nth-child(3), body.not-admin.menuAtlas table#menu-overview tr td:nth-child(2){
+	display: none;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                           PAGE MENU ATLAS                               */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.not-admin.menuAtlas.pageMenu div#edit-menu-link-path-wrapper, body.not-admin.menuAtlas.pageMenu div.hierarchical-select-wrapper-wrapper, body.not-admin.menuAtlas.pageMenu div#edit-menu-weight-wrapper, body.not-admin.menuAtlas.pageMenu input#edit-delete, body.not-admin.menuAtlas.pageMenu div#edit-menu-enabled-wrapper, body.not-admin.menuAtlas.pageMenu div#edit-menu-expanded-wrapper{
+	display: none;
+}
+

@@ -1,0 +1,313 @@
+
+PLAN #
+######
+## Penser à la petite modif faite en production : sur le fichier "block-nice_menu-5.tpl.php" :> Décommenter pour redoner l'accès au menu
+
+
+ENVOIE MAIL AUTO #
+##################
+
+En tant qu'admin, sur l'url : admin/user/permissions
+#Ajout de droits : 
+:> override book_encyclopedie_part promote to front page option -> Contributeur Atlas && Mage Admin
+:> override book_encyclopedie_part sticky option -> Contributeur Atlas && Mage Admin
+
+:> Ajout de droit sur : override book_sous_bassin promote to front page option -> Contributeur Atlas && Mage Admin
+:> Ajout de droit sur : override book_sous_bassin sticky option -> Contributeur Atlas && Mage Admin
+
+:> Ajout de droit sur : override book_cluster promote to front page option -> Contributeur Atlas && Mage Admin
+:> Ajout de droit sur : override book_cluster sticky option -> Contributeur Atlas && Mage Admin
+
+:> Ajout de droit sur : override book_ile promote to front page option -> Contributeur Atlas && Mage Admin
+:> Ajout de droit sur : override book_ile sticky option -> Contributeur Atlas && Mage Admin
+
+:> Notifier les changements d'alias -> Contributeur Atlas
+
+:> Ajout du module Rules depuis : https://www.drupal.org/project/rules  
+:> Activation de "Rules" et "Rules Administration UI"
+:> Règle 1 : ##{{
+	array (
+  'rules' => 
+  array (
+    'rules_book_mail_lors_changement_de_statut_avalider' => 
+    array (
+      '#type' => 'rule',
+      '#set' => 'event_node_update',
+      '#label' => 'book - mail lors changement de statut vers A valider',
+      '#active' => 1,
+      '#weight' => '0',
+      '#categories' => 
+      array (
+        0 => 'atlas',
+      ),
+      '#status' => 'custom',
+      '#conditions' => 
+      array (
+        0 => 
+        array (
+          '#type' => 'condition',
+          '#settings' => 
+          array (
+            '#argument map' => 
+            array (
+              'node' => 'node',
+            ),
+          ),
+          '#name' => 'rules_condition_content_is_promoted',
+          '#info' => 
+          array (
+            'label' => 'Updated content is promoted to frontpage',
+            'arguments' => 
+            array (
+              'node' => 
+              array (
+                'type' => 'node',
+                'label' => 'Contenu',
+              ),
+            ),
+            'module' => 'Node',
+          ),
+          '#weight' => 0,
+        ),
+        1 => 
+        array (
+          '#weight' => 0,
+          '#info' => 
+          array (
+            'label' => 'Updated content is book_cluster ou book_encyclopedie_part ou book_ile ou book_sous_bassin',
+            'arguments' => 
+            array (
+              'node' => 
+              array (
+                'type' => 'node',
+                'label' => 'Contenu',
+              ),
+            ),
+            'module' => 'Node',
+          ),
+          '#name' => 'rules_condition_content_is_type',
+          '#settings' => 
+          array (
+            'type' => 
+            array (
+              'book_cluster' => 'book_cluster',
+              'book_encyclopedie_part' => 'book_encyclopedie_part',
+              'book_ile' => 'book_ile',
+              'book_sous_bassin' => 'book_sous_bassin',
+            ),
+            '#argument map' => 
+            array (
+              'node' => 'node',
+            ),
+          ),
+          '#type' => 'condition',
+        ),
+      ),
+      '#actions' => 
+      array (
+        0 => 
+        array (
+          '#weight' => 0,
+          '#info' => 
+          array (
+            'label' => 'Send a mail to an arbitrary mail address',
+            'module' => 'System',
+            'eval input' => 
+            array (
+              0 => 'subject',
+              1 => 'message',
+              2 => 'from',
+              3 => 'to',
+            ),
+          ),
+          '#name' => 'rules_action_mail',
+          '#settings' => 
+          array (
+            'to' => 'p.delaunay1@gmail.com',
+            'from' => 'contact@pim.org',
+            'subject' => '[:global:site-name] - Changement de statut',
+            'message' => 'La page "[node:title]" est désormais "A valider" depuis le [:global:site-date-small]
+
+Vous pouvez éditer cette page à l\'adresse [:global:current-page-url]
+
+Bonne journée
+',
+            '#eval input' => 
+            array (
+              'token_rules_input_evaluator' => 
+              array (
+                'subject' => 
+                array (
+                  0 => ':global',
+                ),
+                'message' => 
+                array (
+                  0 => 'node',
+                  1 => ':global',
+                ),
+                'from' => 
+                array (
+                  0 => ':global',
+                ),
+                'to' => 
+                array (
+                  0 => ':global',
+                ),
+              ),
+            ),
+          ),
+          '#type' => 'action',
+        ),
+      ),
+      '#version' => 6003,
+    ),
+  ),
+)
+###}}
+
+:> Règle 2 : ##{{ 
+array (
+  'rules' => 
+  array (
+    'rules_book_mail_lors_changement_de_statut_terminer' => 
+    array (
+      '#type' => 'rule',
+      '#set' => 'event_node_update',
+      '#label' => 'book - mail lors changement de statut vers Terminer',
+      '#active' => 1,
+      '#weight' => '0',
+      '#categories' => 
+      array (
+        0 => 'atlas',
+      ),
+      '#status' => 'custom',
+      '#conditions' => 
+      array (
+        0 => 
+        array (
+          '#weight' => 0,
+          '#type' => 'condition',
+          '#settings' => 
+          array (
+            '#argument map' => 
+            array (
+              'node' => 'node',
+            ),
+          ),
+          '#name' => 'rules_condition_content_is_sticky',
+          '#info' => 
+          array (
+            'label' => 'Updated content is sticky',
+            'arguments' => 
+            array (
+              'node' => 
+              array (
+                'type' => 'node',
+                'label' => 'Contenu',
+              ),
+            ),
+            'module' => 'Node',
+          ),
+        ),
+        1 => 
+        array (
+          '#weight' => 0,
+          '#info' => 
+          array (
+            'label' => 'Updated content is book_cluster ou book_encyclopedie_part ou book_ile ou book_sous_bassin',
+            'arguments' => 
+            array (
+              'node' => 
+              array (
+                'type' => 'node',
+                'label' => 'Contenu',
+              ),
+            ),
+            'module' => 'Node',
+          ),
+          '#name' => 'rules_condition_content_is_type',
+          '#settings' => 
+          array (
+            'type' => 
+            array (
+              'book_cluster' => 'book_cluster',
+              'book_encyclopedie_part' => 'book_encyclopedie_part',
+              'book_ile' => 'book_ile',
+              'book_sous_bassin' => 'book_sous_bassin',
+            ),
+            '#argument map' => 
+            array (
+              'node' => 'node',
+            ),
+          ),
+          '#type' => 'condition',
+        ),
+      ),
+      '#actions' => 
+      array (
+        0 => 
+        array (
+          '#weight' => 0,
+          '#info' => 
+          array (
+            'label' => 'Send a mail to an arbitrary mail address',
+            'module' => 'System',
+            'eval input' => 
+            array (
+              0 => 'subject',
+              1 => 'message',
+              2 => 'from',
+              3 => 'to',
+            ),
+          ),
+          '#name' => 'rules_action_mail',
+          '#settings' => 
+          array (
+            'to' => 'p.delaunay1@gmail.com',
+            'from' => 'contact@pim.org',
+            'subject' => '[:global:site-name] - Changement de statut',
+            'message' => 'La page "[node:title]" est désormais "A valider" depuis le [:global:site-date-small]
+
+Vous pouvez éditer cette page à l\'adresse [:global:current-page-url]
+
+Bonne journée
+',
+            '#eval input' => 
+            array (
+              'token_rules_input_evaluator' => 
+              array (
+                'subject' => 
+                array (
+                  0 => ':global',
+                ),
+                'message' => 
+                array (
+                  0 => 'node',
+                  1 => ':global',
+                ),
+                'from' => 
+                array (
+                  0 => ':global',
+                ),
+                'to' => 
+                array (
+                  0 => ':global',
+                ),
+              ),
+            ),
+          ),
+          '#type' => 'action',
+        ),
+      ),
+      '#version' => 6003,
+    ),
+  ),
+)
+##}}
+
+
+ENCADRE #
+#########
+
+:> en tant qu'admin, sur l'url : admin/build/menu-customize/menu-menu-atlas-hp
+:> Activer les items "Encadrés" et "Blocks" du menu Atlas

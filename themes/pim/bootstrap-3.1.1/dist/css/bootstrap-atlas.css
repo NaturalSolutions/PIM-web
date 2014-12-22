@@ -2093,6 +2093,7 @@ body.page-projet-atlas-encadres div.view-v-atlas-affiche-all-encadre p.encadreSt
   display: block;
   margin-bottom: 4px;
   color: #FFA500;
+  overflow: hidden;
 }
 body.page-projet-atlas-encadres div.view-v-atlas-affiche-all-encadre div.conteneurRelatif {
   position: relative;
