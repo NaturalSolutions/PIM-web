@@ -25,12 +25,24 @@ body.not-admin.menuAtlas table#menu-overview tr td:nth-child(3), body.not-admin.
 }
 /***************************************************************************/
 /***************************************************************************/
-/*                           PAGE MENU ATLAS                               */
+/*                           PAGE MENU ATLAS IN                            */
 /*                                                                         */
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
 body.not-admin.menuAtlas.pageMenu div#edit-menu-link-path-wrapper, body.not-admin.menuAtlas.pageMenu div.hierarchical-select-wrapper-wrapper, body.not-admin.menuAtlas.pageMenu div#edit-menu-weight-wrapper, body.not-admin.menuAtlas.pageMenu input#edit-delete, body.not-admin.menuAtlas.pageMenu div#edit-menu-enabled-wrapper, body.not-admin.menuAtlas.pageMenu div#edit-menu-expanded-wrapper{
+	display: none;
+}
+body.not-admin.menuAtlas.pageMenu div#edit-name-wrapper div.description, body.not-admin.menuAtlas.pageMenu div#edit-description-wrapper div.description, body.not-admin.menuAtlas.pageMenu div#edit-weight-wrapper{
+	display: none;
+}
+body.not-admin.menuAtlas.glossaire.pageMenu #edit-delete{
+	display: inline;
+}
+body.not-admin.menuAtlas.glossaire.pageMenu select#edit-language option[value="ar"], body.not-admin.menuAtlas.glossaire.pageMenu select#edit-language option[value="it"], body.not-admin.menuAtlas.glossaire.pageMenu select#edit-language option[value="es"]{
+	display: none;
+}
+body.not-admin.menuAtlas.glossaire.pageMenu #taxonomy-form-term > div > fieldset:nth-child(7), body.not-admin.menuAtlas.glossaire.pageMenu #taxonomy-form-term > div > fieldset:nth-child(8){
 	display: none;
 }
 

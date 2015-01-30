@@ -10,7 +10,48 @@
   <script type="text/javascript"><?php /* Needed to avoid Flash of Unstyle Content in IE */ ?> </script>
 </head>
 
-<body <?php if($is_admin != TRUE) echo "class='not-admin menuAtlas pageMenu'"; ?> >
+
+<?php 
+global $base_url;
+//get current url
+function getUrl() {
+  $url  = @( $_SERVER["HTTPS"] != 'on' ) ? 'http://'.$_SERVER["SERVER_NAME"] :  'https://'.$_SERVER["SERVER_NAME"];
+  $url .= ( $_SERVER["SERVER_PORT"] !== 80 ) ? ":".$_SERVER["SERVER_PORT"] : "";
+  $url .= $_SERVER["REQUEST_URI"];
+  return $url;
+}
+$currentPage = explode('/', getUrl());
+$currentPage = $currentPage[count($currentPage) - 1];
+?>
+
+<body 
+<?php 
+  if($currentPage != 'glossaire' && $currentPage != 'term' && $is_admin != TRUE) echo "class='not-admin menuAtlas pageMenu'"; 
+  else if($currentPage == 'glossaire' || $currentPage == 'term' && $is_admin != TRUE) echo "class='not-admin menuAtlas pageMenu glossaire'"; ?> 
+> <!-- Fermeture balise body -->
+
+
+<?php if($is_admin != TRUE): ?>
+
+  <script>jQuery( document ).ready(function() { isAdmin = false; });</script>
+  
+<?php else: ?>
+
+  <script>jQuery( document ).ready(function() { isAdmin = true; });</script>  
+
+<?php endif; ?>
+
+<?php if($currentPage == 'glossaire' || $currentPage == 'term'): ?>
+
+  <script>jQuery( document ).ready(function() { isGlossaire = true; });</script>
+  
+<?php else: ?>
+
+  <script>jQuery( document ).ready(function() { isGlossaire = false; });</script>
+
+<?php endif; ?>
+
+<script>var base_url = '<?php echo $base_url; ?>';</script>
 
 <table border="0" cellpadding="0" cellspacing="0" id="header">
   <tr>
@@ -56,6 +97,35 @@
 <div id="footer">
   <?php print $footer_message ?>
   <?php print $footer ?>
+
+<script>
+  jQuery( document ).ready(function() {
+
+    if(!isAdmin) $('fieldset.collapsed').removeClass('collapsed');
+    
+    if(!isAdmin && isGlossaire){
+
+      $('.messages.status').html("Le nouveau terme '<em>isGlossaire</em>' a été créé. Cliquez <a href='"+base_url+"/projet-atlas/glossaire'>ici</a> pour revenir au glossaire");
+    
+
+      // var blocTermeLiee = $('#edit-relations-68-wrapper').html(); 
+      // $('#edit-relations-68-wrapper').hide(); 
+
+      // $('#edit-synonyms-wrapper').after('<div class="form-item" id="edit-relations-68-wrapper">'+blocTermeLiee+'</div>');
+
+      $('div#edit-relations-68-wrapper label').text('Traduction :');   
+      
+
+    
+
+    } 
+    
+
+  });
+  
+</script>
+
+
 </div>
 <?php print $closure ?>
 </body>

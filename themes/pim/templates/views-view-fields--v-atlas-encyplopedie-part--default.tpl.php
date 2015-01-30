@@ -55,6 +55,12 @@
   <?php endif; ?>
 <?php endif;?>
 
+<?php if ($id == 'field_encyclop_biblio_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_biblio_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
 
 
 <?php endforeach; ?>
@@ -68,16 +74,14 @@
   <br/>
   <br/>
 
-
-  
-  <!-- <h3>1 - Introduction</h3> -->
-  <!-- <div class='indentRight1'> -->
-    
+      
     <?php echo $field_encylop_body_value; ?>
-    
-  <!-- </div> -->
 
-  
+    <?php if($field_encyclop_biblio_value): ?>
+      <h3>Principales ressources bibliographiques :</h3>
+      <?php echo $field_encyclop_biblio_value; ?>
+    <?php endif; ?>
+    
 
 <?php else: ?>
 
@@ -86,15 +90,17 @@
   <br/>Written by: <i><?php echo $field_encylop_author_value; ?></i>
 
 
-     <br/>
   <br/>
   <br/>
-  <!-- <h3>1 - Introduction</h3> -->
-  <!-- <div class='indentRight1'> -->
+  <br/>
     
     <?php echo $field_encylop_body_value; ?>
-    
-  <!-- </div> -->
 
+    
+    <?php if($field_encyclop_biblio_value): ?>
+      <h3>Principales ressources bibliographiques :</h3>
+      <?php echo $field_encyclop_biblio_value; ?>
+    <?php endif; ?>
+    
   
 <?php endif; ?>

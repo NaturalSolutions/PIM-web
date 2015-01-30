@@ -24,6 +24,22 @@ global $base_url, $language, $node;
 
 <?php endif; ?>
 
+<!-- Tableau explicatifs d'introduction -->
+<table class='infoIsland'>
+  <tr>
+    <th>Blocs de textes (Description – Intérêts - Pression – Gestion / conservation)</th>
+    <td>2 000  caractères maximum (espaces compris, sans la bibliographie) = moins de 20 lignes A4 format paysage</td>
+  </tr>
+  <tr>
+    <th>Références bibliographiques du texte</th>
+    <td>10 références maximum</td>
+  </tr>
+  <tr>
+    <th>Encadrés</th>
+    <td>2 encadrés courts ou 1 encadré medium par fiche</td>
+  </tr>
+</table>
+
 <!-- on alterer qq variables -->
 <?php $form['options']['#collapsed'] = 0; ?>
 <?php $form['menu']['#collapsed'] = 0; ?>
@@ -107,6 +123,17 @@ $( document ).ready(function() {
 		$('#edit-avalider-wrapper label').empty().append(inputAvalider).append('<span> To be validated</span>');
 		$('#edit-termine-wrapper label').empty().append(inputTerminer).append('<span> Complete</span>');
 	}
+
+	//Rendre obligatoire le message de révision
+	$('#node-form').submit(function(){
+				
+		if($('#edit-log').val() == '') {
+			var textLogRevision = prompt("Message de log : ", "Nouvelle révision");
+			$('#edit-log').val(textLogRevision); 
+			return false;
+		}
+		else return true;		
+	});
 		
 	//Pour faire correspondre l'etat "Promu en page d'accueil" avec "A valider" et l'état "Epinglé en haut des listes" avec "Terminé"
 	$('#edit-avalider-wrapper input').change(function(){	
@@ -138,7 +165,7 @@ $( document ).ready(function() {
 	
 
 	//label sur champs image
-	if(lang == 'fr') $('div#field-ile-image-items').before('<p class="labelFieldImages">Une carte, une photo générale et une photo aérienne</p>');
+	if(lang == 'fr') $('div#field-ile-image-items').before('<p class="labelFieldImages">Une carte, une photo générale, une photo aérienne et au maximum une photo complémentaire (détail, spécificité...)<br/><i>(les photos téléchargée doivent être libres de droit. Elles doivent être versée en haute définition)</i></p>');
 	else $('div#field-ile-image-items').before('<p class="labelFieldImages">A map or a picture</p>');
 
 	//Lors de l'ajout d'une ile : add/
@@ -165,19 +192,26 @@ $( document ).ready(function() {
 		
 		
 		//Pour revenir en haut de l'ecran après le .change sur le select
-		$( "select#edit-menu-parent-hierarchical-select-selects-0 option[value='menu-menu-atlas-hp:0" ).change(function() {
-			
-			setTimeout(function(){	
-				
-				$('select#edit-menu-parent-hierarchical-select-selects-1').val('menu-menu-atlas-hp:13558'); 
-				$("select#edit-menu-parent-hierarchical-select-selects-1 option[value='menu-menu-atlas-hp:13558']").trigger("change");
-				setTimeout(function(){	$( document ).scrollTop( 0 ); },2000);
-			},3000);
-			
-		});
+		//Gestion automatique du menu
+	 	setTimeout(function(){	
+	    
+	    	//$("select#edit-menu-parent-hierarchical-select-selects-0 option[value='menu-menu-atlas-hp:0']").trigger("change"); 
+	    	
+	    	if( $('select#edit-menu-parent-hierarchical-select-selects-0').val() != 'menu-menu-atlas-hp:0' ){
+
+				$('select#edit-menu-parent-hierarchical-select-selects-0').val('menu-menu-atlas-hp:0');
+	    		$("select#edit-menu-parent-hierarchical-select-selects-0 option[value='menu-menu-atlas-hp:0']").trigger("change");
+
+	    	} 
 		
-		//Change effect pour forcer l'exection d'un bout de js qui génère les selects
-		$("select#edit-menu-parent-hierarchical-select-selects-0 option[value='menu-menu-atlas-hp:0']").trigger("change");
+	     	setTimeout(function(){	
+				
+			 	$('select#edit-menu-parent-hierarchical-select-selects-1').val('menu-menu-atlas-hp:13558'); 
+			 	$("select#edit-menu-parent-hierarchical-select-selects-1 option[value='menu-menu-atlas-hp:13558']").trigger("change");
+			 			
+			 },2000);
+		
+		},2000);
 		
 	}
 
@@ -188,7 +222,39 @@ $( document ).ready(function() {
 		$('.addEncadre, .addSection, .addLegend').fadeIn();
 		 
 	});
-	},1000);
+	},3000);
+
+	//Compteur de mots
+	function wordCount( val ){
+	    return {
+	        charactersNoSpaces : val.replace(/\s+/g, '').length,
+	        characters         : val.length,
+	        words              : val.match(/\S+/g).length,
+	        lines              : val.split(/\r*\n/).length
+	    }
+	}
+	
+	//Compteur de mots
+ 	setTimeout(function(){
+
+		$('.form-item').each(function(){
+
+			var formItem = $(this);
+
+			formItem.append("<p class='wordCpt'></p>");
+				
+			$(this).find('iframe').contents().find("body").bind( "click", function() {	
+
+				var c = wordCount( $(this).text() );
+				var cpt = "Words: "+ c.words;
+				
+				$(formItem).find('p.wordCpt').text(cpt);
+			
+			});
+				
+		});
+
+	},4000);
 	
 	//Renseigne automatiqument le titre dans le champ titre de l'url pour menu
 	$('#edit-submit').click(function(){
@@ -256,11 +322,11 @@ $( document ).ready(function() {
 			if(lang == 'fr'){
 				var titre = prompt("Titre : ", "Votre titre ici");
 				var texte = prompt("Texte : ", "Votre texte ici");
-				var auteur = prompt("Auteur : ", "Nom de l'auteur");
+				var auteur = prompt("Auteur : ", "Prénom NOM (Organisme)");
 			}else{
 				var titre = prompt("Title : ", "Your title here");
 				var texte = prompt("Text : ", "Your text here");
-				var auteur = prompt("Author : ", "Name of the author");
+				var auteur = prompt("Author : ", "Firstname Lastname (Group)");
 			}
 
 			var encadre = "<p class='encadreStyle'> <strong>"+titre+"</strong> <br/>"+texte+"<br/> <em>"+auteur+"</em> </p><p>&nbsp;</p><p>&nbsp;</p>";   		

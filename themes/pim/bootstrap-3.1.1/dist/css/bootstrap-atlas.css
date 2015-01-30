@@ -89,7 +89,6 @@ ul#nice-menu-2 li.menu-13552.menu-path-node-56647.odd.last a:hover {
 /*********************************  ****************************************/
 ul#nice-menu-5 ul li {
   background-color: rgba(255, 255, 255, 0.8);
-  /*width: 160%; */
 }
 a.linkForEditMenuAtlas{
   background: url('../../../images/icon-edit-menu.png') no-repeat 50% 50%;
@@ -101,10 +100,33 @@ a.linkForEditMenuAtlas{
 div#block-nice_menus-5 ul.nice-menu-right li {
   border-top: 1px solid transparent;
 }
-/*
-ul#nice-menu-6 ul li a{
-	width: 100%;
-}*/
+div#block-nice_menus-5 p#label4selectColor{
+  display: none;
+}
+div#block-nice_menus-5 span.list-item-contrib{
+  border-bottom: solid 1px #cccccc;
+  display: inline-block;
+  width: 72%;
+  margin-top: 4px;
+  line-height: 22px;
+  background: url("../../../images/puce/Fleches_n2_31569f_4x7.png") no-repeat 20px 10px;
+  padding-left: 40px;
+  font-size: 12px;
+}
+div#block-nice_menus-5 i.labelSelectColor{
+  font-size: 12px;
+  text-align: center;
+  width: 100%;
+  display: block;
+  padding-bottom: 10px;
+}
+body.section-node-edit div#block-nice_menus-5 p#label4selectColor{
+  display: block;
+  margin-top: 10px;
+  border: 2px solid;
+  padding: 10px;
+  text-align: center;
+}
 /***************************************************************************/
 /***************************************************************************/
 /*                  		PAGE PROJET-ATLAS                              */
@@ -142,6 +164,7 @@ body.node-type-book-sous-bassin li.es {
   visibility: hidden;
 }
 body.page-projet-atlas div#map_hp {
+  position: relative;
   background: url(../../../images/map.png) no-repeat 99% 50%;
   height: 400px;
   width: 100%;
@@ -157,18 +180,372 @@ body.page-projet-atlas a#btnImprim {
   float: right;
 }
 body.page-projet-atlas .dashboardLabel {
-  background: url(../../../images/gauge.png) no-repeat 99% 50% #4779c0;
-  display: block;
-  height: 38px;
-  padding: 4%;
-  background-size: 14%;
+  font-size: 1.4em;
+  margin-top: 22px;
   text-decoration: underline;
+}
+body.page-projet-atlas .dashboard {
+  background: url(../../../images/Gauge.png) no-repeat 97% 20% #4779c0;
+  display: block;
+  padding: 4%;
+  background-size: 13%;
   font-size: 1.8em;
-  margin-top: 77px;
+  margin-top: 22px;
   color: #fff;
   margin-bottom: 0;
   width: 662px;
+  position: relative;
+  padding-bottom: 41px;
 }
+body.page-projet-atlas div.view-dom-id-v-atlas-presentation-block-7-1 {
+  background-color: #4779C0;
+  color: #fff;
+  padding: 3%;
+  width: 95%; 
+}
+body.page-projet-atlas div.view-id-v_atlas_presentation.view-display-id-block_2{
+  color: #fff;
+  font-size: 15px;
+  border-bottom: 1px solid #fff;
+}
+body.page-projet-atlas div.view-id-v_atlas_presentation.view-display-id-block_3{
+  color: #fff;
+  font-size: 15px;
+  border-bottom: 1px solid #fff;
+}
+body.page-projet-atlas div#absoluteContainer p{
+  font-size: 15px;
+  line-height: 18px;
+  display: block;
+  float: left;
+  padding-left: 62px;
+}
+body.page-projet-atlas div#absoluteContainer p:first-child{
+  padding-left: 0px;
+}
+body.page-projet-atlas div#absoluteContainer{
+  padding-top: 12px;
+}
+body.page-projet-atlas div.view-id-v_atlas_presentation.view-display-id-block_2 a, body.page-projet-atlas div.view-id-v_atlas_presentation.view-display-id-block_3 a{
+  color: #fff !important;
+}
+body.page-projet-atlas div.view-id-v_atlas_presentation.view-display-id-block_2 p{
+  line-height: 18px;
+  text-align: left;
+}
+body.page-projet-atlas div.view-id-v_atlas_presentation.view-display-id-block_3 p{
+  line-height: 18px;
+}
+body.page-projet-atlas .conteneurRelatif{
+  position: relative;
+}
+body.page-projet-atlas div.view-dom-id-v-atlas-presentation-block-2-1 p#title > a, body.page-projet-atlas div.view-dom-id-v-atlas-presentation-block-3-1 p > a{
+  text-decoration: none;
+}
+/*bloc mes publication*/
+body.page-projet-atlas div.unePublication p{
+  float: left;
+  padding-left: 45px;
+}
+body.page-projet-atlas span.btnSeeMore{
+  float: left;
+  cursor: pointer;  
+}
+body.page-projet-atlas span.btnSeeLess{
+  display: none;
+  float: left;
+  cursor: pointer;
+  width: 699px;
+  background-color: #4779C0;
+  color: #fff;
+  padding: 0 0 12px 20px;
+  margin-top: -10px;
+}
+body.page-projet-atlas div.unePublication.lineForHide{
+  display: none;
+}
+body.page-projet-atlas div.unePublication p:first-child{
+  padding-left:0; 
+}
+body.page-projet-atlas div.unePublication p:nth-child(2){
+  width: 396px;
+}
+body.page-projet-atlas div.unePublication p:nth-child(2) > a{
+  color: #fff !important;
+  text-decoration: none;
+}
+body.page-projet-atlas div.unePublication p:nth-child(3){
+  padding-left: 25px;
+}
+body.page-projet-atlas h2#labelMesPubi {
+  background: url(../../../images/Signature-01.png) no-repeat 100% -18px #4779C0;
+  background-size: 18%;
+  margin-bottom: 0;
+  width: 93%;
+  color: #fff;
+  padding: 4%;
+  font-size: 1.8em;
+  margin-top: 22px;
+  text-decoration: underline;
+}
+body.page-projet-atlas div.unePublication{
+  border-bottom: 1px solid #fff;
+  padding-bottom: 29px;
+}
+body.page-projet-atlas div.unePublication h2{
+  text-decoration: underline;
+  font-size: 1.4em;
+}
+body.page-projet-atlas div.unePublication a#link{
+  color: #fff;
+}
+/*bloc mes publication*/
+/*tableau admin recap infos users*/
+body.page-projet-atlas div.view-v-affiche-user-infos-for-admin{
+  font-size: 12px;
+}
+body.page-projet-atlas h2.labelAdminTabUser{
+  background: url(../../../images/User-Group.png) no-repeat 98% 50% #4779C0;
+  color: #fff;
+  padding: 3%;
+  margin-bottom: 0;
+  text-decoration: underline;
+  font-size: 2.4em;
+  background-size: 8%;
+  width: 95%;
+}
+body.page-projet-atlas h2.labelAdminTabPubli{
+  background: url(../../../images/Book-Add.png) no-repeat 98% 50% #4779C0;
+  background-size: 8%;
+  color: #fff;
+  padding: 3%;
+  margin-bottom: 0;
+  text-decoration: underline;
+  font-size: 2.4em;
+  width: 95%;
+}
+body.page-projet-atlas div.view-v-affiche-user-infos-for-admin table{
+  background-color: #4779C0;
+  color: #fff;
+  width: 101%;
+}
+body.page-projet-atlas div.view-v-affiche-user-infos-for-admin table th{
+  padding: 4% 3%;
+  font-weight: normal;
+  border-bottom: 1px solid #fff;
+}
+body.page-projet-atlas div.view-v-affiche-user-infos-for-admin table td{
+  padding: 1% 3%;
+}
+body.page-projet-atlas div.view-v-affiche-user-infos-for-admin table td a{
+  color: #fff !important;
+  text-decoration: none;
+}
+body.page-projet-atlas div.view-dom-id-v-atlas-presentation-block-8-1 table{
+  background-color: #4779C0;
+  color: #fff;
+  font-size: 12px;
+  width: 101%;
+}
+body.page-projet-atlas div.view-dom-id-v-atlas-presentation-block-8-1 table th{
+  padding: 4% 3%;
+  font-weight: normal;
+  border-bottom: 1px solid #fff;
+}
+body.page-projet-atlas div.view-dom-id-v-atlas-presentation-block-8-1 table td{
+  padding: 1% 3%;
+  height: 42px;
+}
+body.page-projet-atlas div.view-dom-id-v-atlas-presentation-block-8-1 table tr{
+  background: none;
+}
+body.page-projet-atlas div.view-dom-id-v-atlas-presentation-block-8-1 table td a{
+  color: #fff !important;
+  text-decoration: none;
+}
+body.page-projet-atlas div.view-v-affiche-user-infos-for-admin tr{
+  background-color: rgba(71,121,200,0.1) !important;
+}
+/**/
+/*bouton sur carte*/
+body.page-projet-atlas p#legend{
+  position: absolute;
+  bottom: -13px;
+  left: 2px;
+  font-style: italic;
+  font-size: 14px;  
+}
+body.page-projet-atlas #map_hp a{
+  position: absolute;  
+  text-decoration: none;
+}
+body.page-projet-atlas #map_hp a > span{
+  color: #fff; 
+  font-weight: normal;
+  font-style: italic;
+  font-size: 50px;
+  position: inherit;
+}
+body.page-projet-atlas a#sous-bassin-1{
+  width: 107px;
+  height: 52px;
+  top: 14px;
+  left: 371px; 
+}
+body.page-projet-atlas a#sous-bassin-1 > span{
+  top: 31px;
+  left: 5px;
+}
+body.page-projet-atlas a#sous-bassin-2{
+  width: 59px;
+  height: 29px;  
+  top: 207px;
+  left: 474px;
+}
+body.page-projet-atlas a#sous-bassin-2 > span{
+  font-size: 21px;
+  top: 12px;
+}
+body.page-projet-atlas a#sous-bassin-3{
+  width: 191px;
+  height: 55px;  
+  top: 101px;
+  left: 203px;
+  transform: rotate(-44deg);
+}
+body.page-projet-atlas a#sous-bassin-3 > span{
+  top: 17px;
+  left: 85px;
+  transform: rotate(44deg);
+  font-size: 35px;
+}
+body.page-projet-atlas a#sous-bassin-4{
+  width: 100px;
+  height: 61px;  
+  top: 189px;
+  left: 133px;
+}
+body.page-projet-atlas a#sous-bassin-4 > span{
+  top: 16px;
+  font-size: 43px;
+  left: 3px;
+}
+body.page-projet-atlas a#sous-bassin-5{
+  width: 137px;
+  height: 113px;  
+  top: 220px;
+  left: 0;  
+}
+body.page-projet-atlas a#sous-bassin-5 > span{
+  top: 62px;
+  left: 29px;
+}
+body.page-projet-atlas a#sous-bassin-6{
+  width: 231px;
+  height: 37px;  
+  top: 209px;
+  left: 239px;
+}
+body.page-projet-atlas a#sous-bassin-6 > span{
+  top: 6px;
+  left: 73px;
+  font-size: 37px;
+}
+body.page-projet-atlas a#sous-bassin-7{
+  width: 49px;
+  height: 122px;
+  top: 236px;
+  left: 503px;
+}
+body.page-projet-atlas a#sous-bassin-7 > span{
+  left: 17px;
+  top: 23px;
+  font-size: 45px;
+}
+body.page-projet-atlas a#sous-bassin-8{
+  width: 92px;
+  height: 61px;  
+  top: 192px;
+  left: 549px;
+}
+body.page-projet-atlas a#sous-bassin-8 > span{
+  top: 14px;
+  font-size: 37px;
+  left: 10px;
+}
+body.page-projet-atlas a#sous-bassin-9{
+  width: 37px;
+  height: 39px;  
+  top: 252px;
+  left: 588px;
+}
+body.page-projet-atlas a#sous-bassin-9 > span{
+  font-size: 30px;
+  top: 28px;
+  left: 8px;  
+}
+body.page-projet-atlas a#sous-bassin-10{
+  width: 55px;
+  height: 102px;
+  top: 104px;
+  left: 466px;
+}
+body.page-projet-atlas a#sous-bassin-10 > span{
+  top: 55px;
+  left: 15px;
+  font-size: 49px;
+}
+body.page-projet-atlas a#sous-bassin-11{
+  width: 39px;
+  height: 59px;  
+  top: 48px;
+  left: 481px;
+}
+body.page-projet-atlas a#sous-bassin-11 > span{
+  top: 34px;
+  font-size: 29px;
+  left: 11px;
+}
+body.page-projet-atlas a#sous-bassin-12{
+  width: 139px;
+  height: 43px;  
+  top: 110px;
+  left: 534px;
+  transform: rotate(31deg);
+}
+body.page-projet-atlas a#sous-bassin-12 > span{
+  top: 18px;
+  font-size: 43px;
+  left: 15px;
+  transform: rotate(-31deg);
+}
+body.page-projet-atlas a#sous-bassin-13{
+  width: 78px;
+  height: 42px;  
+  top: 22px;
+  left: 484px;
+  transform: rotate(31deg);
+}
+body.page-projet-atlas a#sous-bassin-13 > span{
+  font-size: 34px;
+  top: 14px;
+  left: 5px;
+  transform: rotate(-31deg);
+}
+body.page-projet-atlas a#sous-bassin-14{
+  width: 81px;
+  height: 57px;  
+  top: 117px;
+  left: 309px;
+  transform: rotate(-48deg);
+}
+body.page-projet-atlas a#sous-bassin-14 > span{
+  font-size: 37px;
+  left: 2px;
+  top: 9px;
+  transform: rotate(48deg);
+}
+/**/
 /*commentaires*/
 body.page-projet-atlas .titleCommentaire {
   background: url(../../../images/comment_icon.png) no-repeat 99% 50% #4779c0;
@@ -178,15 +555,32 @@ body.page-projet-atlas .titleCommentaire {
   background-size: 14%;
   text-decoration: underline;
   font-size: 1.8em;
-  margin-top: 77px;
+  margin-top: 20px;
   color: #fff;
   margin-bottom: 0;
+  width: 663px;
 }
 body.page-projet-atlas div.view-v-atlas-affiche-comment-in-hp {
   border-left: 1px solid #4779c0;
   border-right: 1px solid #4779c0;
   border-bottom: 1px solid #4779c0;
   padding: 3%;
+  width: 675px;
+  position: relative;
+}
+body.page-projet-atlas div.view-v-atlas-affiche-comment-in-hp div.commentHider{
+  display: none;
+}
+body.page-projet-atlas div.view-v-atlas-affiche-comment-in-hp div.views-row-3 div.containerOfOneComment {
+  border: none;
+}
+body.page-projet-atlas div.view-v-atlas-affiche-comment-in-hp a.seeMore{
+  text-decoration: none;
+  position: absolute;
+  bottom: 19px;
+  background-color: #4779C0;
+  color: #fff !important;
+  padding: 1%;
 }
 body.page-projet-atlas div.containerOfOneComment {
   border-bottom: 1px dashed #4779c0;
@@ -204,9 +598,37 @@ body.page-projet-atlas div.views-row-last div.containerOfOneComment {
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+body.node-type-book-sous-bassin.section-node-edit table.infoSousBassin tr, body.node-type-book-sous-bassin.section-node-edit table.infoSousBassin tr td, body.node-type-book-sous-bassin.section-node-edit table.infoSousBassin tr th {
+  border: 1px solid #ccc;
+  padding: 10px;
+  padding-left: 15px;
+  font-size: small;
+  font-weight: normal;
+  text-align: center;
+}
+body.node-type-book-sous-bassin.section-node-edit table.infoSousBassin tr th, body.node-type-book-sous-bassin.section-node-edit table.infoSousBassin tr th {
+  background-color: #f1f1f1;
+  width: 30%;
+  text-align: left;
+}
+body.node-type-book-sous-bassin.section-node-edit table.infoSousBassin{
+  margin-bottom: 18px;
+  width: 98%;
+  margin-left: 2%;  
+}
 body.node-type-book-sous-bassin.section-node-edit table.cke_editor tbody{
   display: block;
   min-height: 550px;
+}
+body.node-type-book-sous-bassin.section-node-edit div#field-ss-bassin-pic-of-map-items div.filefield-element div.description{
+  display: none;
+}
+body.node-type-book-sous-bassin.section-node-edit table#field_ss_bassin_pic_of_map_values thead > tr  > th > i{
+  font-size: 0.6em;
+  font-weight: normal;
+}
+body.node-type-book-sous-bassin.section-node-edit div#field-ss-bassin-pic-of-map-items tr.even div.description{
+  display: block;
 }
 body.node-type-book-sous-bassin.section-node-edit #edit-sticky-wrapper, body.node-type-book-sous-bassin.section-node-edit #edit-promote-wrapper{
   display: none;
@@ -322,6 +744,11 @@ body.node-type-book-sous-bassin input#edit-submit {
   text-align: -o-center;
   text-align: center;
   cursor: pointer;
+}
+body.node-type-book-sous-bassin p.wordCpt {
+  position: absolute;
+  top: 121px;
+  right: 4px;
 }
 body.node-type-book-sous-bassin input#edit-submit:hover {
   background-color: #FF741C;
@@ -475,7 +902,7 @@ div.containerOfMyssBassin div.views-row-last div.containerOfOneComment {
   padding-bottom: 15px;
 }
 /*fin comment*/
-body.section-projet-atlas.node-type-book-sous-bassin .tabs {
+/*body.section-projet-atlas.node-type-book-sous-bassin .tabs {
   position: fixed;
   top: 250px;
   width: 750px;
@@ -484,19 +911,19 @@ body.section-projet-atlas.node-type-book-sous-bassin .tabs {
   background-color: #fff;
   margin-bottom: 5px;
   padding-top: 7px;
-}
-body.section-projet-atlas.node-type-book-sous-bassin div#header {
+}*/
+/*body.section-projet-atlas.node-type-book-sous-bassin div#header {
   position: fixed;
-}
-body.section-projet-atlas.node-type-book-sous-bassin div#content-area {
+}*/
+/*body.section-projet-atlas.node-type-book-sous-bassin div#content-area {
   margin-top: 34%;
   top: 33%;
-}
-body.section-projet-atlas.node-type-book-sous-bassin div.region.region-sidebar-first.column.sidebar {
+}*/
+/*body.section-projet-atlas.node-type-book-sous-bassin div.region.region-sidebar-first.column.sidebar {
   position: fixed;
   top: 230px;
 }
-/*TAB RECAP ILE CLUSTER */
+*//*TAB RECAP ILE CLUSTER */
 body.section-projet-atlas.node-type-book-sous-bassin div#containerOfTabRecap {
   padding-bottom: 1%;
 }
@@ -618,8 +1045,25 @@ body.page-node-add-book-ile table.cke_editor tbody tr{
 body.page-node-add-book-ile table.cke_editor tbody tr td{
   display: block;
 }
+body.page-node-add-book-ile table#field_ile_image_values thead > tr > th{
+  padding-bottom: 35px;
+}
+body.page-node-add-book-ile p.labelFieldImages > i{
+  font-size: 0.6em;
+}
 body.page-node-add-book-ile iframe {
   float: left;
+}
+body.page-node-add-book-ile p.wordCpt {
+  position: absolute;
+  top: 121px;
+  right: 4px;
+}
+body.page-node-add-book-ile div#field-ile-image-items div.filefield-element div.description{
+  display: none;
+}
+body.page-node-add-book-ile div#field-ile-image-items tr.even div.description{
+  display: block;
 }
 body.page-node-add-book-ile .addEncadre, 
 body.page-node-add-book-ile .addSection, 
@@ -813,19 +1257,58 @@ body.page-node-add-book-ile div.views-field-field-document-auteur-value label.vi
   float: left;
   padding-right: 5px;
 }
+body.page-node-add-book-ile div#edit-revision-wrapper{
+  display: none;
+}
+body.page-node-add-book-ile #edit-sticky-wrapper, body.page-node-add-book-ile #edit-promote-wrapper, body.page-node-add-book-ile legend.collapse-processed {
+  display: none;
+}
 /***************************************************************************/
 /***************************************************************************/
-/*                  	   	   EDIT FORM ILE                               */
+/*                  	   	   EDITION FORM ILE                               */
 /*                                                                         */
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+body.node-type-book-ile.section-node-edit table.infoIsland tr, body.node-type-book-ile.section-node-edit table.infoIsland tr td, body.node-type-book-ile.section-node-edit table.infoIsland tr th {
+  border: 1px solid #ccc;
+  padding: 10px;
+  padding-left: 15px;
+  font-size: small;
+  font-weight: normal;
+  text-align: center;
+}
+body.node-type-book-ile.section-node-edit table.infoIsland tr th, body.node-type-book-ile.section-node-edit table.infoIsland tr th {
+  background-color: #f1f1f1;
+  width: 30%;
+  text-align: left;
+}
 body.node-type-book-ile.section-node-edit #edit-sticky-wrapper, body.node-type-book-ile.section-node-edit #edit-promote-wrapper{
   display: none;
+}
+body.node-type-book-ile.section-node-edit div#edit-revision-wrapper{
+  display: none;
+}
+body.node-type-book-ile.section-node-edit p.wordCpt {
+  position: absolute;
+  top: 121px;
+  right: 4px;
+}
+body.node-type-book-ile.section-node-edit table#field_ile_image_values thead > tr > th{
+  padding-bottom: 35px;
+}
+body.node-type-book-ile.section-node-edit p.labelFieldImages > i{
+  font-size: 0.6em;
 }
 body.node-type-book-ile.section-node-edit.section-node-edit table.cke_editor tbody{
   display: block;
   min-height: 550px;
+}
+body.node-type-book-ile.section-node-edit div#field-ile-image-items div.filefield-element div.description{
+  display: none;
+}
+body.node-type-book-ile.section-node-edit div#field-ile-image-items tr.even div.description{
+  display: block;
 }
 body.node-type-book-ile.section-node-edit table.cke_editor tbody tr{
   display: block;
@@ -1039,6 +1522,23 @@ body.page-node-add-book-cluster table.cke_editor tbody{
   display: block;
   min-height: 550px;
 }
+body.page-node-add-book-cluster p.wordCpt {
+  position: absolute;
+  top: 121px;
+  right: 4px;
+}
+body.page-node-add-book-cluster table#field_cluster_image_values thead > tr > th{
+  padding-bottom: 19px;
+}
+body.page-node-add-book-cluster p.labelFieldImages > i{
+  font-size: 0.6em;
+}
+body.page-node-add-book-cluster div#field-ile-image-items div.filefield-element div.description{
+  display: none;
+}
+body.page-node-add-book-cluster div#field-ile-image-items tr.even div.description{
+  display: block;
+}
 body.page-node-add-book-cluster table.cke_editor tbody tr{
   display: block;
 }
@@ -1240,19 +1740,58 @@ body.page-node-add-book-cluster div.views-field-field-document-auteur-value labe
   float: left;
   padding-right: 5px;
 }
+body.page-node-add-book-cluster div#edit-revision-wrapper{
+  display: none;
+}
+body.page-node-add-book-cluster #edit-sticky-wrapper, body.page-node-add-book-cluster #edit-promote-wrapper, body.page-node-add-book-cluster legend.collapse-processed {
+  display: none;
+}
 /***************************************************************************/
 /***************************************************************************/
-/*                  	   	   EDIT FORM CLUSTER                           */
+/*                  	   	   EDITION FORM CLUSTER                          */
 /*                                                                         */
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+body.node-type-book-cluster.section-node-edit table.infoCluster tr, body.node-type-book-cluster.section-node-edit table.infoCluster tr td, body.node-type-book-cluster.section-node-edit table.infoCluster tr th {
+  border: 1px solid #ccc;
+  padding: 10px;
+  padding-left: 15px;
+  font-size: small;
+  font-weight: normal;
+  text-align: center;
+}
+body.node-type-book-cluster.section-node-edit table.infoCluster tr th, body.node-type-book-cluster.section-node-edit table.infoCluster tr th {
+  background-color: #f1f1f1;
+  width: 30%;
+  text-align: left;
+}
 body.node-type-book-cluster.section-node-edit #edit-sticky-wrapper, body.node-type-book-cluster.section-node-edit #edit-promote-wrapper{
   display: none;
+}
+body.node-type-book-cluster p.wordCpt {
+  position: absolute;
+  top: 121px;
+  right: 4px;
 }
 body.node-type-book-cluster table.cke_editor tbody{
   display: block;
   min-height: 550px;
+}
+body.node-type-book-cluster table#field_cluster_image_values thead > tr > th{
+  padding-bottom: 19px;
+}
+body.node-type-book-cluster p.labelFieldImages > i{
+  font-size: 0.6em;
+}
+body.node-type-book-cluster div#field-cluster-image-items div.filefield-element div.description{
+  display: none;
+}
+body.node-type-book-cluster div#field-cluster-image-items tr.even div.description{
+  display: block;
+}
+body.node-type-book-cluster div#edit-revision-wrapper{
+  display: none;
 }
 body.node-type-book-cluster table.cke_editor tbody tr{
   display: block;
@@ -1459,30 +1998,138 @@ body.node-type-book-cluster.section-node-edit div.views-field-field-document-aut
 /*********************************  ****************************************/
 /*********************************  ****************************************/
 div.containerOfCluster table.tableRecapIle, div.containerOfCluster table.tableRecapIle tr, div.containerOfCluster table.tableRecapIle tr td, div.containerOfCluster table.tableRecapIle tr th{
-  padding: 10px;
-  width: 100%;
+  /*padding: 10px;*/
   border: 1px solid #ccc;
-  padding-left: 15px;
+  /*padding-left: 15px;*/
   font-size: small;
   font-weight: normal;
   text-align: center;
 }
+div.containerOfCluster table.tableRecapIle{
+  width: 100%;
+}
+/* tab composition */
+div.containerOfCluster table.tableRecapIle.tabComposition th:first-child{
+  width: 155px;
+}
+div.containerOfCluster table.tableRecapIle.tabComposition td p{
+  padding: 3% 5%;
+}
+div.containerOfCluster table.tableRecapIle.tabComposition th:nth-child(2) p, div.containerOfCluster table.tableRecapIle.tabComposition th:nth-child(3) p{
+  padding: 3% 5%;
+}
+div.containerOfCluster table.tableRecapIle.tabComposition th:nth-child(2) {
+  width: 250px;
+}
+div.containerOfCluster table.tableRecapIle.tabComposition th p{
+  margin-bottom: 0;
+  text-align: center;
+}
+div.containerOfCluster table.tableRecapIle.tabComposition td p{
+  margin-bottom: 0;
+  text-align: center;
+  word-wrap: break-word;
+}
+/* tab surface */
+div.containerOfCluster table.tableRecapIle.tabSurface th:first-child{
+  width: 155px;
+}
+div.containerOfCluster table.tableRecapIle.tabSurface td p{
+  padding: 3% 5%;
+}
+div.containerOfCluster table.tableRecapIle.tabSurface th:nth-child(2) p, div.containerOfCluster table.tableRecapIle.tabSurface th:nth-child(3) p{
+  padding: 3% 5%;
+}
+div.containerOfCluster table.tableRecapIle.tabSurface th:nth-child(2) center, div.containerOfCluster table.tableRecapIle.tabSurface th:nth-child(3) center{
+  padding: 3% 5%;
+}
+div.containerOfCluster table.tableRecapIle.tabSurface th:nth-child(2) {
+  width: 250px;
+}
+div.containerOfCluster table.tableRecapIle.tabSurface th p{
+  margin-bottom: 0;
+  text-align: center;
+}
+div.containerOfCluster table.tableRecapIle.tabSurface td p{
+  margin-bottom: 0;
+  text-align: center;
+  word-wrap: break-word;
+}
+/* tab protection */
+div.containerOfCluster table.tableRecapIle.tabProtection th:first-child{
+  width: 155px;
+}
+div.containerOfCluster table.tableRecapIle.tabProtection td p{
+  padding: 3% 5%;
+}
+div.containerOfCluster table.tableRecapIle.tabProtection th:nth-child(2) p{
+  padding: 3% 5%;
+}
+div.containerOfCluster table.tableRecapIle.tabProtection th p{
+  margin-bottom: 0;
+  text-align: center;
+}
+div.containerOfCluster table.tableRecapIle.tabProtection td p{
+  margin-bottom: 0;
+  text-align: center;
+  word-wrap: break-word;
+}
+/* tab gestionnaire */
+div.containerOfCluster table.tableRecapIle.tabGestion th:first-child{
+  width: 155px;
+}
+div.containerOfCluster table.tableRecapIle.tabGestion td p{
+  padding: 3% 5%;
+}
+div.containerOfCluster table.tableRecapIle.tabGestion th:nth-child(2) p{
+  padding: 3% 5%;
+}
+div.containerOfCluster table.tableRecapIle.tabGestion th p{
+  margin-bottom: 0;
+  text-align: center;
+}
+div.containerOfCluster table.tableRecapIle.tabGestion td p{
+  margin-bottom: 0;
+  text-align: center;
+  word-wrap: break-word;
+}
+/* tab propriete */
+div.containerOfCluster table.tableRecapIle.tabPropriete th:first-child{
+  width: 155px;
+}
+div.containerOfCluster table.tableRecapIle.tabPropriete td p{
+  padding: 3% 5%;
+}
+div.containerOfCluster table.tableRecapIle.tabPropriete th:nth-child(2) p, div.containerOfCluster table.tableRecapIle.tabPropriete th:nth-child(3) p{
+  padding: 3% 5%;
+}
+div.containerOfCluster table.tableRecapIle.tabPropriete th:nth-child(2) center, div.containerOfCluster table.tableRecapIle.tabPropriete th:nth-child(3) center{
+  padding: 3% 5%;
+}
+div.containerOfCluster table.tableRecapIle.tabPropriete th:nth-child(2) {
+  width: 250px;
+}
+div.containerOfCluster table.tableRecapIle.tabPropriete th p{
+  margin-bottom: 0;
+  text-align: center;
+}
+div.containerOfCluster table.tableRecapIle.tabPropriete td p{
+  margin-bottom: 0;
+  text-align: center;
+  word-wrap: break-word;
+}
 div.containerOfCluster table.tableRecapIle tr th, div.containerOfMyIsland table.tableRecapIleN tr th{
   background-color: #f1f1f1;
-  text-align: left;
 }
-div.containerOfCluster table.tableRecapIle div.icon-ile{ 
-  background: url(../../../images/iconePalmierb.png) no-repeat 50% 50%;
-  background-size: 20%;
-  width: 100%;
-  height: 50px;
+div.containerOfCluster table.tableRecapIle.tabComposition tbody > tr:first-child > th:nth-child(2) { 
+  background: url(../../../images/iconePalmier2b.png) no-repeat 95% 50% #f1f1f1;
+  background-size: 14%;
 }
-div.containerOfCluster table.tableRecapIle div.icon-cluster{ 
-  background: url(../../../images/iconePalmier2b.png) no-repeat 50% 50%;
-  background-size: 35%;
-  width: 100%;
-  height: 50px;
+div.containerOfCluster table.tableRecapIle.tabComposition tbody > tr:first-child > th:nth-child(3) { 
+  background: url(../../../images/iconePalmierb.png) no-repeat 90% 50% #f1f1f1;
+  background-size: 7%;
 }
+/* fin tab */
 div.containerOfCluster a.titleCulster {
   background: url(../../../images/iconePalmier2b.png) no-repeat 100% 64%;
   display: block;
@@ -1774,6 +2421,85 @@ body.node-type-book-glossaire li.it,
 body.node-type-book-glossaire li.es {
   visibility: hidden;
 }
+body.node-type-book-glossaire div.containerOfGlossaire div.oneTerme{
+  background-color: #3A86C0;
+  color: #fff;
+  padding: 2%;
+}
+body.node-type-book-glossaire div.containerOfGlossaire p.labelTerme{
+  border-bottom: 1px solid #fff;
+}
+body.node-type-book-glossaire div.containerOfGlossaire div.oneTerme > a {
+  color: #fff !important;
+}
+body.node-type-book-glossaire div.containerOfGlossaire a.buttonAddTermeGlossaire{
+  color: #fff !important;
+  text-decoration: none;
+  background: #3A86C0;
+  padding: 6px;
+  border-radius: 3px;
+}
+body.node-type-book-glossaire div.containerOfGlossaire a.buttonAddTermeGlossaire:hover{
+  text-decoration: underline;
+}
+body.node-type-book-glossaire div.containerOfGlossaire div.view-v-atlas-affiche-termes-glossaire{
+  margin-top: 22px;
+}
+body.node-type-book-glossaire div.containerOfGlossaire span.en{
+  background: url(../../../../../../../sites/all/modules/languageicons/flags/en.png) no-repeat 50% 50%;
+  background-size: 100%;
+  width: 25px;
+  height: 15px;
+  display: block;
+}
+body.node-type-book-glossaire div.containerOfGlossaire span.fr{
+  background: url(../../../../../../../sites/all/modules/languageicons/flags/fr.png) no-repeat 50% 50%;
+  background-size: 100%;
+  width: 25px;
+  height: 15px;
+  display: block;
+}
+body.node-type-book-glossaire div.containerOfGlossaire a.relatedTerme.fr{
+  background: url(../../../../../../../sites/all/modules/languageicons/flags/fr.png) no-repeat 0% 50%;
+  background-size: 16px;
+  width: 100%;
+  padding-left: 20px;
+  text-decoration: none;
+  color: #fff !important;
+}
+body.node-type-book-glossaire div.containerOfGlossaire a.relatedTerme.en{
+  background: url(../../../../../../../sites/all/modules/languageicons/flags/en.png) no-repeat 0% 50%;
+  background-size: 16px;
+  width: 100%;
+  padding-left: 20px;
+  text-decoration: none;
+  color: #fff !important;
+}
+body.node-type-book-glossaire div.containerOfGlossaire a.relatedTerme{
+  width: 100%;
+  padding-left: 20px;
+  text-decoration: none;
+  color: #fff !important;
+}
+body.node-type-book-glossaire .view-v-atlas-affiche-termes-glossaire .btnVoir{
+  float: right;
+  cursor: pointer;  
+  display: none;
+}
+body.node-type-book-glossaire .view-v-atlas-affiche-termes-glossaire div.blockOfRelatedTerme{
+  border-top: 1px solid #fff;
+  margin-top: 40px;
+}
+body.node-type-book-glossaire .view-v-atlas-affiche-termes-glossaire label{
+  margin-top: 14px;
+  display: block;  
+}
+body.node-type-book-glossaire .view-v-atlas-affiche-termes-glossaire p.descroTerme.truncate{
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 /***************************************************************************/
 /***************************************************************************/
 /*                           EDITION NORMES                                */
@@ -1925,7 +2651,7 @@ div.containerOfEncplodiePart div.views-row-last div.containerOfOneComment {
   padding-bottom: 15px;
 }
 /*fin comment*/
-body.section-projet-atlas.node-type-book-sous-bassin .tabs {
+/*body.section-projet-atlas.node-type-book-sous-bassin .tabs {
   position: fixed;
   top: 250px;
   width: 750px;
@@ -1934,18 +2660,18 @@ body.section-projet-atlas.node-type-book-sous-bassin .tabs {
   background-color: #fff;
   margin-bottom: 5px;
   padding-top: 7px;
-}
-body.section-projet-atlas.node-type-book-sous-bassin div#header {
+}*/
+/*body.section-projet-atlas.node-type-book-sous-bassin div#header {
   position: fixed;
-}
-body.section-projet-atlas.node-type-book-sous-bassin div#content-area {
+}*/
+/*body.section-projet-atlas.node-type-book-sous-bassin div#content-area {
   margin-top: 34%;
   top: 33%;
 }
 body.section-projet-atlas.node-type-book-sous-bassin div.region.region-sidebar-first.column.sidebar {
   position: fixed;
   top: 230px;
-}
+}*/
 /*Commentaires*/
 div.containerOfEncplodiePart .titleCommentaire {
   background: url(../../../images/comment_icon.png) no-repeat 99% 50% #4779c0;
@@ -1981,9 +2707,38 @@ div.containerOfEncplodiePart div.views-row-last div.containerOfOneComment {
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+body.node-type-book-encyclopedie-part.section-node-edit table.infoEncyclop tr, body.node-type-book-encyclopedie-part.section-node-edit table.infoEncyclop tr td, body.node-type-book-encyclopedie-part.section-node-edit table.infoEncyclop tr th {
+  border: 1px solid #ccc;
+  padding: 10px;
+  padding-left: 15px;
+  font-size: small;
+  font-weight: normal;
+  text-align: center;
+}
+body.node-type-book-encyclopedie-part.section-node-edit table.infoEncyclop tr th, body.node-type-book-encyclopedie-part.section-node-edit table.infoEncyclop tr th {
+  background-color: #f1f1f1;
+  width: 30%;
+  text-align: left;
+}
+body.node-type-book-encyclopedie-part.section-node-edit table.infoEncyclop{
+  margin-bottom: -35px;
+  width: 100%;
+  margin-top: 5px; 
+}
 body.node-type-book-encyclopedie-part.section-node-edit table.cke_editor tbody{
   display: block;
   min-height: 550px;
+}
+body.node-type-book-encyclopedie-part.section-node-edit p.wordCpt {
+  position: absolute;
+  top: 121px;
+  right: 4px;
+}
+body.node-type-book-encyclopedie-part.section-node-edit div#field-ss-bassin-pic-of-map-items div.filefield-element div.description{
+  display: none;
+}
+body.node-type-book-encyclopedie-part.section-node-edit div#field-ss-bassin-pic-of-map-items tr.even div.description{
+  display: block;
 }
 body.node-type-book-encyclopedie-part.section-node-edit table.cke_editor tbody tr{
   display: block;
@@ -2078,6 +2833,82 @@ body.node-type-book-encyclopedie-part div#edit-revision-wrapper,
 body.node-type-book-encyclopedie-part div#edit-status-wrapper, body.node-type-book-encyclopedie-part #edit-sticky-wrapper , body.node-type-book-encyclopedie-part #edit-promote-wrapper {
   display: none;
 }
+/*ref biblio*/
+body.node-type-book-encyclopedie-part .btnShowDocs {
+  right: 65px;
+}
+body.node-type-book-encyclopedie-part #dialog2{
+  display: none; 
+}
+body.node-type-book-encyclopedie-part div.ui-dialog.ui-draggable{
+  background-color: #7FB3CE;
+  padding: 1%;
+  height: auto !important;
+  resize: both; 
+    max-height: 500px;
+  overflow-y: scroll !important;
+}
+body.node-type-book-encyclopedie-part div.view-v-atlas-display-docs div.views-row{
+  border-bottom: 4px dashed #fff;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+body.node-type-book-encyclopedie-part div.view-v-atlas-display-docs div.views-row-last{
+  border-bottom: none;
+}
+body.node-type-book-encyclopedie-part span#ui-dialog-title-dialog2{
+  font-weight: bold;
+  cursor: move;
+  color: #fff;
+  font-size: 2.2em;
+}
+body.node-type-book-encyclopedie-part div.views-field-field-document-titre-value a{
+  text-decoration: none;
+  color: #fff;
+}
+body.node-type-book-encyclopedie-part div.views-field-field-document-titre-value a:hover{
+  text-decoration: underline;
+}
+body.node-type-book-encyclopedie-part div.views-field-field-document-auteur-value{
+  color: #fff;
+  font-style: italic;
+  font-size: 0.8em; 
+}
+body.node-type-book-encyclopedie-part div.views-field-field-document-titre-value{
+  padding-bottom: 10px;
+}
+body.node-type-book-encyclopedie-part div.views-field-field-document-annee-value{
+  display: none;
+}
+body.node-type-book-encyclopedie-part a.closeDialog2{
+  background: url('../../../images/Cancel.png') no-repeat 50% 50%;
+  background-size: 100%;
+  border: none;
+  position: absolute;
+  top: -16px;
+  left: -27px;
+}
+body.node-type-book-encyclopedie-part a.closeDialog2 span{
+  border: none;
+}
+body.node-type-book-encyclopedie-part div#dialog2 > a{
+  display: block;
+  width: 100%;
+  text-align: right;
+  color: #fff;
+  font-size: 0.8em;
+}
+body.node-type-book-encyclopedie-part div.views-field-field-document-auteur-value label.views-label-field-document-auteur-value{
+  float: left;
+  padding-right: 5px;
+}
+body.node-type-book-encyclopedie-part .ui-dialog-titlebar-close {
+  color: transparent;
+}
+body.node-type-book-encyclopedie-part .ui-dialog-content {
+  width: 100% !important;
+  height: 100% !important;
+}
 /***************************************************************************/
 /***************************************************************************/
 /*                            PAGE ENCADRE                                 */
@@ -2091,9 +2922,11 @@ body.page-projet-atlas-encadres div.view-v-atlas-affiche-all-encadre p.encadreSt
 body.page-projet-atlas-encadres div.view-v-atlas-affiche-all-encadre p.encadreStyle {
   height: 16px;
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 0px;
   color: #FFA500;
   overflow: hidden;
+  border: none !important;
+  padding: 29px !important;
 }
 body.page-projet-atlas-encadres div.view-v-atlas-affiche-all-encadre div.conteneurRelatif {
   position: relative;
@@ -2103,6 +2936,8 @@ body.page-projet-atlas-encadres div.view-v-atlas-affiche-all-encadre div.contene
   top: 6px;
   right: 8px;
   cursor: pointer;
+  font-size: 14px;
+  font-style: italic;
 }
 /*body.page-projet-atlas-encadres div.view-v-atlas-affiche-all-encadre p.encadreStyle strong{
   width: 80%;
@@ -2119,6 +2954,11 @@ body.page-projet-atlas-encadres div.view-v-atlas-affiche-all-encadre p.encadreSt
 }
 body.page-projet-atlas-encadres div.view-v-atlas-affiche-all-encadre .linkToSeeEncadre{
   font-size: 11px;
+  display: block;
+  border-top: none;
+  padding: 4px;
+  border-top: 2px dotted #fff;
+  background: #EDEDED;
 }
 body.page-projet-atlas-encadres h1 {
   display: block;
@@ -2128,5 +2968,6 @@ body.page-projet-atlas-encadres h1 {
   text-decoration: initial;
   font-size: 1.8em;
 }
+
 
 

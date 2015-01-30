@@ -18,6 +18,22 @@ global $base_url, $language, $node;
 	<?php $form['author']['name']['#description'] = 'Add your name here, please use comma separator for multiple authors'; ?>
 <?php endif; ?>	
 
+<!-- Tableau explicatifs d'introduction -->
+<table class='infoEncyclop'>
+  <tr>
+    <th>Textes des sous-sections (1.1 ; 1.2 …)</th>
+    <td>18 000 caractères maximum (espaces compris, sans la bibliographie),= 4 pages A4 format paysage</td>
+  </tr>
+  <tr>
+    <th>Références bibliographiques du texte</th>
+    <td>25 références bibliographiques maximum</td>
+  </tr>
+  <tr>
+    <th>Encadrés</th>
+    <td>Encadrés moyens ou longs, 3 encadrés maximum par fiche.</td>
+  </tr>
+</table>
+
 
 <?php print drupal_render($form['title']); ?>
 <?php print drupal_render($form['field_encylop_author']); ?>
@@ -30,6 +46,14 @@ global $base_url, $language, $node;
 	<?php print drupal_render($form['field_encylop_body']); ?>
 </div>
 
+<div class='contenerRelatif'><span class='btnShowDocs' title='Add a document'>B</span><?php print drupal_render($form['field_encyclop_biblio']); ?></div>
+
+
+
+<div id='dialog2' title="Documents liés à l'Atlas" class='contenerRelatif'>
+	<a href='<?php echo $base_url; ?>/Bibliotheque' target='_blank'><?php if($language->language == 'fr') echo 'Voir tous les documents'; else echo 'See all documents'; ?></a>
+	<?php print views_embed_view('v_atlas_display_docs', 'block_1'); ?>
+</div>
 
 
 <?php print drupal_render($form['options']); ?>
@@ -73,6 +97,65 @@ $( document ).ready(function() {
 
 	}
 
+	//Rendre obligatoire le message de révision
+	$('#node-form').submit(function(){
+				
+		if($('#edit-log').val() == '') {
+			var textLogRevision = prompt("Message de log : ", "Nouvelle révision");
+			$('#edit-log').val(textLogRevision); 
+			return false;
+		}
+		else return true;		
+	});
+
+	//Lors de clics sur ajout references biblio
+	$('.btnShowDocs').click(function(){
+		$("#dialog2").dialog();
+	 	$('#dialog2').show();
+	 	
+	 	$('.ui-dialog-titlebar-close').addClass('closeDialog2');
+		$('div.views-field-field-document-titre-value a').each(function(){
+			$( this ).attr('target','_blank');
+		});
+		$('.ui-dialog-titlebar-close').click(function(){
+
+			$("#dialog2").dialog("destroy");
+			
+		});
+	});
+
+	//Compteur de mots
+	function wordCount( val ){
+	    return {
+	        charactersNoSpaces : val.replace(/\s+/g, '').length,
+	        characters         : val.length,
+	        words              : val.match(/\S+/g).length,
+	        lines              : val.split(/\r*\n/).length
+	    }
+	}
+	
+	//Compteur de mots
+ 	setTimeout(function(){
+
+		$('.form-item').each(function(){
+
+			var formItem = $(this);
+
+			formItem.append("<p class='wordCpt'></p>");
+				
+			$(this).find('iframe').contents().find("body").bind( "click", function() {	
+
+				var c = wordCount( $(this).text() );
+				var cpt = "Words: "+ c.words;
+				
+				$(formItem).find('p.wordCpt').text(cpt);
+			
+			});
+				
+		});
+
+	},4000);
+
 	// si on click sur ajouter un encadre ou une section ou legend
 	$('.addEncadre, .addSection, .addLegend').click(function(){ 	
 
@@ -109,11 +192,11 @@ $( document ).ready(function() {
 			if(lang == 'fr'){
 				var titre = prompt("Titre : ", "Votre titre ici");
 				var texte = prompt("Texte : ", "Votre texte ici");
-				var auteur = prompt("Auteur : ", "Nom de l'auteur");
+				var auteur = prompt("Auteur : ", "Prénom NOM (Organisme)");
 			}else{
 				var titre = prompt("Title : ", "Your title here");
 				var texte = prompt("Text : ", "Your text here");
-				var auteur = prompt("Author : ", "Name of the author");
+				var auteur = prompt("Author : ", "Firstname Lastname (Group)");
 			}
 
 			

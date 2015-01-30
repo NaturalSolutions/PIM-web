@@ -85,11 +85,16 @@
   <?php endif; ?>
 <?php endif;?>
 
+<?php if ($id == 'counter') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $counter = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
 <?php endforeach; ?>
 
 
-
-<div class='containerOfOneComment'>
+<div class="containerOfOneComment <?php if($counter > 3) echo 'commentHider'; ?>" >
 
   <?php if($language->language == 'fr'): ?>
     <p>Par <?php echo $name; ?><br/><i>le <?php echo $timestamp."</i> sur le contenu : <a href='$path' target='_blank'>$type</a></p>"; ?>
@@ -105,5 +110,10 @@
     <?php echo $delete_comment; ?>
   <?php endif; ?>
 
-
 </div>
+
+
+  <?php 
+    if($counter == 3 && $language->language == 'fr') echo "<a class='seeMore' href='#'>Voir+</a>"; 
+    elseif($counter == 3 && $language->language == 'en') echo "<a class='seeMore' href='#'>See more+</a>"; 
+  ?>

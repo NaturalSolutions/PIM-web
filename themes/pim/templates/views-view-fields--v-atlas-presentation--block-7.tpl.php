@@ -20,72 +20,58 @@
  */
 /***************************************************************************/
 /***************************************************************************/
-/*                   VUE AFFICHE PRESENTATION                              */
+/*                    v_atlas_presentation Bloc_7 "Mes publi"              */
 /*                                                                         */
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
-  global $base_url, $language, $user;
+  global $base_url, $language;
 ?>
 
 <?php foreach ($fields as $id => $field): ?>
 
 
-<?php if ($id == 'edit_node') : ?>
+<?php if ($id == 'changed') : ?>
   <?php if (!empty($field->content)): ?>
-    <?php $edit_node = $field->content; ?>
+    <?php $changed = $field->content; ?>
   <?php endif; ?>
 <?php endif;?>
 
-<?php if ($id == 'field_body_en_value') : ?>
+<?php if ($id == 'nothing') : ?>
   <?php if (!empty($field->content)): ?>
-    <?php $body_en = $field->content; ?>
+    <?php $statut = $field->content; ?>
   <?php endif; ?>
 <?php endif;?>
 
-<?php if ($id == 'field_title_en_value') : ?>
+<?php if ($id == 'title') : ?>
   <?php if (!empty($field->content)): ?>
-    <?php $title_en = $field->content; ?>
+    <?php $title = $field->content; ?>
   <?php endif; ?>
 <?php endif;?>
 
-<?php if ($id == 'field_body_fr_value') : ?>
+<?php if ($id == 'counter') : ?>
   <?php if (!empty($field->content)): ?>
-    <?php $body_fr = $field->content; ?>
+    <?php $counter = $field->content; ?>
   <?php endif; ?>
 <?php endif;?>
-
-<?php if ($id == 'field_title_fr_value') : ?>
-  <?php if (!empty($field->content)): ?>
-    <?php $title_fr = $field->content; ?>
-  <?php endif; ?>
-<?php endif;?>
-
 
 <?php endforeach; ?>
 
+<?php $statut = explode(',', $statut); ?>
+<?php 
+  if($statut[2] == 'Oui') $statut = 'Terminé';
+  elseif($statut[1] == 'Oui') $statut = 'A valider';
+  else $statut = 'Brouillon';
+?>
 
+<?php if($counter == 4) echo '<span class="btnSeeMore">Voir+</span>'; ?>
 
-<?php if($language->language == 'fr'): ?>
+<div class="unePublication <?php if($counter > 3) echo 'lineForHide'; ?>">
 
-  <h1><?php echo $title_fr; ?></h1>
+  <p id="date"><?php echo $changed; ?></p>
 
-  <?php echo $body_fr; ?>
-  
+  <p id="title"><?php echo $title; ?></p>
 
-<?php else: ?>
-  <h1><?php echo $title_en; ?></h1>
+  <p id="statut">Statut "<?php echo $statut; ?>"</p>
 
-  <?php echo $body_en; ?>
-
-<?php endif; ?>
-
-
-<!-- lien de modification visible seulement par Admin PiM -->
-<?php $currentRoles = $user->roles; ?>            
-<?php foreach($currentRoles as $item): ?> 
-    <?php if($item == 'Admin PIM'): ?>
-      <?php echo $edit_node; ?>      
-    <?php endif; ?>
-<?php endforeach; ?>
-  
+</div>

@@ -22,70 +22,40 @@
 /***************************************************************************/
 /*                   VUE AFFICHE PRESENTATION                              */
 /*                                                                         */
+/*                        DISPLAY : Affiche Derniere connexion             */
+/*                                                                         */
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
-  global $base_url, $language, $user;
+  global $base_url, $language;
 ?>
 
 <?php foreach ($fields as $id => $field): ?>
 
 
-<?php if ($id == 'edit_node') : ?>
+<?php if ($id == 'login') : ?>
   <?php if (!empty($field->content)): ?>
-    <?php $edit_node = $field->content; ?>
+    <?php $login = $field->content; ?>
   <?php endif; ?>
 <?php endif;?>
 
-<?php if ($id == 'field_body_en_value') : ?>
+<?php if ($id == 'name') : ?>
   <?php if (!empty($field->content)): ?>
-    <?php $body_en = $field->content; ?>
+    <?php $name = $field->content; ?>
   <?php endif; ?>
 <?php endif;?>
 
-<?php if ($id == 'field_title_en_value') : ?>
-  <?php if (!empty($field->content)): ?>
-    <?php $title_en = $field->content; ?>
-  <?php endif; ?>
-<?php endif;?>
 
-<?php if ($id == 'field_body_fr_value') : ?>
-  <?php if (!empty($field->content)): ?>
-    <?php $body_fr = $field->content; ?>
-  <?php endif; ?>
-<?php endif;?>
 
-<?php if ($id == 'field_title_fr_value') : ?>
-  <?php if (!empty($field->content)): ?>
-    <?php $title_fr = $field->content; ?>
-  <?php endif; ?>
-<?php endif;?>
+
+
 
 
 <?php endforeach; ?>
 
 
 
-<?php if($language->language == 'fr'): ?>
-
-  <h1><?php echo $title_fr; ?></h1>
-
-  <?php echo $body_fr; ?>
-  
-
-<?php else: ?>
-  <h1><?php echo $title_en; ?></h1>
-
-  <?php echo $body_en; ?>
-
-<?php endif; ?>
+  <p>Dernière connexion le <?php echo $login; ?> par <?php echo $name; ?></p>
 
 
-<!-- lien de modification visible seulement par Admin PiM -->
-<?php $currentRoles = $user->roles; ?>            
-<?php foreach($currentRoles as $item): ?> 
-    <?php if($item == 'Admin PIM'): ?>
-      <?php echo $edit_node; ?>      
-    <?php endif; ?>
-<?php endforeach; ?>
-  
+

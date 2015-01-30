@@ -113,7 +113,7 @@
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
-  global $base_url, $language;
+  global $base_url, $language, $user;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language; ?>" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>">
@@ -235,16 +235,8 @@
         
         <!-- le contenu commence ici         -->
         <div id="content-area">
-          
-          <!-- On va chercher les infos dans les vues -->
-          <?php 
-            
-            // $view = views_get_view('v_hp_atlas');
-            // $display = $view->execute_display('block_1');
-            // $textIntro = $display['content'];
-            
-          ?>
-          
+
+                    
           <div class='firstLineOFHpAtlas'>
           <?php if($language->language == 'fr') echo "<p>Atlas des PIM</p>"; else echo "<p>Atlas on western Mediterranean small islands</p>"; ?>
           </div> 
@@ -254,23 +246,98 @@
             <?php print views_embed_view('v_atlas_presentation', 'block_1'); ?>
             <a id="btnImprim" href="<?php echo $base_url; ?>/book/export/html/56647"><?php if( $language->language == 'en') echo 'View all'; else echo 'Voir tout l\'atlas'; ?></a>
             
-            <br/>
-                        
-            <h2 class='dashboardLabel'><?php if( $language->language == 'fr') echo 'Tableau de bord'; else echo 'Dashboard'; ?> </h2> 
-            <div id='map_hp'></div>
 
 
-             <?php if($language->language == 'fr'): ?>
+            <!-- Commentaires -->
+            <?php if($language->language == 'fr'): ?>
               <h2 class='titleCommentaire'>Derniers commentaires</h2>
             <?php else: ?>
               <h2 class='titleCommentaire'>Latest comments</h2>
             <?php endif;  ?>
             <?php print views_embed_view('v_atlas_affiche_comment_in_hp', 'block_1'); ?>
 
+            
+
+            <!-- block mes publications -->
+            <h2 id='labelMesPubi'>Mes publications</h2>
+            <?php print views_embed_view('v_atlas_presentation', 'block_7', $user->uid); ?>
+            <span class="btnSeeLess">Réduire</span>
+          
+      
+                     
+            <!-- Dashboard -->
+            <div class="dashboard">
+              
+              <h2 class='dashboardLabel'><?php if( $language->language == 'fr') echo 'Tableau de bord'; else echo 'Dashboard'; ?></h2>
+                <!-- affiche derniere publication -->
+                <?php print views_embed_view('v_atlas_presentation', 'block_2'); ?>
+                <!-- affiche derniere connexion -->
+                <?php print views_embed_view('v_atlas_presentation', 'block_3'); ?>
+                <!-- affiche Compteur de brouillon -->
+                <div id="absoluteContainer">
+                  <?php $nbBrouillon = views_get_view_result('v_atlas_presentation', 'block_4'); ?>
+                  <?php $nbAvalider = views_get_view_result('v_atlas_presentation', 'block_5'); ?>
+                  <?php $nbTerminer = views_get_view_result('v_atlas_presentation', 'block_6'); ?>
+                  <p><?php echo count($nbBrouillon); ?> publication(s) brouillons</p>                            
+                  <p><?php echo count($nbAvalider); ?> publication(s) à valider</p>                            
+                  <p><?php echo count($nbTerminer); ?> publication(s) terminée(s)</p>                                            
+                </div>            
+            
+            </div>
+
+
+            <!-- la carte des sous bassins en HP -->
+            <div id='map_hp'>
+
+              <!-- On récupere la liste des nid sous-bassin -->
+              <?php $listeIDsousBassin = views_get_view_result('v_atlas_affiche_number_ile_clust', 'default'); ?>
+              
+              <?php             
+              // pour chque nid sous bassin on recupere le nombre d ile / cluster
+              foreach($listeIDsousBassin as $item): ?>
+                
+                <!-- On récuprer les cluster lier au sous bassin -->
+                <?php $res = views_get_view_result('v_atlas_affiche_number_ile_clust', 'block_1', $item->nid); ?>
+                <?php 
+                  //On va cherche le nom du sous bassin
+                  $node = node_load($item->nid);
+                  $name_lien_sous_bassin = l($node->title, 'node/'.$item->nid);
+                  $name_lien_sous_bassin = explode('/', $name_lien_sous_bassin);
+                  $name_lien_sous_bassin = explode('"', $name_lien_sous_bassin[count($name_lien_sous_bassin) - 2]);
+                  $name_lien_sous_bassin = trim($name_lien_sous_bassin[count($name_lien_sous_bassin) - 2]);
+                  $name_lien_sous_bassin = preg_replace('/\s+/', ' ', $name_lien_sous_bassin);
+                  
+                  //Le nombre de cluster lier au sous bassin envoyé
+                  $nb_cluster = count($res);
+                                
+                  //Pour chaque sous bassin :> Affichage de son bouton + son nombre de cluster liés
+                  echo "<a href='$base_url/projet-atlas/$name_lien_sous_bassin' id='$name_lien_sous_bassin' alt='$node->title' title='$node->title'><span alt='Nombre de cluster' id='link4$name_lien_sous_bassin'>".$nb_cluster."</span></a>"
+                                                   
+                ?>
+                
+                
+              <?php endforeach; ?>
+            
+            <p id='legend'>Les chiffres représentent le nombre de clusters.</p>
+            </div>
+
+
+            <!-- Block visibles par Admin PiM : Affichage d'informations sur l'activité des utilisateurs -->
+            <?php $currentRoles = $user->roles; ?>            
+            <?php foreach($currentRoles as $item): ?> 
+                <?php if($item == 'Admin PIM'): ?>
+                  <h2 class="labelAdminTabUser">Les utilisateurs</h2>
+                  <?php print views_embed_view('v_affiche_user_infos_for_admin', 'default'); ?>
+                  <h2 class="labelAdminTabPubli">Les publications</h2>
+                  <?php print views_embed_view('v_atlas_presentation', 'block_8'); ?>
+                <?php endif; ?>
+            <?php endforeach; ?>
+            
+
          </div><!-- fin content-area -->
 
         <?php print $content_bottom; ?>
-
+ 
         <?php if ($feed_icons): ?>
           <div class="feed-icons"><?php print $feed_icons; ?></div>
         <?php endif; ?>
@@ -341,5 +408,126 @@
   ga('create', 'UA-28879746-1', 'initiative-pim.org');
   ga('send', 'pageview');
 
+
+
+  jQuery( document ).ready(function() {
+
+    var lang = '<?php echo $language->language; ?>';
+
+    var toggleMesPubliEnTrop = function(){
+      
+
+      //click sur voir+
+      $('.btnSeeMore').click(function(){
+
+        //cache le bouton Voir+
+        $(this).hide();
+
+        //On enleve la class qui cache pour tout montrer
+        $('div.unePublication').removeClass('lineForHide');
+
+        //On montre le bouton réduire
+        $('.btnSeeLess').show();
+      
+      });
+
+      //click sur réduire
+      $('.btnSeeLess').click(function(){
+
+        //cache le bouton Voir+
+        $(this).hide();
+
+        //On enleve la class qui cache pour tout montrer
+        $('div.unePublication').each(function( index ) {  
+        
+          
+          
+          if(index > 2) {
+            console.log(index);
+            $(this).addClass('lineForHide');
+          }
+
+        });        
+
+        //On ajoute le bouton réduire
+        $('.btnSeeMore').show();
+      
+      });
+
+
+    };
+
+    var goPopup = function(){
+
+      var first_visite = sessionStorage.getItem("first_visite");
+      
+      if(first_visite == 0 || first_visite == null) {
+        
+        //Afficher la popup
+        var reponse = confirm('Veuillez prendre connaissance de la charte des contributeurs et des normes de rédaction.');
+        if(reponse == true) sessionStorage.setItem("first_visite",1);
+
+      }
+
+
+    };
+
+    var toggleComment = function(){
+
+      $('div.view-v-atlas-affiche-comment-in-hp .seeMore').click(function(e) {
+        //desactiver le lien
+        e.preventDefault();
+
+        //Si pas visible alors montre
+        if( $(this).text() == 'Voir+' || $(this).text() == 'See more' ){
+
+          if(lang == 'fr') $(this).text('Réduire');
+          else $(this).text('Hide');
+          
+          $('div.containerOfOneComment').removeClass('commentHider');
+          $('div.view-v-atlas-affiche-comment-in-hp div.views-row-3 div.containerOfOneComment').css('borderBottom','1px dashed #4779c0');
+          $('div.view-v-atlas-affiche-comment-in-hp div.views-row-last').children().css('paddingBottom','50px');
+
+        }else{
+          
+          $('div.view-v-atlas-affiche-comment-in-hp div.views-row').each(function( index ){
+              if(index > 2) {
+
+                $(this).children().addClass('commentHider');
+                
+              }
+          });
+
+
+          if(lang == 'fr') $(this).text('Voir+');
+          else $(this).text('See more');
+
+
+          $('div.view-v-atlas-affiche-comment-in-hp div.views-row-3 div.containerOfOneComment').css('borderBottom','none');
+        
+        }
+
+        
+
+      
+      });
+
+    }
+    
+    window.init = function() {
+      //show hide du bloc publication
+      toggleMesPubliEnTrop();
+
+      //show hide du bloc commentaire
+      toggleComment();
+
+      //PoPuP
+      goPopup();
+
+    }
+    
+    init(); // true 
+
+  });
 </script>
 </html>

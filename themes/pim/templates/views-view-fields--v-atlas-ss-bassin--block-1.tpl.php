@@ -49,6 +49,12 @@
   <?php endif; ?>
 <?php endif;?>
 
+<?php if ($id == 'field_ss_bassin_pic_of_map_data') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $title_picture = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
 <?php if ($id == 'field_ss_bassin_pic_of_map_fid') : ?>
   <?php if (!empty($field->content)): ?>
     <?php $url_picture = $field->content; ?>
@@ -124,7 +130,7 @@
   <br/>Rédigé par : <i><?php echo $author; ?></i>
 
 
-  <?php if($url_picture): ?><img class='imageMap' src="<?php echo $base_url.'/sites/default/files/atlas/ss_bassin/'.$url_picture; ?>" alt='' title='' /><?php endif; ?>
+  <?php if($url_picture): ?><img class='imageMap' src="<?php echo $base_url.'/sites/default/files/atlas/ss_bassin/'.$url_picture; ?>" alt='' title="<?php echo $title_picture; ?>" /><?php endif; ?>
 
 
   <div id='containerOfTabRecap'>

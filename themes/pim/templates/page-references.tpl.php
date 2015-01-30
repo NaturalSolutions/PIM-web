@@ -226,6 +226,8 @@
         <div id="content-area">
           <h1><?php if($language->language == 'fr') echo 'Références du projet Atlas'; else echo 'Atlas project references'; ?></h1>
           <p><?php if($language->language == 'fr') echo "Ici les documents présents en tant que référence bibliographique dans l'atlas des PIM"; else echo 'Here, documents used as references in the atlas project'; ?></p>
+          <?php if( $language->language == 'fr') print views_embed_view('v_atlas_display_docs', 'block_3'); ?>
+          <?php if( $language->language == 'en') print views_embed_view('v_atlas_display_docs', 'block_4'); ?>
           <?php print views_embed_view('v_atlas_display_docs', 'block_2'); ?>
         </div>
 

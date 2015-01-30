@@ -8,7 +8,7 @@
 /*********************************  ****************************************/
 /*********************************  ****************************************/
 
-global $base_url, $language;
+global $base_url, $language, $user;
 ?>
 
 <!-- recuperation de ladresse courante pr tester si on est en mode edition / visu -->
@@ -20,6 +20,22 @@ global $base_url, $language;
 <?php $nid = request_uri(); ?>
 <?php $nid = explode('/', $nid ); ?>
 <?php $nid = $nid[ count($nid) - 2]; ?>
+
+<!-- Tableau explicatifs d'introduction -->
+<table class='infoSousBassin'>
+  <tr>
+    <th>Textes des sous-sections (1.1 ; 1.2 …)</th>
+    <td>18 000 caractères maximum (espaces compris, sans la bibliographie),= 4 pages A4 format paysage</td>
+  </tr>
+  <tr>
+    <th>Références bibliographiques du texte</th>
+    <td>25 références bibliographiques maximum</td>
+  </tr>
+  <tr>
+    <th>Encadrés</th>
+    <td>Encadrés moyens ou longs, 3 encadrés maximum par fiche.</td>
+  </tr>
+</table>
 
 <a class='addButton' title='Ajouter une ile' href="<?php echo $base_url; if($language->language == 'en') echo '/en'; ?>/node/add/book-ile?id=<?php echo $nid; ?>" target='_blank'><?php if($language->language == 'fr') echo "Une ile"; else echo "An island"; ?></a>
 <a class='addButton' title='Ajouter un cluster' href="<?php echo $base_url; if($language->language == 'en') echo '/en'; ?>/node/add/book-cluster?id=<?php echo $nid; ?>" target='_blank'><?php if($language->language == 'fr') echo "Un cluster"; else echo "A cluster"; ?></a>
@@ -34,6 +50,8 @@ global $base_url, $language;
 <?php else: ?>
 	<?php $form['author']['name']['#description'] = 'Add your name here, please use comma separator for multiple authors'; ?>
 <?php endif; ?>	
+
+
 
 <?php print drupal_render($form['title']); ?>
 <?php print drupal_render($form['author']); ?>
@@ -118,6 +136,17 @@ $( document ).ready(function() {
 		$('#edit-termine-wrapper label').empty().append(inputTerminer).append('<span> Complete</span>');
 	}
 
+	//Rendre obligatoire le message de révision
+	$('#node-form').submit(function(){
+				
+		if($('#edit-log').val() == '') {
+			var textLogRevision = prompt("Message de log : ", "Nouvelle révision");
+			$('#edit-log').val(textLogRevision); 
+			return false;
+		}
+		else return true;		
+	});
+
 	//Pour faire correspondre l'etat "Promu en page d'accueil" avec "A valider" et l'état "Epinglé en haut des listes" avec "Terminé"
 	$('#edit-avalider-wrapper input').change(function(){	
 		if($(this).attr('checked') == true) $('#edit-promote-wrapper input').attr('checked',true);
@@ -145,13 +174,13 @@ $( document ).ready(function() {
 	});
 
 	// Pour remplir le champ titre	
-	$('#edit-submit').click(function(){
-		var titre = $('#edit-title').val();
-		$('#wysiwyg-toggle-edit-body').trigger('click');
-		$('#edit-body').val(titre);
-		//Maj automatique du titre pour l'affichage du menu
-		$('#edit-menu-link-title').val(titre);
-	});
+	// $('#edit-submit').click(function(){
+	// 	var titre = $('#edit-title').val();
+	// 	$('#wysiwyg-toggle-edit-body').trigger('click');
+	// 	$('#edit-body').val(titre);
+	// 	//Maj automatique du titre pour l'affichage du menu
+	// 	$('#edit-menu-link-title').val(titre);
+	// });
 
 	//Pour forcer la selection de format d'entre sur PiM Atlas
 	setTimeout(function(){
@@ -159,8 +188,52 @@ $( document ).ready(function() {
 		$(this).change();
 		$('.addEncadre, .addSection, .addLegend').fadeIn();
 	});
-	},1000);	
+	},3000);	
 
+	//Renseigne automatiqument le titre dans le champ titre de l'url pour menu
+	$('#edit-submit').click(function(){
+
+		var titre = $('#edit-title').val();
+		$('#edit-menu-link-title').val(titre);
+
+	});
+
+//Compteur de mots
+	function wordCount( val ){
+	    return {
+	        charactersNoSpaces : val.replace(/\s+/g, '').length,
+	        characters         : val.length,
+	        words              : val.match(/\S+/g).length,
+	        lines              : val.split(/\r*\n/).length
+	    }
+	}
+	
+	//Compteur de mots
+	setTimeout(function(){
+
+		$('.form-item').each(function(){
+
+			var formItem = $(this);
+
+			formItem.append("<p class='wordCpt'></p>");
+				
+			$(this).find('iframe').contents().find("body").bind( "click", function() {	
+
+				var c = wordCount( $(this).text() );
+				var cpt = "Words: "+ c.words;
+				
+				$(formItem).find('p.wordCpt').text(cpt);
+			
+			});
+				
+		});
+
+	},4000);
+
+
+	//Ajout label image carte
+	$('table#field_ss_bassin_pic_of_map_values thead tr th').html(' Image carte : <i>(les photos téléchargée doivent être libres de droit. Elles doivent être versée en haute définition)</i>');	
+	
 
 	// si on click sur ajouter un encadre ou une section ou legend
 	$('.addEncadre, .addSection, .addLegend').click(function(){ 	
@@ -196,11 +269,11 @@ $( document ).ready(function() {
 			if(lang == 'fr'){
 				var titre = prompt("Titre : ", "Votre titre ici");
 				var texte = prompt("Texte : ", "Votre texte ici");
-				var auteur = prompt("Auteur : ", "Nom de l'auteur");
+				var auteur = prompt("Auteur : ", "Prénom NOM (Organisme)");
 			}else{
 				var titre = prompt("Title : ", "Your title here");
 				var texte = prompt("Text : ", "Your text here");
-				var auteur = prompt("Author : ", "Name of the author");
+				var auteur = prompt("Author : ", "Firstname Lastname (Group)");
 			}
 
 			

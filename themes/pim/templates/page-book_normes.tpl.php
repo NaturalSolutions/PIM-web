@@ -220,10 +220,14 @@ global $user, $base_url, $language;
         <?php print $messages; ?>
         <?php if ($tabs): ?>
           <div class="tabs">
-            <?php 
-            /*if($current_url === 'edit' || $user->roles[11] == 'Mega Admin')*/ 
-            print $tabs;
-            ?>
+            
+          <?php $currentRoles = $user->roles; ?>            
+          <?php foreach($currentRoles as $item): ?> 
+              <?php if($item == 'Admin PIM'): ?>
+                <?php print $tabs; ?>      
+              <?php endif; ?>
+          <?php endforeach; ?>
+        
           </div>
         <?php endif; ?>
         <?php print $help; ?>

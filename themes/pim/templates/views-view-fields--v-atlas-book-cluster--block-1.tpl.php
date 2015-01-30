@@ -79,13 +79,6 @@
   <?php endif; ?>
 <?php endif;?>
 
-<?php if ($id == 'field_cluster_have_ss_bassin_nid') : ?>
-  <?php if (!empty($field->content)): ?>
-    <?php $have_ss_bassin = $field->content; ?>
-  <?php endif; ?>
-<?php endif;?>
-
-
 <?php if ($id == 'field_cluster_biblio_value') : ?>
   <?php if (!empty($field->content)): ?>
     <?php $biblio = $field->content; ?>
@@ -150,6 +143,13 @@ for($i=0;$i<count($res);$i++){
 
     //On récupère le terme à partir du tid
     $term = taxonomy_get_term($currentTid);
+
+    //Compteur d'archipels
+    $countNbArchipel++;
+
+    //On chope le synonyme
+    $synonym = taxonomy_get_synonyms($currentTid);
+    if(!empty($synonym[0])) $allTheSynonym .= $synonym[0].',';
     
     //On récupère le vid à partir d'un terme
     $vid = $term->vid;
@@ -162,10 +162,16 @@ for($i=0;$i<count($res);$i++){
 
       $allTheTid .= $var[$j]->tid.',';
       $allTheTidCluster .= $var[$j]->tid.',';
+
+      //Compteur d'iles
+      $countNbIles++;
     }
 
   //Sinon => traiter comme une ile
   }else if($isArchipel == 0){ 
+
+    //Compteur d'iles
+    $countNbIles++;
 
     //On ajoute directement l'id dans notre variable qui regroupe tout les tid
     $allTheTid .= $currentTid.',';
@@ -179,9 +185,10 @@ for($i=0;$i<count($res);$i++){
 $allTheTid = trim($allTheTid, ",");
 $allTheTidCluster = trim($allTheTidCluster, ",");
 $allTheTidIle = trim($allTheTidIle, ",");
+$allTheSynonym = trim($allTheSynonym, ",");
 ?>
 
-<?php //print_r($allTheTidIle); ?>
+<?php //print_r($allTheSynonym); ?>
 
 
 <?php if($language->language == 'fr'): ?>
@@ -204,23 +211,23 @@ $allTheTidIle = trim($allTheTidIle, ",");
     
     <!-- Recherche des noms d'îles à partir des clusters renseignés -->
     <?php $names = views_get_view_result('v_atlas_tab_data_cluster', 'block_5', $allTheTidCluster); ?>
-    
-
-    <?php 
+        
+    <?php
+    $j=0; 
     //On concatène tous les noms d'iles provenant de cluster dans une string
     if(!empty($names)) $allNamesIles = "<div title='Archipel complet' class='icon-cluster'></div>";
-    for($i=0; $i<count($names); $i++){
+    for($i=count($names); $i>=0; $i--){
       
-      if($names[$i+1]->nid != $names[$i]->nid){ 
+      if($names[$i-1]->nid != $names[$i]->nid){ 
         
         $thirdCharOfCurrentTid = substr($names[$i]->term_data_node_data_field_bdi_dp_nom_ile_code_ile_name, 0, 3);
-        $thirdCharOfNextTid = substr($names[$i-1]->term_data_node_data_field_bdi_dp_nom_ile_code_ile_name, 0, 3);
+        $thirdCharOfNextTid = substr($names[$i+1]->term_data_node_data_field_bdi_dp_nom_ile_code_ile_name, 0, 3);
         
+        //Nouveau cluster, on incrémente le compteur j
+        if($i != count($names) - 1 && $thirdCharOfCurrentTid != $thirdCharOfNextTid) $j++;
+                  
+        $tabOfNamesOfIlesFromCluster[$j] .= "<a href='".$base_url."/fiche-Ile/".$names[$i]->term_data_node_data_field_bdi_dp_nom_ile_code_ile_name."' target='_blank'>".$names[$i]->term_data_node_data_field_bdi_dp_nom_ile_code_ile__term_synonym_name."</a>&nbsp;&nbsp;";
 
-        if($i != 0 && $thirdCharOfCurrentTid != $thirdCharOfNextTid) $allNamesIles .= "<div title='Archipel complet' class='icon-cluster'></div>";
-
-        $allNamesIles .= "<a href='".$base_url."/fiche-Ile/".$names[$i]->term_data_node_data_field_bdi_dp_nom_ile_code_ile_name."' target='_blank'>".$names[$i]->term_data_node_data_field_bdi_dp_nom_ile_code_ile__term_synonym_name.'</a><br/>'; 
-        
       }
     
     } 
@@ -230,18 +237,14 @@ $allTheTidIle = trim($allTheTidIle, ",");
     <!-- Recherche des noms d'îles à partir des iles renseignés -->
     <?php $names = views_get_view_result('v_atlas_tab_data_cluster', 'block_5', $allTheTidIle); ?>
 
-    <?php //On concatène une icone d'ile
-    if(count($names) > 0) $allNamesIles .= "<div title='îles' class='icon-ile'></div>";
-    ?>
+    <!-- Test si il existe des ils seuls -->
+    <?php if(count($names) > 0) $nbIlesSolo = 1; ?>
       
     <?php 
     //On concatène tous les noms d'iles seules dans une string
-    for($i=0; $i<count($names); $i++){
+    for($i=count($names); $i>=0; $i--){
       
-      if($names[$i+1]->nid != $names[$i]->nid){ 
-        $allNamesIles .= "<a href='".$base_url."/fiche-Ile/".$names[$i]->term_data_node_data_field_bdi_dp_nom_ile_code_ile_name."' target='_blank'>".$names[$i]->term_data_node_data_field_bdi_dp_nom_ile_code_ile__term_synonym_name.'</a><br/>'; 
-      }
-    
+      if($names[$i-1]->nid != $names[$i]->nid) $allNamesIlesSolo .= "<a href='".$base_url."/fiche-Ile/".$names[$i]->term_data_node_data_field_bdi_dp_nom_ile_code_ile_name."' target='_blank'>".$names[$i]->term_data_node_data_field_bdi_dp_nom_ile_code_ile__term_synonym_name.'</a>&nbsp;&nbsp;'; 
     } 
     ?>
     
@@ -255,25 +258,24 @@ $allTheTidIle = trim($allTheTidIle, ",");
     } 
     ?>
 
-  
+    
     <!-- Recherche du nombre d'îles avec au moins 1 statut de protection -->
     <?php $StatutProtection = views_get_view_result('v_atlas_tab_data_cluster', 'block_2', $allTheTid); ?>
-  
+
+          
     <?php 
-    $cptStatut = 0;
-    for($i=0; $i<count($StatutProtection); $i++){
-      if(!empty($StatutProtection[$i]->term_data_term_hierarchy_name)){
+    $cptStatut = -1;
+    for($i=count($StatutProtection); $i>=0; $i--){
 
-       if($StatutProtection[$i+1]->term_data_node_data_field_bdi_spt_code_ile_ilot_name != $StatutProtection[$i]->term_data_node_data_field_bdi_spt_code_ile_ilot_name && $StatutProtection[$i+1]->term_data_node_data_field_bdi_spt_code_ile_ilot__term_synonym_name != $StatutProtection[$i]->term_data_node_data_field_bdi_spt_code_ile_ilot__term_synonym_name){ 
-
+       if($StatutProtection[$i-1]->term_data_node_data_field_bdi_spt_code_ile_ilot_name != $StatutProtection[$i]->term_data_node_data_field_bdi_spt_code_ile_ilot_name /*&& $StatutProtection[$i+1]->term_data_node_data_field_bdi_spt_code_ile_ilot__term_synonym_name != $StatutProtection[$i]->term_data_node_data_field_bdi_spt_code_ile_ilot__term_synonym_name*/){ 
+        
           $allTidForCalculPourcent .= $StatutProtection[$i]->term_data_node_data_field_bdi_spt_code_ile_ilot_tid.',';
 
           $codeIles = $StatutProtection[$i]->term_data_node_data_field_bdi_spt_code_ile_ilot_name;
-          $allNamesIles2 .= "<a href='".$base_url."/fiche-Ile/".$codeIles."' target='_blank'>".$StatutProtection[$i]->term_data_node_data_field_bdi_spt_code_ile_ilot__term_synonym_name.'</a><br/>';
+          $allNamesIles2 .= "<a href='".$base_url."/fiche-Ile/".$codeIles."' target='_blank'>".$StatutProtection[$i]->term_data_node_data_field_bdi_spt_code_ile_ilot__term_synonym_name.'</a>&nbsp;&nbsp;';
                     
           $cptStatut++;
-        
-        }
+                
       } 
     }
     ?>
@@ -295,13 +297,13 @@ $allTheTidIle = trim($allTheTidIle, ",");
     
     <?php 
     $cptGestion = 0;
-    for($i=0; $i<count($StatutGestion); $i++){
+    for($i=count($StatutGestion); $i>=0; $i--){
       if($StatutGestion[$i]->node_data_field_bdi_g_code_ile_ilot_field_bdi_g_exist_gestionnaire_value == 'Oui'){
 
-        if($StatutGestion[$i+1]->term_data_node_data_field_bdi_g_code_ile_ilot_name != $StatutGestion[$i]->term_data_node_data_field_bdi_g_code_ile_ilot_name && $StatutGestion[$i+1]->term_data_node_data_field_bdi_g_code_ile_ilot__term_synonym_name != $StatutGestion[$i]->term_data_node_data_field_bdi_g_code_ile_ilot__term_synonym_name){ 
+        if($StatutGestion[$i-1]->term_data_node_data_field_bdi_g_code_ile_ilot_name != $StatutGestion[$i]->term_data_node_data_field_bdi_g_code_ile_ilot_name /*&& $StatutGestion[$i-1]->term_data_node_data_field_bdi_g_code_ile_ilot__term_synonym_name != $StatutGestion[$i]->term_data_node_data_field_bdi_g_code_ile_ilot__term_synonym_name*/){ 
 
           $codeIles = $StatutGestion[$i]->term_data_node_data_field_bdi_g_code_ile_ilot_name;
-          $allNamesIles3 .= "<a href='".$base_url."/fiche-Ile/".$codeIles."' target='_blank'>".$StatutGestion[$i]->term_data_node_data_field_bdi_g_code_ile_ilot__term_synonym_name.'</a><br/>';
+          $allNamesIles3 .= "<a href='".$base_url."/fiche-Ile/".$codeIles."' target='_blank'>".$StatutGestion[$i]->term_data_node_data_field_bdi_g_code_ile_ilot__term_synonym_name.'</a>&nbsp;&nbsp;';
                               
           $cptGestion++;
         
@@ -315,13 +317,13 @@ $allTheTidIle = trim($allTheTidIle, ",");
 
     <?php 
     $cptPropriete_publique = 0;
-    for($i=0; $i<count($StatutPropriete_publique); $i++){
+    for($i=count($StatutPropriete_publique); $i>=0; $i--){
       if($StatutPropriete_publique[$i]->node_data_field_bdi_sp_code_ile_ilot_field_bdi_sp_public_value == 'Oui'){
 
-      if($StatutPropriete_publique[$i+1]->term_data_node_data_field_bdi_sp_code_ile_ilot_name != $StatutPropriete_publique[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot_name && $StatutPropriete_publique[$i+1]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name != $StatutPropriete_publique[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name){ 
+      if($StatutPropriete_publique[$i-1]->term_data_node_data_field_bdi_sp_code_ile_ilot_name != $StatutPropriete_publique[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot_name /*&& $StatutPropriete_publique[$i-1]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name != $StatutPropriete_publique[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name*/){ 
 
           $codeIles = $StatutPropriete_publique[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot_name;
-          $allNamesIles4 .= "<a href='".$base_url."/fiche-Ile/".$codeIles."' target='_blank'>".$StatutPropriete_publique[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name.'</a><br/>';
+          $allNamesIles4 .= "<a href='".$base_url."/fiche-Ile/".$codeIles."' target='_blank'>".$StatutPropriete_publique[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name.'</a>&nbsp;&nbsp;';
                               
           $cptPropriete_publique++;
         
@@ -341,7 +343,7 @@ $allTheTidIle = trim($allTheTidIle, ",");
         if($StatutPropriete_prive[$i+1]->term_data_node_data_field_bdi_sp_code_ile_ilot_name != $StatutPropriete_prive[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot_name && $StatutPropriete_prive[$i+1]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name != $StatutPropriete_prive[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name){ 
 
           $codeIles = $StatutPropriete_prive[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot_name;
-          $allNamesIles5 .= "<a href='".$base_url."/fiche-Ile/".$codeIles."' target='_blank'>".$StatutPropriete_prive[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name.'</a><br/>';
+          $allNamesIles5 .= "<a href='".$base_url."/fiche-Ile/".$codeIles."' target='_blank'>".$StatutPropriete_prive[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name.'</a>&nbsp;&nbsp;';
                     
           $cptPropriete_prive++;
         
@@ -349,11 +351,11 @@ $allTheTidIle = trim($allTheTidIle, ",");
       } 
     }
     ?>
-
-    <!-- Recherche du nombre d'îles avec au moins 1 statut propriete prive/publique -->
-    <?php $StatutPropriete_prive_publique = views_get_view_result('v_atlas_tab_data_cluster', 'block_7', $allTheTid); ?>
     
     <?php 
+    /*
+    Recherche du nombre d'îles avec au moins 1 statut propriete prive/publique 
+    $StatutPropriete_prive_publique = views_get_view_result('v_atlas_tab_data_cluster', 'block_7', $allTheTid);
     $cptPropriete_prive_publique = 0;
     for($i=0; $i<count($StatutPropriete_prive_publique); $i++){
       if($StatutPropriete_prive_publique[$i]->node_data_field_bdi_sp_code_ile_ilot_field_bdi_sp_privee_value == 'Oui' && $StatutPropriete_prive_publique[$i]->node_data_field_bdi_sp_code_ile_ilot_field_bdi_sp_public_value == 'Oui'){
@@ -369,33 +371,115 @@ $allTheTidIle = trim($allTheTidIle, ",");
         }
       } 
     }
+    */
     ?>
     
+
+    <?php $tabOfSynonyme = explode(',', $allTheSynonym); ?>
+
+    <!-- Composition -->
+    <table class='tableRecapIle tabComposition'>
+      <tr>
+        <th rowspan="<?php echo 2+$countNbArchipel+$nbIlesSolo; ?>"><p>Composition</p></th>
+        <th><p>Archipel(s) complet(s)</p></th>
+        <th><p>Ile(s)</p></th>
+      </tr>
+      <tr>
+        <td><p><?php if($countNbArchipel == '') echo '0';else echo $countNbArchipel; ?></p></td>
+        <td><p><?php echo $countNbIles; ?></p></td>
+      </tr>
+
+      <?php 
+      for($i=0;$i<count($tabOfSynonyme);$i++){
+        if(!empty($tabOfSynonyme[$i])){
+          print("
+            <tr>
+            <td><p>$tabOfSynonyme[$i]</p></td>
+            <td><p>$tabOfNamesOfIlesFromCluster[$i]</p></td>
+            </tr>
+          ");          
+        }
+      } 
+      if($nbIlesSolo) {
+        print("
+          <tr>
+          <td>-</td>
+          <td><p>$allNamesIlesSolo</p></td>
+          </tr>
+        ");
+      }
+      ?>      
+    </table>
+
+    <br/>
       
-    <!--  Recap Cluster -->
-    <TABLE class='tableRecapIle'>
-      <TR>
-        <th><center>îles</center></th>
-        <th>Surface emergée cumulée<br/><br/><center>(ha)</center></th>
-        <th>Surface emergée cumulée avec statut<br/><br/><center>%</center></th>
-        <th>Nombre d'îles avec au moins 1 statut de protection</th>
-        <th>Nombre d'îles avec au moins 1 gestionnaire</th>
-        <th>Nombre d'îles publiques</th>
-        <th>Nombre d'îles privées</th>
-        <th>Nombre d'îles <br/>privées/<br/>publiques</th>
-      </TR>
-      <TR>
-        <td><?php if(!empty($allNamesIles)) echo $allNamesIles; else echo '-'; ?></td>
-        <td><center><?php echo $surfaceCumule; ?></center></td>
-        <td><center><?php echo round(((100*$surfaceCumuleAvecStatut) / $surfaceCumule), 2); ?></center></td>
-        <td><center><?php echo $cptStatut; ?><br/><small><?php if(!empty($allNamesIles2)) echo $allNamesIles2; ?></small></center></td>
-        <td><center><?php echo $cptGestion; ?><br/><small><?php if(!empty($allNamesIles3)) echo $allNamesIles3; ?></small></center></td>
-        <td><center><?php echo $cptPropriete_publique; ?><br/><small><?php if(!empty($allNamesIles4)) echo $allNamesIles4; ?></small></center></td>
-        <td><center><?php echo $cptPropriete_prive; ?><br/><small><?php if(!empty($allNamesIles5)) echo $allNamesIles5; ?></small></center></td>
-        <td><center><?php echo $cptPropriete_prive_publique; ?><br/><small><?php if(!empty($allNamesIles6)) echo $allNamesIles6; ?></small></center></td>
-      </TR>
-      
-    </TABLE>
+    <!--  Surface -->
+    <table class='tableRecapIle tabSurface'>
+      <tr>
+        <th rowspan=2><center><p>Surface</p></center></th>
+        <th><p>Surface emergée cumuléep</p><center>(ha)</center></th>
+        <th><p>Surface emergée cumulée avec statut</p><center>%</center></th>
+      </tr>
+      <tr>        
+        <td><center><p><?php echo $surfaceCumule; ?></p></center></td>
+        <td><center><p><?php echo round(((100*$surfaceCumuleAvecStatut) / $surfaceCumule), 2); ?></p></center></td>
+      </tr>
+    </table>
+
+    <br/>
+
+        <!-- Statut de propriete -->
+    <table class='tableRecapIle tabPropriete'>
+      <tr>
+        <th rowspan="3">Statut de propriété</th>
+        <th><p>Iles publiques</p></th>
+        <th><p>Iles privées</p></th>
+      </tr>
+      <tr>
+        <td><p><?php echo $cptPropriete_publique; ?></p></td>
+        <td><p><?php echo $cptPropriete_prive; ?></p></td>
+      </tr>
+      <tr>
+        <td><p><?php if(!empty($allNamesIles4)) echo $allNamesIles4; else echo '-'; ?></p></td>
+        <td><p><?php if(!empty($allNamesIles5)) echo $allNamesIles5; else echo '-'; ?></p></td>
+      </tr>
+    </table>
+
+    <br/>
+
+    <!-- Statut de protection -->
+    <table class='tableRecapIle tabProtection'>
+      <tr>
+        <th rowspan=3><center><p>Statut de protection</p></center></th>
+        <th><p>Nombre d'îles avec au moins 1 statut de protection</p></th>
+      </tr>
+      <tr>
+        <td><p><?php echo $cptStatut; ?></p></td>
+      </tr>
+      <tr>
+        <td><center><p><?php if(!empty($allNamesIles2)) echo $allNamesIles2; ?></p></center></td>
+      </tr>
+    </table>
+
+    <br/>
+
+    <!-- Statut de gestion  -->
+    <table class='tableRecapIle tabGestion'>
+      <tr>
+        <th rowspan=3><center><p>Gestionnaire</p></center></th>
+        <th><p>Nombre d'îles avec au moins 1 gestionnaire</p></th>
+      </tr>
+      <tr>
+        <td><p><?php echo $cptGestion; ?></p></td>
+      </tr>
+      <tr>
+        <td><center><p><?php if(!empty($allNamesIles3)) echo $allNamesIles3; ?></p></center></td>
+      </tr>
+    </table>
+
+    <br/>
+
+
   <?php endif; ?>
 
 
@@ -428,13 +512,6 @@ $allTheTidIle = trim($allTheTidIle, ",");
     
   </div>
 
-  <!-- <h3>Est présent dans le sous bassin :</h3> -->
-  <!-- <div class='indentRight1'> -->
-   
-   <!-- <?php //echo $have_ss_bassin; ?> -->
-    
-  <!-- </div> -->
-
   <h3>Îles présentes dans ce cluster :</h3>
   <div class='indentRight1'>
    
@@ -454,7 +531,7 @@ $allTheTidIle = trim($allTheTidIle, ",");
     <div>
       <?php echo $url_picture; ?>
     </div>
-    <!--  <img class='imageMap' src="<?php //echo $base_url.'/sites/default/files/atlas/ss_bassin/'.$url_picture; ?>" alt='' title='' /> -->
+    
 
   <?php endif; ?>
   <br/>
@@ -488,13 +565,6 @@ $allTheTidIle = trim($allTheTidIle, ",");
     <?php echo $biblio; ?>
     
   </div>
-
-  <!-- <h3>Est présent dans le sous bassin :</h3> -->
-  <!-- <div class='indentRight1'> -->
-   
-   <!-- <?php //echo $have_ss_bassin; ?> -->
-    
-  <!-- </div> -->
 
   <h3>Islands present in this cluster:</h3>
   <div class='indentRight1'>

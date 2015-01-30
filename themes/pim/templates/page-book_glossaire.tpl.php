@@ -255,6 +255,14 @@ global $user, $base_url, $language;
               
               <?php print views_embed_view('v_atlas_glossaire', 'block_1'); ?>
 
+              <br/>
+              
+              <a class='buttonAddTermeGlossaire' href="<?php echo $base_url; ?>/admin/content/taxonomy/68/add/term?destination=projet-atlas/glossaire">
+                <?php if($language->language == 'fr') echo 'Ajouter un terme'; else echo 'Add a term'; ?>
+              </a>
+
+              <?php print views_embed_view('v_atlas_affiche_termes_glossaire', 'default'); ?>              
+
             <?php endif; ?>
             
 
@@ -336,5 +344,49 @@ global $user, $base_url, $language;
   ga('create', 'UA-28879746-1', 'initiative-pim.org');
   ga('send', 'pageview');
 
+
+  jQuery( document ).ready(function() {
+
+
+    window.init = function() {
+
+      
+        $('.descroTerme').each(function(){
+
+          var heightOFCurrentBlockDescro = $(this).height();
+
+          if( heightOFCurrentBlockDescro > 16 ){
+
+            $(this).addClass('truncate');
+            $(this).next().show();
+          } 
+         
+          
+        
+        
+        });
+      
+      $('.btnVoir').click(function(){
+
+        //selection ner juste celui qu'il faut
+        $(this).prev().toggleClass("truncate");
+        
+        if( $(this).text() == 'Réduire' ) $(this).text('Voir+');
+        else $(this).text('Réduire');
+
+
+      });
+
+
+    }
+    
+    init(); // true 
+
+  });
+
 </script>
+
+
+
+
 </html>
