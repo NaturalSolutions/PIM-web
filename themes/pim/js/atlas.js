@@ -4,7 +4,6 @@ $( document ).ready(function() {
 		//Pour cacher le bouton vers l'atlas
 		$('body.not-logged-in li.menu-13519.menu-path-node-56082 ').hide();
 
-		// Script pour ajouter le menu dans la page des commentaires   ->>>>>  MARCHE EN PROD
 
 		
 		//On va chercher le nidID dans l'url
@@ -12,11 +11,10 @@ $( document ).ready(function() {
 		var href = window.location.href;
 
 	  	pathBase = href.split('/');
-	  	pathBase = pathBase[0] +'//'+ pathBase[1] +'/'+ pathBase[2] +'/'+ pathBase[3]; // == http://192.168.1.102/pim-pierre
-	  			
-
-	  	//alert(pathBase);
-
+		
+		// Script pour ajouter le menu dans la page des commentaires   ->>>>>  MARCHE EN PROD
+	  	pathBase = pathBase[0] +'//'+ pathBase[1] +'/'+ pathBase[2]; 
+	  	
 		href = href.split('/');
 		href = href[href.length - 4];
 
