@@ -6866,7 +6866,7 @@ $handler->override_option('block_caching', -1);
 :> Maj label, sur l'url : "admin/content/node-type/book-ile/fields/field_ile_biblio", cliquer sur modifier les informations de base
 :> Etiquette -> "Principales ressources bibliographiques ( 10 références maximum )"
 
-:> Maj label, sur l'url : "admin/content/node-type/book-ile/fields/field_ile_biblio", cliquer sur modifier les informations de base
+:> Maj label, sur l'url : "admin/content/node-type/book-sous-bassin/fields/field_ss_bassin_biblio", cliquer sur modifier les informations de base
 :> Etiquette -> "Principales ressources bibliographiques ( 25 références maximum )"
 
 :> Ajouter un nouveau champs au type de contenu encylopedie, sur l'url : admin/content/node-type/book-encyclopedie-part/fields
@@ -6876,6 +6876,7 @@ $handler->override_option('block_caching', -1);
 :> Zone de texte à plusieurs lignes
 :> Rangées : 20
 :> Traitement du texte : Texte filtré (l'utilisateur choisit le format d'entrée)
+
 
 :> Ajout de droits pour le nouveau champs, sur l'url : admin/user/permissions
 :> edit field_encyclop_biblio -> Contributeur && Mega Admin
