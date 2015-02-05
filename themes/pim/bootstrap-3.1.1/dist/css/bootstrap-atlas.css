@@ -2177,6 +2177,9 @@ div.containerOfCluster div.views-row-last div.containerOfOneComment {
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+div.containerOfMyIsland a.linkToFicheIle{
+  text-decoration: none;
+}
 div.containerOfMyIsland table.tableRecapIle,div.containerOfMyIsland table.tableRecapIleN{
   width: 100%;
   border: 1px solid #ccc;
