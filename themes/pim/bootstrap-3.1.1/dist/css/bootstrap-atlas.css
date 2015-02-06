@@ -547,6 +547,10 @@ body.page-projet-atlas a#sous-bassin-14 > span{
 }
 /**/
 /*commentaires*/
+body.page-projet-atlas .containerOfOneComment  > p > a{
+  text-decoration: none;
+  font-size: 14px;
+}
 body.page-projet-atlas .titleCommentaire {
   background: url(../../../images/comment_icon.png) no-repeat 99% 50% #4779c0;
   display: block;

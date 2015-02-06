@@ -91,15 +91,21 @@
   <?php endif; ?>
 <?php endif;?>
 
+<?php if ($id == 'title') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $title = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
 <?php endforeach; ?>
 
 
 <div class="containerOfOneComment <?php if($counter > 3) echo 'commentHider'; ?>" >
 
   <?php if($language->language == 'fr'): ?>
-    <p>Par <?php echo $name; ?><br/><i>le <?php echo $timestamp."</i> sur le contenu : <a href='$path' target='_blank'>$type</a></p>"; ?>
+    <p>Par <?php echo $name; ?><br/><i>le <?php echo $timestamp."</i> - $title</p>"; ?>
   <?php else: ?>
-    <p>By <?php echo $name; ?><br/><i>At <?php echo $timestamp."</i> on the content: <a href='$path' target='_blank'>$type</a></p>"; ?>
+    <p>By <?php echo $name; ?><br/><i>At <?php echo $timestamp."</i> - $title</p>"; ?>
   <?php endif; ?>
   
   
