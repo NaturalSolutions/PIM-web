@@ -337,10 +337,10 @@ $allTheSynonym = trim($allTheSynonym, ",");
     
     <?php 
     $cptPropriete_prive = 0;
-    for($i=0; $i<count($StatutPropriete_prive); $i++){
+    for($i=count($StatutPropriete_prive); $i>=0; $i--){
       if($StatutPropriete_prive[$i]->node_data_field_bdi_sp_code_ile_ilot_field_bdi_sp_privee_value == 'Oui'){
 
-        if($StatutPropriete_prive[$i+1]->term_data_node_data_field_bdi_sp_code_ile_ilot_name != $StatutPropriete_prive[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot_name && $StatutPropriete_prive[$i+1]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name != $StatutPropriete_prive[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name){ 
+        if($StatutPropriete_prive[$i-1]->term_data_node_data_field_bdi_sp_code_ile_ilot_name != $StatutPropriete_prive[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot_name && $StatutPropriete_prive[$i-1]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name != $StatutPropriete_prive[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name){ 
 
           $codeIles = $StatutPropriete_prive[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot_name;
           $allNamesIles5 .= "<a href='".$base_url."/fiche-Ile/".$codeIles."' target='_blank'>".$StatutPropriete_prive[$i]->term_data_node_data_field_bdi_sp_code_ile_ilot__term_synonym_name.'</a>&nbsp;&nbsp;';
