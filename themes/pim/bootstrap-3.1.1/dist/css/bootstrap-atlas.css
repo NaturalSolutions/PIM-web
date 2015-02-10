@@ -1039,6 +1039,19 @@ body.section-comment .node-type-book-cluster {
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+body.page-node-add-book-ile table.infoIsland tr, body.page-node-add-book-ile table.infoIsland tr td, body.page-node-add-book-ile table.infoIsland tr th {
+  border: 1px solid #ccc;
+  padding: 10px;
+  padding-left: 15px;
+  font-size: small;
+  font-weight: normal;
+  text-align: center;
+}
+body.page-node-add-book-ile table.infoIsland tr th, body.page-node-add-book-ile table.infoIsland tr th {
+  background-color: #f1f1f1;
+  width: 30%;
+  text-align: left;
+}
 body.page-node-add-book-ile table.cke_editor tbody{
   display: block;
   min-height: 550px;
@@ -1522,6 +1535,19 @@ body.node-type-book-ile.section-node-edit div.views-field-field-document-auteur-
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+body.page-node-add-book-cluster table.infoCluster tr, body.page-node-add-book-cluster table.infoCluster tr td, body.page-node-add-book-cluster table.infoCluster tr th {
+  border: 1px solid #ccc;
+  padding: 10px;
+  padding-left: 15px;
+  font-size: small;
+  font-weight: normal;
+  text-align: center;
+}
+body.page-node-add-book-cluster table.infoCluster tr th, body.page-node-add-book-cluster table.infoCluster tr th {
+  background-color: #f1f1f1;
+  width: 30%;
+  text-align: left;
+}
 body.page-node-add-book-cluster table.cke_editor tbody{
   display: block;
   min-height: 550px;
