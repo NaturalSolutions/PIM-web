@@ -598,3 +598,8 @@ $handler->override_option('block_caching', -1);
 
 
 ##}
+
+:> Suite 1 :
+
+:> Remplacer le texte d'aide par  : Séparer les valeurs par une virgule. Ne pas ajouter une île qui est déjà présente dans un archipel.
+:> sur l'url : admin/content/node-type/book-cluster/fields/field_cluster_code

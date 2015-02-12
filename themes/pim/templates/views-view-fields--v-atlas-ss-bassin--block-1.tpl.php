@@ -136,7 +136,7 @@
   <div id='containerOfTabRecap'>
 
     
-      <p class='headerLabelLeft'>Archipels retenus <br/><i>(secteurs géographiques)</i></p><p class='headerLabelRight'>Iles retenues pour les fiches<br/>&nbsp;</p>
+      <p class='headerLabelLeft'>Cluster retenus et îles orphelines <br/>&nbsp;</p><p class='headerLabelRight'>Iles retenues pour les fiches<br/>&nbsp;</p>
       <?php print views_embed_view('v_atlas_affiche_tab_ile_cluster', 'block_1', $nid); ?>
 
   </div>

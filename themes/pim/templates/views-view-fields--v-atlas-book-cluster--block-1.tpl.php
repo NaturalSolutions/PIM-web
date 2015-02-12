@@ -512,7 +512,7 @@ $allTheSynonym = trim($allTheSynonym, ",");
     
   </div>
 
-  <h3>Îles présentes dans ce cluster :</h3>
+  <h3>Fiche(s) ile du cluster :</h3>
   <div class='indentRight1'>
    
    <?php if($have_iles) echo $have_iles; else echo 'Aucune'; ?>
@@ -566,7 +566,7 @@ $allTheSynonym = trim($allTheSynonym, ",");
     
   </div>
 
-  <h3>Islands present in this cluster:</h3>
+  <h3>Islands sheet in this cluster:</h3>
   <div class='indentRight1'>
    
    <?php if($have_iles) echo $have_iles; else echo 'Aucune'; ?>
