@@ -98,9 +98,16 @@ global $base_url, $language, $user;
 	<?php print views_embed_view('v_atlas_display_docs', 'block_1'); ?>
 </div>
 
+
+
 <?php print drupal_render($form['options']); ?>
-<?php print drupal_render($form['buttons']); ?>
 <?php print drupal_render($form); ?>
+<?php print drupal_render($form['buttons']); ?>
+
+
+<span class="tooltip"><?php if($language->language == fr) echo 'Veuillez noter les modifictions effectuées'; else echo 'Please note modifictions made'; ?></span>
+<p><span class='redStar'>*</span><?php if($language->language == fr) echo 'Champ obligatoire'; else echo 'Required field'; ?></p>
+<div id='overlayButton'></div>
 
 <script>
 
@@ -112,6 +119,7 @@ $( document ).ready(function() {
 
 	//language, traduction
 	var lang = '<?php echo $language->language; ?>';
+	var logIsWrite = false;
 	if(lang == 'en'){
 		
 		$('table#field_ss_bassin_pic_of_map_values > thead > tr > th').text('Map:');
@@ -133,20 +141,62 @@ $( document ).ready(function() {
 		var inputTerminer = $('#edit-termine-wrapper input');
 		$('#edit-brouillon-wrapper label').empty().append(inputBrouillon).append('<span> Draft</span>');
 		$('#edit-avalider-wrapper label').empty().append(inputAvalider).append('<span> To be validated</span>');
-		$('#edit-termine-wrapper label').empty().append(inputTerminer).append('<span> Complete</span>');
+		$('#edit-termine-wrapper label').empty().append(inputTerminer).append('<span> Complete</span>');		
+		$('#edit-log-wrapper label').html('Changes made<span>*</span>:');
+	}else{
+
+		$('#edit-log-wrapper label').html('Modifications effectuées<span>*</span>:');
 	}
 
-	//Rendre obligatoire le message de révision
-	$('#node-form').submit(function(){
-				
+	
+	//Pour afficher un message sur la souris
+	var displayMessageOnCursor = function(){
+
+		//Active le texte sur le cursor
+		var tooltip = $('.tooltip');
+		tooltip.show();
+		window.onmousemove = function (e) {
+		    var x = e.clientX,
+		        y = e.clientY;
+		    tooltip.css('top', (y + 10) + 'px');
+		    tooltip.css('left', (x + 10) + 'px');
+		};
+	}
+
+	
+	//Comportement lors survol du bouton ENREGISTRER 
+	var button = $('#edit-submit');
+	var overlayOnButton = $('#overlayButton');
+	var combined = button.add(overlayOnButton);
+
+	combined.mouseenter(function(){
+
+		console.log($('#edit-log').val());
+		//Si pas de message de log
 		if($('#edit-log').val() == '') {
-			var textLogRevision = prompt("Message de log : ", "Nouvelle révision");
-			$('#edit-log').val(textLogRevision); 
-			return false;
+
+			overlayOnButton.show();
+			overlayOnButton.css('cursor','not-allowed');		
+			displayMessageOnCursor();
+			logIsWrite = false;
+			
 		}
-		else return true;		
+		else{
+			overlayOnButton.hide();
+			$('.tooltip').css('display','none');
+			overlayOnButton.css('cursor','auto');
+			logIsWrite = true;			
+
+		}
+
+	}); 
+
+	//Comportement lors qu'on quitte le focus sur le bouton ENREGISTRER 
+	overlayOnButton.mouseleave(function(){
+		$('.tooltip').css('display','none');			
 	});
 
+	
 	//Pour faire correspondre l'etat "Promu en page d'accueil" avec "A valider" et l'état "Epinglé en haut des listes" avec "Terminé"
 	$('#edit-avalider-wrapper input').change(function(){	
 		if($(this).attr('checked') == true) $('#edit-promote-wrapper input').attr('checked',true);
@@ -198,7 +248,7 @@ $( document ).ready(function() {
 
 	});
 
-//Compteur de mots
+	//Compteur de mots
 	function wordCount( val ){
 	    return {
 	        charactersNoSpaces : val.replace(/\s+/g, '').length,

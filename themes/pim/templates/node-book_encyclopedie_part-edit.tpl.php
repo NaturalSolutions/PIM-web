@@ -57,8 +57,13 @@ global $base_url, $language, $node;
 
 
 <?php print drupal_render($form['options']); ?>
-<?php print drupal_render($form['buttons']); ?>
 <?php print drupal_render($form); ?>
+<?php print drupal_render($form['buttons']); ?>
+
+
+<span class="tooltip"><?php if($language->language == fr) echo 'Veuillez noter les modifictions effectuées'; else echo 'Please note modifictions made'; ?></span>
+<p><span class='redStar'>*</span><?php if($language->language == fr) echo 'Champ obligatoire'; else echo 'Required field'; ?></p>
+<div id='overlayButton'></div>
 
 <script>
 $( document ).ready(function() {
@@ -94,8 +99,65 @@ $( document ).ready(function() {
 		$('#edit-brouillon-wrapper label').empty().append(inputBrouillon).append('<span> Draft</span>');
 		$('#edit-avalider-wrapper label').empty().append(inputAvalider).append('<span> To be validated</span>');
 		$('#edit-termine-wrapper label').empty().append(inputTerminer).append('<span> Complete</span>');
+		$('#edit-log-wrapper label').html('Changes made<span>*</span>:');
+	}else{
 
+		$('#edit-log-wrapper label').html('Modifications effectuées<span>*</span>:');
 	}
+
+	//Deplacer le bouton enregistrer
+	var saveButton = $('#edit-submit');
+	var deleteButton = $('#edit-delete');
+
+	saveButton.insertBefore('#node-form > div > fieldset:last');
+	deleteButton.insertBefore('#node-form > div > fieldset:last');
+
+	//Pour afficher un message sur la souris
+	var displayMessageOnCursor = function(){
+
+		//Active le texte sur le cursor
+		var tooltip = $('.tooltip');
+		tooltip.show();
+		window.onmousemove = function (e) {
+		    var x = e.clientX,
+		        y = e.clientY;
+		    tooltip.css('top', (y + 10) + 'px');
+		    tooltip.css('left', (x + 10) + 'px');
+		};
+	}
+
+	
+	//Comportement lors survol du bouton ENREGISTRER 
+	var button = $('#edit-submit');
+	var overlayOnButton = $('#overlayButton');
+	var combined = button.add(overlayOnButton);
+
+	combined.mouseenter(function(){
+
+		console.log($('#edit-log').val());
+		//Si pas de message de log
+		if($('#edit-log').val() == '') {
+
+			overlayOnButton.show();
+			overlayOnButton.css('cursor','not-allowed');		
+			displayMessageOnCursor();
+			logIsWrite = false;
+			
+		}
+		else{
+			overlayOnButton.hide();
+			$('.tooltip').css('display','none');
+			overlayOnButton.css('cursor','auto');
+			logIsWrite = true;			
+
+		} 
+	});
+
+	//Comportement lors qu'on quitte le focus sur le bouton ENREGISTRER 
+	overlayOnButton.mouseleave(function(){
+		$('.tooltip').css('display','none');			
+	});
+
 
 	//Rendre obligatoire le message de révision
 	$('#node-form').submit(function(){

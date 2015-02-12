@@ -418,7 +418,7 @@ $allTheSynonym = trim($allTheSynonym, ",");
       <tr>
         <th rowspan=2><center><p>Surface</p></center></th>
         <th><p>Surface emergée cumulée</p><center>(ha)</center></th>
-        <th><p>Surface emergée cumulée avec statut</p><center>(%)</center></th>
+        <th><p>Surface emergée cumulée avec statut de protection</p><center>(%)</center></th>
       </tr>
       <tr>        
         <td><center><p><?php echo $surfaceCumule; ?></p></center></td>

@@ -646,6 +646,41 @@ body.node-type-book-sous-bassin.section-node-edit table.cke_editor tbody tr td{
 body.node-type-book-sous-bassin.section-node-edit iframe {
   float: left;
 }
+body.node-type-book-sous-bassin.section-node-edit #edit-log-wrapper label {
+  font-size: 14px;
+}
+body.node-type-book-sous-bassin.section-node-edit #edit-log-wrapper label > span{
+  color: #c00;
+  padding-left: 3px;
+}
+body.node-type-book-sous-bassin.section-node-edit form{
+  position: relative;
+}
+body.node-type-book-sous-bassin.section-node-edit form#node-form > div > p:last-of-type {
+  margin-top: 11px;
+}
+body.node-type-book-sous-bassin.section-node-edit #node-form > div > fieldset:nth-child(34){
+  display: none;
+}
+body.node-type-book-sous-bassin.section-node-edit div#overlayButton{
+  height: 90px;
+  position: absolute;
+  bottom: 23px;
+  z-index: 999999;
+  width: 100%; 
+}
+body.node-type-book-sous-bassin.section-node-edit span.redStar{
+  color: #c00;
+  padding-right: 2px;
+}
+body.node-type-book-sous-bassin.section-node-edit .tooltip  {
+    display:block;
+    position:fixed;
+    overflow:hidden;
+    background: #000;
+    color: #fff;
+    padding: 5px
+}
 body.node-type-book-sous-bassin.section-node-edit .addEncadre, body.node-type-book-sous-bassin.section-node-edit .addSection, body.node-type-book-sous-bassin.section-node-edit .addLegend {
   display: none;
 }
@@ -1039,6 +1074,31 @@ body.section-comment .node-type-book-cluster {
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+body.page-node-add-book-ile form{
+  position: relative;
+}
+body.page-node-add-book-ile div#overlayButton{
+  height: 87px;
+  position: absolute;
+  bottom: 25px;
+  z-index: 999999;
+  width: 100%;
+}
+body.page-node-add-book-ile form#node-form > div > p:last-of-type {
+  margin-top: 11px;
+}
+body.page-node-add-book-ile span.redStar{
+  color: #c00;
+  padding-right: 2px;
+}
+body.page-node-add-book-ile .tooltip  {
+    display:block;
+    position:fixed;
+    overflow:hidden;
+    background: #000;
+    color: #fff;
+    padding: 5px
+}
 body.page-node-add-book-ile table.infoIsland tr, body.page-node-add-book-ile table.infoIsland tr td, body.page-node-add-book-ile table.infoIsland tr th {
   border: 1px solid #ccc;
   padding: 10px;
@@ -1287,6 +1347,41 @@ body.page-node-add-book-ile #edit-sticky-wrapper, body.page-node-add-book-ile #e
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+body.node-type-book-ile.section-node-edit form{
+  position: relative;
+}
+body.node-type-book-ile.section-node-edit #node-form > div > fieldset:nth-child(35){
+  display: none;
+}
+body.node-type-book-ile.section-node-edit form#node-form > div > p:last-of-type{
+  margin-top: 11px;
+}
+body.node-type-book-ile.section-node-edit div#overlayButton{
+  height: 87px;
+  position: absolute;
+  bottom: 47px;
+  z-index: 999999;
+  width: 100%;
+}
+body.node-type-book-ile.section-node-edit span.redStar{
+  color: #c00;
+  padding-right: 2px;
+}
+body.node-type-book-ile.section-node-edit #edit-log-wrapper label > span {
+  color: #c00;
+  padding-left: 3px;
+}
+body.node-type-book-ile.section-node-edit #edit-log-wrapper label {
+  font-size: 14px;
+}
+body.node-type-book-ile.section-node-edit .tooltip  {
+    display:block;
+    position:fixed;
+    overflow:hidden;
+    background: #000;
+    color: #fff;
+    padding: 5px
+}
 body.node-type-book-ile.section-node-edit table.infoIsland tr, body.node-type-book-ile.section-node-edit table.infoIsland tr td, body.node-type-book-ile.section-node-edit table.infoIsland tr th {
   border: 1px solid #ccc;
   padding: 10px;
@@ -1535,6 +1630,38 @@ body.node-type-book-ile.section-node-edit div.views-field-field-document-auteur-
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+body.page-node-add-book-cluster form{
+  position: relative;
+}
+body.page-node-add-book-cluster form#node-form > div > p:last-of-type{
+  margin-top: 11px;
+}
+body.page-node-add-book-cluster div#overlayButton{
+  height: 87px;
+  position: absolute;
+  bottom: 25px;
+  z-index: 999999;
+  width: 100%;
+}
+body.page-node-add-book-cluster span.redStar{
+  color: #c00;
+  padding-right: 2px;
+}
+body.page-node-add-book-cluster #edit-log-wrapper label > span {
+  color: #c00;
+  padding-left: 3px;
+}
+body.page-node-add-book-cluster #edit-log-wrapper label {
+  font-size: 14px;
+}
+body.page-node-add-book-cluster .tooltip  {
+    display:block;
+    position:fixed;
+    overflow:hidden;
+    background: #000;
+    color: #fff;
+    padding: 5px
+}
 body.page-node-add-book-cluster table.infoCluster tr, body.page-node-add-book-cluster table.infoCluster tr td, body.page-node-add-book-cluster table.infoCluster tr th {
   border: 1px solid #ccc;
   padding: 10px;
@@ -1783,6 +1910,41 @@ body.page-node-add-book-cluster #edit-sticky-wrapper, body.page-node-add-book-cl
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+body.node-type-book-cluster.section-node-edit form{
+  position: relative;
+}
+body.node-type-book-cluster.section-node-edit #node-form > div > fieldset:nth-child(34){
+  display: none;
+}
+body.node-type-book-cluster.section-node-edit form#node-form > div > p:last-of-type {
+  margin-top: 11px;
+}
+body.node-type-book-cluster.section-node-edit div#overlayButton{
+  height: 87px;
+  position: absolute;
+  bottom: 47px;
+  z-index: 999999;
+  width: 100%;
+}
+body.node-type-book-cluster.section-node-edit span.redStar{
+  color: #c00;
+  padding-right: 2px;
+}
+body.node-type-book-cluster.section-node-edit #edit-log-wrapper label > span {
+  color: #c00;
+  padding-left: 3px;
+}
+body.node-type-book-cluster.section-node-edit #edit-log-wrapper label {
+  font-size: 14px;
+}
+body.node-type-book-cluster.section-node-edit .tooltip  {
+    display:block;
+    position:fixed;
+    overflow:hidden;
+    background: #000;
+    color: #fff;
+    padding: 5px
+}
 body.node-type-book-cluster.section-node-edit table.infoCluster tr, body.node-type-book-cluster.section-node-edit table.infoCluster tr td, body.node-type-book-cluster.section-node-edit table.infoCluster tr th {
   border: 1px solid #ccc;
   padding: 10px;
@@ -2740,6 +2902,41 @@ div.containerOfEncplodiePart div.views-row-last div.containerOfOneComment {
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+body.node-type-book-encyclopedie-part.section-node-edit form{
+  position: relative;
+}
+body.node-type-book-encyclopedie-part.section-node-edit #node-form > div > fieldset:nth-child(20){
+  display: none;
+}
+body.node-type-book-encyclopedie-part.section-node-edit form#node-form > div > p:last-of-type {
+  margin-top: 11px;
+}
+body.node-type-book-encyclopedie-part.section-node-edit div#overlayButton{
+  height: 87px;
+  position: absolute;
+  bottom: 25px;
+  z-index: 999999;
+  width: 100%;
+}
+body.node-type-book-encyclopedie-part.section-node-edit span.redStar{
+  color: #c00;
+  padding-right: 2px;
+}
+body.node-type-book-encyclopedie-part.section-node-edit #edit-log-wrapper label > span {
+  color: #c00;
+  padding-left: 3px;
+}
+body.node-type-book-encyclopedie-part.section-node-edit #edit-log-wrapper label {
+  font-size: 14px;
+}
+body.node-type-book-encyclopedie-part.section-node-edit .tooltip  {
+    display:block;
+    position:fixed;
+    overflow:hidden;
+    background: #000;
+    color: #fff;
+    padding: 5px
+}
 body.node-type-book-encyclopedie-part.section-node-edit table.infoEncyclop tr, body.node-type-book-encyclopedie-part.section-node-edit table.infoEncyclop tr td, body.node-type-book-encyclopedie-part.section-node-edit table.infoEncyclop tr th {
   border: 1px solid #ccc;
   padding: 10px;
