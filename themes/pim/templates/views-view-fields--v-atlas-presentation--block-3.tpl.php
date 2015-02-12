@@ -55,7 +55,7 @@
 
 
 
-  <p>Dernière connexion le <?php echo $login; ?> par <?php echo $name; ?></p>
+  <p>Le <?php echo $login; ?> par <?php echo $name; ?></p>
 
 
 

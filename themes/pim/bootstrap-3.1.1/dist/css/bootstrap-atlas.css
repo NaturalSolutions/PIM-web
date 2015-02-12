@@ -206,7 +206,6 @@ body.page-projet-atlas div.view-dom-id-v-atlas-presentation-block-7-1 {
 body.page-projet-atlas div.view-id-v_atlas_presentation.view-display-id-block_2{
   color: #fff;
   font-size: 15px;
-  border-bottom: 1px solid #fff;
 }
 body.page-projet-atlas div.view-id-v_atlas_presentation.view-display-id-block_3{
   color: #fff;
@@ -232,6 +231,15 @@ body.page-projet-atlas div.view-id-v_atlas_presentation.view-display-id-block_2 
 body.page-projet-atlas div.view-id-v_atlas_presentation.view-display-id-block_2 p{
   line-height: 18px;
   text-align: left;
+}
+body.page-projet-atlas div.view-id-v_atlas_presentation.view-display-id-block_2 p:last-of-type{
+  border-top: 1px solid #fff;
+  line-height: 40px;
+  border-bottom: 1px solid #fff;
+  margin-bottom: 0;
+}
+body.page-projet-atlas div.view-id-v_atlas_presentation.view-display-id-block_2 p:last-of-type > a{
+  text-decoration: none;
 }
 body.page-projet-atlas div.view-id-v_atlas_presentation.view-display-id-block_3 p{
   line-height: 18px;

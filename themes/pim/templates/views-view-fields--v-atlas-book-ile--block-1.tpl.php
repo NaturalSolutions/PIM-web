@@ -147,7 +147,7 @@
   <?php if($tid != ''): ?>
   
     <!-- lien vers la fiche ile -->
-    <?php echo  "<a class='linkToFicheIle' href=".$base_url."/fiche-Ile/".$code_ile.">Fiche île</a>"; ?>
+    <?php echo  "<a class='linkToFicheIle' href=".$base_url."/fiche-Ile/".$code_ile.">Modifier les valeurs des tableaux pour cette île.</a>"; ?>
 
     <!-- Status description physique -->
     <?php print views_embed_view('v_atlas_tab_data_ile', 'block_1', $tid); ?>

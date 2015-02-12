@@ -66,11 +66,12 @@
   else $statut = 'Brouillon';
 ?>
 
-
-<p>Dernière publication le <?php echo $lastDateOfMaj; ?></p>
+<p>Dernière publication</p>
 
 <p id="title"><?php echo $title; ?></p>
 
 <p id="statut">Statut "<?php echo $statut; ?>"</p>
+
+<p>Le <?php echo $lastDateOfMaj; ?> par <?php echo $auteur; ?></p>
 
 

@@ -270,9 +270,7 @@
               
               <h2 class='dashboardLabel'><?php if( $language->language == 'fr') echo 'Tableau de bord'; else echo 'Dashboard'; ?></h2>
                 <!-- affiche derniere publication -->
-                <?php print views_embed_view('v_atlas_presentation', 'block_2'); ?>
-                <!-- affiche derniere connexion -->
-                <?php print views_embed_view('v_atlas_presentation', 'block_3'); ?>
+                <?php print views_embed_view('v_atlas_presentation', 'block_2'); ?>                
                 <!-- affiche Compteur de brouillon -->
                 <div id="absoluteContainer">
                   <?php $nbBrouillon = views_get_view_result('v_atlas_presentation', 'block_4'); ?>
