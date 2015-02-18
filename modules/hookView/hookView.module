@@ -210,7 +210,7 @@ function hookView_views_pre_execute(&$view) {
           "SELECT node.nid AS nid,
                      AsText(node_data_field_bdi_dp_zone_geographique.field_bdi_dp_coordonnees_geo) 
                         AS field_bdi_dp_coordonnees_geo_astext,
-                     term_synonym.name AS term_synonym_name,
+                     group_concat(term_synonym.name ORDER BY term_synonym.tsid ASC SEPARATOR ', ') AS term_synonym_name,
                      node_data_field_bdi_dp_zone_geographique.field_bdi_dp_nom_ile_code_ile_value 
                         AS node_data_field_bdi_dp_zone_geographique_field_bdi_dp_nom_ile_code_ile_value,
                      node.language AS node_language,
@@ -219,14 +219,13 @@ function hookView_views_pre_execute(&$view) {
             FROM {node} node 
             LEFT JOIN {content_type_bd_i_description_physique} node_data_field_bdi_dp_zone_geographique 
                 ON node.vid = node_data_field_bdi_dp_zone_geographique.vid
-            LEFT JOIN {term_node} term_node 
-                ON node.vid = term_node.vid
             LEFT JOIN {term_synonym} term_synonym 
                 ON node_data_field_bdi_dp_zone_geographique.field_bdi_dp_nom_ile_code_ile_value = term_synonym.tid
             LEFT join {term_fields_term} term_fields_term
                 ON node_data_field_bdi_dp_zone_geographique.field_bdi_dp_nom_ile_code_ile_value = term_fields_term.tid
             WHERE (node.type in ('%s')) 
               AND (term_fields_term.is_archipel = 0)
+            GROUP BY node.nid
           ";
         
         $view->build_info['count_query'] =
