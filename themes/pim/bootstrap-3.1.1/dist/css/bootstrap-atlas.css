@@ -2188,6 +2188,10 @@ body.node-type-book-cluster.section-node-edit div.views-field-field-document-aut
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+div.containerOfCluster img.imagefield-field_cluster_image{
+  width: 100%;
+  height: auto;
+}
 div.containerOfCluster table.tableRecapIle, div.containerOfCluster table.tableRecapIle tr, div.containerOfCluster table.tableRecapIle tr td, div.containerOfCluster table.tableRecapIle tr th{
   /*padding: 10px;*/
   border: 1px solid #ccc;
