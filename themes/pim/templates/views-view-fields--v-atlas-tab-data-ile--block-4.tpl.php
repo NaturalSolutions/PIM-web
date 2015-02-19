@@ -74,8 +74,8 @@
   <?php if($counter == '1'): ?><th ROWSPAN=<?php echo $countNbTotalItem;?>>Gestionnaires</th><?php endif; ?>
 
   <td><?php echo $field_bdi_g_type_accordg_precis_value; ?></td>
-  <td><?php echo $field_bdi_g_annee_debut_gestion_value; ?></td>
-  <td><?php echo $field_bdi_g_nom_gestionnaire_value; ?></td>
+  <td><?php if($field_bdi_g_annee_debut_gestion_value == '<span class="date-display-single">1666</span>') echo "NC"; else echo $field_bdi_g_annee_debut_gestion_value; ?></td>
+    <td><?php echo $field_bdi_g_nom_gestionnaire_value; ?></td>
 
   
   </TR>

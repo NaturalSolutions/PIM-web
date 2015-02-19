@@ -86,7 +86,7 @@
   <?php if($counter == '1'): ?><th ROWSPAN=<?php echo $countNbTotalItem;?>>Statut de protection international</th><?php endif; ?>
     
     <td><?php echo $field_bdi_spt_statut_protection_value; ?></td>
-    <td><?php echo $field_bdi_spt_annee_value; ?></td>
+    <td><?php if($field_bdi_spt_annee_value == '<span class="date-display-single">1666</span>') echo "NC"; else echo $field_bdi_spt_annee_value; ?></td>
     <td><?php echo $field_bdi_spt_aire_concernee_value; ?></td>
       
   </TR>
