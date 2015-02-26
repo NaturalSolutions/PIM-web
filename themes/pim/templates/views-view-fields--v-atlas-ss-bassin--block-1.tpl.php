@@ -121,6 +121,12 @@
   <?php endif; ?>
 <?php endif;?>
 
+<?php if ($id == 'field_ss_bassin_responsable_uid') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $responsables = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
 
 <?php endforeach; ?>
 
@@ -142,7 +148,10 @@
   </div>
 
 
-
+  <div class='responsableBloc'>
+    <h2>Responsable(s):</h2>
+    <?php echo $responsables; ?>
+  </div>
 
 
   <h3>1 - Présentation et caractéristiques générales</h3>
@@ -227,7 +236,10 @@
   </div>
 
 
-
+  <div class='responsableBloc'>
+    <h2>Responsable(s):</h2>
+    <?php echo $responsables; ?>
+  </div>
 
 
   <h3>1 - Presentation of the sub-basin and general characteristics </h3>

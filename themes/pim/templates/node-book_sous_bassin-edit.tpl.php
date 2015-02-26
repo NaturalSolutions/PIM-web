@@ -52,11 +52,11 @@ global $base_url, $language, $user;
 <?php endif; ?>	
 
 
-
 <?php print drupal_render($form['title']); ?>
 <?php print drupal_render($form['author']); ?>
-
 <?php print drupal_render($form['field_ss_bassin_author']); ?>
+<?php print drupal_render($form['field_ss_bassin_responsable']); ?>
+
 <?php print drupal_render($form['field_ss_bassin_pic_of_map']); ?>
 
 <h4>1 - <?php if($language->language == 'fr') echo "Présentation et caractéristiques générales"; else echo "Presentation of the sub-basin and general characteristics"; ?></h4>
@@ -148,7 +148,7 @@ $( document ).ready(function() {
 		$('#edit-log-wrapper label').html('Modifications effectuées<span>*</span>:');
 	}
 
-	
+		
 	//Pour afficher un message sur la souris
 	var displayMessageOnCursor = function(){
 

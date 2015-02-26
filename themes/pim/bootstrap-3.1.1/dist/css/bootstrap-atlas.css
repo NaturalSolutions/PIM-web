@@ -610,6 +610,12 @@ body.page-projet-atlas div.views-row-last div.containerOfOneComment {
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+body.node-type-book-sous-bassin.section-node-edit div#field-ss-bassin-responsable-items{
+  padding-bottom: 12px;
+}
+body.node-type-book-sous-bassin.section-node-edit div#field-ss-bassin-responsable-items th{
+  font-size: 14px
+}
 body.node-type-book-sous-bassin.section-node-edit table.infoSousBassin tr, body.node-type-book-sous-bassin.section-node-edit table.infoSousBassin tr td, body.node-type-book-sous-bassin.section-node-edit table.infoSousBassin tr th {
   border: 1px solid #ccc;
   padding: 10px;
@@ -884,6 +890,9 @@ body.node-type-book-sous-bassin div.views-field-field-document-auteur-value labe
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+div.containerOfMyssBassin div.responsableBloc {
+  text-align: right;
+}
 div.containerOfMyssBassin img.imageMap {
   width: 100%;
   margin-top: 30px;
@@ -1074,7 +1083,7 @@ body.section-comment .node-type-book-cluster {
 }
 /***************************************************************************/
 /***************************************************************************/
-/*                  	   	   ADD FORM ILE                               */
+/*                  	   	     ADD ILE                                     */
 /*                                                                         */
 /***************************************************************************/
 /*********************************  ****************************************/
@@ -1627,7 +1636,7 @@ body.node-type-book-ile.section-node-edit div.views-field-field-document-auteur-
 }
 /***************************************************************************/
 /***************************************************************************/
-/*                  	   	   ADD FORM CLUSTER                            */
+/*                  	   	      ADD CLUSTER                                */
 /*                                                                         */
 /***************************************************************************/
 /*********************************  ****************************************/
@@ -1907,7 +1916,7 @@ body.page-node-add-book-cluster #edit-sticky-wrapper, body.page-node-add-book-cl
 }
 /***************************************************************************/
 /***************************************************************************/
-/*                  	   	   EDITION FORM CLUSTER                          */
+/*                  	   	   EDITION CLUSTER                               */
 /*                                                                         */
 /***************************************************************************/
 /*********************************  ****************************************/
@@ -2188,6 +2197,9 @@ body.node-type-book-cluster.section-node-edit div.views-field-field-document-aut
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+div.containerOfCluster div.responsableBloc {
+  text-align: right;
+}
 div.containerOfCluster img.imagefield-field_cluster_image{
   width: 100%;
   height: auto;
@@ -2372,6 +2384,9 @@ div.containerOfCluster div.views-row-last div.containerOfOneComment {
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+div.containerOfMyIsland div.responsableBloc {
+  text-align: right;
+}
 div.containerOfMyIsland a.linkToFicheIle{
   text-decoration: none;
 }

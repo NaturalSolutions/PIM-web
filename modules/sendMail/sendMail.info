@@ -1,0 +1,6 @@
+; $Id: ctools.info,v 1.2 2011/08/02  $
+name = Send Mail 
+description = Execute des fonctions d'envoi de mail après l'édition d'un contenu (Atlas)
+core = 6.x
+version = "6.x-1.2"
+package = "# NS Modules"

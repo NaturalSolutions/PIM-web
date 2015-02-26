@@ -12,7 +12,6 @@ global $base_url, $language, $node;
 <!-- recuperation de ladresse courante pr tester si on est en mode edition / visu -->
 <?php $current_url = request_uri(); ?>
 <?php $current_url = explode('/', $current_url ); ?>
-<?php $current_url[ count($current_url) - 2]; ?>
 
 <?php if($current_url[ count($current_url) - 2] == 'add'): ?>
 
@@ -55,21 +54,16 @@ global $base_url, $language, $node;
 <?php print drupal_render($form['title']); ?>
 <?php print drupal_render($form['author']); ?>
 <?php print drupal_render($form['field_cluster_autor']); ?>
-
-
 <?php print drupal_render($form['field_id_bassin_for_cluster']); ?>
 <?php print drupal_render($form['field_cluster_have_ss_bassin']); ?>
-
 <?php print drupal_render($form['field_cluster_image']); ?>
 
-<div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_cluster_tab']); ?></div>
 <div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_cluster_desc_gen']); ?></div>
 <div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_cluster_connaiss']); ?></div>
 <div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_cluster_interet']); ?></div>
 <div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_cluster_pression']); ?></div>
 <div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_cluster_gest_conserv']); ?></div>
 <div class='contenerRelatif'><span class='btnShowDocs' title='Add a document'>B</span><?php print drupal_render($form['field_cluster_biblio']); ?></div>
-
 
 
 <div id='dialog2' title="Documents liés à l'Atlas" class='contenerRelatif'>
@@ -126,6 +120,7 @@ $( document ).ready(function() {
 
 		$('#edit-log-wrapper label').html('Modifications effectuées<span>*</span>:');
 	}
+
 
 	//Deplacer le bouton enregistrer
 	var saveButton = $('#edit-submit');

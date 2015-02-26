@@ -115,6 +115,12 @@
   <?php endif; ?>
 <?php endif;?>
 
+<?php if ($id == 'field_ile_id_ss_bassin_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $idSousBassinParent = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
 <?php if ($id == 'tid') : ?>
   <?php if (!empty($field->content)): ?>
     <?php $tid = $field->content; ?>
@@ -215,6 +221,31 @@
 
   <?php echo $tab; ?>
 
+  <div class='responsableBloc'>
+    <h2>Responsable(s) :</h2>
+    <?php $nodeOfSousBassinParent = node_load($idSousBassinParent, $revision = NULL, $reset = NULL);  ?>
+    <?php 
+    //On récupere un tableau d'uid des utilisateur enregsitré dans le champs "field_ss_bassin_responsable"
+    $arrayOfUidOfResponsable = $nodeOfSousBassinParent->field_ss_bassin_responsable;
+
+
+    //Parcour des uid
+    foreach ($arrayOfUidOfResponsable as $value){
+        
+      //Charge l'utilisateur concerné
+      $userCourant = user_load( $value['uid'] );
+
+      //Concaténation des mails des responsables
+      $allName .= "<a href=$base_url/user/$value[uid]>".$userCourant->name.'</a><br/>';
+
+    }
+
+    //Nettoyage de la string
+    $allName = trim($allName, ",");
+    echo $allName;
+    ?>
+  </div>
+
   <h3> Description générale</h3>
 
   <?php echo $descGen; ?>
@@ -313,6 +344,31 @@
   <?php endif; ?>
 
   <?php echo $tab; ?>
+
+  <div class='responsableBloc'>
+    <h2>Responsable(s) :</h2>
+    <?php $nodeOfSousBassinParent = node_load($idSousBassinParent, $revision = NULL, $reset = NULL);  ?>
+    <?php 
+    //On récupere un tableau d'uid des utilisateur enregsitré dans le champs "field_ss_bassin_responsable"
+    $arrayOfUidOfResponsable = $nodeOfSousBassinParent->field_ss_bassin_responsable;
+
+
+    //Parcour des uid
+    foreach ($arrayOfUidOfResponsable as $value){
+        
+      //Charge l'utilisateur concerné
+      $userCourant = user_load( $value['uid'] );
+
+      //Concaténation des mails des responsables
+      $allName .= "<a href=$base_url/user/$value[uid]>".$userCourant->name.'</a><br/>';
+
+    }
+
+    //Nettoyage de la string
+    $allName = trim($allName, ",");
+    echo $allName;
+    ?>
+  </div>
 
   <h3>General description</h3>
 
