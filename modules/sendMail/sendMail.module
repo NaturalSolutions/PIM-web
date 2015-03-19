@@ -8,17 +8,49 @@ require_once('sendMail.inc');
 
 //Si on valide un formulaire
 function sendMail_form_alter(&$form, &$form_state) {
-	
-	//execute
-	$form['#submit'][] = 'sendMail_submit_function';
+  
+  //execute
+  $form['#submit'][] = 'sendMail_submit_function';
   
 }
-
 
 function sendMail_submit_function($form, &$form_state) {
 /* any custom submit processing 
  * required for the submitted form data
 */
+
+  //si c'est un post de commentaire
+  if($form['_author']['#post']['form_id'] == 'comment_form'){
+    
+    //Nom
+    $nid = $form['nid']['#value'];
+    $node = node_load($nid);
+    $title = $node->title;
+
+    //type
+    $type = $node->type;
+
+    //filtre sur la partie Atlas
+    if($type == 'book_sous_bassin' || $type == 'book_cluster' || $type == 'book_ile'){
+
+      //lien
+      $base_url = "http://".$_SERVER['HTTP_HOST'].base_path();
+      $link = '<a href='.$base_url.'node/'.$nid.'>lien</a>';
+
+      //Recuperation des responsables
+      $allMail = getMailResponsables($form,  $form_state, $type, $node, $isComment = true);
+
+      //Comment body
+      //$textComment = $form['_author']['#post']['comment'];      
+
+      //Envoi du mail
+      sendMail($allMail, $title, $statut = 0, $link, $type, $isComment = true);
+      
+    }
+
+      
+  }
+
 	//Si c'est une ile ou un cluster ou un sous bassin
 	if($form_state['values']['type'] == 'book_ile' || $form_state['values']['type'] == 'book_cluster' || $form_state['values']['type'] == 'book_sous_bassin'){
 
@@ -28,9 +60,9 @@ function sendMail_submit_function($form, &$form_state) {
 
       //type de contenu
       $type = $form_state['values']['type'];
-      
+
       //Recuperation des responsables
-      $allMail = getMailResponsables($form,  $form_state, $type);
+      $allMail = getMailResponsables($form,  $form_state, $type, $node = '', $isComment = false);
 
       //Nom du node
       $title = $form_state['values']['title'];
@@ -38,7 +70,7 @@ function sendMail_submit_function($form, &$form_state) {
       //lien
       $base_url = "http://".$_SERVER['HTTP_HOST'].base_path();
 			$nid = $form_state['values']['nid'];
-			$link = '<a href='.$base_url.'node/'.$nid.'">lien</a>';
+			$link = '<a href='.$base_url.'node/'.$nid.'>lien</a>';
 
 			//Si le statut deviens "brouillon"
 			if($form_state['values']['brouillon'] == 1) $statut = 'Bouillon'; 				
@@ -48,7 +80,7 @@ function sendMail_submit_function($form, &$form_state) {
       if($form_state['values']['termine'] == 1) $statut = 'Terminé';        
         
       //Envoie du mail si un statut à changer
-      if($form_state['values']['brouillon'] == 1 || $form_state['values']['avalider'] == 1 || $form_state['values']['termine'] == 1 ) 	sendMail($allMail, $title, $statut, $link);
+      if($form_state['values']['brouillon'] == 1 || $form_state['values']['avalider'] == 1 || $form_state['values']['termine'] == 1 ) 	sendMail($allMail, $title, $statut, $link, $type, $isComment = false);
 
 		}
 

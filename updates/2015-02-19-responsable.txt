@@ -2978,8 +2978,128 @@ $handler->override_option('block_caching', -1);
 
 :> Supprimer la règle "book - mail lors changement de statut vers A valider" (admin/rules/trigger)
 :> Supprimer la règle "book - mail lors changement de statut vers Terminer" (admin/rules/trigger)
+:> Supprimer la règle "book - mail aux Admin PIM lors nouveau commentaire After" (admin/rules/trigger)
 :> Activer mon jolie module "Send Mail" (admin/build/modules)
 
+### NE PAS COPIER - Sauvegarde de la regle "book - mail aux Admin PIM lors nouveau commentaire"{{##
+  array (
+  'rules' => 
+  array (
+    'rules_book_mail_aux_admin_pim_lors_nouveau_commentaire' => 
+    array (
+      '#type' => 'rule',
+      '#set' => 'event_comment_publish',
+      '#label' => 'book - mail aux Admin PIM lors nouveau commentaire',
+      '#active' => 1,
+      '#weight' => '0',
+      '#categories' => 
+      array (
+        0 => 'atlas',
+      ),
+      '#status' => 'custom',
+      '#conditions' => 
+      array (
+        0 => 
+        array (
+          '#type' => 'condition',
+          '#settings' => 
+          array (
+            'type' => 
+            array (
+              'book_cluster' => 'book_cluster',
+              'book_encyclopedie_part' => 'book_encyclopedie_part',
+              'book_ile' => 'book_ile',
+              'book_sous_bassin' => 'book_sous_bassin',
+            ),
+            '#argument map' => 
+            array (
+              'node' => 'node',
+            ),
+          ),
+          '#name' => 'rules_condition_content_is_type',
+          '#info' => 
+          array (
+            'label' => 'Commented content is book_cluster ou book_encyclopedie_part ou book_ile ou book_sous_bassin',
+            'arguments' => 
+            array (
+              'node' => 
+              array (
+                'type' => 'node',
+                'label' => 'Contenu',
+              ),
+            ),
+            'module' => 'Node',
+          ),
+          '#weight' => 0,
+        ),
+      ),
+      '#actions' => 
+      array (
+        1 => 
+        array (
+          '#weight' => 0,
+          '#info' => 
+          array (
+            'label' => 'Send a mail to an arbitrary mail address',
+            'module' => 'System',
+            'eval input' => 
+            array (
+              0 => 'subject',
+              1 => 'message',
+              2 => 'from',
+              3 => 'to',
+            ),
+          ),
+          '#name' => 'rules_action_mail',
+          '#settings' => 
+          array (
+            'to' => 'p.delaunay1@gmail.com',
+            'from' => 'initiative-pim@conservatoire-du-littoral.fr',
+            'subject' => '[Atlas PIM] Nouveau commentaire',
+            'message' => 'Bonjour,
+
+Un commentaire a été posté sur le contenu "[comment:comment-node-title]", le [comment:comment-small], par [comment_author:user] :
+
+Voir sur le site : [node:node-url]
+
+Bonne journée.
+
+Atlas PIM',
+            '#eval input' => 
+            array (
+              'token_rules_input_evaluator' => 
+              array (
+                'subject' => 
+                array (
+                  0 => ':global',
+                ),
+                'message' => 
+                array (
+                  0 => 'comment',
+                  1 => 'comment_author',
+                  2 => 'node',
+                  3 => ':global',
+                ),
+                'from' => 
+                array (
+                  0 => ':global',
+                ),
+                'to' => 
+                array (
+                  0 => ':global',
+                ),
+              ),
+            ),
+          ),
+          '#type' => 'action',
+        ),
+      ),
+      '#version' => 6003,
+    ),
+  ),
+)
+
+##}}
 #SAVE NE PAS IMPORTER### Backup des 3 règles {{## 
 
 array (
