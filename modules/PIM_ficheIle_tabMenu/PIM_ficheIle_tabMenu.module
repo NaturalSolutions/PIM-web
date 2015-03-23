@@ -240,7 +240,7 @@ function PIM_ficheIle_tabMenu_form_alter(&$form, &$form_state, $form_id) {
       $url = pim_fi_hack_nodeview_url($form["nid"]["#value"], $node_type);
       $form_state['pim_fi_redirect'] = $url;
       //une seule destination
-      if (strpos($form['#action'], '?destination=') == FALSE && $form['#field_info']['field_id_bassin_for_cluster']['type_name'] != 'book_cluster') {
+      if (strpos($form['#action'], '?destination=') == FALSE && $form['#field_info']['field_id_bassin_for_cluster']['type_name'] != 'book_cluster' && $form_id != 'book_ile_node_form') {
         $form['#action'] .= '?destination=' . urlencode($url);
       }
     break;
