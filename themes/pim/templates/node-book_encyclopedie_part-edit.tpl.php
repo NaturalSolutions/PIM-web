@@ -254,7 +254,7 @@ $( document ).ready(function() {
 			if(lang == 'fr'){
 				var titre = prompt("Titre : ", "Votre titre ici");
 				var texte = prompt("Texte : ", "Votre texte ici");
-				var auteur = prompt("Auteur : ", "Prénom NOM (Organisme)");
+				var auteur = prompt("Auteur : ", "[Prénom, nom, organisme]");
 			}else{
 				var titre = prompt("Title : ", "Your title here");
 				var texte = prompt("Text : ", "Your text here");
