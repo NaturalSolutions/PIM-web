@@ -156,7 +156,7 @@ $( document ).ready(function() {
 
 	combined.mouseenter(function(){
 
-		console.log($('#edit-log').val());
+		
 		//Si pas de message de log
 		if($('#edit-log').val() == '') {
 
@@ -234,14 +234,9 @@ $( document ).ready(function() {
 		$('#edit-title').val('Île :')
 
 		//Gestion automatique du menu
-		$('select#edit-menu-parent-hierarchical-select-selects-0').val('menu-menu-atlas-hp:0');
-		
-		
-		//Pour revenir en haut de l'ecran après le .change sur le select
-		//Gestion automatique du menu
 	 	setTimeout(function(){	
 	    
-	    	//$("select#edit-menu-parent-hierarchical-select-selects-0 option[value='menu-menu-atlas-hp:0']").trigger("change"); 
+	    	$("select#edit-menu-parent-hierarchical-select-selects-0 option[value='menu-menu-atlas-hp:0']").trigger("change"); 
 	    	
 	    	if( $('select#edit-menu-parent-hierarchical-select-selects-0').val() != 'menu-menu-atlas-hp:0' ){
 
