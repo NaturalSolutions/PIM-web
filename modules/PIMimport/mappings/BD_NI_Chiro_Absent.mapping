@@ -29,7 +29,7 @@ function _getSqlCheckValue($tableName) {
         'description' => t('Please verify your taxonomic references, you either have misspelled them or have used unknown references. In the later case, you must contact an administrator and ask him if this reference could be added for your taxonomic domain.'),
         'type' => 'taxonomy',
         'field' => 'Referentiel_taxonomique',
-        'vid' => 68,
+        'vid' => 67,
         'mandatory' => true,
         'hasDefault' => false,
     );
@@ -156,7 +156,7 @@ function _getMappingNodeSelectImportableData($tableName) {
                 'mutlivalue' => false,
                 'contentField' => 'field_bdni_c_a_referentiel',
                 'type' => 'taxonomy',
-                'taxonomyVoc' => 68,
+                'taxonomyVoc' => 67,
                 'taxonomyOpen' => false,
                 'typeImpl' => 'value',
                 'importTableField' => 'ref_taxo'
