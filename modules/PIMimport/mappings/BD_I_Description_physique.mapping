@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 
@@ -155,7 +155,7 @@ function _getMappingNodeSelectImportableData($tableName) {
                                  2 => array (
                     'name'=>'Autres_nom',
                     'mutlivalue'=> false,
-                    'contentField' => 'field_bdi_dp_autres_noms',
+                    'contentField' => 'field_bdi_dp_autres_noms_calcules',
                     'type'=>'text',
                     'typeImpl'=>'value',
                     'importTableField'=>'Autres_nom',
