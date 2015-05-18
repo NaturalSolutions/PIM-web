@@ -357,6 +357,7 @@ function _get_html_taxon_thesaurus($term) {
 }
 
 function _get_html_gbifMap($term_name) {
+    /* GB 20150518 : désactivation de GBIF, le module est obsolète, l'URL n'est plus valide
 	gbifmap_init();
 	$gbifResponse =  gbifmap_ajax_callback($term_name);
 	$gbifMap =  $gbifResponse[0]['body'];
@@ -367,6 +368,8 @@ function _get_html_gbifMap($term_name) {
 	$htmlout .=_get_html_sources($gbifCitation);
 	$htmlout .='</div>';
 	return $htmlout;
+     */
+	return '';
 }
 
 
