@@ -385,7 +385,7 @@ function _get_html_flicker_main($term_name) {
 		$mode = current($flickrImages);
 		$htmlout .='<img class="fiche-taxon-content main-picture" src="'.$mode['photo_url'].'"/>';
 		$htmlout .= '</div>';
-		$htmlout .=_get_html_sources('<a href="http://www.flickr.com" alt="flickr" > Flicker</a>');
+		$htmlout .=_get_html_sources('<a href="http://www.flickr.com" alt="flickr" > Flickr</a>');
 		$htmlout .='</div>';
 	}
 	return $htmlout;
@@ -408,7 +408,7 @@ function _get_html_flicker_thumb($term_name) {
 
 		}
 		$htmlout .= '</div>';
-		$htmlout .=_get_html_sources('<a href="http://www.flickr.com" alt="flickr" > Flicker</a>');
+		$htmlout .=_get_html_sources('<a href="http://www.flickr.com" alt="flickr" > Flickr</a>');
 		$htmlout .= '</div>';
 	}
 	return $htmlout;
