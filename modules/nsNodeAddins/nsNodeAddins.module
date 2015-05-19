@@ -37,8 +37,7 @@ function nsNodeAddins_nodeapi(&$node, $op) {
   if ($op == 'load' && $node->type == 'bd_i_description_physique') {
     $syns = taxonomy_get_synonyms($node->field_bdi_dp_nom_ile_code_ile[0]['value']);
     $node->field_bdi_dp_autres_noms_calcules = array(array('value' => NULL));
-    if (count($syns) > 1) {
-      array_shift($syns); // Le premier synonyme est le nom principal
+    if (count($syns) > 0) {
       $node->field_bdi_dp_autres_noms_calcules[0]['value'] = implode(', ', $syns);
     }
   }
@@ -50,13 +49,13 @@ function nsNodeAddins_nodeapi(&$node, $op) {
 
 function nsNodeAddins_form_alter(&$form, &$form_state, $form_id) {
   if ('bd_i_description_physique_node_form' == $form_id) {
-      $form['field_bdi_dp_autres_noms'] = array(
+      $form['field_bdi_dp_noms'] = array(
         '#type' => 'textfield',
-        '#title' => t('Other(s) name(s)'),
+        '#title' => t('Island name(s)'),
         '#size' => 60,
         '#default_value' => $form['#node']->field_bdi_dp_autres_noms_calcules[0]['value'],
         '#weight' => 32,
-        '#description' => t('Please type in island alternative names separated by commas (",").')
+        '#description' => t('Please type in island names separated by commas (","), beginning with the main name.')
       );
 
       $form['#submit'][] = 'nsNodeAddins_bd_i_description_physique_submit';

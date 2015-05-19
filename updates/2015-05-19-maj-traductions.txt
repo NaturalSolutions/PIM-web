@@ -1,0 +1,26 @@
+Dans la base de données, exécuter les requêtes suivante pour mettre à jour deux
+messages qui ont changé :
+
+SELECT @lid := lid
+FROM drp_locales_source
+WHERE source = 'Please type in island alternative names separated by commas (",").';
+
+UPDATE drp_locales_source
+SET source = 'Please type in island names separated by commas (","), beginning with the main name.'
+WHERE lid = @lid;
+
+UPDATE drp_locales_target
+SET translation = 'Veuillez saisir tous les noms de l''île, séparés par des virgules (","), en commançant par le nom principal.'
+WHERE lid = @lid;
+
+SELECT @lid := lid
+FROM drp_locales_source
+WHERE source = 'Other(s) name(s)';
+
+UPDATE drp_locales_source
+SET source = 'Island name(s)'
+WHERE lid = @lid;
+
+UPDATE drp_locales_target
+SET translation = 'Nom(s) de l''île'
+WHERE lid = @lid;

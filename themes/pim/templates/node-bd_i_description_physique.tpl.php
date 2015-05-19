@@ -203,9 +203,9 @@
                 $island_term = taxonomy_get_term($island_id);
                 $island_code = $island_term->name;
                 
-                $synonyms = taxonomy_get_synonyms($island_id);
+                $i_synonyms = taxonomy_get_synonyms($island_id);
                 print '<a href="'.$base_url.'/fiche-Ile/'.$island_code.'">';
-                print $synonyms[0]; //." - ".$island_code;
+                print $i_synonyms[0]; //." - ".$island_code;
                 print '</a>';
                 $i += 1;
               }
@@ -238,7 +238,10 @@
         </td>
       </tr>
 	  <?php endif; ?>
-	  <?php if ($node->field_bdi_dp_autres_noms_calcules[0]['value'] != null):  ?>
+      <?php
+        if (count($synonyms) > 1) {
+            array_shift($synonyms);
+        ?>
       <tr>
         <td class="ficheile-label">
           <div class="texte-gris">
@@ -247,11 +250,11 @@
         </td>
         <td class="ficheile-value">
           <div class="texte-gris">
-            <?php print $node->field_bdi_dp_autres_noms_calcules[0]['value'];?>
+            <?php print implode(', ', $synonyms);?>
           </div>
         </td>
       </tr>
-	  <?php endif; ?>
+	  <?php } ?>
       <tr>
         <td class="ficheile-label">
           <div class="texte-gris">

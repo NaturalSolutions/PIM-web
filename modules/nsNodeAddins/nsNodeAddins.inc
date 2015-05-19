@@ -87,7 +87,7 @@ function clean_weirdchars($value) {
 }
 
 function nsNodeAddins_bd_i_description_physique_submit($form, &$form_state) {
-  $form_state['values']['field_bdi_dp_autres_noms_calcules'] = array(array('value' => $form_state['values']['field_bdi_dp_autres_noms']));
+  $form_state['values']['field_bdi_dp_autres_noms_calcules'] = array(array('value' => $form_state['values']['field_bdi_dp_noms']));
 }
 
 function nsNodeAddins_update_synonyms_after_save($node) {
@@ -95,7 +95,6 @@ function nsNodeAddins_update_synonyms_after_save($node) {
   $tid = $node->field_bdi_dp_nom_ile_code_ile[0]['value'];
   // Read synonyms from the DB (remember, the first one is the main name)
   $db_syns = taxonomy_get_synonyms($tid);
-  array_shift($db_syns); // should be safe when array is empty
 
   // Read synonyms form user input
   $form_syns = array_map('trim', explode(',', $node->field_bdi_dp_autres_noms_calcules[0]['value']));
