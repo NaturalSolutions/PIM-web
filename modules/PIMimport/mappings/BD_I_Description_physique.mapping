@@ -169,6 +169,14 @@ function _getMappingNodeSelectImportableData($tableName) {
                     'typeImpl'=>'value',
                     'importTableField'=> 'Zone_geographique'
                 ),
+				4 => array (
+                    'name'=>'Distance_ile_principale_plus_proche',
+                    'mutlivalue'=> false,
+                    'contentField' => 'field_bdi_dp_dist_ile_proche',
+                    'type'=>'float',
+                    'typeImpl'=>'value',
+                    'importTableField'=> 'Distance_ile_principale_plus_proche'
+                ),
 				5 => array (
                     'name'=>'Localite_la_plus_proche',
                     'mutlivalue'=> false,
@@ -216,14 +224,6 @@ function _getMappingNodeSelectImportableData($tableName) {
                     'type'=>'text',
                     'typeImpl'=>'value',
                     'importTableField'=>'Cote_continentale_reference',
-                ),
-				11 => array (
-                    'name'=>'Distance_ile_principale_plus_proche',
-                    'mutlivalue'=> false,
-                    'contentField' => 'field_bdi_dp_dist_ile_proche',
-                    'type'=>'float',
-                    'typeImpl'=>'value',
-                    'importTableField'=> 'Distance_ile_principale_plus_proche'
                 ),
 				12 => array (
                     'name'=>'Ile_principale_de_reference',
