@@ -35,7 +35,14 @@ function nsNodeAddins_nodeapi(&$node, $op) {
   }
 
   if ($op == 'load' && $node->type == 'bd_i_description_physique') {
-    $syns = taxonomy_get_synonyms($node->field_bdi_dp_nom_ile_code_ile[0]['value']);
+    $syns = array();
+    $result = db_query(
+            'SELECT name FROM {term_synonym} WHERE tid = %d ORDER BY tsid ASC',
+            $node->field_bdi_dp_nom_ile_code_ile[0]['value']
+        );
+    while ($synonym = db_fetch_array($result)) {
+      $syns[] = $synonym['name'];
+    }
     $node->field_bdi_dp_autres_noms_calcules = array(array('value' => NULL));
     if (count($syns) > 0) {
       $node->field_bdi_dp_autres_noms_calcules[0]['value'] = implode(', ', $syns);

@@ -93,23 +93,15 @@ function nsNodeAddins_bd_i_description_physique_submit($form, &$form_state) {
 function nsNodeAddins_update_synonyms_after_save($node) {
   // Obtain the term id for the island code
   $tid = $node->field_bdi_dp_nom_ile_code_ile[0]['value'];
-  // Read synonyms from the DB (remember, the first one is the main name)
-  $db_syns = taxonomy_get_synonyms($tid);
 
   // Read synonyms form user input
   $form_syns = array_map('trim', explode(',', $node->field_bdi_dp_autres_noms_calcules[0]['value']));
 
-  // Delete synonyms that can't be retrieved in user input (e.g. deleted or modified)
-  foreach ($db_syns as $term) {
-    if (! in_array($term, $form_syns)) {
-      db_query('DELETE FROM {term_synonym} WHERE tid = %d AND name = \'%s\'', $tid, $term);
-    }
-  }
+  // Clean-up old synonyms
+  db_query('DELETE FROM {term_synonym} WHERE tid = %d', $tid);
 
-  // Add synonyms that exist in user input but not in the DB (e.g. added or modified)
+  // Add synonyms from form
   foreach ($form_syns as $term) {
-    if (! in_array($term, $db_syns)) {
-      db_query('INSERT INTO {term_synonym} (tid, name) VALUES (%d, \'%s\')', $tid, $term);
-    }
+    db_query('INSERT INTO {term_synonym} (tid, name) VALUES (%d, \'%s\')', $tid, $term);
   }
 }

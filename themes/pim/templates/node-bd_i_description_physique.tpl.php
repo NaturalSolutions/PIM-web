@@ -85,7 +85,7 @@
         $ile_term_id = $node->field_bdi_dp_nom_ile_code_ile[0]['value'];
         $ile_term_name = $node->field_bdi_dp_nom_ile_code_ile[0]['view'];
         
-        $synonyms = taxonomy_get_synonyms($ile_term_id);
+        $synonyms = explode(', ', $node->field_bdi_dp_autres_noms_calcules[0]['value']);
         if ((in_array("Admin PIM", $user->roles)) or 
             (in_array("Mega Admin", $user->roles))) {
             //print '<a href="'.$base_url.'/admin/content/taxonomy/edit/term/'.$ile_term_id.'">';
@@ -203,9 +203,12 @@
                 $island_term = taxonomy_get_term($island_id);
                 $island_code = $island_term->name;
                 
-                $i_synonyms = taxonomy_get_synonyms($island_id);
+                $result = db_query('SELECT name FROM {term_synonym} WHERE tid = %d ORDER BY tsid ASC LIMIT 1', $island_id);
+                $row = db_fetch_array($result);
+                $island_name = $row['name'];
+
                 print '<a href="'.$base_url.'/fiche-Ile/'.$island_code.'">';
-                print $i_synonyms[0]; //." - ".$island_code;
+                print $island_name; //." - ".$island_code;
                 print '</a>';
                 $i += 1;
               }
