@@ -122,9 +122,10 @@ function PIMimport_form(&$form_state) {
       'BD_I_Problemes_menaces' => t('Contenu ile - Problèmes et menaces'), 
       'BD_I_Gestionnaire' => t('Contenu ile - Action de gestion'),    
 		),
-		'#description' => t('Select import type template.'). '<span><a id="getTemplate" class="blank " onMouseOver="getTemplateLink();" href="">'.t('Get template').'</a> 
-					  <a id="getNotice_FR" class="blank" onMouseOver="getNoticeLink(\'FR\');" href="">'.t('Get notice').' (fr)</a>
-					  <a id="getNotice_EN" class="blank" onMouseOver="getNoticeLink(\'EN\');" href="">'.t('Get notice').' (en)</a></span>',
+		'#description' => t('Select import type template.'). '<span><a id="getTemplate" class="blank " href="">'.t('Get template').'</a> 
+					  <a id="getNotice_FR" class="blank" href="">'.t('Get notice').' (fr)</a>
+                      <a id="getNotice_EN" class="blank" href="">'.t('Get notice').' (en)</a></span>
+                      <script type="text/javascript">$(document).ready(function() {$(\'#import_type\').change(function() {updateLinks();}); updateLinks();})</script>',
 		'#default_value' =>$form_state['storage']['values']['import_type'],
 	);	
 	$form['PIMimport_file_upload'] = array(
