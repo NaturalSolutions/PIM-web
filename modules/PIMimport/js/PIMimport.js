@@ -30,7 +30,7 @@ function getNoticeLink(lg) {
     } else if (lg === 'FR') {
         lnk.href = baseURL + 'Notice_V2_FR.pdf';
     } else if (importName.substr(0, 10) === 'BD_NI_Bota') {
-        lnk.href = baseURL + 'BD_NI_PIM_Notice_EN.doc';
+        lnk.href = baseURL + 'BD_NI_Flora_EN.pdf';
     } else if (importName.substr(0, 12) === 'BD_NI_Arthro') {
         lnk.href = baseURL + 'BD_NI_Arthropodes_EN.pdf';
     } else if (importName.substr(0, 11) === 'BD_NI_Autre') {
