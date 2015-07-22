@@ -333,7 +333,7 @@ function  cancelImport($tableName) {
 function _xls2csv($xls_file,$csv_file) { 
     // "sed" command is used to discard any content after a formfeed character 
     // (which is the sheet separator of xls2csv)
-	$cmd = "xls2csv -q '1' -c ';' -d 'UTF-8' -f 'd/m/Y' \"$xls_file\" | sed -n -e '/\f/ i\\\\' -e '/\f/q' -e 'p' > \"$csv_file\""; 
+	$cmd = "export LANG=\"fr_FR.UTF-8\" && xls2csv -q '1' -c ';' -d 'UTF-8' -f 'd/m/Y' \"$xls_file\" | sed -n -e '/\f/ i\\\\' -e '/\f/q' -e 'p' > \"$csv_file\""; 
 	@exec($cmd,$stdout,$errocode); 
 	unlink("$xls_file"); 
 	if ($errorcode > 0) return $errocode; 
