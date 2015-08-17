@@ -59,49 +59,49 @@ function _getSqlCheckValue($tableName) {
 			);
 	$sqlCheckValue[]=  array(
 			'message' => t('Invalid value').": ".t('Milieu_terrestre-Impact_frequentation_humaine'),
-			'description'=>t('Possible values (Fort, Moyen, Faible)'),
+			'description'=>t('Possible values (Pas d\'impact, Fort, Moyen, Faible)'),
 			'sql' => "SELECT importid+1 as importid, `Milieu_terrestre-Impact_frequentation_humaine` AS val 
-			FROM $tableName WHERE (`Milieu_terrestre-Impact_frequentation_humaine` IS NULL OR NOT  `Milieu_terrestre-Impact_frequentation_humaine`  ='' ) AND NOT  `Milieu_terrestre-Impact_frequentation_humaine` IN('Fort', 'Moyen', 'Faible') ",
+			FROM $tableName WHERE (`Milieu_terrestre-Impact_frequentation_humaine` IS NULL OR NOT  `Milieu_terrestre-Impact_frequentation_humaine`  ='' ) AND NOT  `Milieu_terrestre-Impact_frequentation_humaine` IN('Pas d''impact', 'Fort', 'Moyen', 'Faible') ",
 			'mandatory'=> true,
 			'field'=> 'val',
 			);
 	$sqlCheckValue[]=  array(
 			'message' => t('Invalid value').": ".t('Milieu_terrestre-impact_envahissantes'),
-			'description'=>t('Possible values (Fort, Moyen, Faible)'),
+			'description'=>t('Possible values (Pas d\'impact, Fort, Moyen, Faible)'),
 			'sql' => "SELECT importid+1 as importid, `Milieu_terrestre-impact_envahissantes` AS val 
-			FROM $tableName WHERE (`Milieu_terrestre-impact_envahissantes` IS NULL OR NOT  `Milieu_terrestre-impact_envahissantes`  ='' ) AND NOT `Milieu_terrestre-impact_envahissantes` IN('Fort', 'Moyen', 'Faible') ",
+			FROM $tableName WHERE (`Milieu_terrestre-impact_envahissantes` IS NULL OR NOT  `Milieu_terrestre-impact_envahissantes`  ='' ) AND NOT `Milieu_terrestre-impact_envahissantes` IN('Pas d''impact', 'Fort', 'Moyen', 'Faible') ",
 			'mandatory'=> true,
 			'field'=> 'val',
 			);
 	$sqlCheckValue[]=  array(
 			'message' => t('Invalid value').": ".t('Milieu_terrestre-Impact_usages'),
-			'description'=>t('Possible values (Fort, Moyen, Faible)'),
+			'description'=>t('Possible values (Pas d\'impact, Fort, Moyen, Faible)'),
 			'sql' => "SELECT importid+1 as importid, `Milieu_terrestre-Impact_usages` AS val 
-			FROM $tableName WHERE (`Milieu_terrestre-Impact_usages` IS NULL OR NOT  `Milieu_terrestre-Impact_usages`  ='' ) AND NOT `Milieu_terrestre-Impact_usages` IN('Fort', 'Moyen', 'Faible') ",
+			FROM $tableName WHERE (`Milieu_terrestre-Impact_usages` IS NULL OR NOT  `Milieu_terrestre-Impact_usages`  ='' ) AND NOT `Milieu_terrestre-Impact_usages` IN('Pas d''impact', 'Fort', 'Moyen', 'Faible') ",
 			'mandatory'=> true,
 			'field'=> 'val',
 			);
 	$sqlCheckValue[]=  array(
 			'message' => t('Invalid value').": ".t('Milieu_marin-Impact_frequentation_humaine'),
-			'description'=>t('Possible values (Fort, Moyen, Faible)'),
+			'description'=>t('Possible values (Pas d\'impact, Fort, Moyen, Faible)'),
 			'sql' => "SELECT importid+1 as importid, `Milieu_marin-Impact_frequentation_humaine` AS val 
-			FROM $tableName WHERE (`Milieu_marin-Impact_frequentation_humaine` IS NULL OR NOT  `Milieu_marin-Impact_frequentation_humaine`  ='' ) AND NOT `Milieu_marin-Impact_frequentation_humaine` IN('Fort', 'Moyen', 'Faible') ",
+			FROM $tableName WHERE (`Milieu_marin-Impact_frequentation_humaine` IS NULL OR NOT  `Milieu_marin-Impact_frequentation_humaine`  ='' ) AND NOT `Milieu_marin-Impact_frequentation_humaine` IN('Pas d''impact', 'Fort', 'Moyen', 'Faible') ",
 			'mandatory'=> true,
 			'field'=> 'val',
 			);
 	$sqlCheckValue[]=  array(
 			'message' => t('Invalid value').": ".t('Milieu_marin-impact_envahissantes'),
-			'description'=>t('Possible values (Fort, Moyen, Faible)'),
+			'description'=>t('Possible values (Pas d\'impact, Fort, Moyen, Faible)'),
 			'sql' => "SELECT importid+1 as importid, `Milieu_marin-impact_envahissantes` AS val 
-			FROM $tableName WHERE (`Milieu_marin-impact_envahissantes` IS NULL OR NOT  `Milieu_marin-impact_envahissantes`  ='' ) AND NOT `Milieu_marin-impact_envahissantes` IN('Fort', 'Moyen', 'Faible') ",
+			FROM $tableName WHERE (`Milieu_marin-impact_envahissantes` IS NULL OR NOT  `Milieu_marin-impact_envahissantes`  ='' ) AND NOT `Milieu_marin-impact_envahissantes` IN('Pas d''impact', 'Fort', 'Moyen', 'Faible') ",
 			'mandatory'=> true,
 			'field'=> 'val',
 			);
 	$sqlCheckValue[]=  array(
 			'message' => t('Invalid value').": ".t('Milieu_marin-Impact_usages'),
-			'description'=>t('Possible values (Fort, Moyen, Faible)'),
+			'description'=>t('Possible values (Pas d\'impact, Fort, Moyen, Faible)'),
 			'sql' => "SELECT importid+1 as importid, `Milieu_marin-Impact_usages` AS val 
-			FROM $tableName WHERE (`Milieu_marin-Impact_usages` IS NULL OR NOT  `Milieu_marin-Impact_usages`  ='' ) AND NOT `Milieu_marin-Impact_usages` IN('Fort', 'Moyen', 'Faible') ",
+			FROM $tableName WHERE (`Milieu_marin-Impact_usages` IS NULL OR NOT  `Milieu_marin-Impact_usages`  ='' ) AND NOT `Milieu_marin-Impact_usages` IN('Pas d''impact', 'Fort', 'Moyen', 'Faible') ",
 			'mandatory'=> true,
 			'field'=> 'val',
 			);
