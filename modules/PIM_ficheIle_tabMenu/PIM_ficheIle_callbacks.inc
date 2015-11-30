@@ -743,7 +743,7 @@ function pim_fi_bdn_ispecies ($tid, $title, $array_node_type) {
   if ($external_ref == FALSE) {
     
     if (isset($db_names_ep['group'])) {
-      $sql = "SELECT p.%s as spgroup, 
+      $sql = "SELECT coalesce(p.%s, '') as spgroup,
       					COALESCE( CONCAT(t.name, ' ', p.%s),t.name) as species, t.tid as spid, 
                 count(p.nid) as nb, 'titi' as protection
                 FROM {%s} p
@@ -823,8 +823,6 @@ function pim_fi_bdn_ispecies ($tid, $title, $array_node_type) {
     $row2add = array();
     if (isset($record->spgroup)) {
       $row2add[] = array('data' => $record->spgroup);
-    } else {
-      $row2add[] = array('data' => '');
     }
 		if ($external_ref == FALSE) {
 	    $row2add[] = array('data' => "<a alt='".t('View Taxon')."' title='".t('View Taxon')."' href='".$base_url."/".$lang."fiche-taxon/".$record->spid."'>".$record->species."</a>");
