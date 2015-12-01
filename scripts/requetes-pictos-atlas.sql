@@ -279,7 +279,7 @@ SELECT
 FROM drp_term_data t
     LEFT JOIN drp_content_type_bd_i_occupation o ON (t.tid = o.field_bdi_o_code_ile_ilot_value)
     LEFT JOIN drp_content_field_bdi_o_infrastruct_equip oie ON (o.vid = oie.vid AND oie.field_bdi_o_infrastruct_equip_value IN (58632, 44939, 44938, 44936, 44940, 58624, 44947, 58633))
-WHERE t.vid = 4 
+WHERE t.vid = 4
 GROUP BY t.name;
 
 -- Création de richesse économique (Mer)
@@ -373,7 +373,7 @@ SELECT
 FROM drp_term_data t
     LEFT JOIN drp_content_type_bd_i_occupation o ON (t.tid = o.field_bdi_o_code_ile_ilot_value)
     LEFT JOIN drp_content_field_bdi_o_infrastruct_equip oie ON (o.vid = oie.vid)
-WHERE t.vid = 4 
+WHERE t.vid = 4
 GROUP BY t.name;
 
 -- Activités touristisques
@@ -391,7 +391,7 @@ SELECT
 FROM drp_term_data t
     LEFT JOIN drp_content_type_bd_i_occupation o ON (t.tid = o.field_bdi_o_code_ile_ilot_value)
     LEFT JOIN drp_content_field_bdi_o_activites_visiteurs oav ON (o.vid = oav.vid)
-WHERE t.vid = 4 
+WHERE t.vid = 4
 GROUP BY t.name;
 
 -- Présence d'habitants à l'année
@@ -495,16 +495,16 @@ WHERE d.code_ile = p.code_ile
 CREATE OR REPLACE VIEW picto_gecon_spt AS
 SELECT
     t.name AS code_ile,
-    CASE 
+    CASE
         WHEN count(sp.field_bdi_spt_statut_protection_value) = 0 THEN 0
         WHEN sum(sp.field_bdi_spt_statut_protection_value = 58622) = count(sp.field_bdi_spt_statut_protection_value) THEN 1
         ELSE 2
     END AS niveau
 FROM drp_term_data t
     LEFT JOIN (
-        drp_content_type_bd_i_statut_de_protection sp JOIN 
+        drp_content_type_bd_i_statut_de_protection sp JOIN
         drp_content_field_bdi_spt_aire_concernee ac ON (sp.vid = ac.vid AND ac.field_bdi_spt_aire_concernee_value = 'Terre')
-    ) ON (t.tid = sp.field_bdi_spt_code_ile_ilot_value)    
+    ) ON (t.tid = sp.field_bdi_spt_code_ile_ilot_value)
 WHERE t.vid = 4
 GROUP BY t.name;
 
@@ -515,16 +515,16 @@ GROUP BY t.name;
 CREATE OR REPLACE VIEW picto_gecon_spm AS
 SELECT
     t.name AS code_ile,
-    CASE 
+    CASE
         WHEN count(sp.field_bdi_spt_statut_protection_value) = 0 THEN 0
         WHEN sum(sp.field_bdi_spt_statut_protection_value = 58622) = count(sp.field_bdi_spt_statut_protection_value) THEN 1
         ELSE 2
     END AS niveau
 FROM drp_term_data t
     LEFT JOIN (
-        drp_content_type_bd_i_statut_de_protection sp JOIN 
+        drp_content_type_bd_i_statut_de_protection sp JOIN
         drp_content_field_bdi_spt_aire_concernee ac ON (sp.vid = ac.vid AND ac.field_bdi_spt_aire_concernee_value = 'Mer')
-    ) ON (t.tid = sp.field_bdi_spt_code_ile_ilot_value)    
+    ) ON (t.tid = sp.field_bdi_spt_code_ile_ilot_value)
 WHERE t.vid = 4
 GROUP BY t.name;
 
