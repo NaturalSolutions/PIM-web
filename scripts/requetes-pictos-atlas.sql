@@ -12,7 +12,6 @@
 --
 -- TODO/debug :
 -- - pour picto_etaco_soceco, supprimer le hack anti-doublons sur drp_content_type_bd_i_statut_de_propriete (enlever count et ajouter à la clause group by)
--- - vérifier partout la gestion des null, surtout dans les blocs CASE
 
 -- ----------------------------------------------------------------------------
 -- État des connaissances
@@ -349,10 +348,10 @@ WHERE o.code_ile = c.code_ile
 CREATE OR REPLACE VIEW picto_press_denav AS
 SELECT
     t.name AS code_ile,
-    CASE coalesce(o.field_bdi_o_desserte_de_l_ile_value, 'NULL')
-        WHEN 'NULL' THEN 0
-        WHEN 'NON' THEN 1
+    CASE o.field_bdi_o_desserte_de_l_ile_value
         WHEN 'OUI' THEN 2
+        WHEN 'NON' THEN 1
+        ELSE 0
     END AS niveau
 FROM drp_term_data t
     LEFT JOIN drp_content_type_bd_i_occupation o ON (t.tid = o.field_bdi_o_code_ile_ilot_value)
