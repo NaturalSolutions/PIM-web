@@ -356,7 +356,7 @@ SELECT
     t.name AS code_ile,
     CASE
         WHEN count(oie.field_bdi_o_infrastruct_equip_value) = 0 THEN 0
-        WHEN sum(oie.field_bdi_o_infrastruct_equip_value = 58623) = count(oie.field_bdi_o_infrastruct_equip_value) THEN 1
+        WHEN sum(oie.field_bdi_o_infrastruct_equip_value in (58623, 58635, 58634)) = count(oie.field_bdi_o_infrastruct_equip_value) THEN 1
         ELSE 2
     END AS niveau
 FROM drp_term_data t
