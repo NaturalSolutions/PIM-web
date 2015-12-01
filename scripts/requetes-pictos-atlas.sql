@@ -12,7 +12,6 @@
 --
 -- TODO/debug :
 -- - pour picto_etaco_soceco, supprimer le hack anti-doublons sur drp_content_type_bd_i_statut_de_propriete (enlever count et ajouter à la clause group by)
--- - vérifier que les tid sont les mêmes sur le serveur de prod
 -- - vérifier partout la gestion des null, surtout dans les blocs CASE
 
 -- ----------------------------------------------------------------------------
@@ -207,6 +206,8 @@ WHERE b.code_ile = o.code_ile
 
 -- Ornithologie
 
+-- Pour vérifier les tid des termes à chercher :
+-- select * from drp_term_data where name like 'Calonectris dio%' or name like 'Hydrobates pelag%' or name like 'Falco peregr%' or name like 'Phalacrocorax aristo%' or name like 'Pandion halia%' or name like 'Puffinus yelk%' or name like 'Falco eleo%' or name like 'Larus micha%' or name like 'Larus audoui%' or name like 'Bubo b%';
 CREATE OR REPLACE VIEW picto_intepa_ornitho AS
 SELECT
     t.name AS code_ile,
@@ -263,6 +264,8 @@ GROUP BY t.name;
 
 -- Paysage (Terre)
 
+-- Pour vérifier les tid des termes à chercher :
+-- select * from drp_term_data where vid = 57;
 CREATE OR REPLACE VIEW picto_intepa_paysat AS
 SELECT
     t.name AS code_ile,
@@ -281,6 +284,9 @@ GROUP BY t.name;
 
 -- Création de richesse économique (Mer)
 
+-- Pour vérifier les tid des termes à chercher :
+-- select * from drp_term_data where vid = 58 and name = 'Pêche';
+-- select * from drp_term_data where vid = 59 and (name like 'Chass%' or name like 'Nauti%' or name = 'Plongée' or name like 'Scoot%');
 CREATE OR REPLACE VIEW picto_intepa_crem AS
 SELECT
     t.name AS code_ile,
@@ -302,6 +308,9 @@ GROUP BY t.name, o.field_bdi_o_desserte_de_l_ile_value, oua.field_bdi_o_usages_a
 
 -- Création de richesse économique (Terre)
 
+-- Pour vérifier les tid des termes à chercher :
+-- select * from drp_term_data where vid = 58 and (name like 'Agric%' or name like 'Carr%' or name = 'Elevage' or name = 'Tourisme');
+-- select * from drp_term_data where vid = 59 and (name like 'Activ%' or name like 'Restau%' or name like 'Rando%');
 CREATE OR REPLACE VIEW picto_intepa_cret AS
 SELECT
     t.name AS code_ile,
@@ -351,6 +360,8 @@ WHERE t.vid = 4;
 
 -- Présence de bâti
 
+-- Pour vérifier les tid des termes à chercher :
+-- select * from drp_term_data where vid = 57 and (name = 'Aucun' or name like 'Epave%');
 CREATE OR REPLACE VIEW picto_press_preba AS
 SELECT
     t.name AS code_ile,
@@ -367,6 +378,8 @@ GROUP BY t.name;
 
 -- Activités touristisques
 
+-- Pour vérifier les tid des termes à chercher :
+-- select * from drp_term_data where vid = 59 and name = 'Aucun';
 CREATE OR REPLACE VIEW picto_press_actou AS
 SELECT
     t.name AS code_ile,
@@ -477,6 +490,8 @@ WHERE d.code_ile = p.code_ile
 
 -- Statut de protection terrestre
 
+-- Pour vérifier les tid des termes à chercher :
+-- select * from drp_term_data where vid = 54 and name = 'Pas de statut de protection';
 CREATE OR REPLACE VIEW picto_gecon_spt AS
 SELECT
     t.name AS code_ile,
@@ -495,6 +510,8 @@ GROUP BY t.name;
 
 -- Statut de protection marin
 
+-- Pour vérifier les tid des termes à chercher :
+-- select * from drp_term_data where vid = 54 and name = 'Pas de statut de protection';
 CREATE OR REPLACE VIEW picto_gecon_spm AS
 SELECT
     t.name AS code_ile,
