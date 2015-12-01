@@ -79,6 +79,18 @@ FROM drp_term_data t
 WHERE t.vid = 4
 GROUP BY t.name;
 
+-- Invertébrés
+
+CREATE OR REPLACE VIEW picto_etaco_invert AS
+SELECT
+    t.name AS code_ile,
+    if(sum(YEAR(o.field_bdni_e_p_date_value) < 2000) != 0, 1, 0) +
+    if(sum(YEAR(o.field_bdni_e_p_date_value) >= 2000) != 0, 2, 0) + 1 AS niveau
+FROM drp_term_data t
+    LEFT JOIN drp_content_type_bd_ni_entomo_present o ON (t.tid = o.field_bdni_e_p_code_ile_ilot_value)
+WHERE t.vid = 4
+GROUP BY t.name;
+
 -- Caractéristiques environnementales
 
 CREATE OR REPLACE VIEW picto_etaco_carenv AS
@@ -177,12 +189,13 @@ GROUP BY t.name, o.field_bdi_o_desserte_de_l_ile_value, o.vid;
 -- Résumé
 
 CREATE OR REPLACE VIEW picto_etaco AS
-SELECT b.code_ile AS code_ile, b.niveau AS bota, o.niveau AS ornitho, h.niveau AS herpeto, m.niveau AS mamm, c.niveau AS chiro, ce.niveau AS carenv, se.niveau AS soceco
-FROM picto_etaco_bota b, picto_etaco_ornitho o, picto_etaco_herpeto h, picto_etaco_mamm m, picto_etaco_chiro c, picto_etaco_carenv ce, picto_etaco_soceco se
+SELECT b.code_ile AS code_ile, b.niveau AS bota, o.niveau AS ornitho, h.niveau AS herpeto, m.niveau AS mamm, c.niveau AS chiro, i.niveau AS invert, ce.niveau AS carenv, se.niveau AS soceco
+FROM picto_etaco_bota b, picto_etaco_ornitho o, picto_etaco_herpeto h, picto_etaco_mamm m, picto_etaco_chiro c, picto_etaco_invert i, picto_etaco_carenv ce, picto_etaco_soceco se
 WHERE b.code_ile = o.code_ile
   AND b.code_ile = h.code_ile
   AND b.code_ile = m.code_ile
   AND b.code_ile = c.code_ile
+  AND b.code_ile = i.code_ile
   AND b.code_ile = ce.code_ile
   AND b.code_ile = se.code_ile;
 
