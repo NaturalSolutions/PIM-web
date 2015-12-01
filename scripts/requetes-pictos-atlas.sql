@@ -7,19 +7,8 @@
 -- - pour "pressions" et "gestion/conservation", le niveau est une valeur entre 0 (pas de données/?) et 2 à 4 selon le nombre de picto
 
 -- TODO/Questions :
--- - pour l'état des connaissances biologique : les inventaires de l'année 2000 sont-ils considérés comme avant ou après 2000 ?
 -- - dans la catégorie "intérêts des patrimoines", les listes d'espèces n'ont pas été fournies dans les cas suivants : botanique, herpétologie, mammifères, faune marine, flore marine
 -- - dans la catégorie "intérêts des patrimoines", la requête pour les invertébrés n'est pas décrite
--- - pour la requête "intérêts des patrimoines/ornithologie", j'ai plusieurs doutes :
---    . que siginie "inclu" ? Calonectris diomedea inclu ssp diomedea = Calonectris diomedea + Calonectris diomedea diomedea + Calonectris diomedea scopoli ?
---    . pour Pandion haliaetus et Falco peregrinus, il y a des observations concernant des sous-espèces, faut-il inclure les sous-espèces dans la requête ?
---    . telle que la requête est décrite, la valeur 3 équivaut à "faible" et "moyen" en même temps
--- - pour la présence d'un gestionnaire sur le site (Gestion/conservation), j'ai regroupé les valeurs existantes de la manière suivante, merci de valider ou corriger : 
---    . "Permanente" => picto "Permanente"
---    . "Temporaire" ou "Semi-permanente" => picto "Temporaire"
---    . "En projet", "Pas de surveillance" ou "Non" => picto "Nulle"
---    . pas de valeur => picto "?"
--- - pour l'existance d'un plan de gestion (Gestion/conservation), il y a 4 valeurs possibles mais 3 pictos seulement
 --
 -- TODO/debug :
 -- - pour picto_etaco_soceco, supprimer le hack anti-doublons sur drp_content_type_bd_i_statut_de_propriete (enlever count et ajouter à la clause group by)
@@ -36,7 +25,7 @@ CREATE OR REPLACE VIEW picto_etaco_bota AS
 SELECT
     t.name AS code_ile,
     if(sum(YEAR(o.field_bdni_b_p_date_value) < 2000) != 0, 1, 0) +
-    if(sum(YEAR(o.field_bdni_b_p_date_value) > 2000) != 0, 2, 0) + 1 AS niveau
+    if(sum(YEAR(o.field_bdni_b_p_date_value) >= 2000) != 0, 2, 0) + 1 AS niveau
 FROM drp_term_data t
     LEFT JOIN drp_content_type_bd_ni_botanique_present o ON (t.tid = o.field_bdni_b_p_code_ile_ilot_value)
 WHERE t.vid = 4
@@ -48,7 +37,7 @@ CREATE OR REPLACE VIEW picto_etaco_ornitho AS
 SELECT
     t.name AS code_ile,
     if(sum(YEAR(o.field_bdni_o_p_date_value) < 2000) != 0, 1, 0) +
-    if(sum(YEAR(o.field_bdni_o_p_date_value) > 2000) != 0, 2, 0) + 1 AS niveau
+    if(sum(YEAR(o.field_bdni_o_p_date_value) >= 2000) != 0, 2, 0) + 1 AS niveau
 FROM drp_term_data t
     LEFT JOIN drp_content_type_bd_ni_ornithologie_present o ON (t.tid = o.field_bdni_o_p_code_ile_ilot_value)
 WHERE t.vid = 4
@@ -60,7 +49,7 @@ CREATE OR REPLACE VIEW picto_etaco_herpeto AS
 SELECT
     t.name AS code_ile,
     if(sum(YEAR(o.field_bdni_h_p_date_value) < 2000) != 0, 1, 0) +
-    if(sum(YEAR(o.field_bdni_h_p_date_value) > 2000) != 0, 2, 0) + 1 AS niveau
+    if(sum(YEAR(o.field_bdni_h_p_date_value) >= 2000) != 0, 2, 0) + 1 AS niveau
 FROM drp_term_data t
     LEFT JOIN drp_content_type_bd_ni_herpetologie_present o ON (t.tid = o.field_bdni_h_p_code_ile_ilot_value)
 WHERE t.vid = 4
@@ -72,7 +61,7 @@ CREATE OR REPLACE VIEW picto_etaco_mamm AS
 SELECT
     t.name AS code_ile,
     if(sum(YEAR(o.field_bdni_mt_p_date_value) < 2000) != 0, 1, 0) +
-    if(sum(YEAR(o.field_bdni_mt_p_date_value) > 2000) != 0, 2, 0) + 1 AS niveau
+    if(sum(YEAR(o.field_bdni_mt_p_date_value) >= 2000) != 0, 2, 0) + 1 AS niveau
 FROM drp_term_data t
     LEFT JOIN drp_content_type_bd_ni_mam_terrestres_present o ON (t.tid = o.field_bdni_mt_p_code_ile_ilot_value)
 WHERE t.vid = 4
@@ -84,7 +73,7 @@ CREATE OR REPLACE VIEW picto_etaco_chiro AS
 SELECT
     t.name AS code_ile,
     if(sum(YEAR(o.field_bdni_c_p_date_value) < 2000) != 0, 1, 0) +
-    if(sum(YEAR(o.field_bdni_c_p_date_value) > 2000) != 0, 2, 0) + 1 AS niveau
+    if(sum(YEAR(o.field_bdni_c_p_date_value) >= 2000) != 0, 2, 0) + 1 AS niveau
 FROM drp_term_data t
     LEFT JOIN drp_content_type_bd_ni_chiroptere_present o ON (t.tid = o.field_bdni_c_p_code_ile_ilot_value)
 WHERE t.vid = 4
@@ -204,7 +193,6 @@ WHERE b.code_ile = o.code_ile
 -- Botanique
 
 -- Ornithologie
--- TODO : Doute sur "inclu" pour Calonectris diomedea, Hydrobates pelagicus et Phalacrocorax aristotelis + ssp de Pandion haliaetus et Falco peregrinus + cas de la valeur 3
 
 CREATE OR REPLACE VIEW picto_intepa_ornitho AS
 SELECT
@@ -223,7 +211,7 @@ SELECT
         WHEN 0 THEN 1
         WHEN 1 THEN 2
         WHEN 2 THEN 2
-        WHEN 3 THEN 2
+        WHEN 3 THEN 3
         WHEN 4 THEN 3
         WHEN 5 THEN 3
         ELSE 4
