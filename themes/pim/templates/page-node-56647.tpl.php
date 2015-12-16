@@ -296,6 +296,7 @@
                 
                 <!-- On récuprer les cluster lier au sous bassin -->
                 <?php $res = views_get_view_result('v_atlas_affiche_number_ile_clust', 'block_1', $item->nid); ?>
+                <?php $resIle = views_get_view_result('v_atlas_affiche_number_ile_clust', 'block_2', $item->nid); ?>
                 <?php 
                   //On va cherche le nom du sous bassin
                   $node = node_load($item->nid);
@@ -304,20 +305,127 @@
                   $name_lien_sous_bassin = explode('"', $name_lien_sous_bassin[count($name_lien_sous_bassin) - 2]);
                   $name_lien_sous_bassin = trim($name_lien_sous_bassin[count($name_lien_sous_bassin) - 2]);
                   $name_lien_sous_bassin = preg_replace('/\s+/', ' ', $name_lien_sous_bassin);
+
+                  //Get statut of sous-bassin
+                  if($node->avalider == 1) $statutOfSousBassin = 'avalider';
+                  else if($node->brouillon == 1) $statutOfSousBassin = 'brouillon';
+                  else if($node->termine == 1) $statutOfSousBassin = 'termine';
                   
                   //Le nombre de cluster lier au sous bassin envoyé
                   $nb_cluster = count($res);
+                  $nb_ile = count($resIle);
+
+                                    
+                  //S'il existe des ils dans un sous bassin
+                  $ctpIslandBrouillon=0;
+                  $ctpIslandAvalider=0;
+                  $ctpIslandTermine=0;
+                  $ctpClusterBrouillon=0;
+                  $ctpClusterAvalider=0;
+                  $ctpClusterTermine=0;
+                 
+
+                  if($nb_ile > 0){
+
+
+                    //Pour chaque ile
+                    foreach ($resIle as $key => $island) {
+                      
+                      //Get nid of island                  
+                      $nidOfIsland = $island->nid;
+
+                      //load island node 
+                      $nodeOfIsland  = node_load($nidOfIsland);
+
+                      if($nodeOfIsland->brouillon == 1) $ctpIslandBrouillon++;
+                      else if($nodeOfIsland->avalider == 1) $ctpIslandAvalider++;
+                      else if($nodeOfIsland->termine == 1) $ctpIslandTermine++;
+
+    
+                    }
+                    
+                    $ctpIslandBrouillon = ($ctpIslandBrouillon / $nb_ile) * 100;
+                    $ctpIslandAvalider = ($ctpIslandAvalider / $nb_ile) * 100;
+                    $ctpIslandTermine = ($ctpIslandTermine / $nb_ile) * 100;                    
+
+                  }
+
+                  if($nb_cluster > 0){
+
+
+                    //Pour chaque ile
+                    foreach ($res as $key => $cluster) {
+                      
+                      //Get nid of cluster                  
+                      $nidOfCluster = $cluster->nid;
+
+                      //load cluster node 
+                      $nodeOfcluster  = node_load($nidOfCluster);
+
+                      if($nodeOfcluster->brouillon == 1) $ctpClusterBrouillon++;
+                      else if($nodeOfcluster->avalider == 1) $ctpClusterAvalider++;
+                      else if($nodeOfcluster->termine == 1) $ctpClusterTermine++;
+
+    
+                    }
+                    
+                    $ctpClusterBrouillon = ($ctpClusterBrouillon / $nb_cluster) * 100;
+                    $ctpClusterAvalider = ($ctpClusterAvalider / $nb_cluster) * 100;
+                    $ctpClusterTermine = ($ctpClusterTermine / $nb_cluster) * 100;                    
+
+                  }
+                                   
                                 
-                  //Pour chaque sous bassin :> Affichage de son bouton + son nombre de cluster liés
-                  echo "<a href='$base_url/projet-atlas/$name_lien_sous_bassin' id='$name_lien_sous_bassin' alt='$node->title' title='$node->title'><span alt='Nombre de cluster' id='link4$name_lien_sous_bassin'>".$nb_cluster."</span></a>"
-                                                   
                 ?>
+                  <!-- Pour chaque sous bassin :> Affichage de son bouton + son nombre de cluster liés -->
+                  <a href="<?php echo $base_url; ?>/projet-atlas/<?php echo $name_lien_sous_bassin; ?>" id='<?php echo $name_lien_sous_bassin; ?>' alt='<?php echo $node->title; ?>' title='Voir la page du <?php echo $node->title; ?>'></a>
+
+                  <div class='hidden infoOnHover <?php echo $name_lien_sous_bassin; ?>'>
+
+                    
+                    <div class='hidden statutOfSousBassin'><?php echo $statutOfSousBassin; ?></div>
+
+                    <div class='hidden ctpIslandBrouillon'><?php echo $ctpIslandBrouillon; ?></div>
+                    <div class='hidden ctpIslandAvalider'><?php echo $ctpIslandAvalider; ?></div>
+                    <div class='hidden ctpIslandTermine'><?php echo $ctpIslandTermine; ?></div>
+
+                    <div class='hidden ctpClusterBrouillon'><?php echo $ctpClusterBrouillon; ?></div>
+                    <div class='hidden ctpClusterAvalider'><?php echo $ctpClusterAvalider; ?></div>
+                    <div class='hidden ctpClusterTermine'><?php echo $ctpClusterTermine; ?></div>
+                    
+                  
+                    <h4><?php echo $node->title; ?><span class='statutCodeColor'></span></h4>
+                    
+                    <div class='countCluster' alt='Nombre de cluster'>
+                      <?php echo $nb_cluster; ?>
+                      <label>cluster(s)</label>
+                      <div class="progressbar">
+                        <div class="statutB"></div>
+                        <div class="statutA"></div>
+                        <div class="statutT"></div>                        
+                      </div>
+                    </div>
+                    
+                    <div class='countIsland' alt='Nombre île'>
+                      <?php echo $nb_ile; ?>
+                      <label>île(s)</label>
+                      <div class="progressbar">
+                        <div class="statutB"></div>
+                        <div class="statutA"></div>
+                        <div class="statutT"></div>                        
+                      </div>
+                    </div>
+
+                  </div>
                 
                 
               <?php endforeach; ?>
             
-            <p id='legend'>Les chiffres représentent le nombre de clusters.</p>
-            </div>
+            <p class='legend'><span class='labelBrouillon'></span>&nbsp;Brouillon <span class='labelAvalider'></span>&nbsp;A valider <span class='labelTerminer'></span>&nbsp;Terminer</p>
+            
+            </div> <!-- fin map -->
+
+            <div class='zoneInfoHover'></div>
 
 
             <!-- Block visibles par Admin PiM : Affichage d'informations sur l'activité des utilisateurs -->
@@ -511,7 +619,110 @@
       });
 
     }
-    
+
+    var hoverOnMap = function(){
+
+      //when hover a sous-bassin on the map
+      $('div#map_hp a').hover(function() {
+
+          /*//get id block
+          var idBlock = '.'+$(this).attr('id');*/
+
+          //dispay info block
+          var zoneInfoOfCurrentHover = $(this).next();
+          zoneInfoOfCurrentHover.show();
+
+          //Get info statut of sous-bassin
+          statutOfSousBassin = zoneInfoOfCurrentHover.find('.statutOfSousBassin').text();
+          titleOfBloc = zoneInfoOfCurrentHover.find('.statutCodeColor');
+          if(statutOfSousBassin == 'brouillon') titleOfBloc.css('backgroundColor','rgba(255, 0, 0, 0.6)');
+          if(statutOfSousBassin == 'avalider') titleOfBloc.css('backgroundColor','rgba(251, 114, 27, 0.68)');
+          if(statutOfSousBassin == 'terminer') titleOfBloc.css('backgroundColor','rgba(71, 121, 192, 0.79)');
+          
+
+          //Get % info for islands
+          var currrentPourcentOfIslandBrouillon = Math.round(zoneInfoOfCurrentHover.find('.ctpIslandBrouillon').html());
+          var currrentPourcentOfIslandAvalider = Math.round(zoneInfoOfCurrentHover.find('.ctpIslandAvalider').html());
+          var currrentPourcentOfIslandTerminer = Math.round(zoneInfoOfCurrentHover.find('.ctpIslandTermine').html());
+
+          //Get % info for cluster
+          var currrentPourcentOfClusterBrouillon = Math.round(zoneInfoOfCurrentHover.find('.ctpClusterBrouillon').html());
+          var currrentPourcentOfClusterAvalider = Math.round(zoneInfoOfCurrentHover.find('.ctpClusterAvalider').html());
+          var currrentPourcentOfClusterTerminer = Math.round(zoneInfoOfCurrentHover.find('.ctpClusterTermine').html());
+
+          //display % info for islands
+          if(currrentPourcentOfIslandBrouillon > 0 ){
+            zoneInfoOfCurrentHover.find('.countIsland .statutB').animate({
+              width: currrentPourcentOfIslandBrouillon+'%'            
+              },
+              1000, function() {
+              /* stuff to do after animation is complete */
+              if(currrentPourcentOfIslandBrouillon > 10) $(this).html(currrentPourcentOfIslandBrouillon+'%');              
+            });
+          } 
+          if(currrentPourcentOfIslandAvalider > 0 ){
+            zoneInfoOfCurrentHover.find('.countIsland .statutA').animate({
+              width: currrentPourcentOfIslandAvalider+'%'            
+              },
+              1000, function() {
+              /* stuff to do after animation is complete */
+              if(currrentPourcentOfIslandAvalider > 10) $(this).html(currrentPourcentOfIslandAvalider+'%');
+            });
+          }
+          if(currrentPourcentOfIslandTerminer > 0 ){
+            zoneInfoOfCurrentHover.find('.countIsland .statutT').animate({
+              width: currrentPourcentOfIslandTerminer+'%'            
+              },
+              1000, function() {
+              /* stuff to do after animation is complete */
+              if(currrentPourcentOfIslandTerminer > 10) $(this).html(currrentPourcentOfIslandTerminer+' %');
+            });            
+          }
+
+          //display % info for cluster
+          if(currrentPourcentOfClusterBrouillon > 0 ){
+            zoneInfoOfCurrentHover.find('.countCluster .statutB').animate({
+              width: currrentPourcentOfClusterBrouillon+'%'            
+              },
+              1000, function() {
+              /* stuff to do after animation is complete */
+              if(currrentPourcentOfClusterBrouillon > 10) $(this).html(currrentPourcentOfClusterBrouillon+'%');              
+            });
+          } 
+          if(currrentPourcentOfClusterAvalider > 0 ){
+            zoneInfoOfCurrentHover.find('.countCluster .statutA').animate({
+              width: currrentPourcentOfClusterAvalider+'%'            
+              },
+              1000, function() {
+              /* stuff to do after animation is complete */
+              if(currrentPourcentOfClusterAvalider > 10) $(this).html(currrentPourcentOfClusterAvalider+'%');
+            });
+          }
+          if(currrentPourcentOfClusterTerminer > 0 ){
+            zoneInfoOfCurrentHover.find('.countCluster .statutT').animate({
+              width: currrentPourcentOfClusterTerminer+'%'            
+              },
+              1000, function() {
+              /* stuff to do after animation is complete */
+              if(currrentPourcentOfClusterTerminer > 10) $(this).html(currrentPourcentOfClusterTerminer+' %');
+            });            
+          }
+
+
+      }, function() {
+
+        //Hide when leaving block
+        var zoneInfoOfCurrentHover = $(this).next();
+        zoneInfoOfCurrentHover.hide();
+        zoneInfoOfCurrentHover.find('.statutB, .statutA, .statutT').css('width', 0);
+        zoneInfoOfCurrentHover.find('.statutB, .statutA, .statutT').html('');
+      
+      
+      });
+
+    }
+        
+
     window.init = function() {
       //show hide du bloc publication
       toggleMesPubliEnTrop();
@@ -521,6 +732,9 @@
 
       //PoPuP
       goPopup();
+
+      //To Display data of sous-bassin when hover item on map
+      hoverOnMap();
 
     }
     

@@ -124,15 +124,12 @@
 <?php endforeach; ?>
 
 
-<?php //echo $field_cluster_code_value; ?><br/>
-
 <!-- Vu qui récupere tout les tid -->
 <?php $res = views_get_view_result('v_atlas_book_cluster', 'block_2', $nid); ?>
 
 <?php //parcour des tid 
 for($i=0;$i<count($res);$i++){ 
-  
-  
+    
   //Notre tid courant
   $currentTid = $res[$i]->term_data_node_data_field_cluster_code_tid;
 
@@ -155,35 +152,75 @@ for($i=0;$i<count($res);$i++){
 
     //On chope le synonyme
     $synonym = taxonomy_get_synonyms($currentTid);
-    if(!empty($synonym[0])) $allTheSynonym .= $synonym[0].',';
+    foreach ($synonym as $key => $value) {
+      
+      if(!empty($value)) $allTheSynonym .= $value.',';
+      
+    }
     
     //On récupère le vid à partir d'un terme
     $vid = $term->vid;
     
     //Avec le vid, on récupère les enfants d'un terme en spécifiant le parent tid égale à notre tid courant
-    $var  = taxonomy_get_tree($vid, $parent = $currentTid, $depth = -1, $max_depth = NULL);
-    
+    $var = taxonomy_get_tree($vid, $parent = $currentTid, $depth = -1, $max_depth = NULL);    
+
     //On parcour les enfants pour stocker dans une variable tous les tid
     for($j=0;$j<count($var);$j++){ 
+          
+      //On vérifie que l'îles est "PIM"      
+      $resTidNonSpecifie = views_get_view_result('v_atlas_tab_data_cluster', 'block_10', $var[$j]->tid);
+      $resTidPim = views_get_view_result('v_atlas_tab_data_cluster', 'block_11', $var[$j]->tid);
+      
+      if($resTidNonSpecifie[0]->node_term_node__term_data_tid != ''){
 
-      $allTheTid .= $var[$j]->tid.',';
-      $allTheTidCluster .= $var[$j]->tid.',';
+        //Compteur d'iles
+        /*$countNbIles++;*/
+        
+        $allTheTid .= $resTidNonSpecifie[0]->node_term_node__term_data_tid.',';
+        $allTheTidCluster .= $resTidNonSpecifie[0]->node_term_node__term_data_tid.',';      
+        
+      }else if($resTidPim[0]->node_term_node__term_data_tid != ''){
 
-      //Compteur d'iles
-      $countNbIles++;
+        //Compteur d'iles
+        /*$countNbIles++;*/
+        
+        $allTheTid .= $resTidPim[0]->node_term_node__term_data_tid.',';
+        $allTheTidCluster .= $resTidPim[0]->node_term_node__term_data_tid.',';  
+
+      }
+           
     }
 
-  //Sinon => traiter comme une ile
-  }else if($isArchipel == 0){ 
+    //Sinon => traiter comme une ile
+    }else if($isArchipel == 0){ 
 
-    //Compteur d'iles
-    $countNbIles++;
+      //On vérifie que l'îles est "PIM"      
+      $resTidNonSpecifie = views_get_view_result('v_atlas_tab_data_cluster', 'block_10', $var[$j]->tid);
+      $resTidPim = views_get_view_result('v_atlas_tab_data_cluster', 'block_11', $var[$j]->tid);
 
-    //On ajoute directement l'id dans notre variable qui regroupe tout les tid
-    $allTheTid .= $currentTid.',';
-    $allTheTidIle .= $currentTid.',';
+      if($resTidNonSpecifie[0]->node_term_node__term_data_tid != ''){
 
-  }
+        //Compteur d'iles
+        /*$countNbIles++;*/
+        
+        //On ajoute directement l'id dans notre variable qui regroupe tout les tid
+        $allTheTid .= $resTidNonSpecifie[0]->node_term_node__term_data_tid.',';
+        $allTheTidIle .= $resTidNonSpecifie[0]->node_term_node__term_data_tid.',';
+
+      }else if($resTidPim[0]->node_term_node__term_data_tid != ''){
+
+        //Compteur d'iles
+        /*$countNbIles++;*/
+        
+        //On ajoute directement l'id dans notre variable qui regroupe tout les tid
+        $allTheTid .= $resTidPim[0]->node_term_node__term_data_tid.',';
+        $allTheTidIle .= $resTidPim[0]->node_term_node__term_data_tid.',';
+
+      }
+
+         
+
+    }
   
 }
 
@@ -194,7 +231,10 @@ $allTheTidIle = trim($allTheTidIle, ",");
 $allTheSynonym = trim($allTheSynonym, ",");
 ?>
 
-<?php //print_r($allTheSynonym); ?>
+<?php 
+if($allTheTid == '') echo "Aucune îles PIM ou Non-spécifié"; 
+//echo $allTheTid;
+?>
 
 
 <?php if($language->language == 'fr'): ?>
@@ -231,12 +271,12 @@ $allTheSynonym = trim($allTheSynonym, ",");
         
         //Nouveau cluster, on incrémente le compteur j
         if($i != count($names) - 1 && $thirdCharOfCurrentTid != $thirdCharOfNextTid) $j++;
-                  
+        
         $tabOfNamesOfIlesFromCluster[$j] .= "<a href='".$base_url."/fiche-Ile/".$names[$i]->term_data_node_data_field_bdi_dp_nom_ile_code_ile_name."' target='_blank'>".$names[$i]->term_data_node_data_field_bdi_dp_nom_ile_code_ile__term_synonym_name."</a>&nbsp;&nbsp;";
 
       }
     
-    } 
+    }     
     ?>
 
 
@@ -383,26 +423,36 @@ $allTheSynonym = trim($allTheSynonym, ",");
 
     <?php $tabOfSynonyme = explode(',', $allTheSynonym); ?>
 
+    <!-- cpt -->
+    <?php 
+    for($i=0;$i<count($tabOfSynonyme);$i++){
+      if(!empty($tabOfSynonyme[$i])){ 
+        $cptName = explode('</a>', $tabOfNamesOfIlesFromCluster[$i]);
+        $cptName = count($cptName) - 2;       
+      }
+    }
+    ?>
+
     <!-- Composition -->
     <table class='tableRecapIle tabComposition'>
       <tr>
         <th rowspan="<?php echo 2+$countNbArchipel+$nbIlesSolo; ?>"><p>Composition</p></th>
         <th><p>Archipel(s) complet(s)</p></th>
-        <th><p>Ile(s)</p></th>
+        <th><p>Ile(s) PIM & Non spécifié</p></th>
       </tr>
       <tr>
         <td><p><?php if($countNbArchipel == '') echo '0';else echo $countNbArchipel; ?></p></td>
-        <td><p><?php echo $countNbIles; ?></p></td>
+        <td><p><?php echo $cptName; ?></p></td>
       </tr>
 
-      <?php 
+      <?php             
       for($i=0;$i<count($tabOfSynonyme);$i++){
-        if(!empty($tabOfSynonyme[$i])){
+        if(!empty($tabOfSynonyme[$i])){ 
           print("
             <tr>
             <td><p>$tabOfSynonyme[$i]</p></td>
             <td><p>$tabOfNamesOfIlesFromCluster[$i]</p></td>
-            </tr>
+            </tr>            
           ");          
         }
       } 

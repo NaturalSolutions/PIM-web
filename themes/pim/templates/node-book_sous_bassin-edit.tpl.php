@@ -24,8 +24,12 @@ global $base_url, $language, $user;
 <!-- Tableau explicatifs d'introduction -->
 <table class='infoSousBassin'>
   <tr>
-    <th>Textes des sous-sections (1.1 ; 1.2 …)</th>
+    <th>Textes des sous-chapitres (1.1 ; 1.2 …) Par bloc de texte <b>se référer aux normes de rédactions</b></th>
     <td>18 000 caractères maximum (espaces compris, sans la bibliographie),= 4 pages A4 format paysage</td>
+  </tr>
+  <tr>
+    <th>Figures</th>
+    <td>2 maximums par sous-chapitre</td>
   </tr>
   <tr>
     <th>Références bibliographiques du texte</th>
@@ -33,7 +37,7 @@ global $base_url, $language, $user;
   </tr>
   <tr>
     <th>Encadrés</th>
-    <td>Encadrés moyens ou longs, 3 encadrés maximum par fiche.</td>
+    <td>Encadrés moyens ou longs (voir règle encadrés)</td>
   </tr>
 </table>
 

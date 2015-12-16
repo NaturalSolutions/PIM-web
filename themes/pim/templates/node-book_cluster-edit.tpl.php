@@ -27,10 +27,10 @@ global $base_url, $language, $node;
 <table class='infoCluster'>
   <tr>
     <th>Blocs de textes (Description – Intérêts - Pression – Gestion / conservation)</th>
-    <td>2 000  caractères maximum (espaces compris, sans la bibliographie) = moins de 20 lignes A4 format paysage</td>
+    <td>4 000  caractères maximum (espaces compris, sans la bibliographie) = moins de 40 lignes A4 format portrait par bloc de texte</td>
   </tr>
   <tr>
-    <th>Références bibliographiques du texte</th>
+    <th>Références bibliographiques des fiches cluster</th>
     <td>10 références maximum</td>
   </tr>
   <tr>

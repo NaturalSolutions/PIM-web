@@ -367,5 +367,48 @@ global $user, $base_url, $language;
   ga('create', 'UA-28879746-1', 'initiative-pim.org');
   ga('send', 'pageview');
 
+  /*jQuery( document ).ready(function() {
+
+  //Le but est d'enlever les îles "non-pim" des tableaux récap.
+  var filtreIslandNonPimInTab = function() {
+
+      //Pour chaque nom d'île à enlever
+      $('.view-dom-id-v-atlas-tab-data-cluster-block-9-1 .views-row').each(function(index, el) {
+
+        //Get name island                
+        var currentNameIsland = $(this).find('.field-content').html();
+
+        //For each item in recap tabs
+        $('.tabPropriete tr:last td p a').each(function(index, el) {          
+          
+          //Test if PIM of Not PiM
+          if( $(this).html() ==  currentNameIsland ) $(this).remove();
+          
+
+        });
+        $('.tabProtection tr:last td p a').each(function(index, el) {          
+          
+          //Test if PIM of Not PiM
+          if( $(this).html() ==  currentNameIsland ) $(this).remove();
+          
+
+        });
+        $('.tabGestion tr:last td p a').each(function(index, el) {          
+          
+          //Test if PIM of Not PiM
+          if( $(this).html() ==  currentNameIsland ) $(this).remove();
+          
+
+        });
+
+        
+
+      });
+    
+    }
+
+  
+  filtreIslandNonPimInTab(); // true 
+  });*/
 </script>
 </html>

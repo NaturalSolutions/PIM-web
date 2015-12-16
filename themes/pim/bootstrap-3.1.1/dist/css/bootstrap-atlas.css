@@ -19,6 +19,7 @@
     src: url('font/HelveticaNeueCondensedBold.ttf');
 }
 */
+@import url(https://fonts.googleapis.com/css?family=Poiret+One);
 /***************************************************************************/
 /*                          DIVERS - Tools                                 */
 /*                                                                         */
@@ -374,25 +375,112 @@ body.page-projet-atlas div.view-dom-id-v-atlas-presentation-block-8-1 table td a
 body.page-projet-atlas div.view-v-affiche-user-infos-for-admin tr{
   background-color: rgba(71,121,200,0.1) !important;
 }
-/**/
-/*bouton sur carte*/
-body.page-projet-atlas p#legend{
+body.page-projet-atlas div#map_hp div.statutB, body.page-projet-atlas div#map_hp div.statutA, body.page-projet-atlas div#map_hp div.statutB, body.page-projet-atlas div#map_hp div.statutT{
+  height: 15px;
+  padding: 3px 0;
+  width: 0%;
+  font-size: 15px;
+  line-height: 15px;
+  text-align: center;
+  float: left;
+  z-index: 999;
+}
+body.page-projet-atlas div#map_hp div.progressbar{
+  width: 100%;
+  padding: 0px 0 37px 0;
+  color: #fff;
+  font-weight: 800;
+}
+body.page-projet-atlas span.statutCodeColor{
+  height: 20px;
+  width: 20px;
+  display: inline-block;
+  margin-left: 10px;
+}
+body.page-projet-atlas div#map_hp div.statutB{
+  background-color:   rgba(255, 0, 0, 0.6);
+}
+body.page-projet-atlas div#map_hp div.statutA{
+  background-color:   rgba(251, 114, 27, 0.68);
+}
+body.page-projet-atlas div#map_hp div.statutT{
+  background-color:   rgba(71, 121, 192, 0.79);
+}
+body.page-projet-atlas div#map_hp div.hidden{
+  display:  none; 
+}
+body.page-projet-atlas div.zoneInfoHover{
+  margin-top: 20px;  
+}
+body.page-projet-atlas div#map_hp p.legend{
   position: absolute;
   bottom: -13px;
   left: 2px;
   font-style: italic;
   font-size: 14px;  
 }
+body.page-projet-atlas div#map_hp p.legend span.labelBrouillon{
+  display:  inline-block; 
+  height:   5px;
+  width:  5px;
+  background-color:   rgba(255, 0, 0, 0.6);
+}
+body.page-projet-atlas div#map_hp p.legend span.labelAvalider{
+  display:  inline-block; 
+  height:   5px;
+  width:  5px;
+  background-color:   rgba(251, 114, 27, 0.68);
+}
+body.page-projet-atlas div#map_hp p.legend span.labelTerminer{
+  display:  inline-block; 
+  height:   5px;
+  width:  5px;
+  background-color:   rgba(71, 121, 192, 0.79);
+}
 body.page-projet-atlas #map_hp a{
   position: absolute;  
   text-decoration: none;
 }
-body.page-projet-atlas #map_hp a > span{
-  color: #fff; 
-  font-weight: normal;
-  font-style: italic;
-  font-size: 50px;
-  position: inherit;
+body.page-projet-atlas #map_hp .infoOnHover{
+  background-color: rgba(255,255,255,0.9);
+  font-family: 'Poiret One', cursive;
+  width: 300px;
+  height: auto;
+  padding: 0px 15px;
+  border: 1px solid #000;
+}
+body.page-projet-atlas #map_hp .infoOnHover div.countCluster{
+  background: url(../../../images/iconePalmier2b.png) no-repeat 100% 45%;
+  background-size: 45px;
+}
+body.page-projet-atlas #map_hp .infoOnHover div.countIsland{
+  background: url(../../../images/iconePalmierb.png) no-repeat 98% 56%;
+  background-size: 30px;
+}
+body.page-projet-atlas #map_hp .infoOnHover h4{
+  margin: 10px 0px;
+  font-weight: 600;
+  font-size: 30px;
+  text-align: center;
+  border-bottom: 1px solid #949191;
+  padding-bottom: 15px;
+}
+body.page-projet-atlas #map_hp .infoOnHover div.countCluster{
+  font-size: 76px;
+  min-height: 60px;
+  line-height: 60px;  
+  padding-bottom: 1px;  
+}
+body.page-projet-atlas #map_hp .infoOnHover div.countIsland{
+  
+  font-size: 76px;  
+  min-height: 60px;
+  line-height: 60px;
+  padding-top: 15px;
+}
+body.page-projet-atlas #map_hp .infoOnHover div.countCluster label , body.page-projet-atlas #map_hp .infoOnHover div.countIsland label{
+  font-size: 30px;
+  margin-left: -17px;
 }
 body.page-projet-atlas a#sous-bassin-1{
   width: 107px;
@@ -400,19 +488,11 @@ body.page-projet-atlas a#sous-bassin-1{
   top: 14px;
   left: 371px; 
 }
-body.page-projet-atlas a#sous-bassin-1 > span{
-  top: 31px;
-  left: 5px;
-}
 body.page-projet-atlas a#sous-bassin-2{
   width: 59px;
-  height: 29px;  
+  height: 40px;
   top: 207px;
   left: 474px;
-}
-body.page-projet-atlas a#sous-bassin-2 > span{
-  font-size: 21px;
-  top: 12px;
 }
 body.page-projet-atlas a#sous-bassin-3{
   width: 191px;
@@ -421,22 +501,11 @@ body.page-projet-atlas a#sous-bassin-3{
   left: 203px;
   transform: rotate(-44deg);
 }
-body.page-projet-atlas a#sous-bassin-3 > span{
-  top: 17px;
-  left: 85px;
-  transform: rotate(44deg);
-  font-size: 35px;
-}
 body.page-projet-atlas a#sous-bassin-4{
   width: 100px;
   height: 61px;  
   top: 189px;
   left: 133px;
-}
-body.page-projet-atlas a#sous-bassin-4 > span{
-  top: 16px;
-  font-size: 43px;
-  left: 3px;
 }
 body.page-projet-atlas a#sous-bassin-5{
   width: 137px;
@@ -444,20 +513,11 @@ body.page-projet-atlas a#sous-bassin-5{
   top: 220px;
   left: 0;  
 }
-body.page-projet-atlas a#sous-bassin-5 > span{
-  top: 62px;
-  left: 29px;
-}
 body.page-projet-atlas a#sous-bassin-6{
   width: 231px;
   height: 37px;  
   top: 209px;
   left: 239px;
-}
-body.page-projet-atlas a#sous-bassin-6 > span{
-  top: 6px;
-  left: 73px;
-  font-size: 37px;
 }
 body.page-projet-atlas a#sous-bassin-7{
   width: 49px;
@@ -465,21 +525,11 @@ body.page-projet-atlas a#sous-bassin-7{
   top: 236px;
   left: 503px;
 }
-body.page-projet-atlas a#sous-bassin-7 > span{
-  left: 17px;
-  top: 23px;
-  font-size: 45px;
-}
 body.page-projet-atlas a#sous-bassin-8{
   width: 92px;
   height: 61px;  
   top: 192px;
   left: 549px;
-}
-body.page-projet-atlas a#sous-bassin-8 > span{
-  top: 14px;
-  font-size: 37px;
-  left: 10px;
 }
 body.page-projet-atlas a#sous-bassin-9{
   width: 37px;
@@ -487,32 +537,17 @@ body.page-projet-atlas a#sous-bassin-9{
   top: 252px;
   left: 588px;
 }
-body.page-projet-atlas a#sous-bassin-9 > span{
-  font-size: 30px;
-  top: 28px;
-  left: 8px;  
-}
 body.page-projet-atlas a#sous-bassin-10{
   width: 55px;
   height: 102px;
   top: 104px;
   left: 466px;
 }
-body.page-projet-atlas a#sous-bassin-10 > span{
-  top: 55px;
-  left: 15px;
-  font-size: 49px;
-}
 body.page-projet-atlas a#sous-bassin-11{
   width: 39px;
   height: 59px;  
   top: 48px;
   left: 481px;
-}
-body.page-projet-atlas a#sous-bassin-11 > span{
-  top: 34px;
-  font-size: 29px;
-  left: 11px;
 }
 body.page-projet-atlas a#sous-bassin-12{
   width: 139px;
@@ -521,12 +556,6 @@ body.page-projet-atlas a#sous-bassin-12{
   left: 534px;
   transform: rotate(31deg);
 }
-body.page-projet-atlas a#sous-bassin-12 > span{
-  top: 18px;
-  font-size: 43px;
-  left: 15px;
-  transform: rotate(-31deg);
-}
 body.page-projet-atlas a#sous-bassin-13{
   width: 78px;
   height: 42px;  
@@ -534,24 +563,12 @@ body.page-projet-atlas a#sous-bassin-13{
   left: 484px;
   transform: rotate(31deg);
 }
-body.page-projet-atlas a#sous-bassin-13 > span{
-  font-size: 34px;
-  top: 14px;
-  left: 5px;
-  transform: rotate(-31deg);
-}
 body.page-projet-atlas a#sous-bassin-14{
   width: 81px;
   height: 57px;  
   top: 117px;
   left: 309px;
   transform: rotate(-48deg);
-}
-body.page-projet-atlas a#sous-bassin-14 > span{
-  font-size: 37px;
-  left: 2px;
-  top: 9px;
-  transform: rotate(48deg);
 }
 /**/
 /*commentaires*/
@@ -2197,6 +2214,7 @@ body.node-type-book-cluster.section-node-edit div.views-field-field-document-aut
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+div.containerOfCluster div.hidden{display: none;}
 div.containerOfCluster div.responsableBloc {
   text-align: right;
 }
@@ -3161,6 +3179,9 @@ body.node-type-book-encyclopedie-part .ui-dialog-content {
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+body.page-projet-atlas-encadres li.ar, body.page-projet-atlas-encadres li.it, body.page-projet-atlas-encadres li.es {
+    visibility: hidden;
+}
 body.page-projet-atlas-encadres div.view-v-atlas-affiche-all-encadre p.encadreStyle br, body.page-projet-atlas-encadres div.view-v-atlas-affiche-all-encadre p, body.page-projet-atlas-encadres div.view-v-atlas-affiche-all-encadre table, body.page-projet-atlas-encadres div.view-v-atlas-affiche-all-encadre div.field-content > div{
   display: none;
 }
@@ -3213,6 +3234,114 @@ body.page-projet-atlas-encadres h1 {
   text-decoration: initial;
   font-size: 1.8em;
 }
+/***************************************************************************/
+/***************************************************************************/
+/*                    PAGE TOUS LES PICTOGRAMMES                           */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.page-projet-atlas-tous-les-pictogrammes li.ar, body.page-projet-atlas-tous-les-pictogrammes li.it, body.page-projet-atlas-tous-les-pictogrammes li.es {
+    visibility: hidden;
+}
+body.page-projet-atlas-tous-les-pictogrammes div.view-tous-les-pictogrammes h1{
+  margin-bottom: 40px;
+  display: block;
+  height: 38px;
+  padding-top: 10px;
+  border-bottom: 3px dashed #666666;
+  text-decoration: initial;
+  font-size: 1.8em;
+}
+body.page-projet-atlas-tous-les-pictogrammes div.view-tous-les-pictogrammes a.addPicto{
+  background: url(../../../images/add-new.png) no-repeat 100% 78%;
+  background-size: 100%;
+  display: inline-block;
+  width: 25px;
+  height: 60px;
+  margin-left: 5px;
+}
+body.page-projet-atlas-tous-les-pictogrammes div.view-tous-les-pictogrammes a.addPicto:hover{
+  background: url(../../../images/add-new_hover.png) no-repeat 100% 78%;
+  background-size: 100%;
+}
+body.page-projet-atlas-tous-les-pictogrammes div.view-tous-les-pictogrammes h2{
+  font-family: 'Poiret One', cursive;
+  font-size: 35px;
+  margin-bottom: 3px;
+  display:  inline-block; 
+}
+body.page-projet-atlas-tous-les-pictogrammes div.view-tous-les-pictogrammes th{
+  font-size: 10px;
+}
+body.page-projet-atlas-tous-les-pictogrammes div.view-tous-les-pictogrammes tr{
+  font-size: 10px;
+}
+body.page-projet-atlas-tous-les-pictogrammes div.view-tous-les-pictogrammes table{
+  width: 100%;
+}
 
-
-
+/***************************************************************************/
+/***************************************************************************/
+/*               PAGE AJOUT / ADD PICTO_CONNAISSANCE                       */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.page-node-add-book-les-pictos-connaissances li.ar, body.page-node-add-book-les-pictos-connaissances li.it, body.page-node-add-book-les-pictos-connaissances li.es, body.node-type-book-les-pictos-connaissances.section-node-edit li.ar, body.node-type-book-les-pictos-connaissances.section-node-edit li.it, body.node-type-book-les-pictos-connaissances.section-node-edit li.es {
+    visibility: hidden;
+}
+body.page-node-add-book-les-pictos-connaissances fieldset.menu-item-form.collapsible.collapsed, body.page-node-add-book-les-pictos-connaissances fieldset.collapsible.collapsed, body.page-node-add-book-les-pictos-connaissances input#edit-preview{
+  display:  none; 
+}
+body.node-type-book-les-pictos-connaissances.section-node-edit fieldset.menu-item-form.collapsible.collapsed, body.node-type-book-les-pictos-connaissances.section-node-edit fieldset.collapsible.collapsed, body.node-type-book-les-pictos-connaissances.section-node-edit input#edit-preview{
+  display:  none; 
+}
+/***************************************************************************/
+/***************************************************************************/
+/*               PAGE AJOUT / ADD PICTO_INTERET                            */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.page-node-add-book-les-pictos-interet li.ar, body.page-node-add-book-les-pictos-interet li.it, body.page-node-add-book-les-pictos-interet li.es, body.node-type-book-les-pictos-interet.section-node-edit li.ar, body.node-type-book-les-pictos-interet.section-node-edit li.it, body.node-type-book-les-pictos-interet.section-node-edit li.es {
+    visibility: hidden;
+}
+body.page-node-add-book-les-pictos-interet fieldset.menu-item-form.collapsible.collapsed, body.page-node-add-book-les-pictos-interet fieldset.collapsible.collapsed, body.page-node-add-book-les-pictos-interet input#edit-preview{
+  display:  none; 
+}
+body.node-type-book-les-pictos-interet.section-node-edit fieldset.menu-item-form.collapsible.collapsed, body.node-type-book-les-pictos-interet.section-node-edit fieldset.collapsible.collapsed, body.node-type-book-les-pictos-interet.section-node-edit input#edit-preview{
+  display:  none; 
+}
+/***************************************************************************/
+/***************************************************************************/
+/*               PAGE AJOUT / ADD PICTO_PRESSION                           */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.page-node-add-book-les-pictos-pression li.ar, body.page-node-add-book-les-pictos-pression li.it, body.page-node-add-book-les-pictos-pression li.es, body.node-type-book-les-pictos-pression.section-node-edit li.ar, body.node-type-book-les-pictos-pression.section-node-edit li.it, body.node-type-book-les-pictos-pression.section-node-edit li.es {
+    visibility: hidden;
+}
+body.page-node-add-book-les-pictos-pression fieldset.menu-item-form.collapsible.collapsed, body.page-node-add-book-les-pictos-pression fieldset.collapsible.collapsed, body.page-node-add-book-les-pictos-pression input#edit-preview{
+  display:  none; 
+}
+body.node-type-book-les-pictos-pression.section-node-edit fieldset.menu-item-form.collapsible.collapsed, body.node-type-book-les-pictos-pression.section-node-edit fieldset.collapsible.collapsed, body.node-type-book-les-pictos-pression.section-node-edit input#edit-preview{
+  display:  none; 
+}
+/***************************************************************************/
+/***************************************************************************/
+/*               PAGE AJOUT / ADD PICTO_GESTION                            */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.page-node-add-book-les-pictos-gestions li.ar, body.page-node-add-book-les-pictos-gestions li.it, body.page-node-add-book-les-pictos-gestions li.es, body.node-type-book-les-pictos-gestions.section-node-edit li.ar, body.node-type-book-les-pictos-gestions.section-node-edit li.it, body.node-type-book-les-pictos-gestions.section-node-edit li.es {
+    visibility: hidden;
+}
+body.page-node-add-book-les-pictos-gestions fieldset.menu-item-form.collapsible.collapsed, body.page-node-add-book-les-pictos-gestions fieldset.collapsible.collapsed, body.page-node-add-book-les-pictos-gestions input#edit-preview{
+  display:  none; 
+}
+body.node-type-book-les-pictos-gestions.section-node-edit fieldset.menu-item-form.collapsible.collapsed, body.node-type-book-les-pictos-gestions.section-node-edit fieldset.collapsible.collapsed, body.node-type-book-les-pictos-gestions.section-node-edit input#edit-preview{
+  display:  none; 
+}
