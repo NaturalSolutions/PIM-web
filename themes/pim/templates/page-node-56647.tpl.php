@@ -306,6 +306,13 @@
                   $name_lien_sous_bassin = trim($name_lien_sous_bassin[count($name_lien_sous_bassin) - 2]);
                   $name_lien_sous_bassin = preg_replace('/\s+/', ' ', $name_lien_sous_bassin);
 
+                  //get total of islands for completude
+                  $cptISlandForCompletude = $node->field_cpt_island[0]['value'];
+                  //get total of clusters for completude
+                  $cptClusterForCompletude = $node->field_cpt_cluster[0]['value'];
+                  
+
+
                   //Get statut of sous-bassin
                   if($node->avalider == 1) $statutOfSousBassin = 'avalider';
                   else if($node->brouillon == 1) $statutOfSousBassin = 'brouillon';
@@ -394,34 +401,46 @@
                     <div class='hidden ctpClusterTermine'><?php echo $ctpClusterTermine; ?></div>
                     
                   
-                    <h4><?php echo $node->title; ?><span class='statutCodeColor'></span></h4>
+                    <h4><span class='statutCodeColor'></span><span class="title"><?php echo $node->title; ?></span></h4>
                     
                     <div class='countCluster' alt='Nombre de cluster'>
-                      <?php echo $nb_cluster; ?>
+                      <span class='nb_cluster'><?php echo $nb_cluster; ?></span>
                       <label>cluster(s)</label>
                       <div class="progressbar">
                         <div class="statutB"></div>
                         <div class="statutA"></div>
-                        <div class="statutT"></div>                        
+                        <div class="statutT"></div>
                       </div>
+                      <div class="completudeBar">   
+                        <?php 
+                        if($cptClusterForCompletude > 0) echo "<p class='BlocLabelCompletude'><span class='sur'> sur </span><span class='labelCompletude'>$cptClusterForCompletude</span></p>";
+                        ?>      
+                      </div>                    
                     </div>
                     
                     <div class='countIsland' alt='Nombre île'>
-                      <?php echo $nb_ile; ?>
+                      <span class="nb_island"><?php echo $nb_ile; ?></span>
                       <label>île(s)</label>
                       <div class="progressbar">
                         <div class="statutB"></div>
                         <div class="statutA"></div>
-                        <div class="statutT"></div>                        
+                        <div class="statutT"></div>  
                       </div>
+                      <div class="completudeBar">
+                        <?php 
+                        if($cptISlandForCompletude > 0) echo "<p class='BlocLabelCompletude'><span class='sur'> sur </span><span class='labelCompletude'>$cptISlandForCompletude</span></p>";
+                        ?>                        
+                      </div>                      
                     </div>
+
+                    <p class='legend'><span class='labelBrouillon'></span>&nbsp;Brouillon <span class='labelAvalider'></span>&nbsp;A valider <span class='labelTerminer'></span>&nbsp;Terminer</p>
 
                   </div>
                 
                 
               <?php endforeach; ?>
             
-            <p class='legend'><span class='labelBrouillon'></span>&nbsp;Brouillon <span class='labelAvalider'></span>&nbsp;A valider <span class='labelTerminer'></span>&nbsp;Terminer</p>
+            
             
             </div> <!-- fin map -->
 
@@ -629,17 +648,66 @@
           var idBlock = '.'+$(this).attr('id');*/
 
           //dispay info block
-          var zoneInfoOfCurrentHover = $(this).next();
-          zoneInfoOfCurrentHover.show();
-
+          var zoneInfoOfCurrentHover = $(this).next();          
+          zoneInfoOfCurrentHover.toggle();
           //Get info statut of sous-bassin
           statutOfSousBassin = zoneInfoOfCurrentHover.find('.statutOfSousBassin').text();
           titleOfBloc = zoneInfoOfCurrentHover.find('.statutCodeColor');
-          if(statutOfSousBassin == 'brouillon') titleOfBloc.css('backgroundColor','rgba(255, 0, 0, 0.6)');
-          if(statutOfSousBassin == 'avalider') titleOfBloc.css('backgroundColor','rgba(251, 114, 27, 0.68)');
-          if(statutOfSousBassin == 'terminer') titleOfBloc.css('backgroundColor','rgba(71, 121, 192, 0.79)');
+                              
+          if(statutOfSousBassin == 'brouillon') titleOfBloc.css({               
+            'backgroundImage'   : 'url(sites/all/themes/pim/images/icon_draft_book.png)',
+            'backgroundRepeat'  : 'no-repeat',
+            'backgroundPosition': 'center',
+            'backgroundSize'    : '70px'
+          });
+          if(statutOfSousBassin == 'avalider') titleOfBloc.css({                        
+            'backgroundImage' : 'url(sites/all/themes/pim/images/icon_gears_book.png)',
+            'backgroundRepeat'  : 'no-repeat',
+            'backgroundPosition': 'center',
+            'backgroundSize'    : '70px'
+          });
+          if(statutOfSousBassin == 'terminer') titleOfBloc.css({                        
+            'backgroundImage' : 'url(sites/all/themes/pim/images/icon_check_book.png)',
+            'backgroundRepeat'  : 'no-repeat',
+            'backgroundPosition': 'center',
+            'backgroundSize'    : '70px'
+          });
           
 
+          //Get nb total of clusters for completude
+          var currentNbTotalOfClusterForCompletude = parseInt(zoneInfoOfCurrentHover.find('.countCluster .labelCompletude').html());
+          //Get nb of cluster 
+          var currentNbOfClusterForCompletude = parseInt(zoneInfoOfCurrentHover.find('.countCluster .nb_cluster').html());
+          //Calc % of completude cluster
+          var pourcentOfCompletudeCluster = Math.round(currentNbOfClusterForCompletude * 100 / currentNbTotalOfClusterForCompletude);
+
+          //Get nb total of island for completude
+          var currentNbTotalOfIslandForCompletude = parseInt(zoneInfoOfCurrentHover.find('.countIsland .labelCompletude').html());
+          //Get nb of island
+          var currentNbOfIslandForCompletude = parseInt(zoneInfoOfCurrentHover.find('.countIsland .nb_island').html());
+          //Calc % of completude island
+          var pourcentOfCompletudeIsland = Math.round(currentNbOfIslandForCompletude * 100 / currentNbTotalOfIslandForCompletude);
+
+          //display % of completude for cluster
+          if(pourcentOfCompletudeCluster > 0){
+            zoneInfoOfCurrentHover.find('.countCluster .completudeBar').animate({
+              width: pourcentOfCompletudeCluster+'%'            
+              },
+              1000, function() {
+              /* stuff to do after animation is complete */                            
+            });
+          }
+
+          //display % of completude for island
+          if(pourcentOfCompletudeIsland > 0){
+            zoneInfoOfCurrentHover.find('.countIsland .completudeBar').animate({
+              width: pourcentOfCompletudeIsland+'%'            
+              },
+              1000, function() {
+              /* stuff to do after animation is complete */                            
+            });
+          }
+          
           //Get % info for islands
           var currrentPourcentOfIslandBrouillon = Math.round(zoneInfoOfCurrentHover.find('.ctpIslandBrouillon').html());
           var currrentPourcentOfIslandAvalider = Math.round(zoneInfoOfCurrentHover.find('.ctpIslandAvalider').html());
@@ -656,7 +724,7 @@
               width: currrentPourcentOfIslandBrouillon+'%'            
               },
               1000, function() {
-              /* stuff to do after animation is complete */
+              /* stuff to do after animation is complete */              
               if(currrentPourcentOfIslandBrouillon > 10) $(this).html(currrentPourcentOfIslandBrouillon+'%');              
             });
           } 
@@ -712,9 +780,9 @@
       }, function() {
 
         //Hide when leaving block
-        var zoneInfoOfCurrentHover = $(this).next();
-        zoneInfoOfCurrentHover.hide();
-        zoneInfoOfCurrentHover.find('.statutB, .statutA, .statutT').css('width', 0);
+        var zoneInfoOfCurrentHover = $(this).next();        
+        zoneInfoOfCurrentHover.toggle();
+        zoneInfoOfCurrentHover.find('.statutB, .statutA, .statutT, .completudeBar').css('width', 0);
         zoneInfoOfCurrentHover.find('.statutB, .statutA, .statutT').html('');
       
       

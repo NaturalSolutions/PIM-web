@@ -60,6 +60,8 @@ global $base_url, $language, $user;
 <?php print drupal_render($form['author']); ?>
 <?php print drupal_render($form['field_ss_bassin_author']); ?>
 <?php print drupal_render($form['field_ss_bassin_responsable']); ?>
+<?php print drupal_render($form['field_cpt_island']); ?>
+<?php print drupal_render($form['field_cpt_cluster']); ?>
 
 <?php print drupal_render($form['field_ss_bassin_pic_of_map']); ?>
 
@@ -91,7 +93,6 @@ global $base_url, $language, $user;
 <div class='indentRight1'>
 	<div class='contenerRelatif'><span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span><span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span><span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span><?php print drupal_render($form['field_ss_bassin_strat_conserv']); ?></div>
 </div>
-
 
 <div class='indentRight1'>
 	<div class='contenerRelatif'><span class='btnShowDocs' title='Add a document'>B</span><?php print drupal_render($form['field_ss_bassin_biblio']); ?></div>
