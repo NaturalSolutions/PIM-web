@@ -60,8 +60,8 @@ global $base_url, $language, $user;
 <?php print drupal_render($form['author']); ?>
 <?php print drupal_render($form['field_ss_bassin_author']); ?>
 <?php print drupal_render($form['field_ss_bassin_responsable']); ?>
-<?php print drupal_render($form['field_cpt_island']); ?>
-<?php print drupal_render($form['field_cpt_cluster']); ?>
+<?php print drupal_render($form['field_ss_bassin_cpt_island']); ?>
+<?php print drupal_render($form['field_ss_bassin_cpt_cluster']); ?>
 
 <?php print drupal_render($form['field_ss_bassin_pic_of_map']); ?>
 
