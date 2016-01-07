@@ -395,14 +395,18 @@ body.page-projet-atlas div#map_hp div.progressbar{
 body.page-projet-atlas div#map_hp div.completudeBar{
   background-color: rgba(0, 0, 0, 0.35);
   width: 0;
-  height: 12px;
+  height: 16px;
 }
 body.page-projet-atlas div#map_hp p.BlocLabelCompletude{  
-  font-size: 10px;
+  display: none;
+  font-size: 14px;
   margin: 0;
   text-align: center;
-  line-height: 10px;
+  line-height: 15px;
   color: #fff;
+  font-weight: 600;
+  text-shadow: 0px 2px 5px #000;
+  letter-spacing: 2px;
 }
 body.page-projet-atlas h4 span.title{
   display: inline-block;

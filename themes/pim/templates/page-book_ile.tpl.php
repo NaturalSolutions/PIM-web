@@ -272,18 +272,19 @@ global $user, $base_url, $language;
                           
           <!-- sinon affiche vue -->
           <?php else: ?>
-                           
-            <!-- Recuperation du l'iD de la node courante -->
-            <?php $nid = $node->nid; ?>
-            <!-- Envoie de l'ID dans la vue templaté -->
-            <?php print views_embed_view('v_atlas_book_ile', 'block_1', $nid); ?>
+                        
+            <?php 
+
+            //Envoie de l'ID dans la vue templaté pour afficher le contenu
+            print views_embed_view('v_atlas_book_ile', 'block_1', $node->nid); 
+            ?>
             
             <?php if($language->language == 'fr'): ?>
               <h2 class='titleCommentaire'>Commentaires</h2>
             <?php else: ?>
               <h2 class='titleCommentaire'>Comments</h2>
             <?php endif;  ?>
-            <?php print views_embed_view('v_atlas_affiche_comment', 'block_1', $nid); ?>
+            <?php print views_embed_view('v_atlas_affiche_comment', 'block_1', $node->nid); ?>
             
             <br/>
            

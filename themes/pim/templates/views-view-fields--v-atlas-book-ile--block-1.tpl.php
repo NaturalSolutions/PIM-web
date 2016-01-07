@@ -250,7 +250,89 @@
 
   <?php echo $descGen; ?>
 
-  <h4>Connaissances :</h4>
+  <?php 
+  
+  //Get termName
+  $termName = $code_ile;     
+
+  //État des connaissances                
+  //Bota
+  /*$sql = "select b.niveau from picto_etaco_bota b where code_ile = '".$termName."'";           
+  $result = db_query($sql);
+  $result = db_fetch_array($result); 
+  $etatBota = $result['niveau'];
+  echo 'Bota : '.$result['niveau']."<br/>"; */   
+
+ /* //Ornithologie
+  $sql = "select b.niveau from picto_etaco_ornitho b where code_ile = '".$termName."'";           
+  $result = db_query($sql);
+  $result = db_fetch_array($result);             
+  $etatOrni = $result['niveau'];
+  echo 'Ornithologie : '.$result['niveau']."<br/>";        
+
+  //Herpétologie
+  $sql = "select b.niveau from picto_etaco_herpeto b where code_ile = '".$termName."'";           
+  $result = db_query($sql);
+  $result = db_fetch_array($result);
+  $etatHerpe = $result['niveau'];
+  echo 'Herpétologie : '.$result['niveau']."<br/>";    
+
+  //Mammifères
+  $sql = "select b.niveau from picto_etaco_mamm b where code_ile = '".$termName."'";           
+  $result = db_query($sql);
+  $result = db_fetch_array($result);             
+  $etatMami = $result['niveau'];
+  echo 'Mammifères : '.$result['niveau']."<br/>";    
+
+  //Chiroptères
+  $sql = "select b.niveau from picto_etaco_chiro b where code_ile = '".$termName."'";           
+  $result = db_query($sql);
+  $result = db_fetch_array($result);             
+  $etatChiro = $result['niveau'];
+  echo 'Chiroptères : '.$result['niveau']."<br/>";   */ 
+              
+  //Invertébrés
+  /*$sql = "select b.niveau from picto_etaco_invert b where code_ile = '".$termName."'";           
+  $result = db_query($sql);
+  $result = db_fetch_array($result);             
+  $etatInvert = $result['niveau'];
+  echo 'Invertébrés : '.$result['niveau']."<br/>";  
+    
+  //On enregistre tous les chemins de pictos en fonction du type de picto (bota, ornito ...) et de son genre (connaissance, intérêt, pression...)
+  $sql = "SELECT d.filepath, c.field_book_picto_valeur_value FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_picto_connaiss_bota_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Botanique';";  
+  $result = db_query($sql);
+  while (  $row  =  db_fetch_array($result) ) $rowsBota[$row['field_book_picto_valeur_value']] = $row['filepath'];
+
+  //On enregistre tous les chemins de pictos en fonction du type de picto (bota, ornito ...) et de son genre (connaissance, intérêt, pression...)
+  $sql = "SELECT d.filepath, c.field_book_picto_valeur_value FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_picto_connaiss_bota_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Invertébrés';";  
+  $result = db_query($sql);
+  while (  $row  =  db_fetch_array($result) ) $rowsInvert[$row['field_book_picto_valeur_value']] = $row['filepath'];
+
+  //On stock le bon picto en fonction de la valeur
+  $urlOfPictoBotaToDisplay = $rowsBota[$etatBota];
+  $urlOfPictoInvertToDisplay = $rowsInvert[$etatInvert];*/
+
+  /*
+  $urlOfPictoOrniToDisplay = $pathBota[$etatOrni];
+  $urlOfPictoHerpeToDisplay = $pathBota[$etatHerpe];
+  $urlOfPictoMamiToDisplay = $pathBota[$etatMami];
+  $urlOfPictoChiroToDisplay = $pathBota[$etatChiro];
+  */
+  
+
+  ?>
+
+  <h4>Connaissances :</h4> 
+  
+  <!-- <div class="onePicto bota <?php echo $etatBota; ?>"><?php echo "<img src='$base_url/$urlOfPictoBotaToDisplay' alt='' title='' />"; ?></div>
+  <div class="onePicto invert <?php echo $etatBota; ?>"><?php echo "<img src='$base_url/$urlOfPictoInvertToDisplay' alt='' title='' />"; ?></div> -->
+  
+  <!--
+  <div class="onePicto orni <?php echo $etatBota; ?>"><?php echo "<img src='$base_url/$urlOfPictoOrniToDisplay' alt='' title='' />"; ?></div>
+  <div class="onePicto herpe <?php echo $etatBota; ?>"><?php echo "<img src='$base_url/$urlOfPictoHerpeToDisplay' alt='' title='' />"; ?></div>
+  <div class="onePicto mammi <?php echo $etatBota; ?>"><?php echo "<img src='$base_url/$urlOfPictoMamiToDisplay' alt='' title='' />"; ?></div>
+  <div class="onePicto chirop <?php echo $etatBota; ?>"><?php echo "<img src='$base_url/$urlOfPictoChiroToDisplay' alt='' title='' />"; ?></div>
+     -->
 
   <?php echo $connaissances; ?>
 

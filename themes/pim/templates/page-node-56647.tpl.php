@@ -694,6 +694,7 @@
               width: pourcentOfCompletudeCluster+'%'            
               },
               1000, function() {
+                $(this).find('p.BlocLabelCompletude').show();
               /* stuff to do after animation is complete */                            
             });
           }
@@ -704,6 +705,7 @@
               width: pourcentOfCompletudeIsland+'%'            
               },
               1000, function() {
+                $(this).find('p.BlocLabelCompletude').show();
               /* stuff to do after animation is complete */                            
             });
           }
