@@ -40,7 +40,7 @@
 <?php endforeach; ?>
 <?php print views_embed_view('tous_les_pictogrammes', 'block_3'); ?> 
 
-<h2>Gestions</h2>
+<h2>Gestions / Conservation</h2>
 <?php $currentRoles = $user->roles; ?>            
 <?php foreach($currentRoles as $item): ?> 
   <?php if($item == 'Admin PIM'): ?>

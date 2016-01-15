@@ -163,6 +163,7 @@ for($i=0;$i<count($res);$i++){
     
     //Avec le vid, on récupère les enfants d'un terme en spécifiant le parent tid égale à notre tid courant
     $var = taxonomy_get_tree($vid, $parent = $currentTid, $depth = -1, $max_depth = NULL);    
+    drupal_set_message( "<pre>" . print_r('titi '.$var, TRUE) . "</pre>" ); 
 
     //On parcour les enfants pour stocker dans une variable tous les tid
     for($j=0;$j<count($var);$j++){ 
@@ -174,7 +175,7 @@ for($i=0;$i<count($res);$i++){
       if($resTidNonSpecifie[0]->node_term_node__term_data_tid != ''){
 
         //Compteur d'iles
-        /*$countNbIles++;*/
+        //$countNbIles++;
         
         $allTheTid .= $resTidNonSpecifie[0]->node_term_node__term_data_tid.',';
         $allTheTidCluster .= $resTidNonSpecifie[0]->node_term_node__term_data_tid.',';      
@@ -182,7 +183,7 @@ for($i=0;$i<count($res);$i++){
       }else if($resTidPim[0]->node_term_node__term_data_tid != ''){
 
         //Compteur d'iles
-        /*$countNbIles++;*/
+        //$countNbIles++;
         
         $allTheTid .= $resTidPim[0]->node_term_node__term_data_tid.',';
         $allTheTidCluster .= $resTidPim[0]->node_term_node__term_data_tid.',';  
@@ -194,14 +195,14 @@ for($i=0;$i<count($res);$i++){
     //Sinon => traiter comme une ile
     }else if($isArchipel == 0){ 
 
-      //On vérifie que l'îles est "PIM"      
-      $resTidNonSpecifie = views_get_view_result('v_atlas_tab_data_cluster', 'block_10', $var[$j]->tid);
-      $resTidPim = views_get_view_result('v_atlas_tab_data_cluster', 'block_11', $var[$j]->tid);
+      //On vérifie que l'îles est "PIM"            
+      $resTidNonSpecifie = views_get_view_result('v_atlas_tab_data_cluster', 'block_10', $currentTid);
+      $resTidPim = views_get_view_result('v_atlas_tab_data_cluster', 'block_11', $currentTid);
 
       if($resTidNonSpecifie[0]->node_term_node__term_data_tid != ''){
 
         //Compteur d'iles
-        /*$countNbIles++;*/
+        //$countNbIles++;
         
         //On ajoute directement l'id dans notre variable qui regroupe tout les tid
         $allTheTid .= $resTidNonSpecifie[0]->node_term_node__term_data_tid.',';
@@ -210,7 +211,7 @@ for($i=0;$i<count($res);$i++){
       }else if($resTidPim[0]->node_term_node__term_data_tid != ''){
 
         //Compteur d'iles
-        /*$countNbIles++;*/
+        //$countNbIles++;
         
         //On ajoute directement l'id dans notre variable qui regroupe tout les tid
         $allTheTid .= $resTidPim[0]->node_term_node__term_data_tid.',';
