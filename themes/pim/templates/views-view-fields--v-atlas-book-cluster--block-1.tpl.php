@@ -162,8 +162,7 @@ for($i=0;$i<count($res);$i++){
     $vid = $term->vid;
     
     //Avec le vid, on récupère les enfants d'un terme en spécifiant le parent tid égale à notre tid courant
-    $var = taxonomy_get_tree($vid, $parent = $currentTid, $depth = -1, $max_depth = NULL);    
-    drupal_set_message( "<pre>" . print_r('titi '.$var, TRUE) . "</pre>" ); 
+    $var = taxonomy_get_tree($vid, $parent = $currentTid, $depth = -1, $max_depth = NULL);        
 
     //On parcour les enfants pour stocker dans une variable tous les tid
     for($j=0;$j<count($var);$j++){ 
