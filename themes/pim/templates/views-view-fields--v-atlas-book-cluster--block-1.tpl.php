@@ -174,7 +174,7 @@ for($i=0;$i<count($res);$i++){
       if($resTidNonSpecifie[0]->node_term_node__term_data_tid != ''){
 
         //Compteur d'iles
-        //$countNbIles++;
+        $countNbIles++;
         
         $allTheTid .= $resTidNonSpecifie[0]->node_term_node__term_data_tid.',';
         $allTheTidCluster .= $resTidNonSpecifie[0]->node_term_node__term_data_tid.',';      
@@ -182,7 +182,7 @@ for($i=0;$i<count($res);$i++){
       }else if($resTidPim[0]->node_term_node__term_data_tid != ''){
 
         //Compteur d'iles
-        //$countNbIles++;
+        $countNbIles++;
         
         $allTheTid .= $resTidPim[0]->node_term_node__term_data_tid.',';
         $allTheTidCluster .= $resTidPim[0]->node_term_node__term_data_tid.',';  
@@ -201,7 +201,7 @@ for($i=0;$i<count($res);$i++){
       if($resTidNonSpecifie[0]->node_term_node__term_data_tid != ''){
 
         //Compteur d'iles
-        //$countNbIles++;
+        $countNbIles++;
         
         //On ajoute directement l'id dans notre variable qui regroupe tout les tid
         $allTheTid .= $resTidNonSpecifie[0]->node_term_node__term_data_tid.',';
@@ -210,7 +210,7 @@ for($i=0;$i<count($res);$i++){
       }else if($resTidPim[0]->node_term_node__term_data_tid != ''){
 
         //Compteur d'iles
-        //$countNbIles++;
+        $countNbIles++;
         
         //On ajoute directement l'id dans notre variable qui regroupe tout les tid
         $allTheTid .= $resTidPim[0]->node_term_node__term_data_tid.',';
@@ -442,7 +442,7 @@ if($allTheTid == '') echo "Aucune îles PIM ou Non-spécifié";
       </tr>
       <tr>
         <td><p><?php if($countNbArchipel == '') echo '0';else echo $countNbArchipel; ?></p></td>
-        <td><p><?php echo $cptName; ?></p></td>
+        <td><p><?php echo $countNbIles; ?></p></td>
       </tr>
 
       <?php             
@@ -510,7 +510,7 @@ if($allTheTid == '') echo "Aucune îles PIM ou Non-spécifié";
         <th><p>Nombre d'îles avec au moins 1 statut de protection</p></th>
       </tr>
       <tr>
-        <td><p><?php echo $cptStatut; ?></p></td>
+        <td><p><?php if($cptStatut == -1) $cptStatut = 0; echo $cptStatut; ?></p></td>
       </tr>
       <tr>
         <td><center><p><?php if(!empty($allNamesIles2)) echo $allNamesIles2; ?></p></center></td>
