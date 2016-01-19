@@ -201,26 +201,32 @@ WHERE b.code_ile = o.code_ile
 -- Intérêts des patrimoines
 -- ----------------------------------------------------------------------------
 
+
 -- Botanique
 
 -- Ornithologie
 
--- Pour vérifier les tid des termes à chercher :
--- select * from drp_term_data where name like 'Calonectris dio%' or name like 'Hydrobates pelag%' or name like 'Falco peregr%' or name like 'Phalacrocorax aristo%' or name like 'Pandion halia%' or name like 'Puffinus yelk%' or name like 'Falco eleo%' or name like 'Larus micha%' or name like 'Larus audoui%' or name like 'Bubo b%';
+-- Chargement de la liste des taxons
+DROP TABLE IF EXISTS picto_intepa_ornitho_taxons;
+CREATE TABLE picto_intepa_ornitho_taxons (taxon varchar(255), tid INT(10), spid INT(10));
+LOAD DATA LOCAL INFILE './requetes-pictos-atlas.liste-ornitho.csv'
+    INTO TABLE picto_intepa_ornitho_taxons
+    FIELDS TERMINATED BY ','
+    ENCLOSED BY '"'
+    LINES TERMINATED BY '\n'
+    (taxon);
+-- Traitement/nettoyage de la liste des taxons
+UPDATE picto_intepa_ornitho_taxons SET taxon = trim(taxon);
+UPDATE picto_intepa_ornitho_taxons l, drp_term_data t SET l.tid = t.tid, l.spid = t.tid
+    WHERE t.vid = 21 AND t.name = l.taxon;
+UPDATE picto_intepa_ornitho_taxons l, drp_term_data t SET l.spid = t.tid
+    WHERE t.vid = 21 AND locate(' ', l.taxon, locate(' ', l.taxon) + 1) > 0 AND t.name = substring_index(l.taxon, ' ', 2);
+-- Création de la requête
 CREATE OR REPLACE VIEW picto_intepa_ornitho AS
 SELECT
     t.name AS code_ile,
     CASE
-        (coalesce(sum(o.field_bdni_o_p_taxon_value = 3513), 0) > 0) +
-        (coalesce(sum(o.field_bdni_o_p_taxon_value = 3116), 0) > 0) +
-        (coalesce(sum(o.field_bdni_o_p_taxon_value = 3227), 0) > 0) +
-        (coalesce(sum(o.field_bdni_o_p_taxon_value = 3244), 0) > 0) +
-        (coalesce(sum(o.field_bdni_o_p_taxon_value = 2890), 0) > 0) +
-        (coalesce(sum(o.field_bdni_o_p_taxon_value IN (2930, 22614, 22615)), 0) > 0) +
-        (coalesce(sum(o.field_bdni_o_p_taxon_value IN (3198, 22620)), 0) > 0) +
-        (coalesce(sum(o.field_bdni_o_p_taxon_value IN (3119, 22616, 22617)), 0) > 0) +
-        (coalesce(sum(o.field_bdni_o_p_taxon_value IN (3410, 22626)), 0) > 0) +
-        (coalesce(sum(o.field_bdni_o_p_taxon_value IN (3371, 22624)), 0) > 0)
+        count(distinct l.spid)
         WHEN 0 THEN 1
         WHEN 1 THEN 2
         WHEN 2 THEN 2
@@ -229,8 +235,9 @@ SELECT
         WHEN 5 THEN 3
         ELSE 4
     END AS niveau
-FROM drp_term_data t
-    LEFT JOIN drp_content_type_bd_ni_ornithologie_present o ON (t.tid = o.field_bdni_o_p_code_ile_ilot_value)
+FROM drp_content_type_bd_ni_ornithologie_present o JOIN
+     picto_intepa_ornitho_taxons l ON (o.field_bdni_o_p_taxon_value = l.tid) RIGHT JOIN
+     drp_term_data t ON (t.tid = o.field_bdni_o_p_code_ile_ilot_value)
 WHERE t.vid = 4
 GROUP BY t.name;
 
