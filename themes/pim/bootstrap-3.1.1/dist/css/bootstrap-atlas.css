@@ -2416,11 +2416,25 @@ div.containerOfCluster div.views-row-last div.containerOfOneComment {
 }
 /***************************************************************************/
 /***************************************************************************/
-/*                  		VISUALISATION ILE                              */
+/*                  		VISUALISATION ILE                                  */
 /*                                                                         */
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+div.containerOfMyIsland div.onePicto{
+  width: 80px;
+  height: 80px;
+  display: inline-block;
+}
+div.containerOfMyIsland div.onePicto > img{
+  width: 100%;
+  height: 100%;
+}
+div.containerOfMyIsland div.lesPicto{
+  width:  100%;
+  width: 100%;
+  padding-bottom: 10px;
+}
 div.containerOfMyIsland div.responsableBloc {
   text-align: right;
 }

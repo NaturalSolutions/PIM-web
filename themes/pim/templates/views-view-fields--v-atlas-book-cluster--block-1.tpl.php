@@ -128,6 +128,7 @@
 <?php $res = views_get_view_result('v_atlas_book_cluster', 'block_2', $nid); ?>
 
 <?php //parcour des tid 
+$countNbIles = 0;
 for($i=0;$i<count($res);$i++){ 
     
   //Notre tid courant
@@ -191,8 +192,8 @@ for($i=0;$i<count($res);$i++){
            
     }
 
-    //Sinon => traiter comme une ile
-    }else if($isArchipel == 0){ 
+  //Sinon => traiter comme une ile
+  }else if($isArchipel == 0){ 
 
       //On vérifie que l'îles est "PIM"            
       $resTidNonSpecifie = views_get_view_result('v_atlas_tab_data_cluster', 'block_10', $currentTid);
@@ -220,7 +221,7 @@ for($i=0;$i<count($res);$i++){
 
          
 
-    }
+  }
   
 }
 
