@@ -347,12 +347,12 @@
   <h4>Connaissances :</h4> 
   
   <div class="lesPicto">
-    <div class="onePicto bota <?php echo $etatBota; ?>"><?php echo "<img src='$base_url/$urlOfPictoBotaToDisplay' alt='' title='' />"; ?></div>
-    <div class="onePicto orni <?php echo $etatBota; ?>"><?php echo "<img src='$base_url/$urlOfPictoOrniToDisplay' alt='' title='' />"; ?></div>
-    <div class="onePicto herpe <?php echo $etatBota; ?>"><?php echo "<img src='$base_url/$urlOfPictoHerpeToDisplay' alt='' title='' />"; ?></div>
-    <div class="onePicto mammi <?php echo $etatBota; ?>"><?php echo "<img src='$base_url/$urlOfPictoMamiToDisplay' alt='' title='' />"; ?></div>
-    <div class="onePicto chirop <?php echo $etatBota; ?>"><?php echo "<img src='$base_url/$urlOfPictoChiroToDisplay' alt='' title='' />"; ?></div>
-    <div class="onePicto invert <?php echo $etatBota; ?>"><?php echo "<img src='$base_url/$urlOfPictoInvertToDisplay' alt='' title='' />"; ?></div>  
+    <?php if($urlOfPictoBotaToDisplay != ''): ?><div class="onePicto bota <?php echo $etatBota; ?>"><?php echo "<img src='$base_url/$urlOfPictoBotaToDisplay' alt='' title='' />"; ?></div><?php endif; ?>
+    <?php if($urlOfPictoOrniToDisplay != ''): ?><div class="onePicto orni <?php echo $etatBota; ?>"><?php echo "<img src='$base_url/$urlOfPictoOrniToDisplay' alt='' title='' />"; ?></div><?php endif; ?>
+    <?php if($urlOfPictoHerpeToDisplay != ''): ?><div class="onePicto herpe <?php echo $etatBota; ?>"><?php echo "<img src='$base_url/$urlOfPictoHerpeToDisplay' alt='' title='' />"; ?></div><?php endif; ?>
+    <?php if($urlOfPictoMamiToDisplay != ''): ?><div class="onePicto mammi <?php echo $etatBota; ?>"><?php echo "<img src='$base_url/$urlOfPictoMamiToDisplay' alt='' title='' />"; ?></div><?php endif; ?>
+    <?php if($urlOfPictoChiroToDisplay != ''): ?><div class="onePicto chirop <?php echo $etatBota; ?>"><?php echo "<img src='$base_url/$urlOfPictoChiroToDisplay' alt='' title='' />"; ?></div><?php endif; ?>
+    <?php if($urlOfPictoInvertToDisplay != ''): ?><div class="onePicto invert <?php echo $etatBota; ?>"><?php echo "<img src='$base_url/$urlOfPictoInvertToDisplay' alt='' title='' />"; ?></div>  <?php endif; ?>
   </div>
   
 

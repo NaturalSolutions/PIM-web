@@ -424,16 +424,6 @@ if($allTheTid == '') echo "Aucune îles PIM ou Non-spécifié";
 
     <?php $tabOfSynonyme = explode(',', $allTheSynonym); ?>
 
-    <!-- cpt -->
-    <?php 
-    for($i=0;$i<count($tabOfSynonyme);$i++){
-      if(!empty($tabOfSynonyme[$i])){ 
-        $cptName = explode('</a>', $tabOfNamesOfIlesFromCluster[$i]);
-        $cptName = count($cptName) - 2;       
-      }
-    }
-    ?>
-
     <!-- Composition -->
     <table class='tableRecapIle tabComposition'>
       <tr>
