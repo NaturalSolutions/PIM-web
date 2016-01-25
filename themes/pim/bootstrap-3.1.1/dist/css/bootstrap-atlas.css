@@ -3316,6 +3316,100 @@ body.page-projet-atlas-tous-les-pictogrammes div.view-tous-les-pictogrammes tabl
 
 /***************************************************************************/
 /***************************************************************************/
+/*                       VISU PICTO_CONNAISSANCE                           */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.node-type-book-les-pictos-connaissances div.field-field-book-picto-connaissance div.field-label{
+  display:  none; 
+}
+body.node-type-book-les-pictos-connaissances div.node-type-book-les-pictos-connaissances > div.meta{
+  background-color: #4779C0;
+  color: #fff;
+  padding: 19px 15px 16px 15px;
+  text-shadow: none;
+  text-indent: 190px;
+}
+body.node-type-book-les-pictos-connaissances div.node-type-book-les-pictos-connaissances > div.meta a{
+  color:  #fff !important;
+}
+body.node-type-book-les-pictos-connaissances div#comments div.box h2{
+  position: absolute;
+  top: 20px;
+  background: url(../../../images/comment_icon.png) no-repeat 99% 50% #4779c0;
+  display: block;
+  height: 38px;
+  padding: 4%;
+  background-size: 14%;
+  text-decoration: underline;
+  font-size: 1.8em;
+  margin-top: 20px;
+  color: #fff;
+  margin-bottom: 0;
+  width: 663px;  
+}
+body.node-type-book-les-pictos-connaissances div#comments div.box form div.form-item:first-of-type{
+  display: none;
+}
+body.node-type-book-les-pictos-connaissances div#comments div.box form fieldset.collapsible.collapsed{
+  display: none;
+}
+body.node-type-book-les-pictos-connaissances div#comments div.box form input#edit-preview{
+  display: none;
+}
+body.node-type-book-les-pictos-connaissances div#comments div.comment{
+  padding: 3%;
+  width: 675px;
+  position: relative;
+  border: 1px solid #4779c0;
+  margin-top: 10px;
+  padding-bottom: 0px;
+}
+body.node-type-book-les-pictos-connaissances div#comments div.comment div.submitted{
+  font-style: italic;
+}
+body.node-type-book-les-pictos-connaissances div#comments div.comment div.content{
+  margin-top: 12px;
+  text-indent: 12px;
+}
+body.node-type-book-les-pictos-connaissances div#comments div.comment ul.links{
+  margin-bottom: 0;
+  margin-top: 30px;  
+}
+body.node-type-book-les-pictos-connaissances div#comments {
+  margin-top: 100px;
+  position: relative;
+  padding-top: 125px;
+}
+body.node-type-book-les-pictos-connaissances div#comments h2{
+  display: none;
+}
+body.node-type-book-les-pictos-connaissances div.field-field-book-value-picto-connaiss{
+  position: absolute;
+  top: 15px;
+  left: 100px;
+}
+body.node-type-book-les-pictos-connaissances div.field-field-book-picto-connaissance{
+  position: absolute;
+  left: 0;
+  top: -51px;
+}
+body.node-type-book-les-pictos-connaissances div.field-field-book-type-picto-connaiss{
+  position: absolute;
+  top: 15px;
+  right: 110px;
+}
+body.node-type-book-les-pictos-connaissances div.field-field-book-picto-connaissance img{
+  height: 80px;
+  width: 80px;
+  border: 3px solid #4779C0;
+}
+body.node-type-book-les-pictos-connaissances div#content-area div.content{
+  position:   relative; 
+}
+/***************************************************************************/
+/***************************************************************************/
 /*               PAGE AJOUT / ADD PICTO_CONNAISSANCE                       */
 /*                                                                         */
 /***************************************************************************/
