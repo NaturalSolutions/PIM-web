@@ -214,6 +214,7 @@ LOAD DATA LOCAL INFILE './requetes-pictos-atlas.liste-ornitho.csv'
     FIELDS TERMINATED BY ','
     ENCLOSED BY '"'
     LINES TERMINATED BY '\n'
+    IGNORE 1 LINES
     (taxon);
 -- Traitement/nettoyage de la liste des taxons
 UPDATE picto_intepa_ornitho_taxons SET taxon = trim(taxon);
