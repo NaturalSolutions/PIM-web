@@ -201,8 +201,43 @@ WHERE b.code_ile = o.code_ile
 -- Intérêts des patrimoines
 -- ----------------------------------------------------------------------------
 
-
 -- Botanique
+
+-- Chargement de la liste des taxons
+DROP TABLE IF EXISTS picto_intepa_bota_taxons;
+CREATE TABLE picto_intepa_bota_taxons (taxon varchar(255), tid INT(10), spid INT(10));
+LOAD DATA LOCAL INFILE './requetes-pictos-atlas.liste-bota.csv'
+    INTO TABLE picto_intepa_bota_taxons
+    FIELDS TERMINATED BY ','
+    ENCLOSED BY '"'
+    LINES TERMINATED BY '\n'
+    IGNORE 1 LINES
+    (taxon);
+-- Traitement/nettoyage de la liste des taxons
+UPDATE picto_intepa_bota_taxons SET taxon = trim(taxon);
+UPDATE picto_intepa_bota_taxons l, drp_term_data t SET l.tid = t.tid, l.spid = t.tid
+    WHERE t.vid = 55 AND t.name = l.taxon;
+UPDATE picto_intepa_bota_taxons l, drp_term_data t SET l.spid = t.tid
+    WHERE t.vid = 55 AND locate(' ', l.taxon, locate(' ', l.taxon) + 1) > 0 AND t.name = substring_index(l.taxon, ' ', 2);
+-- Création de la requête
+CREATE OR REPLACE VIEW picto_intepa_bota AS
+SELECT
+    t.name AS code_ile,
+    CASE
+        count(distinct l.spid)
+        WHEN 0 THEN 1
+        WHEN 1 THEN 2
+        WHEN 2 THEN 2
+        WHEN 3 THEN 3
+        WHEN 4 THEN 3
+        WHEN 5 THEN 3
+        ELSE 4
+    END AS niveau
+FROM drp_content_type_bd_ni_botanique_present o JOIN
+     picto_intepa_bota_taxons l ON (o.field_bdni_b_p_taxon_value = l.tid) RIGHT JOIN
+     drp_term_data t ON (t.tid = o.field_bdni_b_p_code_ile_ilot_value)
+WHERE t.vid = 4
+GROUP BY t.name;
 
 -- Ornithologie
 
@@ -244,7 +279,79 @@ GROUP BY t.name;
 
 -- Herpétologie
 
+-- Chargement de la liste des taxons
+DROP TABLE IF EXISTS picto_intepa_herpeto_taxons;
+CREATE TABLE picto_intepa_herpeto_taxons (taxon varchar(255), tid INT(10), spid INT(10));
+LOAD DATA LOCAL INFILE './requetes-pictos-atlas.liste-herpeto.csv'
+    INTO TABLE picto_intepa_herpeto_taxons
+    FIELDS TERMINATED BY ','
+    ENCLOSED BY '"'
+    LINES TERMINATED BY '\n'
+    IGNORE 1 LINES
+    (taxon);
+-- Traitement/nettoyage de la liste des taxons
+UPDATE picto_intepa_herpeto_taxons SET taxon = trim(taxon);
+UPDATE picto_intepa_herpeto_taxons l, drp_term_data t SET l.tid = t.tid, l.spid = t.tid
+    WHERE t.vid = 29 AND t.name = l.taxon;
+UPDATE picto_intepa_herpeto_taxons l, drp_term_data t SET l.spid = t.tid
+    WHERE t.vid = 29 AND locate(' ', l.taxon, locate(' ', l.taxon) + 1) > 0 AND t.name = substring_index(l.taxon, ' ', 2);
+-- Création de la requête
+CREATE OR REPLACE VIEW picto_intepa_herpeto AS
+SELECT
+    t.name AS code_ile,
+    CASE
+        count(distinct l.spid)
+        WHEN 0 THEN 1
+        WHEN 1 THEN 2
+        WHEN 2 THEN 2
+        WHEN 3 THEN 3
+        WHEN 4 THEN 3
+        WHEN 5 THEN 3
+        ELSE 4
+    END AS niveau
+FROM drp_content_type_bd_ni_herpetologie_present o JOIN
+     picto_intepa_herpeto_taxons l ON (o.field_bdni_h_p_taxon_value = l.tid) RIGHT JOIN
+     drp_term_data t ON (t.tid = o.field_bdni_h_p_code_ile_ilot_value)
+WHERE t.vid = 4
+GROUP BY t.name;
+
 -- Mammifères
+
+-- Chargement de la liste des taxons
+DROP TABLE IF EXISTS picto_intepa_mamm_taxons;
+CREATE TABLE picto_intepa_mamm_taxons (taxon varchar(255), tid INT(10), spid INT(10));
+LOAD DATA LOCAL INFILE './requetes-pictos-atlas.liste-mamm.csv'
+    INTO TABLE picto_intepa_mamm_taxons
+    FIELDS TERMINATED BY ','
+    ENCLOSED BY '"'
+    LINES TERMINATED BY '\n'
+    IGNORE 1 LINES
+    (taxon);
+-- Traitement/nettoyage de la liste des taxons
+UPDATE picto_intepa_mamm_taxons SET taxon = trim(taxon);
+UPDATE picto_intepa_mamm_taxons l, drp_term_data t SET l.tid = t.tid, l.spid = t.tid
+    WHERE t.vid = 26 AND t.name = l.taxon;
+UPDATE picto_intepa_mamm_taxons l, drp_term_data t SET l.spid = t.tid
+    WHERE t.vid = 26 AND locate(' ', l.taxon, locate(' ', l.taxon) + 1) > 0 AND t.name = substring_index(l.taxon, ' ', 2);
+-- Création de la requête
+CREATE OR REPLACE VIEW picto_intepa_mamm AS
+SELECT
+    t.name AS code_ile,
+    CASE
+        count(distinct l.spid)
+        WHEN 0 THEN 1
+        WHEN 1 THEN 2
+        WHEN 2 THEN 2
+        WHEN 3 THEN 3
+        WHEN 4 THEN 3
+        WHEN 5 THEN 3
+        ELSE 4
+    END AS niveau
+FROM drp_content_type_bd_ni_mam_terrestres_present o JOIN
+     picto_intepa_mamm_taxons l ON (o.field_bdni_mt_p_taxon_value = l.tid) RIGHT JOIN
+     drp_term_data t ON (t.tid = o.field_bdni_mt_p_code_ile_ilot_value)
+WHERE t.vid = 4
+GROUP BY t.name;
 
 -- Chiroptères
 
@@ -263,11 +370,73 @@ FROM drp_term_data t
 WHERE t.vid = 4
 GROUP BY t.name;
 
--- Invertébrés
-
 -- Faune marine
 
+-- Chargement de la liste des taxons
+DROP TABLE IF EXISTS picto_intepa_faunem_taxons;
+CREATE TABLE picto_intepa_faunem_taxons (taxon varchar(255));
+LOAD DATA LOCAL INFILE './requetes-pictos-atlas.liste-faune-m.csv'
+    INTO TABLE picto_intepa_faunem_taxons
+    FIELDS TERMINATED BY ','
+    ENCLOSED BY '"'
+    LINES TERMINATED BY '\n'
+    IGNORE 1 LINES
+    (taxon);
+-- Traitement/nettoyage de la liste des taxons
+UPDATE picto_intepa_faunem_taxons SET taxon = trim(taxon);
+-- Création de la requête
+CREATE OR REPLACE VIEW picto_intepa_faunem AS
+SELECT
+    t.name AS code_ile,
+    CASE
+        count(distinct l.taxon)
+        WHEN 0 THEN 1
+        WHEN 1 THEN 2
+        WHEN 2 THEN 2
+        WHEN 3 THEN 3
+        WHEN 4 THEN 3
+        WHEN 5 THEN 3
+        ELSE 4
+    END AS niveau
+FROM drp_content_type_bd_ni_faune_flore_marine_present o JOIN
+     picto_intepa_faunem_taxons l ON (o.field_bdni_fm_p_taxon_worms_name = l.taxon) RIGHT JOIN
+     drp_term_data t ON (t.tid = o.field_bdni_fm_p_code_ile_ilot_value)
+WHERE t.vid = 4
+GROUP BY t.name;
+
 -- Flore marine
+
+-- Chargement de la liste des taxons
+DROP TABLE IF EXISTS picto_intepa_florem_taxons;
+CREATE TABLE picto_intepa_florem_taxons (taxon varchar(255));
+LOAD DATA LOCAL INFILE './requetes-pictos-atlas.liste-flore-m.csv'
+    INTO TABLE picto_intepa_florem_taxons
+    FIELDS TERMINATED BY ','
+    ENCLOSED BY '"'
+    LINES TERMINATED BY '\n'
+    IGNORE 1 LINES
+    (taxon);
+-- Traitement/nettoyage de la liste des taxons
+UPDATE picto_intepa_florem_taxons SET taxon = trim(taxon);
+-- Création de la requête
+CREATE OR REPLACE VIEW picto_intepa_florem AS
+SELECT
+    t.name AS code_ile,
+    CASE
+        count(distinct l.taxon)
+        WHEN 0 THEN 1
+        WHEN 1 THEN 2
+        WHEN 2 THEN 2
+        WHEN 3 THEN 3
+        WHEN 4 THEN 3
+        WHEN 5 THEN 3
+        ELSE 4
+    END AS niveau
+FROM drp_content_type_bd_ni_faune_flore_marine_present o JOIN
+     picto_intepa_florem_taxons l ON (o.field_bdni_fm_p_taxon_worms_name = l.taxon) RIGHT JOIN
+     drp_term_data t ON (t.tid = o.field_bdni_fm_p_code_ile_ilot_value)
+WHERE t.vid = 4
+GROUP BY t.name;
 
 -- Paysage (Terre)
 
@@ -340,9 +509,12 @@ GROUP BY t.name, o.field_bdi_o_desserte_de_l_ile_value, oua.field_bdi_o_usages_a
 -- Résumé
 
 CREATE OR REPLACE VIEW picto_intepa AS
-SELECT o.code_ile AS code_ile, 1 AS bota, o.niveau AS ornitho, 1 AS herpeto, 1 AS mamm, c.niveau AS chiro, 1 AS invert, 1 AS faunem, 1 AS florem, pt.niveau AS paysat, rm.niveau AS crem, rt.niveau AS cret
-FROM picto_intepa_ornitho o, picto_etaco_chiro c, picto_intepa_paysat pt, picto_intepa_crem rm, picto_intepa_cret rt
+SELECT o.code_ile AS code_ile, b.niveau AS bota, o.niveau AS ornitho, h.niveau AS herpeto, m.niveau AS mamm, c.niveau AS chiro, fa.niveau AS faunem, fl.niveau AS florem, pt.niveau AS paysat, rm.niveau AS crem, rt.niveau AS cret
+FROM picto_intepa_bota b, picto_intepa_ornitho o, picto_intepa_herpeto h, picto_intepa_mamm m, picto_intepa_chiro c, picto_intepa_faunem fa, picto_intepa_florem fl, picto_intepa_paysat pt, picto_intepa_crem rm, picto_intepa_cret rt
 WHERE o.code_ile = c.code_ile
+  AND o.code_ile = h.code_ile
+  AND o.code_ile = m.code_ile
+  AND o.code_ile = b.code_ile
   AND o.code_ile = pt.code_ile
   AND o.code_ile = rm.code_ile
   AND o.code_ile = rt.code_ile;
