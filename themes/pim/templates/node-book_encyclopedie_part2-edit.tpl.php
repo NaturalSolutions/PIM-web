@@ -82,6 +82,15 @@ global $base_url, $language, $node;
 	<?php print drupal_render($form['field_encyclop_part2_txt5']); ?>
 </div>
 
+<?php print drupal_render($form['field_encyclop_part2_h6']); ?>
+<?php print drupal_render($form['field_encyclop_part2_aut6']); ?>
+<div class='contenerRelatif'>
+	<span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span>
+	<span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span>
+	<span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span>
+	<?php print drupal_render($form['field_encyclop_part2_txt6']); ?>
+</div>
+
 <div class='contenerRelatif'><span class='btnShowDocs' title='Add a document'>B</span><?php print drupal_render($form['field_encyclop_biblio2']); ?></div>
 
 <div id='dialog2' title="Documents liés à l'Atlas" class='contenerRelatif'>
