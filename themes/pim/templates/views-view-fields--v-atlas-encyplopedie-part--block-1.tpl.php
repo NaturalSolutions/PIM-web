@@ -20,7 +20,7 @@
  */
 /***************************************************************************/
 /***************************************************************************/
-/*                VUE AFFICHE FIELDS OF ENCYCPLOPEDIE PART                 */
+/*                VUE AFFICHE FIELDS OF ENCYCPLOPEDIE PART0                */
 /*                                                                         */
 /***************************************************************************/
 /*********************************  ****************************************/
@@ -43,15 +43,39 @@
   <?php endif; ?>
 <?php endif;?>
 
-<?php if ($id == 'field_encylop_author_value') : ?>
+<?php if ($id == 'field_encyclop_part_h1_value') : ?>
   <?php if (!empty($field->content)): ?>
-    <?php $field_encylop_author_value = $field->content; ?>
+    <?php $field_encyclop_part_h1_value = $field->content; ?>
   <?php endif; ?>
 <?php endif;?>
 
-<?php if ($id == 'field_encylop_body_value') : ?>
+<?php if ($id == 'field_encyclop_part_aut1_value') : ?>
   <?php if (!empty($field->content)): ?>
-    <?php $field_encylop_body_value = $field->content; ?>
+    <?php $field_encyclop_part_aut1_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part_txt1_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part_txt1_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part_h2_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part_h2_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part_aut2_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part_aut2_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part_txt2_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part_txt2_value = $field->content; ?>
   <?php endif; ?>
 <?php endif;?>
 
@@ -68,17 +92,19 @@
 <?php if($language->language == 'fr'): ?>
 
   <a class='titleSSbassin' title='Editer' href="<?php echo $base_url; ?>/node/<?php echo $nid; ?>/edit"><h1><?php echo $title; ?></h1></a>
-  <br/>Rédigé par : <i><?php echo $field_encylop_author_value; ?></i>
+  
+  <br/>
+  <br/>
+  <br/>
+        
+    <h4><?php echo $field_encyclop_part_h1_value; ?></h4> <p><?php echo $field_encyclop_part_aut1_value; ?></p>
+    <?php echo $field_encyclop_part_txt1_value; ?>
 
-  <br/>
-  <br/>
-  <br/>
-
-      
-    <?php echo $field_encylop_body_value; ?>
+    <h4><?php echo $field_encyclop_part_h2_value; ?></h4> <p><?php echo $field_encyclop_part_aut2_value; ?></p>
+    <?php echo $field_encyclop_part_txt2_value; ?>
 
     <?php if($field_encyclop_biblio_value): ?>
-      <h3>Principales ressources bibliographiques :</h3>
+      <h4>Principales ressources bibliographiques :</h4>
       <?php echo $field_encyclop_biblio_value; ?>
     <?php endif; ?>
     
@@ -87,18 +113,19 @@
 
 
   <a class='titleSSbassin' title='Edit' href="<?php echo $base_url; ?>/node/<?php echo $nid; ?>/edit"><h1><?php echo $title; ?></h1></a>
-  <br/>Written by: <i><?php echo $field_encylop_author_value; ?></i>
-
-
+  
   <br/>
   <br/>
   <br/>
     
-    <?php echo $field_encylop_body_value; ?>
+    <h4><?php echo $field_encyclop_part_h1_value; ?></h4> <p><?php echo $field_encyclop_part_aut1_value; ?></p>
+    <?php echo $field_encyclop_part_txt1_value; ?>
 
-    
+    <h4><?php echo $field_encyclop_part_h2_value; ?></h4> <p><?php echo $field_encyclop_part_aut2_value; ?></p>
+    <?php echo $field_encyclop_part_txt2_value; ?>
+
     <?php if($field_encyclop_biblio_value): ?>
-      <h3>Principales ressources bibliographiques :</h3>
+      <h4>Principales ressources bibliographiques :</h4>
       <?php echo $field_encyclop_biblio_value; ?>
     <?php endif; ?>
     

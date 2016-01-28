@@ -127,6 +127,21 @@ function _zen_theme(&$existing, $type, $theme, $path) {
       'book_encyclopedie_part_node_form' => array(
          'arguments' => array('form' => NULL),
          'template' => 'templates/node-book_encyclopedie_part-edit'), 
+      'book_encyclopedie_part1_node_form' => array(
+         'arguments' => array('form' => NULL),
+         'template' => 'templates/node-book_encyclopedie_part1-edit'), 
+      'book_encyclopedie_part2_node_form' => array(
+         'arguments' => array('form' => NULL),
+         'template' => 'templates/node-book_encyclopedie_part2-edit'), 
+      'book_encyclopedie_part3_node_form' => array(
+         'arguments' => array('form' => NULL),
+         'template' => 'templates/node-book_encyclopedie_part3-edit'), 
+      'book_encyclopedie_part4_node_form' => array(
+         'arguments' => array('form' => NULL),
+         'template' => 'templates/node-book_encyclopedie_part4-edit'), 
+      'book_encyclopedie_part5_node_form' => array(
+         'arguments' => array('form' => NULL),
+         'template' => 'templates/node-book_encyclopedie_part5-edit') 
      
    ); 
 }

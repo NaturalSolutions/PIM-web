@@ -108,7 +108,7 @@
  */
 /***************************************************************************/
 /***************************************************************************/
-/*                        PAGE ENCYCLOPEDIE PART                           */
+/*                        PAGE ENCYCLOPEDIE PART1                          */
 /*                                                                         */
 /***************************************************************************/
 /*********************************  ****************************************/
@@ -276,7 +276,7 @@ global $user, $base_url, $language;
             <!-- Recuperation du l'iD de la node courante -->
             <?php $nid = $node->nid; ?>
             <!-- Envoie de l'ID dans la vue templaté -->
-            <?php print views_embed_view('v_atlas_encyplopedie_part', 'block_1', $nid); ?>
+            <?php print views_embed_view('v_atlas_encyplopedie_part', 'block_2', $nid); ?>
             
             <?php if($language->language == 'fr'): ?>
               <h2 class='titleCommentaire'>Commentaires</h2>

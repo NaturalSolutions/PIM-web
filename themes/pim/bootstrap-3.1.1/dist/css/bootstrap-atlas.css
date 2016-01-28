@@ -1114,6 +1114,11 @@ ul#secondary-menu li a {
 body.section-comment .node-type-book-sous-bassin,
 body.section-comment .node-type-book-ile,
 body.section-comment .node-type-book-encyclopedie-part,
+body.section-comment .node-type-book-encyclopedie-part1,
+body.section-comment .node-type-book-encyclopedie-part2,
+body.section-comment .node-type-book-encyclopedie-part3,
+body.section-comment .node-type-book-encyclopedie-part4,
+body.section-comment .node-type-book-encyclopedie-part5,
 body.section-comment .node-type-book-cluster {
   display: none;
 }
@@ -2861,7 +2866,22 @@ body.page-projet-atlas div.view-v-atlas-presentation div.views-row > a {
 /*********************************  ****************************************/
 body.node-type-book-encyclopedie-part li.ar,
 body.node-type-book-encyclopedie-part li.it,
-body.node-type-book-encyclopedie-part li.es {
+body.node-type-book-encyclopedie-part li.es,
+body.node-type-book-encyclopedie-part1 li.ar,
+body.node-type-book-encyclopedie-part1 li.it,
+body.node-type-book-encyclopedie-part1 li.es,
+body.node-type-book-encyclopedie-part2 li.ar,
+body.node-type-book-encyclopedie-part2 li.it,
+body.node-type-book-encyclopedie-part2 li.es,
+body.node-type-book-encyclopedie-part3 li.ar,
+body.node-type-book-encyclopedie-part3 li.it,
+body.node-type-book-encyclopedie-part3 li.es,
+body.node-type-book-encyclopedie-part4 li.ar,
+body.node-type-book-encyclopedie-part4 li.it,
+body.node-type-book-encyclopedie-part4 li.es,
+body.node-type-book-encyclopedie-part5 li.ar,
+body.node-type-book-encyclopedie-part5 li.it,
+body.node-type-book-encyclopedie-part5 li.es {
   visibility: hidden;
 }
 div.containerOfEncplodiePart img.imageMap {
@@ -3202,6 +3222,1211 @@ body.node-type-book-encyclopedie-part .ui-dialog-titlebar-close {
   color: transparent;
 }
 body.node-type-book-encyclopedie-part .ui-dialog-content {
+  width: 100% !important;
+  height: 100% !important;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                       EDITION ENCYCPLOPEDIE PART1                       */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.node-type-book-encyclopedie-part1.section-node-edit form{
+  position: relative;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit form#node-form > div > p:last-of-type {
+  margin-top: 11px;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit div#overlayButton{
+  height: 87px;
+  position: absolute;
+  bottom: 67px;
+  z-index: 999999;
+  width: 100%;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit span.redStar{
+  color: #c00;
+  padding-right: 2px;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit #edit-log-wrapper label > span {
+  color: #c00;
+  padding-left: 3px;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit #edit-log-wrapper label {
+  font-size: 14px;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit .tooltip  {
+    display:block;
+    position:fixed;
+    overflow:hidden;
+    background: #000;
+    color: #fff;
+    padding: 5px
+}
+body.node-type-book-encyclopedie-part1.section-node-edit table.infoEncyclop tr, body.node-type-book-encyclopedie-part1.section-node-edit table.infoEncyclop tr td, body.node-type-book-encyclopedie-part1.section-node-edit table.infoEncyclop tr th {
+  border: 1px solid #ccc;
+  padding: 10px;
+  padding-left: 15px;
+  font-size: small;
+  font-weight: normal;
+  text-align: center;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit table.infoEncyclop tr th, body.node-type-book-encyclopedie-part1.section-node-edit table.infoEncyclop tr th {
+  background-color: #f1f1f1;
+  width: 30%;
+  text-align: left;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit table.infoEncyclop{
+  margin-bottom: -35px;
+  width: 100%;
+  margin-top: 5px; 
+}
+body.node-type-book-encyclopedie-part1.section-node-edit table.cke_editor tbody{
+  display: block;
+  min-height: 550px;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit p.wordCpt {
+  position: absolute;
+  top: 121px;
+  right: 4px;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit div#field-ss-bassin-pic-of-map-items div.filefield-element div.description{
+  display: none;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit div#field-ss-bassin-pic-of-map-items tr.even div.description{
+  display: block;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit table.cke_editor tbody tr{
+  display: block;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit table.cke_editor tbody tr td{
+  display: block;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit iframe {
+  float: left;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit .addEncadre, body.node-type-book-encyclopedie-part1.section-node-edit .addSection, body.node-type-book-encyclopedie-part1.section-node-edit .addLegend {
+  display: none;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit table .cke_toolbar, body.node-type-book-encyclopedie-part1.section-node-edit table .cke_toolgroup {
+  width: 100%;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit div#field-ss-bassin-caract-env-items table,
+body.node-type-book-encyclopedie-part1.section-node-edit div#field-ss-bassin-pic-of-map-items table {
+  width: 100%;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit div.body-field-wrapper {
+  display: none;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit fieldset.collapsible.collapsed,
+body.node-type-book-encyclopedie-part1.section-node-edit div.wysiwyg-toggle-wrapper {
+  display: none;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit div#edit-title-wrapper {
+  margin-top: 55px;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit div#edit-field-encylop-intro-0-value-wrapper label, body.node-type-book-encyclopedie-part1.section-node-edit input#edit-preview {
+  display: none;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit div#edit-field-ss-bassin-status-conserv-0-value-wrapper label,
+body.node-type-book-encyclopedie-part1.section-node-edit div#edit-field-ss-bassin-strat-conserv-0-value-wrapper label {
+  visibility: hidden;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit .encadreStyle {
+  background-color: orange;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit .contenerRelatif {
+  position: relative;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit .addEncadre:hover,
+body.node-type-book-encyclopedie-part1.section-node-edit .addSection:hover,
+body.node-type-book-encyclopedie-part1.section-node-edit .btnShowDocs:hover,
+body.node-type-book-encyclopedie-part1.section-node-edit .addLegend:hover {
+  background-color: #B2BBD0;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit .addEncadre,
+body.node-type-book-encyclopedie-part1.section-node-edit .addSection,
+body.node-type-book-encyclopedie-part1.section-node-edit .btnShowDocs,
+body.node-type-book-encyclopedie-part1.section-node-edit .addLegend {
+  position: absolute;
+  top: 64px;
+  right: 35px;
+  font-weight: 700;
+  border: 1px solid #000;
+  padding: 1px 4px;
+  cursor: pointer;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit .addSection {
+  right: 12px;
+}
+body.node-type-book-encyclopedie-part1.section-node-edit .addEncadre {
+  right: 58px;
+}
+body.node-type-book-encyclopedie-part1 input#edit-submit {
+  background-color: #4779bf;
+  height: 85px;
+  background-size: 9%;
+  text-decoration: initial;
+  font-size: 2em;
+  width: 100%;
+  color: #fff!important;
+  text-align: -webkit-center;
+  text-align: -o-center;
+  text-align: center;
+  cursor: pointer;
+}
+body.node-type-book-encyclopedie-part1 input#edit-submit:hover {
+  background-color: #FF741C;
+}
+body.node-type-book-encyclopedie-part1 .book-navigation,
+body.node-type-book-encyclopedie-part1 .links.inline,
+body.node-type-book-encyclopedie-part1 fieldset.menu-item-form,
+body.node-type-book-encyclopedie-part1 div#edit-path-wrapper {
+  display: none;
+}
+body.node-type-book-encyclopedie-part1 fieldset.collapsible legend.collapse-processed,
+body.node-type-book-encyclopedie-part1 div#edit-revision-wrapper,
+body.node-type-book-encyclopedie-part1 div#edit-status-wrapper, body.node-type-book-encyclopedie-part1 #edit-sticky-wrapper , body.node-type-book-encyclopedie-part1 #edit-promote-wrapper {
+  display: none;
+}
+/*ref biblio*/
+body.node-type-book-encyclopedie-part1 .btnShowDocs {
+  right: 65px;
+}
+body.node-type-book-encyclopedie-part1 #dialog2{
+  display: none; 
+}
+body.node-type-book-encyclopedie-part1 div.ui-dialog.ui-draggable{
+  background-color: #7FB3CE;
+  padding: 1%;
+  height: auto !important;
+  resize: both; 
+    max-height: 500px;
+  overflow-y: scroll !important;
+}
+body.node-type-book-encyclopedie-part1 div.view-v-atlas-display-docs div.views-row{
+  border-bottom: 4px dashed #fff;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+body.node-type-book-encyclopedie-part1 div.view-v-atlas-display-docs div.views-row-last{
+  border-bottom: none;
+}
+body.node-type-book-encyclopedie-part1 span#ui-dialog-title-dialog2{
+  font-weight: bold;
+  cursor: move;
+  color: #fff;
+  font-size: 2.2em;
+}
+body.node-type-book-encyclopedie-part1 div.views-field-field-document-titre-value a{
+  text-decoration: none;
+  color: #fff;
+}
+body.node-type-book-encyclopedie-part1 div.views-field-field-document-titre-value a:hover{
+  text-decoration: underline;
+}
+body.node-type-book-encyclopedie-part1 div.views-field-field-document-auteur-value{
+  color: #fff;
+  font-style: italic;
+  font-size: 0.8em; 
+}
+body.node-type-book-encyclopedie-part1 div.views-field-field-document-titre-value{
+  padding-bottom: 10px;
+}
+body.node-type-book-encyclopedie-part1 div.views-field-field-document-annee-value{
+  display: none;
+}
+body.node-type-book-encyclopedie-part1 a.closeDialog2{
+  background: url('../../../images/Cancel.png') no-repeat 50% 50%;
+  background-size: 100%;
+  border: none;
+  position: absolute;
+  top: -16px;
+  left: -27px;
+}
+body.node-type-book-encyclopedie-part1 a.closeDialog2 span{
+  border: none;
+}
+body.node-type-book-encyclopedie-part1 div#dialog2 > a{
+  display: block;
+  width: 100%;
+  text-align: right;
+  color: #fff;
+  font-size: 0.8em;
+}
+body.node-type-book-encyclopedie-part1 div.views-field-field-document-auteur-value label.views-label-field-document-auteur-value{
+  float: left;
+  padding-right: 5px;
+}
+body.node-type-book-encyclopedie-part1 .ui-dialog-titlebar-close {
+  color: transparent;
+}
+body.node-type-book-encyclopedie-part1 .ui-dialog-content {
+  width: 100% !important;
+  height: 100% !important;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                       EDITION ENCYCPLOPEDIE PART2                       */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.node-type-book-encyclopedie-part2.section-node-edit form{
+  position: relative;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit form#node-form > div > p:last-of-type {
+  margin-top: 11px;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit div#overlayButton{
+  height: 87px;
+  position: absolute;
+  bottom: 67px;
+  z-index: 999999;
+  width: 100%;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit span.redStar{
+  color: #c00;
+  padding-right: 2px;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit #edit-log-wrapper label > span {
+  color: #c00;
+  padding-left: 3px;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit #edit-log-wrapper label {
+  font-size: 14px;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit .tooltip  {
+    display:block;
+    position:fixed;
+    overflow:hidden;
+    background: #000;
+    color: #fff;
+    padding: 5px
+}
+body.node-type-book-encyclopedie-part2.section-node-edit table.infoEncyclop tr, body.node-type-book-encyclopedie-part2.section-node-edit table.infoEncyclop tr td, body.node-type-book-encyclopedie-part2.section-node-edit table.infoEncyclop tr th {
+  border: 1px solid #ccc;
+  padding: 10px;
+  padding-left: 15px;
+  font-size: small;
+  font-weight: normal;
+  text-align: center;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit table.infoEncyclop tr th, body.node-type-book-encyclopedie-part2.section-node-edit table.infoEncyclop tr th {
+  background-color: #f1f1f1;
+  width: 30%;
+  text-align: left;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit table.infoEncyclop{
+  margin-bottom: -35px;
+  width: 100%;
+  margin-top: 5px; 
+}
+body.node-type-book-encyclopedie-part2.section-node-edit table.cke_editor tbody{
+  display: block;
+  min-height: 550px;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit p.wordCpt {
+  position: absolute;
+  top: 121px;
+  right: 4px;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit div#field-ss-bassin-pic-of-map-items div.filefield-element div.description{
+  display: none;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit div#field-ss-bassin-pic-of-map-items tr.even div.description{
+  display: block;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit table.cke_editor tbody tr{
+  display: block;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit table.cke_editor tbody tr td{
+  display: block;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit iframe {
+  float: left;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit .addEncadre, body.node-type-book-encyclopedie-part2.section-node-edit .addSection, body.node-type-book-encyclopedie-part2.section-node-edit .addLegend {
+  display: none;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit table .cke_toolbar, body.node-type-book-encyclopedie-part2.section-node-edit table .cke_toolgroup {
+  width: 100%;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit div#field-ss-bassin-caract-env-items table,
+body.node-type-book-encyclopedie-part2.section-node-edit div#field-ss-bassin-pic-of-map-items table {
+  width: 100%;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit div.body-field-wrapper {
+  display: none;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit fieldset.collapsible.collapsed,
+body.node-type-book-encyclopedie-part2.section-node-edit div.wysiwyg-toggle-wrapper {
+  display: none;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit div#edit-title-wrapper {
+  margin-top: 55px;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit div#edit-field-encylop-intro-0-value-wrapper label, body.node-type-book-encyclopedie-part2.section-node-edit input#edit-preview {
+  display: none;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit div#edit-field-ss-bassin-status-conserv-0-value-wrapper label,
+body.node-type-book-encyclopedie-part2.section-node-edit div#edit-field-ss-bassin-strat-conserv-0-value-wrapper label {
+  visibility: hidden;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit .encadreStyle {
+  background-color: orange;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit .contenerRelatif {
+  position: relative;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit .addEncadre:hover,
+body.node-type-book-encyclopedie-part2.section-node-edit .addSection:hover,
+body.node-type-book-encyclopedie-part2.section-node-edit .btnShowDocs:hover,
+body.node-type-book-encyclopedie-part2.section-node-edit .addLegend:hover {
+  background-color: #B2BBD0;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit .addEncadre,
+body.node-type-book-encyclopedie-part2.section-node-edit .addSection,
+body.node-type-book-encyclopedie-part2.section-node-edit .btnShowDocs,
+body.node-type-book-encyclopedie-part2.section-node-edit .addLegend {
+  position: absolute;
+  top: 64px;
+  right: 35px;
+  font-weight: 700;
+  border: 1px solid #000;
+  padding: 1px 4px;
+  cursor: pointer;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit .addSection {
+  right: 12px;
+}
+body.node-type-book-encyclopedie-part2.section-node-edit .addEncadre {
+  right: 58px;
+}
+body.node-type-book-encyclopedie-part2 input#edit-submit {
+  background-color: #4779bf;
+  height: 85px;
+  background-size: 9%;
+  text-decoration: initial;
+  font-size: 2em;
+  width: 100%;
+  color: #fff!important;
+  text-align: -webkit-center;
+  text-align: -o-center;
+  text-align: center;
+  cursor: pointer;
+}
+body.node-type-book-encyclopedie-part2 input#edit-submit:hover {
+  background-color: #FF741C;
+}
+body.node-type-book-encyclopedie-part2 .book-navigation,
+body.node-type-book-encyclopedie-part2 .links.inline,
+body.node-type-book-encyclopedie-part2 fieldset.menu-item-form,
+body.node-type-book-encyclopedie-part2 div#edit-path-wrapper {
+  display: none;
+}
+body.node-type-book-encyclopedie-part2 fieldset.collapsible legend.collapse-processed,
+body.node-type-book-encyclopedie-part2 div#edit-revision-wrapper,
+body.node-type-book-encyclopedie-part2 div#edit-status-wrapper, body.node-type-book-encyclopedie-part2 #edit-sticky-wrapper , body.node-type-book-encyclopedie-part2 #edit-promote-wrapper {
+  display: none;
+}
+/*ref biblio*/
+body.node-type-book-encyclopedie-part2 .btnShowDocs {
+  right: 65px;
+}
+body.node-type-book-encyclopedie-part2 #dialog2{
+  display: none; 
+}
+body.node-type-book-encyclopedie-part2 div.ui-dialog.ui-draggable{
+  background-color: #7FB3CE;
+  padding: 1%;
+  height: auto !important;
+  resize: both; 
+    max-height: 500px;
+  overflow-y: scroll !important;
+}
+body.node-type-book-encyclopedie-part2 div.view-v-atlas-display-docs div.views-row{
+  border-bottom: 4px dashed #fff;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+body.node-type-book-encyclopedie-part2 div.view-v-atlas-display-docs div.views-row-last{
+  border-bottom: none;
+}
+body.node-type-book-encyclopedie-part2 span#ui-dialog-title-dialog2{
+  font-weight: bold;
+  cursor: move;
+  color: #fff;
+  font-size: 2.2em;
+}
+body.node-type-book-encyclopedie-part2 div.views-field-field-document-titre-value a{
+  text-decoration: none;
+  color: #fff;
+}
+body.node-type-book-encyclopedie-part2 div.views-field-field-document-titre-value a:hover{
+  text-decoration: underline;
+}
+body.node-type-book-encyclopedie-part2 div.views-field-field-document-auteur-value{
+  color: #fff;
+  font-style: italic;
+  font-size: 0.8em; 
+}
+body.node-type-book-encyclopedie-part2 div.views-field-field-document-titre-value{
+  padding-bottom: 10px;
+}
+body.node-type-book-encyclopedie-part2 div.views-field-field-document-annee-value{
+  display: none;
+}
+body.node-type-book-encyclopedie-part2 a.closeDialog2{
+  background: url('../../../images/Cancel.png') no-repeat 50% 50%;
+  background-size: 100%;
+  border: none;
+  position: absolute;
+  top: -16px;
+  left: -27px;
+}
+body.node-type-book-encyclopedie-part2 a.closeDialog2 span{
+  border: none;
+}
+body.node-type-book-encyclopedie-part2 div#dialog2 > a{
+  display: block;
+  width: 100%;
+  text-align: right;
+  color: #fff;
+  font-size: 0.8em;
+}
+body.node-type-book-encyclopedie-part2 div.views-field-field-document-auteur-value label.views-label-field-document-auteur-value{
+  float: left;
+  padding-right: 5px;
+}
+body.node-type-book-encyclopedie-part2 .ui-dialog-titlebar-close {
+  color: transparent;
+}
+body.node-type-book-encyclopedie-part2 .ui-dialog-content {
+  width: 100% !important;
+  height: 100% !important;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                       EDITION ENCYCPLOPEDIE PART3                       */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.node-type-book-encyclopedie-part3.section-node-edit form{
+  position: relative;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit form#node-form > div > p:last-of-type {
+  margin-top: 11px;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit div#overlayButton{
+  height: 87px;
+  position: absolute;
+  bottom: 67px;
+  z-index: 999999;
+  width: 100%;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit span.redStar{
+  color: #c00;
+  padding-right: 2px;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit #edit-log-wrapper label > span {
+  color: #c00;
+  padding-left: 3px;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit #edit-log-wrapper label {
+  font-size: 14px;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit .tooltip  {
+    display:block;
+    position:fixed;
+    overflow:hidden;
+    background: #000;
+    color: #fff;
+    padding: 5px
+}
+body.node-type-book-encyclopedie-part3.section-node-edit table.infoEncyclop tr, body.node-type-book-encyclopedie-part3.section-node-edit table.infoEncyclop tr td, body.node-type-book-encyclopedie-part3.section-node-edit table.infoEncyclop tr th {
+  border: 1px solid #ccc;
+  padding: 10px;
+  padding-left: 15px;
+  font-size: small;
+  font-weight: normal;
+  text-align: center;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit table.infoEncyclop tr th, body.node-type-book-encyclopedie-part3.section-node-edit table.infoEncyclop tr th {
+  background-color: #f1f1f1;
+  width: 30%;
+  text-align: left;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit table.infoEncyclop{
+  margin-bottom: -35px;
+  width: 100%;
+  margin-top: 5px; 
+}
+body.node-type-book-encyclopedie-part3.section-node-edit table.cke_editor tbody{
+  display: block;
+  min-height: 550px;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit p.wordCpt {
+  position: absolute;
+  top: 121px;
+  right: 4px;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit div#field-ss-bassin-pic-of-map-items div.filefield-element div.description{
+  display: none;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit div#field-ss-bassin-pic-of-map-items tr.even div.description{
+  display: block;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit table.cke_editor tbody tr{
+  display: block;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit table.cke_editor tbody tr td{
+  display: block;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit iframe {
+  float: left;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit .addEncadre, body.node-type-book-encyclopedie-part3.section-node-edit .addSection, body.node-type-book-encyclopedie-part3.section-node-edit .addLegend {
+  display: none;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit table .cke_toolbar, body.node-type-book-encyclopedie-part3.section-node-edit table .cke_toolgroup {
+  width: 100%;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit div#field-ss-bassin-caract-env-items table,
+body.node-type-book-encyclopedie-part3.section-node-edit div#field-ss-bassin-pic-of-map-items table {
+  width: 100%;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit div.body-field-wrapper {
+  display: none;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit fieldset.collapsible.collapsed,
+body.node-type-book-encyclopedie-part3.section-node-edit div.wysiwyg-toggle-wrapper {
+  display: none;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit div#edit-title-wrapper {
+  margin-top: 55px;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit div#edit-field-encylop-intro-0-value-wrapper label, body.node-type-book-encyclopedie-part3.section-node-edit input#edit-preview {
+  display: none;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit div#edit-field-ss-bassin-status-conserv-0-value-wrapper label,
+body.node-type-book-encyclopedie-part3.section-node-edit div#edit-field-ss-bassin-strat-conserv-0-value-wrapper label {
+  visibility: hidden;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit .encadreStyle {
+  background-color: orange;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit .contenerRelatif {
+  position: relative;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit .addEncadre:hover,
+body.node-type-book-encyclopedie-part3.section-node-edit .addSection:hover,
+body.node-type-book-encyclopedie-part3.section-node-edit .btnShowDocs:hover,
+body.node-type-book-encyclopedie-part3.section-node-edit .addLegend:hover {
+  background-color: #B2BBD0;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit .addEncadre,
+body.node-type-book-encyclopedie-part3.section-node-edit .addSection,
+body.node-type-book-encyclopedie-part3.section-node-edit .btnShowDocs,
+body.node-type-book-encyclopedie-part3.section-node-edit .addLegend {
+  position: absolute;
+  top: 64px;
+  right: 35px;
+  font-weight: 700;
+  border: 1px solid #000;
+  padding: 1px 4px;
+  cursor: pointer;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit .addSection {
+  right: 12px;
+}
+body.node-type-book-encyclopedie-part3.section-node-edit .addEncadre {
+  right: 58px;
+}
+body.node-type-book-encyclopedie-part3 input#edit-submit {
+  background-color: #4779bf;
+  height: 85px;
+  background-size: 9%;
+  text-decoration: initial;
+  font-size: 2em;
+  width: 100%;
+  color: #fff!important;
+  text-align: -webkit-center;
+  text-align: -o-center;
+  text-align: center;
+  cursor: pointer;
+}
+body.node-type-book-encyclopedie-part3 input#edit-submit:hover {
+  background-color: #FF741C;
+}
+body.node-type-book-encyclopedie-part3 .book-navigation,
+body.node-type-book-encyclopedie-part3 .links.inline,
+body.node-type-book-encyclopedie-part3 fieldset.menu-item-form,
+body.node-type-book-encyclopedie-part3 div#edit-path-wrapper {
+  display: none;
+}
+body.node-type-book-encyclopedie-part3 fieldset.collapsible legend.collapse-processed,
+body.node-type-book-encyclopedie-part3 div#edit-revision-wrapper,
+body.node-type-book-encyclopedie-part3 div#edit-status-wrapper, body.node-type-book-encyclopedie-part3 #edit-sticky-wrapper , body.node-type-book-encyclopedie-part3 #edit-promote-wrapper {
+  display: none;
+}
+/*ref biblio*/
+body.node-type-book-encyclopedie-part3 .btnShowDocs {
+  right: 65px;
+}
+body.node-type-book-encyclopedie-part3 #dialog2{
+  display: none; 
+}
+body.node-type-book-encyclopedie-part3 div.ui-dialog.ui-draggable{
+  background-color: #7FB3CE;
+  padding: 1%;
+  height: auto !important;
+  resize: both; 
+    max-height: 500px;
+  overflow-y: scroll !important;
+}
+body.node-type-book-encyclopedie-part3 div.view-v-atlas-display-docs div.views-row{
+  border-bottom: 4px dashed #fff;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+body.node-type-book-encyclopedie-part3 div.view-v-atlas-display-docs div.views-row-last{
+  border-bottom: none;
+}
+body.node-type-book-encyclopedie-part3 span#ui-dialog-title-dialog2{
+  font-weight: bold;
+  cursor: move;
+  color: #fff;
+  font-size: 2.2em;
+}
+body.node-type-book-encyclopedie-part3 div.views-field-field-document-titre-value a{
+  text-decoration: none;
+  color: #fff;
+}
+body.node-type-book-encyclopedie-part3 div.views-field-field-document-titre-value a:hover{
+  text-decoration: underline;
+}
+body.node-type-book-encyclopedie-part3 div.views-field-field-document-auteur-value{
+  color: #fff;
+  font-style: italic;
+  font-size: 0.8em; 
+}
+body.node-type-book-encyclopedie-part3 div.views-field-field-document-titre-value{
+  padding-bottom: 10px;
+}
+body.node-type-book-encyclopedie-part3 div.views-field-field-document-annee-value{
+  display: none;
+}
+body.node-type-book-encyclopedie-part3 a.closeDialog2{
+  background: url('../../../images/Cancel.png') no-repeat 50% 50%;
+  background-size: 100%;
+  border: none;
+  position: absolute;
+  top: -16px;
+  left: -27px;
+}
+body.node-type-book-encyclopedie-part3 a.closeDialog2 span{
+  border: none;
+}
+body.node-type-book-encyclopedie-part3 div#dialog2 > a{
+  display: block;
+  width: 100%;
+  text-align: right;
+  color: #fff;
+  font-size: 0.8em;
+}
+body.node-type-book-encyclopedie-part3 div.views-field-field-document-auteur-value label.views-label-field-document-auteur-value{
+  float: left;
+  padding-right: 5px;
+}
+body.node-type-book-encyclopedie-part3 .ui-dialog-titlebar-close {
+  color: transparent;
+}
+body.node-type-book-encyclopedie-part3 .ui-dialog-content {
+  width: 100% !important;
+  height: 100% !important;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                       EDITION ENCYCPLOPEDIE PART4                       */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.node-type-book-encyclopedie-part4.section-node-edit form{
+  position: relative;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit form#node-form > div > p:last-of-type {
+  margin-top: 11px;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit div#overlayButton{
+  height: 87px;
+  position: absolute;
+  bottom: 67px;
+  z-index: 999999;
+  width: 100%;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit span.redStar{
+  color: #c00;
+  padding-right: 2px;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit #edit-log-wrapper label > span {
+  color: #c00;
+  padding-left: 3px;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit #edit-log-wrapper label {
+  font-size: 14px;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit .tooltip  {
+    display:block;
+    position:fixed;
+    overflow:hidden;
+    background: #000;
+    color: #fff;
+    padding: 5px
+}
+body.node-type-book-encyclopedie-part4.section-node-edit table.infoEncyclop tr, body.node-type-book-encyclopedie-part4.section-node-edit table.infoEncyclop tr td, body.node-type-book-encyclopedie-part4.section-node-edit table.infoEncyclop tr th {
+  border: 1px solid #ccc;
+  padding: 10px;
+  padding-left: 15px;
+  font-size: small;
+  font-weight: normal;
+  text-align: center;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit table.infoEncyclop tr th, body.node-type-book-encyclopedie-part4.section-node-edit table.infoEncyclop tr th {
+  background-color: #f1f1f1;
+  width: 30%;
+  text-align: left;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit table.infoEncyclop{
+  margin-bottom: -35px;
+  width: 100%;
+  margin-top: 5px; 
+}
+body.node-type-book-encyclopedie-part4.section-node-edit table.cke_editor tbody{
+  display: block;
+  min-height: 550px;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit p.wordCpt {
+  position: absolute;
+  top: 121px;
+  right: 4px;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit div#field-ss-bassin-pic-of-map-items div.filefield-element div.description{
+  display: none;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit div#field-ss-bassin-pic-of-map-items tr.even div.description{
+  display: block;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit table.cke_editor tbody tr{
+  display: block;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit table.cke_editor tbody tr td{
+  display: block;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit iframe {
+  float: left;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit .addEncadre, body.node-type-book-encyclopedie-part4.section-node-edit .addSection, body.node-type-book-encyclopedie-part4.section-node-edit .addLegend {
+  display: none;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit table .cke_toolbar, body.node-type-book-encyclopedie-part4.section-node-edit table .cke_toolgroup {
+  width: 100%;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit div#field-ss-bassin-caract-env-items table,
+body.node-type-book-encyclopedie-part4.section-node-edit div#field-ss-bassin-pic-of-map-items table {
+  width: 100%;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit div.body-field-wrapper {
+  display: none;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit fieldset.collapsible.collapsed,
+body.node-type-book-encyclopedie-part4.section-node-edit div.wysiwyg-toggle-wrapper {
+  display: none;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit div#edit-title-wrapper {
+  margin-top: 55px;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit div#edit-field-encylop-intro-0-value-wrapper label, body.node-type-book-encyclopedie-part4.section-node-edit input#edit-preview {
+  display: none;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit div#edit-field-ss-bassin-status-conserv-0-value-wrapper label,
+body.node-type-book-encyclopedie-part4.section-node-edit div#edit-field-ss-bassin-strat-conserv-0-value-wrapper label {
+  visibility: hidden;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit .encadreStyle {
+  background-color: orange;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit .contenerRelatif {
+  position: relative;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit .addEncadre:hover,
+body.node-type-book-encyclopedie-part4.section-node-edit .addSection:hover,
+body.node-type-book-encyclopedie-part4.section-node-edit .btnShowDocs:hover,
+body.node-type-book-encyclopedie-part4.section-node-edit .addLegend:hover {
+  background-color: #B2BBD0;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit .addEncadre,
+body.node-type-book-encyclopedie-part4.section-node-edit .addSection,
+body.node-type-book-encyclopedie-part4.section-node-edit .btnShowDocs,
+body.node-type-book-encyclopedie-part4.section-node-edit .addLegend {
+  position: absolute;
+  top: 64px;
+  right: 35px;
+  font-weight: 700;
+  border: 1px solid #000;
+  padding: 1px 4px;
+  cursor: pointer;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit .addSection {
+  right: 12px;
+}
+body.node-type-book-encyclopedie-part4.section-node-edit .addEncadre {
+  right: 58px;
+}
+body.node-type-book-encyclopedie-part4 input#edit-submit {
+  background-color: #4779bf;
+  height: 85px;
+  background-size: 9%;
+  text-decoration: initial;
+  font-size: 2em;
+  width: 100%;
+  color: #fff!important;
+  text-align: -webkit-center;
+  text-align: -o-center;
+  text-align: center;
+  cursor: pointer;
+}
+body.node-type-book-encyclopedie-part4 input#edit-submit:hover {
+  background-color: #FF741C;
+}
+body.node-type-book-encyclopedie-part4 .book-navigation,
+body.node-type-book-encyclopedie-part4 .links.inline,
+body.node-type-book-encyclopedie-part4 fieldset.menu-item-form,
+body.node-type-book-encyclopedie-part4 div#edit-path-wrapper {
+  display: none;
+}
+body.node-type-book-encyclopedie-part4 fieldset.collapsible legend.collapse-processed,
+body.node-type-book-encyclopedie-part4 div#edit-revision-wrapper,
+body.node-type-book-encyclopedie-part4 div#edit-status-wrapper, body.node-type-book-encyclopedie-part4 #edit-sticky-wrapper , body.node-type-book-encyclopedie-part4 #edit-promote-wrapper {
+  display: none;
+}
+/*ref biblio*/
+body.node-type-book-encyclopedie-part4 .btnShowDocs {
+  right: 65px;
+}
+body.node-type-book-encyclopedie-part4 #dialog2{
+  display: none; 
+}
+body.node-type-book-encyclopedie-part4 div.ui-dialog.ui-draggable{
+  background-color: #7FB3CE;
+  padding: 1%;
+  height: auto !important;
+  resize: both; 
+    max-height: 500px;
+  overflow-y: scroll !important;
+}
+body.node-type-book-encyclopedie-part4 div.view-v-atlas-display-docs div.views-row{
+  border-bottom: 4px dashed #fff;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+body.node-type-book-encyclopedie-part4 div.view-v-atlas-display-docs div.views-row-last{
+  border-bottom: none;
+}
+body.node-type-book-encyclopedie-part4 span#ui-dialog-title-dialog2{
+  font-weight: bold;
+  cursor: move;
+  color: #fff;
+  font-size: 2.2em;
+}
+body.node-type-book-encyclopedie-part4 div.views-field-field-document-titre-value a{
+  text-decoration: none;
+  color: #fff;
+}
+body.node-type-book-encyclopedie-part4 div.views-field-field-document-titre-value a:hover{
+  text-decoration: underline;
+}
+body.node-type-book-encyclopedie-part4 div.views-field-field-document-auteur-value{
+  color: #fff;
+  font-style: italic;
+  font-size: 0.8em; 
+}
+body.node-type-book-encyclopedie-part4 div.views-field-field-document-titre-value{
+  padding-bottom: 10px;
+}
+body.node-type-book-encyclopedie-part4 div.views-field-field-document-annee-value{
+  display: none;
+}
+body.node-type-book-encyclopedie-part4 a.closeDialog2{
+  background: url('../../../images/Cancel.png') no-repeat 50% 50%;
+  background-size: 100%;
+  border: none;
+  position: absolute;
+  top: -16px;
+  left: -27px;
+}
+body.node-type-book-encyclopedie-part4 a.closeDialog2 span{
+  border: none;
+}
+body.node-type-book-encyclopedie-part4 div#dialog2 > a{
+  display: block;
+  width: 100%;
+  text-align: right;
+  color: #fff;
+  font-size: 0.8em;
+}
+body.node-type-book-encyclopedie-part4 div.views-field-field-document-auteur-value label.views-label-field-document-auteur-value{
+  float: left;
+  padding-right: 5px;
+}
+body.node-type-book-encyclopedie-part4 .ui-dialog-titlebar-close {
+  color: transparent;
+}
+body.node-type-book-encyclopedie-part4 .ui-dialog-content {
+  width: 100% !important;
+  height: 100% !important;
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                       EDITION ENCYCPLOPEDIE PART5                       */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.node-type-book-encyclopedie-part5.section-node-edit form{
+  position: relative;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit form#node-form > div > p:last-of-type {
+  margin-top: 11px;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit div#overlayButton{
+  height: 87px;
+  position: absolute;
+  bottom: 67px;
+  z-index: 999999;
+  width: 100%;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit span.redStar{
+  color: #c00;
+  padding-right: 2px;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit #edit-log-wrapper label > span {
+  color: #c00;
+  padding-left: 3px;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit #edit-log-wrapper label {
+  font-size: 14px;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit .tooltip  {
+    display:block;
+    position:fixed;
+    overflow:hidden;
+    background: #000;
+    color: #fff;
+    padding: 5px
+}
+body.node-type-book-encyclopedie-part5.section-node-edit table.infoEncyclop tr, body.node-type-book-encyclopedie-part5.section-node-edit table.infoEncyclop tr td, body.node-type-book-encyclopedie-part5.section-node-edit table.infoEncyclop tr th {
+  border: 1px solid #ccc;
+  padding: 10px;
+  padding-left: 15px;
+  font-size: small;
+  font-weight: normal;
+  text-align: center;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit table.infoEncyclop tr th, body.node-type-book-encyclopedie-part5.section-node-edit table.infoEncyclop tr th {
+  background-color: #f1f1f1;
+  width: 30%;
+  text-align: left;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit table.infoEncyclop{
+  margin-bottom: -35px;
+  width: 100%;
+  margin-top: 5px; 
+}
+body.node-type-book-encyclopedie-part5.section-node-edit table.cke_editor tbody{
+  display: block;
+  min-height: 550px;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit p.wordCpt {
+  position: absolute;
+  top: 121px;
+  right: 4px;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit div#field-ss-bassin-pic-of-map-items div.filefield-element div.description{
+  display: none;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit div#field-ss-bassin-pic-of-map-items tr.even div.description{
+  display: block;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit table.cke_editor tbody tr{
+  display: block;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit table.cke_editor tbody tr td{
+  display: block;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit iframe {
+  float: left;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit .addEncadre, body.node-type-book-encyclopedie-part5.section-node-edit .addSection, body.node-type-book-encyclopedie-part5.section-node-edit .addLegend {
+  display: none;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit table .cke_toolbar, body.node-type-book-encyclopedie-part5.section-node-edit table .cke_toolgroup {
+  width: 100%;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit div#field-ss-bassin-caract-env-items table,
+body.node-type-book-encyclopedie-part5.section-node-edit div#field-ss-bassin-pic-of-map-items table {
+  width: 100%;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit div.body-field-wrapper {
+  display: none;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit fieldset.collapsible.collapsed,
+body.node-type-book-encyclopedie-part5.section-node-edit div.wysiwyg-toggle-wrapper {
+  display: none;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit div#edit-title-wrapper {
+  margin-top: 55px;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit div#edit-field-encylop-intro-0-value-wrapper label, body.node-type-book-encyclopedie-part5.section-node-edit input#edit-preview {
+  display: none;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit div#edit-field-ss-bassin-status-conserv-0-value-wrapper label,
+body.node-type-book-encyclopedie-part5.section-node-edit div#edit-field-ss-bassin-strat-conserv-0-value-wrapper label {
+  visibility: hidden;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit .encadreStyle {
+  background-color: orange;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit .contenerRelatif {
+  position: relative;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit .addEncadre:hover,
+body.node-type-book-encyclopedie-part5.section-node-edit .addSection:hover,
+body.node-type-book-encyclopedie-part5.section-node-edit .btnShowDocs:hover,
+body.node-type-book-encyclopedie-part5.section-node-edit .addLegend:hover {
+  background-color: #B2BBD0;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit .addEncadre,
+body.node-type-book-encyclopedie-part5.section-node-edit .addSection,
+body.node-type-book-encyclopedie-part5.section-node-edit .btnShowDocs,
+body.node-type-book-encyclopedie-part5.section-node-edit .addLegend {
+  position: absolute;
+  top: 64px;
+  right: 35px;
+  font-weight: 700;
+  border: 1px solid #000;
+  padding: 1px 4px;
+  cursor: pointer;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit .addSection {
+  right: 12px;
+}
+body.node-type-book-encyclopedie-part5.section-node-edit .addEncadre {
+  right: 58px;
+}
+body.node-type-book-encyclopedie-part5 input#edit-submit {
+  background-color: #4779bf;
+  height: 85px;
+  background-size: 9%;
+  text-decoration: initial;
+  font-size: 2em;
+  width: 100%;
+  color: #fff!important;
+  text-align: -webkit-center;
+  text-align: -o-center;
+  text-align: center;
+  cursor: pointer;
+}
+body.node-type-book-encyclopedie-part5 input#edit-submit:hover {
+  background-color: #FF741C;
+}
+body.node-type-book-encyclopedie-part5 .book-navigation,
+body.node-type-book-encyclopedie-part5 .links.inline,
+body.node-type-book-encyclopedie-part5 fieldset.menu-item-form,
+body.node-type-book-encyclopedie-part5 div#edit-path-wrapper {
+  display: none;
+}
+body.node-type-book-encyclopedie-part5 fieldset.collapsible legend.collapse-processed,
+body.node-type-book-encyclopedie-part5 div#edit-revision-wrapper,
+body.node-type-book-encyclopedie-part5 div#edit-status-wrapper, body.node-type-book-encyclopedie-part5 #edit-sticky-wrapper , body.node-type-book-encyclopedie-part5 #edit-promote-wrapper {
+  display: none;
+}
+/*ref biblio*/
+body.node-type-book-encyclopedie-part5 .btnShowDocs {
+  right: 65px;
+}
+body.node-type-book-encyclopedie-part5 #dialog2{
+  display: none; 
+}
+body.node-type-book-encyclopedie-part5 div.ui-dialog.ui-draggable{
+  background-color: #7FB3CE;
+  padding: 1%;
+  height: auto !important;
+  resize: both; 
+    max-height: 500px;
+  overflow-y: scroll !important;
+}
+body.node-type-book-encyclopedie-part5 div.view-v-atlas-display-docs div.views-row{
+  border-bottom: 4px dashed #fff;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+body.node-type-book-encyclopedie-part5 div.view-v-atlas-display-docs div.views-row-last{
+  border-bottom: none;
+}
+body.node-type-book-encyclopedie-part5 span#ui-dialog-title-dialog2{
+  font-weight: bold;
+  cursor: move;
+  color: #fff;
+  font-size: 2.2em;
+}
+body.node-type-book-encyclopedie-part5 div.views-field-field-document-titre-value a{
+  text-decoration: none;
+  color: #fff;
+}
+body.node-type-book-encyclopedie-part5 div.views-field-field-document-titre-value a:hover{
+  text-decoration: underline;
+}
+body.node-type-book-encyclopedie-part5 div.views-field-field-document-auteur-value{
+  color: #fff;
+  font-style: italic;
+  font-size: 0.8em; 
+}
+body.node-type-book-encyclopedie-part5 div.views-field-field-document-titre-value{
+  padding-bottom: 10px;
+}
+body.node-type-book-encyclopedie-part5 div.views-field-field-document-annee-value{
+  display: none;
+}
+body.node-type-book-encyclopedie-part5 a.closeDialog2{
+  background: url('../../../images/Cancel.png') no-repeat 50% 50%;
+  background-size: 100%;
+  border: none;
+  position: absolute;
+  top: -16px;
+  left: -27px;
+}
+body.node-type-book-encyclopedie-part5 a.closeDialog2 span{
+  border: none;
+}
+body.node-type-book-encyclopedie-part5 div#dialog2 > a{
+  display: block;
+  width: 100%;
+  text-align: right;
+  color: #fff;
+  font-size: 0.8em;
+}
+body.node-type-book-encyclopedie-part5 div.views-field-field-document-auteur-value label.views-label-field-document-auteur-value{
+  float: left;
+  padding-right: 5px;
+}
+body.node-type-book-encyclopedie-part5 .ui-dialog-titlebar-close {
+  color: transparent;
+}
+body.node-type-book-encyclopedie-part5 .ui-dialog-content {
   width: 100% !important;
   height: 100% !important;
 }

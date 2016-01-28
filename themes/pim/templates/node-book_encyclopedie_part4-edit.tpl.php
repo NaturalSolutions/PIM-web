@@ -1,7 +1,7 @@
 <?php 
 /***************************************************************************/
 /***************************************************************************/
-/*                 PAGE EDITION ENCYCLOPEDIE PART                          */
+/*                 PAGE EDITION ENCYCLOPEDIE PART4                         */
 /*                                                                         */
 /***************************************************************************/
 /*********************************  ****************************************/
@@ -37,25 +37,61 @@ global $base_url, $language, $node;
 
 <?php print drupal_render($form['title']); ?>
 
-<?php print drupal_render($form['field_encyclop_part_h1']); ?>
-<?php print drupal_render($form['field_encyclop_part_aut1']); ?>
+<?php print drupal_render($form['field_encyclop_part4_h1']); ?>
+<?php print drupal_render($form['field_encyclop_part4_aut1']); ?>
 <div class='contenerRelatif'>
 	<span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span>
 	<span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span>
 	<span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span>
-	<?php print drupal_render($form['field_encyclop_part_txt1']); ?>
+	<?php print drupal_render($form['field_encyclop_part4_txt1']); ?>
 </div>
 
-<?php print drupal_render($form['field_encyclop_part_h2']); ?>
-<?php print drupal_render($form['field_encyclop_part_aut2']); ?>
+<?php print drupal_render($form['field_encyclop_part4_h2']); ?>
+<?php print drupal_render($form['field_encyclop_part4_aut2']); ?>
 <div class='contenerRelatif'>
 	<span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span>
 	<span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span>
 	<span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span>
-	<?php print drupal_render($form['field_encyclop_part_txt2']); ?>
+	<?php print drupal_render($form['field_encyclop_part4_txt2']); ?>
 </div>
 
-<div class='contenerRelatif'><span class='btnShowDocs' title='Add a document'>B</span><?php print drupal_render($form['field_encyclop_biblio']); ?></div>
+<?php print drupal_render($form['field_encyclop_part4_h3']); ?>
+<?php print drupal_render($form['field_encyclop_part4_aut3']); ?>
+<div class='contenerRelatif'>
+	<span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span>
+	<span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span>
+	<span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span>
+	<?php print drupal_render($form['field_encyclop_part4_txt3']); ?>
+</div>
+
+<?php print drupal_render($form['field_encyclop_part4_h4']); ?>
+<?php print drupal_render($form['field_encyclop_part4_aut4']); ?>
+<div class='contenerRelatif'>
+	<span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span>
+	<span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span>
+	<span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span>
+	<?php print drupal_render($form['field_encyclop_part4_txt4']); ?>
+</div>
+
+<?php print drupal_render($form['field_encyclop_part4_h5']); ?>
+<?php print drupal_render($form['field_encyclop_part4_aut5']); ?>
+<div class='contenerRelatif'>
+	<span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span>
+	<span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span>
+	<span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span>
+	<?php print drupal_render($form['field_encyclop_part4_txt5']); ?>
+</div>
+
+<?php print drupal_render($form['field_encyclop_part4_h6']); ?>
+<?php print drupal_render($form['field_encyclop_part4_aut6']); ?>
+<div class='contenerRelatif'>
+	<span class='addLegend' title='<?php if($language->language == 'fr') echo 'Ajouter une légende'; else echo 'Add a legend'; ?>'>L</span>
+	<span class='addEncadre' title='<?php if($language->language == 'fr') echo 'Ajouter un encadré'; else echo 'Add a block'; ?>'><?php if($language->language == 'fr') echo 'E'; else echo 'B'; ?></span>
+	<span class='addSection' title='<?php if($language->language == 'fr') echo 'Ajouter un chapitre'; else echo 'Add a chapter'; ?>'>C</span>
+	<?php print drupal_render($form['field_encyclop_part4_txt6']); ?>
+</div>
+
+<div class='contenerRelatif'><span class='btnShowDocs' title='Add a document'>B</span><?php print drupal_render($form['field_encyclop_biblio4']); ?></div>
 
 <div id='dialog2' title="Documents liés à l'Atlas" class='contenerRelatif'>
 	<a href='<?php echo $base_url; ?>/Bibliotheque' target='_blank'><?php if($language->language == 'fr') echo 'Voir tous les documents'; else echo 'See all documents'; ?></a>
