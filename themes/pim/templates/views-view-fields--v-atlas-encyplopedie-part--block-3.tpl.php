@@ -133,6 +133,24 @@
   <?php endif; ?>
 <?php endif;?>
 
+<?php if ($id == 'field_encyclop_part2_h6_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part2_h6_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part2_aut6_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part2_aut6_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part2_txt6_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part2_txt6_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
 <?php if ($id == 'field_encyclop_biblio2_value') : ?>
   <?php if (!empty($field->content)): ?>
     <?php $field_encyclop_biblio2_value = $field->content; ?>
@@ -166,6 +184,9 @@
     <h4><?php echo $field_encyclop_part2_h5_value; ?></h4> <p><?php echo $field_encyclop_part2_aut5_value; ?></p>
     <?php echo $field_encyclop_part2_txt5_value; ?>
 
+    <h4><?php echo $field_encyclop_part2_h6_value; ?></h4> <p><?php echo $field_encyclop_part2_aut6_value; ?></p>
+    <?php echo $field_encyclop_part2_txt6_value; ?>
+
     <?php if($field_encyclop_biblio_value): ?>
       <h4>Principales ressources bibliographiques :</h4>
       <?php echo $field_encyclop_biblio2_value; ?>
@@ -195,6 +216,9 @@
 
     <h4><?php echo $field_encyclop_part2_h5_value; ?></h4> <p><?php echo $field_encyclop_part2_aut5_value; ?></p>
     <?php echo $field_encyclop_part2_txt5_value; ?>
+
+    <h4><?php echo $field_encyclop_part2_h6_value; ?></h4> <p><?php echo $field_encyclop_part2_aut6_value; ?></p>
+    <?php echo $field_encyclop_part2_txt6_value; ?>
 
     <?php if($field_encyclop_biblio_value): ?>
       <h4>Principales ressources bibliographiques :</h4>

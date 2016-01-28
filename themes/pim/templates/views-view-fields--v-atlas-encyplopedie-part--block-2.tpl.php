@@ -117,19 +117,19 @@
 
 <?php if ($id == 'field_encyclop_part1_h5_value') : ?>
   <?php if (!empty($field->content)): ?>
-    <?php $field_encyclop_part1_h4_value = $field->content; ?>
+    <?php $field_encyclop_part1_h5_value = $field->content; ?>
   <?php endif; ?>
 <?php endif;?>
 
 <?php if ($id == 'field_encyclop_part1_aut5_value') : ?>
   <?php if (!empty($field->content)): ?>
-    <?php $field_encyclop_part1_aut4_value = $field->content; ?>
+    <?php $field_encyclop_part1_aut5_value = $field->content; ?>
   <?php endif; ?>
 <?php endif;?>
 
 <?php if ($id == 'field_encyclop_part1_txt5_value') : ?>
   <?php if (!empty($field->content)): ?>
-    <?php $field_encyclop_part1_txt4_value = $field->content; ?>
+    <?php $field_encyclop_part1_txt5_value = $field->content; ?>
   <?php endif; ?>
 <?php endif;?>
 
