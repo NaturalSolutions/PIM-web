@@ -2427,9 +2427,14 @@ div.containerOfCluster div.views-row-last div.containerOfOneComment {
 /*********************************  ****************************************/
 /*********************************  ****************************************/
 div.containerOfMyIsland div.onePicto{
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
+  font-size: 10px;
   display: inline-block;
+  border: 1px dotted #c1c1c1;
+}
+div.containerOfMyIsland div.onePicto.expert{
+  vertical-align: top;
 }
 div.containerOfMyIsland div.onePicto > img{
   width: 100%;

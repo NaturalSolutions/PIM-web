@@ -415,20 +415,29 @@
   -- ----------------------------------------------------------------------------*/
 
   //Botanique
-  //...
-
+  $sql = "select b.niveau from picto_intepa_bota b where code_ile = '".$termName."'";           
+  $result = db_query($sql);
+  $result = db_fetch_array($result); 
+  $etatBota = $result['niveau'] - 1;
+  
   //Ornithologie
   $sql = "select b.niveau from picto_intepa_ornitho b where code_ile = '".$termName."'";           
   $result = db_query($sql);
   $result = db_fetch_array($result); 
-  $etatOrni = $result['niveau'] - 1;
+  $etatOrni = $result['niveau'] - 1;  
   
   //Herpétologie
-  //...
-
+  $sql = "select b.niveau from picto_intepa_herpeto b where code_ile = '".$termName."'";           
+  $result = db_query($sql);
+  $result = db_fetch_array($result); 
+  $etatHerpe = $result['niveau'] - 1;
+  
   //Mammifères
-  //...
-
+  $sql = "select b.niveau from picto_intepa_mamm b where code_ile = '".$termName."'";           
+  $result = db_query($sql);
+  $result = db_fetch_array($result); 
+  $etatMami = $result['niveau'] - 1;
+  
   //Chiroptères
   $sql = "select b.niveau from picto_intepa_chiro b where code_ile = '".$termName."'";           
   $result = db_query($sql);
@@ -436,16 +445,22 @@
   $etatChiro = $result['niveau'] - 1;
   
   //Invertébré
-  //...
+  //Valeur rentré par l'expert
 
   //Faune marine
-  //...
-
+  $sql = "select b.niveau from picto_intepa_faunem b where code_ile = '".$termName."'";           
+  $result = db_query($sql);
+  $result = db_fetch_array($result); 
+  $etatFauneM = $result['niveau'] - 1;
+  
   //Flore marine
-  //...
-
+  $sql = "select b.niveau from picto_intepa_florem b where code_ile = '".$termName."'";           
+  $result = db_query($sql);
+  $result = db_fetch_array($result); 
+  $etatFloreM = $result['niveau'] - 1;
+  
   //Grotte et fond rocheux
-  //...
+  //Valeur rentré par l'expert
 
   //Paysage (Terre)
   $sql = "select b.niveau from picto_intepa_paysat b where code_ile = '".$termName."'";           
@@ -458,13 +473,22 @@
   $result = db_query($sql);
   $result = db_fetch_array($result); 
   $etatEcoMer = $result['niveau'] - 1;
-  
+    
   //Création de richesse économique (Terre)
   $sql = "select b.niveau from picto_intepa_cret b where code_ile = '".$termName."'";           
   $result = db_query($sql);
   $result = db_fetch_array($result); 
   $etatEcoTerre = $result['niveau'] - 1;
   
+  //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Botanique et Interêt des patrimoines
+  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Botanique';";  
+  $result = db_query($sql);
+  if (!$result) die('Invalid query: ' . mysql_error());
+  else while (  $row  =  db_fetch_array($result) ) {
+    $rowsBota[$row['field_book_value_picto_interet_value']] = $row['filepath']; 
+    $titleBota = $row['title'];
+  }
+
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Ornithologie et Interêt des patrimoines
   $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Ornithologie';";  
   $result = db_query($sql);
@@ -472,6 +496,24 @@
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsOrni[$row['field_book_value_picto_interet_value']] = $row['filepath']; 
     $titleOrni = $row['title'];
+  }
+
+  //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Herpétologie et Interêt des patrimoines
+  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Herpétologie';";  
+  $result = db_query($sql);
+  if (!$result) die('Invalid query: ' . mysql_error());
+  else while (  $row  =  db_fetch_array($result) ) {
+    $rowsHerpeto[$row['field_book_value_picto_interet_value']] = $row['filepath']; 
+    $titleHerpeto = $row['title'];
+  }
+
+  //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Mammifères et Interêt des patrimoines
+  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Mammifères';";  
+  $result = db_query($sql);
+  if (!$result) die('Invalid query: ' . mysql_error());
+  else while (  $row  =  db_fetch_array($result) ) {
+    $rowsMami[$row['field_book_value_picto_interet_value']] = $row['filepath']; 
+    $titleMami = $row['title'];
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Chiroptere et Interêt des patrimoines
@@ -482,6 +524,28 @@
     $rowsChiro[$row['field_book_value_picto_interet_value']] = $row['filepath']; 
     $titleChiro = $row['title'];
   }
+
+  /*intervention manuel de l'expert pour invertébré*/
+
+  //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Faune marine et Interêt des patrimoines
+  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Faune marine';";
+  $result = db_query($sql);
+  if (!$result) die('Invalid query: ' . mysql_error());
+  else while (  $row  =  db_fetch_array($result) ) {
+    $rowsFauneM[$row['field_book_value_picto_interet_value']] = $row['filepath']; 
+    $titleFauneM = $row['title'];
+  }
+
+  //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Flore marine et Interêt des patrimoines
+  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Flore marine';";
+  $result = db_query($sql);
+  if (!$result) die('Invalid query: ' . mysql_error());
+  else while (  $row  =  db_fetch_array($result) ) {
+    $rowsFloreM[$row['field_book_value_picto_interet_value']] = $row['filepath']; 
+    $titleFloreM = $row['title'];
+  }
+
+  /*intervention manuel de l'expert pour Grotte et fond rocheux*/
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Paysage / Terre et Interêt des patrimoines
   $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Paysager / Terre';";
@@ -511,16 +575,28 @@
   }
 
   //On stock le bon picto en fonction de la valeur
+  $urlOfPictoBotaToDisplay = $rowsBota[$etatBota];
   $urlOfPictoOrniToDisplay = $rowsOrni[$etatOrni];
+  $urlOfPictoHerpetoToDisplay = $rowsHerpeto[$etatHerpe];
+  $urlOfPictoMamitoToDisplay = $rowsMami[$etatMami];
   $urlOfPictoChiroToDisplay = $rowsChiro[$etatChiro];
+  $urlOfPictoFauneMToDisplay = $rowsFauneM[$etatFauneM];
+  $urlOfPictoFloreMToDisplay = $rowsFloreM[$etatFloreM];
   $urlOfPictoPaysTToDisplay = $rowsPaysT[$etatPaysT];
   $urlOfPictoEcoMerToDisplay = $rowsEcoMer[$etatEcoMer];
   $urlOfPictoEcoTerreToDisplay = $rowsEcoTerre[$etatEcoTerre];
   ?>
   
   <div class="lesPicto">
+    <?php if($urlOfPictoBotaToDisplay != ''): ?><div class="onePicto bota <?php echo $etatBota; ?>"><?php echo "<img src='$base_url/$urlOfPictoBotaToDisplay' alt='$titleBota' title='$titleBota' />"; ?></div><?php endif; ?>    
     <?php if($urlOfPictoOrniToDisplay != ''): ?><div class="onePicto orni <?php echo $etatOrni; ?>"><?php echo "<img src='$base_url/$urlOfPictoOrniToDisplay' alt='$titleOrni' title='$titleOrni' />"; ?></div><?php endif; ?>    
+    <?php if($urlOfPictoHerpetoToDisplay != ''): ?><div class="onePicto herpe <?php echo $etatHerpe; ?>"><?php echo "<img src='$base_url/$urlOfPictoHerpetoToDisplay' alt='$titleHerpeto' title='$titleHerpeto' />"; ?></div><?php endif; ?>    
+    <?php if($urlOfPictoMamitoToDisplay != ''): ?><div class="onePicto mami <?php echo $etatMami; ?>"><?php echo "<img src='$base_url/$urlOfPictoMamitoToDisplay' alt='$titleMami' title='$titleMami' />"; ?></div><?php endif; ?>    
     <?php if($urlOfPictoChiroToDisplay != ''): ?><div class="onePicto chiro <?php echo $etatChiro; ?>"><?php echo "<img src='$base_url/$urlOfPictoChiroToDisplay' alt='$titleChiro' title='$titleChiro' />"; ?></div><?php endif; ?>    
+    <div class="onePicto expert" title='Invertébré'><i>Expert</i><!-- <img src='' alt='' title='' /> --></div>
+    <?php if($urlOfPictoFauneMToDisplay != ''): ?><div class="onePicto fauneM <?php echo $etatFauneM; ?>"><?php echo "<img src='$base_url/$urlOfPictoFauneMToDisplay' alt='$titleFauneM' title='$titleFauneM' />"; ?></div><?php endif; ?>    
+    <?php if($urlOfPictoFloreMToDisplay != ''): ?><div class="onePicto floreM <?php echo $etatFloreM; ?>"><?php echo "<img src='$base_url/$urlOfPictoFloreMToDisplay' alt='$titleFloreM' title='$titleFloreM' />"; ?></div><?php endif; ?>    
+    <div class="onePicto expert" title='Grotte et fond rocheux'><i>Expert</i><!-- <img src='' alt='' title='' /> --></div>
     <?php if($urlOfPictoPaysTToDisplay != ''): ?><div class="onePicto paysTM <?php echo $etatPaysT; ?>"><?php echo "<img src='$base_url/$urlOfPictoPaysTToDisplay' alt='$titlePaysT' title='$titlePaysT' />"; ?></div><?php endif; ?>    
     <?php if($urlOfPictoEcoMerToDisplay != ''): ?><div class="onePicto ecoM <?php echo $etatEcoMer; ?>"><?php echo "<img src='$base_url/$urlOfPictoEcoMerToDisplay' alt='$titleCreaRichessEcoMer' title='$titleCreaRichessEcoMer' />"; ?></div><?php endif; ?>    
     <?php if($urlOfPictoEcoTerreToDisplay != ''): ?><div class="onePicto ecoT <?php echo $etatEcoTerre; ?>"><?php echo "<img src='$base_url/$urlOfPictoEcoTerreToDisplay' alt='$titleCreaRichessEcoTerre' title='$titleCreaRichessEcoTerre' />"; ?></div><?php endif; ?>    
