@@ -2441,9 +2441,8 @@ div.containerOfMyIsland div.onePicto > img{
   height: 100%;
 }
 div.containerOfMyIsland div.lesPicto{
-  width:  100%;
   width: 100%;
-  padding-bottom: 10px;
+  padding-bottom: 24px;
 }
 div.containerOfMyIsland div.responsableBloc {
   text-align: right;
