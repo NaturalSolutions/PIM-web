@@ -31,4 +31,13 @@ $( document ).ready(function() {
 		else var bar = "<div class='tabs'><ul class='tabs primary clearfix'><li><a href='"+pathBase+"/en/node/"+nodeID+"'><span class='tab'>View</span></a></li><li><a href='"+pathBase+"/en/node/"+nodeID+"/edit'><span class='tab'>Edit</span></a></li><li class='tab'><a href='"+pathBase+"/en/node/"+nodeID+"/revisions' class='tab'><span class='tab'>Revisions</span></a></li><li class='active'><a href='"+pathBase+"/en/comment/reply/"+nodeID+"#comment-form' class='active'><span class='tab'>Comment</span></a></li></div>";
 
 		$('body.section-comment #content .section').before(bar);
+
+		//To redirect after add node picto
+		if(nodeID == 'book-les-pictos-interet' || nodeID == 'book-les-pictos-connaissances' || nodeID == 'book-les-pictos-pression' || nodeID == 'book-les-pictos-gestions') {
+			
+			var action = $('form').attr('action');	        	      
+	      action = action+'?destination=projet-atlas/tous-les-pictogrammes';
+	      $('form').attr('action', action);
+			
+		}
 });

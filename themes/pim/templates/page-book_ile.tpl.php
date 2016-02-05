@@ -277,6 +277,7 @@ global $user, $base_url, $language;
 
             //Envoie de l'ID dans la vue templaté pour afficher le contenu
             print views_embed_view('v_atlas_book_ile', 'block_1', $node->nid); 
+
             ?>
             
             <?php if($language->language == 'fr'): ?>
@@ -372,9 +373,180 @@ global $user, $base_url, $language;
 
   jQuery( document ).ready(function() {
 
+    var eventOnPopup = function(){
+
+
+      //Close popup
+      jQuery('.croix').click(function(event) {
+        /* Act on the event */        
+        thePopup = jQuery(this).parent();
+         thePopup.hide();        
+      });
+
+      //Print nid
+      jQuery('#edit-title-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('#edit-title-1-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('#edit-title-2-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('#edit-title-3-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('#edit-title-4-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('#edit-title-5-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('#edit-title-6-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('#edit-title-7-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('#edit-title-8-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('#edit-title-9-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('#edit-title-10-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('#edit-title-11-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('#edit-title-12-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('#edit-title-13-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('#edit-title-14-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+
+      //Event on clic isRemarquable
+      /*jQuery('form .form-item:nth-of-type(6) input').click(function(event) {          
+        var com = jQuery('form .form-item:nth-of-type(7)');
+        if(jQuery(this).attr('checked')) com.show();
+        else com.hide();
+      });*/   
+
+      //Foce show if data in comment 
+      /*if(jQuery('form .form-item:nth-of-type(7) textarea').val() != '') jQuery('form .form-item:nth-of-type(7)').show();*/
+      /*if(jQuery('#edit-field-book-star-com-picto-0-value-1').text() != '') jQuery('#edit-field-book-star-com-picto-0-value-1-wrapper').show();
+      if(jQuery('#edit-field-book-star-com-picto-0-value-2').text() != '') jQuery('#edit-field-book-star-com-picto-0-value-2-wrapper').show();
+      if(jQuery('#edit-field-book-star-com-picto-0-value-3').text() != '') jQuery('#edit-field-book-star-com-picto-0-value-3-wrapper').show();*/
+
+      //Alter label select value
+      jQuery('#edit-field-book-value-picto-surcharge-value-2 option').each(function(index, el) {        
+        var myOption = jQuery(this);
+        if(index == 0) myOption.text('--'); else if(index == 1) myOption.text('Pas de connaissance'); else if(index == 2) myOption.text('Fond sableux'); else if(index == 3) myOption.text('Fond rocheux'); else if(index == 4) myOption.text('Grottes');
+      });      
+      jQuery('#edit-field-book-value-picto-surcharge-value-10 option').each(function(index, el) {        
+        var myOption = jQuery(this); if(index == 0) myOption.text('--'); else if(index == 1) myOption.text('Pas de connaissance'); else if(index == 2) myOption.text('Faible'); else if(index == 3) myOption.text('Moyen'); else if(index == 4) myOption.text('Fort');
+      });      
+      jQuery('#edit-field-book-value-picto-surcharge-value-11 option').each(function(index, el) {        
+        var myOption = jQuery(this); if(index == 0) myOption.text('--'); else if(index == 1) myOption.text('Pas de connaissance'); else if(index == 2) myOption.text('Faible'); else if(index == 3) myOption.text('Moyen'); else if(index == 4) myOption.text('Fort');
+      });
+      jQuery('#edit-field-book-value-picto-surcharge-value-12 option').each(function(index, el) {        
+        var myOption = jQuery(this); if(index == 0) myOption.text('--'); else if(index == 1) myOption.text('Pas de connaissance'); else if(index == 2) myOption.text('Faible'); else if(index == 3) myOption.text('Moyen'); else if(index == 4) myOption.text('Fort');
+      });
+      
+    } //fin eventOnPopup
+
+
     //Pour cacher le tableau recap du status de protection nationnal si aucunes valeurs
     if(jQuery('table.tableRecapIleN tbody tr').length > 1) jQuery('table.tableRecapIleN').show();
     if(jQuery('table.tableRecapIleA tbody tr').length > 1) jQuery('table.tableRecapIleA').show();
+
+    /*jQuery('body.node-type-book-ile').click(function(event) {
+       Act on the event 
+      if(jQuery('.popup').length > 0 ) jQuery('.popup').hide();
+
+    });*/
+
+    jQuery('div.containerOfMyIsland div.lesPicto div.onePicto').click(function(event) {
+      /* Stuff to do when the mouse enters the element */
+      var thePictoClique = jQuery(this);
+      var popup = thePictoClique.find('div.popup');
+      var editBtn = popup.find('a.editPicto');
+      var visuBtn = popup.find('a.visuPicto');
+      var visuZone = popup.find('.visu');
+      var editZone = popup.find('.edit');
+
+
+
+      //Changer destination      
+      if(thePictoClique.hasClass('expert')){ // Si form edit
+
+        var action = popup.find('form#node-form').attr('action');
+        var currentUrl = window.location.pathname.split('/');
+        
+        if(action.split('?destination').length == 1){
+
+          currentUrl = currentUrl[currentUrl.length - 1];
+          action = action+'?destination=ile-atlas/'+currentUrl;
+          popup.find('form#node-form').attr('action', action);
+          
+        }
+
+      }
+
+      //Print genre et type in popup
+      popup.find('.form-item').each(function(index, el) {        
+        if(index == 17) jQuery(this).find('input').val(thePictoClique.attr('class').split(' ')[2]);
+        if(index == 18) jQuery(this).find('input').val(thePictoClique.attr('class').split(' ')[3]);
+      });      
+
+      //Toggle show / hide the popup
+      thePictoClique.parent('.lesPicto').find('.onePicto').each(function(index, el) {      
+        
+        var currentPopup = jQuery(this).find('.popup');
+        //Cacher l'ancienne popup lors du hover
+        if( currentPopup.length > 0 ) currentPopup.hide();        
+        
+      });      
+      
+      //On clikc Edit button in the popup
+      editBtn.click(function(event) {        
+        //disable link <a>
+        event.preventDefault();        
+        //toggle blocks
+        editBtn.addClass('select');
+        visuBtn.removeClass('select');
+        visuZone.hide();
+        editZone.show();        
+
+      });
+
+      visuBtn.click(function(event) {        
+        //disable link <a>
+        event.preventDefault();
+        //toggle blocks
+        visuBtn.addClass('select');
+        editBtn.removeClass('select');
+        visuZone.show();
+        editZone.hide();
+
+      });
+
+      //Show Popup
+      if(event.target.className != 'croix') popup.show();
+
+
+    });
+
+    eventOnPopup();
+
+    //Remplissage des infos pour pictos surchargés
+
+    //Pour chaque barettes de pictos affichés
+/*    jQuery('.lesPicto').each(function(index, el) {
+
+      //Get genre
+      var genrePicto = jQuery(this).attr('class');
+      genrePicto = genrePicto.split(' ')[1];
+      console.log('genrePicto', genrePicto);      
+
+      //Pour chaque picto qu'il contient
+      jQuery(this).find('.onePicto').each(function(index, el) {      
+        
+        //Get type et valeur
+        var allClassesOfOnePicto = jQuery(this).attr('class');
+        var typePicto = allClassesOfOnePicto.split(' ')[1];
+        var valuePicto = allClassesOfOnePicto.split(' ')[2];
+        
+        console.log('index', index);
+        console.log('valuePicto', valuePicto);      
+        console.log('valuePicto', valuePicto);      
+
+        //Check s'il y a une image pour l'index courant
+        //jQuery(this).find('.popup .edit .myFormOnVisu #field-ile-pictosurcharge-items table tr:nth-child('+index+')')
+
+
+        //print dans les champs cibles
+        //jQuery(this).find('.popup .edit .myFormOnVisu')
+        
+      });
+
+    });   */ 
+
 
   });
 </script>
