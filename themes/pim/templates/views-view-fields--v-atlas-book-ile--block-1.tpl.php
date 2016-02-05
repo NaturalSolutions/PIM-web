@@ -446,7 +446,7 @@
     */
     //Get nid of picto_surcharge to load the correct node edit form -> FloreM
     $idPictoMSurcharge = '';
-    $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN pimPierre.drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'floreM' AND s.field_book_genre_picto_surcharge_value = 'connaissance';";  
+    $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'floreM' AND s.field_book_genre_picto_surcharge_value = 'connaissance';";  
     $result = db_query($sql);  
     if (!$result) die('Invalid query: ' . mysql_error());
     else while (  $row  =  db_fetch_array($result) ) {
@@ -475,7 +475,7 @@
     */
     //Get nid of picto_surcharge to load the correct node edit form -> FloreM
     $idPictoMSurcharge = '';
-    $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN pimPierre.drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'grotte' AND s.field_book_genre_picto_surcharge_value = 'connaissance';";  
+    $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'grotte' AND s.field_book_genre_picto_surcharge_value = 'connaissance';";  
     $result = db_query($sql);  
     if (!$result) die('Invalid query: ' . mysql_error());
     else while (  $row  =  db_fetch_array($result) ) {
@@ -992,7 +992,7 @@
   */
   //Get nid of picto_surcharge to load the correct node edit form -> bota
   $idPictoMSurcharge = '';
-  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN pimPierre.drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'botanique' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
+  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'botanique' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
   $result = db_query($sql);  
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
@@ -1010,7 +1010,7 @@
   */
   //Get nid of picto_surcharge to load the correct node edit form -> orni
   $idPictoMSurcharge = '';
-  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN pimPierre.drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'ornithologie' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
+  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'ornithologie' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
   $result = db_query($sql);  
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
@@ -1028,7 +1028,7 @@
   */
   //Get nid of picto_surcharge to load the correct node edit form -> orni
   $idPictoMSurcharge = '';
-  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN pimPierre.drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'herpetologie' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
+  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'herpetologie' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
   $result = db_query($sql);  
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
@@ -1046,7 +1046,7 @@
   */
   //Get nid of picto_surcharge to load the correct node edit form -> orni
   $idPictoMSurcharge = '';
-  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN pimPierre.drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'mamifere' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
+  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'mamifere' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
   $result = db_query($sql);  
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
@@ -1064,7 +1064,7 @@
   */
   //Get nid of picto_surcharge to load the correct node edit form -> orni
   $idPictoMSurcharge = '';
-  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN pimPierre.drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'chiroptere' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
+  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'chiroptere' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
   $result = db_query($sql);  
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
@@ -1082,7 +1082,7 @@
   */
   //Get nid of picto_surcharge to load the correct node edit form -> orni
   $idPictoMSurcharge = '';
-  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN pimPierre.drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'invert' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
+  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'invert' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
   $result = db_query($sql);  
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
@@ -1110,7 +1110,7 @@
   */
   //Get nid of picto_surcharge to load the correct node edit form -> orni
   $idPictoMSurcharge = '';
-  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN pimPierre.drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'fauneM' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
+  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'fauneM' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
   $result = db_query($sql);  
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
@@ -1128,7 +1128,7 @@
   */
   //Get nid of picto_surcharge to load the correct node edit form -> orni
   $idPictoMSurcharge = '';
-  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN pimPierre.drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'floreM' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
+  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'floreM' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
   $result = db_query($sql);  
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
@@ -1146,7 +1146,7 @@
   */
   //Get nid of picto_surcharge to load the correct node edit form -> orni
   $idPictoMSurcharge = '';
-  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN pimPierre.drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'grotte' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
+  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'grotte' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
   $result = db_query($sql);  
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
@@ -1175,7 +1175,7 @@
   */
   //Get nid of picto_surcharge to load the correct node edit form -> orni
   $idPictoMSurcharge = '';
-  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN pimPierre.drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'paysT' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
+  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'paysT' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
   $result = db_query($sql);  
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
@@ -1203,7 +1203,7 @@
   */
   //Get nid of picto_surcharge to load the correct node edit form -> orni
   $idPictoMSurcharge = '';
-  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN pimPierre.drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'paysM' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
+  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'paysM' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
   $result = db_query($sql);  
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
@@ -1231,7 +1231,7 @@
   
   //Get nid of picto_surcharge to load the correct node edit form -> orni
   $idPictoMSurcharge = '';
-  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN pimPierre.drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'ecoM' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
+  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'ecoM' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
   $result = db_query($sql);  
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
@@ -1249,7 +1249,7 @@
   
   //Get nid of picto_surcharge to load the correct node edit form -> orni
   $idPictoMSurcharge = '';
-  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN pimPierre.drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'ecoT' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
+  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'ecoT' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
   $result = db_query($sql);  
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
