@@ -37,6 +37,7 @@
     case "v-search-protection":
     case "v-search-islands-archipelagos":
     case "v-search-inventory":
+    case "v-search-inventory-anon":
         if (($classes_array[4] == "view-display-id-page_1") || ($classes_array[4] == "view-display-id-page_2")) {
          $v_search['v-search-islands-archipelagos'] = array(
             'name' => 'Island',
@@ -46,9 +47,9 @@
             'name' => 'Manager',
             'page' => 'search_manager',
           );
-         $v_search['v-search-inventory'] = array(
+         $v_search['v-search-inventory'.($user->uid === 0 ? '-anon' : '')] = array(
             'name' => 'Taxon',
-            'page' => 'search_taxon',
+            'page' => 'search_taxon'.($user->uid === 0 ? '2' : ''),
           );
          $v_search['v-search-protection'] = array(
             'name' => 'Protection',

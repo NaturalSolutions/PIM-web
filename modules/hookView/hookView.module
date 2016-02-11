@@ -9,6 +9,7 @@ function hookView_views_pre_execute(&$view) {
       case "v_search_protection":
       case "v_search_islands_archipelagos":
       case "v_search_inventory":
+      case "v_search_inventory_anon":
         if (empty($view->exposed_input)) {
 		  		$view->set_items_per_page(1); 
       	}

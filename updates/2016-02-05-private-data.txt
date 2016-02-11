@@ -1,0 +1,26 @@
+Dans l'administration des droits des utilisateurs : /admin/user/permissions
+- sélectionner "--All roles" et le module "views" puis cliquer sur "filter permissions"
+- s'assurer que "Accéder à toutes les vues n'est coché pour personne sauf Mega Admin
+
+Dupliquer la vue v_search_inventory en cliquant sur "cloner" en haut à droite de :
+/admin/build/views/edit/v_search_inventory.
+Mettre "v_search_inventory_anon" pour le nom de la nouvelle vue.
+Cliquer sur "Suivant" en bas puis "Enregistrer" en bas de l'écran suivant.
+
+Modifiez la vue v_search_inventory en allant à /admin/build/views/edit/v_search_inventory.
+Dans "Paramètres de base", cliquez sur "Accès: libre", choisissez de restreindre
+l'accès par rôle puis cliquer sur"Mettre à jour". Enfin, cliquez sur la roue à
+côté de "Accès : pas de rôle(s) sélectionné(s)", cochez "authenticated user" et
+cliquez sur "Mettre à jour".
+Enfin, enregistrer les modifications.
+
+Modifiez la vue v_search_inventory_anon en allant à
+/admin/build/views/edit/v_search_inventory_anon.
+Dans "Paramètres de base", cliquez sur "+" à côté de "Filtres", cochez
+"v_sys_bd_ni_all_common_content_with_thesaurus : Public" et cliquez sur
+"Ajouter", choisissez l'opérateur "N'est pas égal à", mettez la valeur "Donnée
+privée" puis cliquez sur "Mettre à jour"
+Sélectionner l'onglet "search_inventory" puis cliquez sur "Aucun(e)" à côté de
+"Chemin" dans les "Paramètres de la page" et mettez la valeur
+"search_data/search_taxon2" et cliquez sur "Mettre à jour".
+Enfin, enregistrer les modifications.

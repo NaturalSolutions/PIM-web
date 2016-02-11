@@ -225,6 +225,7 @@ function pim_preprocess_views_view(&$vars) {
       case "v_search_protection":
       case "v_search_islands_archipelagos":
       case "v_search_inventory":
+      case "v_search_inventory_anon":
          if ( ! preg_match("/^block/i",$vars['view']->current_display )) {
              if (empty($vars['view']->exposed_input)) {
               $vars['rows'] = array();

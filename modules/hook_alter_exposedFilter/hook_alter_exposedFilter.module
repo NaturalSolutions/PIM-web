@@ -60,7 +60,7 @@ function hook_alter_exposedFilter_form_alter(&$form, $form_state, $form_id) {
     //Change le nom du bouton Appliquer
     $form['submit']['#value'] = t('Search');
 	}
-	elseif ($form['#id'] ==  'views-exposed-form-v-search-inventory-page-1') {
+	elseif (($form['#id'] ==  'views-exposed-form-v-search-inventory-page-1') || ($form['#id'] ==  'views-exposed-form-v-search-inventory-anon-page-1')) {
 		if (empty($form_state['view']->exposed_input['compartiment'])) { 
 			$form_state['input']['compartiment'] = array(); 
 		} 
