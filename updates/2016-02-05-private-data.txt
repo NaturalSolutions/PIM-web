@@ -1,3 +1,9 @@
+Allez dans le table wizard : /admin/content/tw/analyze/10/.
+Cliquez sur "Reanalyze" en haut de la page.
+Cochez "PK" pour le champs "nid" si ce n'est pas déjà fait.
+Cliquez sur "Submit changes".
+Faire de même pour /admin/content/tw/analyze/5/.
+
 Dans l'administration des droits des utilisateurs : /admin/user/permissions
 - sélectionner "--All roles" et le module "views" puis cliquer sur "filter permissions"
 - s'assurer que "Accéder à toutes les vues n'est coché pour personne sauf Mega Admin
@@ -20,7 +26,7 @@ Dans "Paramètres de base", cliquez sur "+" à côté de "Filtres", cochez
 "v_sys_bd_ni_all_common_content_with_thesaurus : Public" et cliquez sur
 "Ajouter", choisissez l'opérateur "N'est pas égal à", mettez la valeur "Donnée
 privée" puis cliquez sur "Mettre à jour"
-Sélectionner l'onglet "search_inventory" puis cliquez sur "Aucun(e)" à côté de
-"Chemin" dans les "Paramètres de la page" et mettez la valeur
-"search_data/search_taxon2" et cliquez sur "Mettre à jour".
+Sélectionner l'onglet "search_inventory" puis cliquez sur
+"search_data/search_taxon" à côté de "Chemin" dans les "Paramètres de la page"
+et mettez la valeur "search_data/search_taxon2" et cliquez sur "Mettre à jour".
 Enfin, enregistrer les modifications.
