@@ -761,6 +761,8 @@ function pim_fi_menu_primary_local_tasks($level = 0, $node_type = NULL,
 
 function pim_fi_node_access($op, $tid, $node_type) {
 	global $user;
+	global $pim_fi_nodetype2url;
+	pim_fi_set_nodetype2url();
 	
 	$account = $user;
 	
@@ -793,6 +795,17 @@ function pim_fi_node_access($op, $tid, $node_type) {
 	if (empty($node)) {
 		return FALSE;
 	}
+
+    if ($op == 'view' && substr($node_type, 0, 5) === 'bd_ni') {
+        $bd_prefix = $pim_fi_nodetype2url[$node_type]['bd_prefix'];
+        $fname = 'field_'.$bd_prefix.'_donnees_publique';
+        $field = $node->$fname;
+        if ($account->uid === 0 && $field[0]['value'] === 'Donnée privée') {
+            return FALSE;
+        }
+        return TRUE;
+    }
+
 	//@modif 
 	//new shortcut: should be enough and quicker 
 	// than complete drupal code with grant handling

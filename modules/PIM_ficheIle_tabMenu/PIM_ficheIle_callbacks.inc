@@ -610,8 +610,12 @@ function pim_fi_view_bd_n_callback ($tid, $op = 'view', $node_type) {
     $args[] = $db_names['ile_term_field'];
     $args[] = $list_islands;
   }
-  
-  $query = sprintf($sql, $args[0],$args[1],$args[2],$args[3],$args[4],$args[5],$args[6],$args[7],$args[8],$args[9],$args[10],$args[11],$args[12]);
+
+  // Masquer les données privées pour les utilisateurs anonymes
+  if ($user->uid === 0) {
+    $sql .= " AND p.%s != 'Donnée privée'";
+    $args[] = $db_names['public_data'];
+  }
 
   $sql_count = "select count(*) from (".$sql.")T";  
   $sql .= tablesort_sql($head);

@@ -146,7 +146,8 @@ function PIM_ficheIle_tabMenu_menu() {
         'title' => t('View'),
         'page callback' => 'pim_fi_node_bd_n_callback',
         'page arguments' => array($tid=1,$op=4, $node_type, $nid=3),
-        'access arguments' => array('access content'),
+        'access callback' => 'pim_fi_node_access',
+        'access arguments' => array('view', 3, $node_type),
         'type' => MENU_LOCAL_TASK,
         'weight' => -15,
       );
