@@ -424,7 +424,7 @@ global $user, $base_url, $language;
 
             myOption = jQuery(this);
   
-            if(index == 0) myOption.text('--'); 
+            if(index == 0) myOption.text('--');
             else if(index == 1) myOption.text('Pas de connaissance'); 
             else if(index == 2) myOption.text('Faible'); 
             else if(index == 3) myOption.text('Moyen'); 
