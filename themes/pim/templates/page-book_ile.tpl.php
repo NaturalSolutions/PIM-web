@@ -373,17 +373,23 @@ global $user, $base_url, $language;
 
   jQuery( document ).ready(function() {
 
-    var eventOnPopup = function(){
+    //Pour cacher le tableau recap du status de protection nationnal si aucunes valeurs
+    if(jQuery('table.tableRecapIleN tbody tr').length > 1) jQuery('table.tableRecapIleN').show();
+    if(jQuery('table.tableRecapIleA tbody tr').length > 1) jQuery('table.tableRecapIleA').show();
+    
+    // Tout ce qu'il se passe autour des pictogrammes et clic dessus avec l'ouverture de la popup
+    var gestionPopup = function(){
 
 
-      //Close popup
+      //Event de fermeture de la popup
       jQuery('.croix').click(function(event) {
         /* Act on the event */        
         thePopup = jQuery(this).parent();
          thePopup.hide();        
       });
 
-      //Print nid
+
+      //Print nid in fields
       jQuery('#edit-title-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
       jQuery('#edit-title-1-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
       jQuery('#edit-title-2-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
@@ -400,19 +406,6 @@ global $user, $base_url, $language;
       jQuery('#edit-title-13-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
       jQuery('#edit-title-14-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
 
-      //Event on clic isRemarquable
-      /*jQuery('form .form-item:nth-of-type(6) input').click(function(event) {          
-        var com = jQuery('form .form-item:nth-of-type(7)');
-        if(jQuery(this).attr('checked')) com.show();
-        else com.hide();
-      });*/   
-
-      //Foce show if data in comment 
-      /*if(jQuery('form .form-item:nth-of-type(7) textarea').val() != '') jQuery('form .form-item:nth-of-type(7)').show();*/
-      /*if(jQuery('#edit-field-book-star-com-picto-0-value-1').text() != '') jQuery('#edit-field-book-star-com-picto-0-value-1-wrapper').show();
-      if(jQuery('#edit-field-book-star-com-picto-0-value-2').text() != '') jQuery('#edit-field-book-star-com-picto-0-value-2-wrapper').show();
-      if(jQuery('#edit-field-book-star-com-picto-0-value-3').text() != '') jQuery('#edit-field-book-star-com-picto-0-value-3-wrapper').show();*/
-
       //Alter label select value
       jQuery('#edit-field-book-value-picto-surcharge-value-2 option').each(function(index, el) {        
         var myOption = jQuery(this);
@@ -428,20 +421,8 @@ global $user, $base_url, $language;
         var myOption = jQuery(this); if(index == 0) myOption.text('--'); else if(index == 1) myOption.text('Pas de connaissance'); else if(index == 2) myOption.text('Faible'); else if(index == 3) myOption.text('Moyen'); else if(index == 4) myOption.text('Fort');
       });
       
-    } //fin eventOnPopup
 
-
-    //Pour cacher le tableau recap du status de protection nationnal si aucunes valeurs
-    if(jQuery('table.tableRecapIleN tbody tr').length > 1) jQuery('table.tableRecapIleN').show();
-    if(jQuery('table.tableRecapIleA tbody tr').length > 1) jQuery('table.tableRecapIleA').show();
-
-    /*jQuery('body.node-type-book-ile').click(function(event) {
-       Act on the event 
-      if(jQuery('.popup').length > 0 ) jQuery('.popup').hide();
-
-    });*/
-
-    jQuery('div.containerOfMyIsland div.lesPicto div.onePicto').click(function(event) {
+      jQuery('div.containerOfMyIsland div.lesPicto div.onePicto').click(function(event) {
       /* Stuff to do when the mouse enters the element */
       var thePictoClique = jQuery(this);
       var popup = thePictoClique.find('div.popup');
@@ -510,42 +491,14 @@ global $user, $base_url, $language;
       if(event.target.className != 'croix') popup.show();
 
 
-    });
+      });// fin click
+  
+    } //fin gestionPopup
+    
 
-    eventOnPopup();
-
-    //Remplissage des infos pour pictos surchargés
-
-    //Pour chaque barettes de pictos affichés
-/*    jQuery('.lesPicto').each(function(index, el) {
-
-      //Get genre
-      var genrePicto = jQuery(this).attr('class');
-      genrePicto = genrePicto.split(' ')[1];
-      console.log('genrePicto', genrePicto);      
-
-      //Pour chaque picto qu'il contient
-      jQuery(this).find('.onePicto').each(function(index, el) {      
-        
-        //Get type et valeur
-        var allClassesOfOnePicto = jQuery(this).attr('class');
-        var typePicto = allClassesOfOnePicto.split(' ')[1];
-        var valuePicto = allClassesOfOnePicto.split(' ')[2];
-        
-        console.log('index', index);
-        console.log('valuePicto', valuePicto);      
-        console.log('valuePicto', valuePicto);      
-
-        //Check s'il y a une image pour l'index courant
-        //jQuery(this).find('.popup .edit .myFormOnVisu #field-ile-pictosurcharge-items table tr:nth-child('+index+')')
-
-
-        //print dans les champs cibles
-        //jQuery(this).find('.popup .edit .myFormOnVisu')
-        
-      });
-
-    });   */ 
+    var current_url = "<?php echo $current_url; ?>";    
+    //Si on est pas en mode edition alors execute script gestion popup
+    if(current_url != 'edit') gestionPopup();    
 
 
   });
