@@ -389,36 +389,51 @@ global $user, $base_url, $language;
       });
 
 
-      //Print nid in fields
-      jQuery('#edit-title-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('#edit-title-1-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('#edit-title-2-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('#edit-title-3-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('#edit-title-4-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('#edit-title-5-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('#edit-title-6-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('#edit-title-7-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('#edit-title-8-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('#edit-title-9-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('#edit-title-10-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('#edit-title-11-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('#edit-title-12-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('#edit-title-13-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('#edit-title-14-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-
+      //Print nid in fields      
+      jQuery('.onePicto.expert.connaissance.fauneM #edit-title-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");            
+      jQuery('.onePicto.expert.connaissance.floreM #edit-title-1-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('.onePicto.expert.connaissance.grotte #edit-title-2-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('.onePicto.expert.interet.botanique #edit-title-3-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('.onePicto.expert.interet.ornithologie #edit-title-4-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('.onePicto.expert.interet.herpetologie #edit-title-5-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('.onePicto.expert.interet.mamifere #edit-title-6-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('.onePicto.expert.interet.chiroptere #edit-title-7-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('.onePicto.expert.interet.invert #edit-title-8-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('.onePicto.expert.interet.fauneM #edit-title-9-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('.onePicto.expert.interet.floreM #edit-title-10-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('.onePicto.expert.interet.grotte #edit-title-11-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('.onePicto.expert.interet.paysT #edit-title-12-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('.onePicto.expert.interet.paysM #edit-title-13-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      
       //Alter label select value
-      jQuery('#edit-field-book-value-picto-surcharge-value-2 option').each(function(index, el) {        
+      jQuery('.onePicto.expert.connaissance.grotte #edit-field-book-value-picto-surcharge-value-2 option').each(function(index, el) {        
         var myOption = jQuery(this);
         if(index == 0) myOption.text('--'); else if(index == 1) myOption.text('Pas de connaissance'); else if(index == 2) myOption.text('Fond sableux'); else if(index == 3) myOption.text('Fond rocheux'); else if(index == 4) myOption.text('Grottes');
-      });      
-      jQuery('#edit-field-book-value-picto-surcharge-value-10 option').each(function(index, el) {        
-        var myOption = jQuery(this); if(index == 0) myOption.text('--'); else if(index == 1) myOption.text('Pas de connaissance'); else if(index == 2) myOption.text('Faible'); else if(index == 3) myOption.text('Moyen'); else if(index == 4) myOption.text('Fort');
-      });      
-      jQuery('#edit-field-book-value-picto-surcharge-value-11 option').each(function(index, el) {        
-        var myOption = jQuery(this); if(index == 0) myOption.text('--'); else if(index == 1) myOption.text('Pas de connaissance'); else if(index == 2) myOption.text('Faible'); else if(index == 3) myOption.text('Moyen'); else if(index == 4) myOption.text('Fort');
-      });
-      jQuery('#edit-field-book-value-picto-surcharge-value-12 option').each(function(index, el) {        
-        var myOption = jQuery(this); if(index == 0) myOption.text('--'); else if(index == 1) myOption.text('Pas de connaissance'); else if(index == 2) myOption.text('Faible'); else if(index == 3) myOption.text('Moyen'); else if(index == 4) myOption.text('Fort');
+      });     
+
+      //Alter label on interet select
+      jQuery('.onePicto.expert.interet').each(function(posPicto, el) {
+
+        var onePicto = jQuery(this);
+
+        onePicto.find('.popup .edit .myFormOnVisu .standard > .form-item').each(function(posFormItem, elem) {
+          
+          var myItem = jQuery(this);
+
+          if(posFormItem == 3) myItem.find('select option').each(function(index, el) {
+
+            myOption = jQuery(this);
+  
+            if(index == 0) myOption.text('--'); 
+            else if(index == 1) myOption.text('Pas de connaissance'); 
+            else if(index == 2) myOption.text('Faible'); 
+            else if(index == 3) myOption.text('Moyen'); 
+            else if(index == 4) myOption.text('Fort');
+            
+          });
+
+        });
+
       });
       
 
