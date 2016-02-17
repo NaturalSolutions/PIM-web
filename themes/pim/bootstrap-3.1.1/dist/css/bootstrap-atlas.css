@@ -2548,6 +2548,7 @@ div.containerOfMyIsland div.lesPicto div.popup{
   height: auto;
   font-size: 14px;
   border: 1px solid #4472c4;
+  z-index: 99;
 }
 div.containerOfMyIsland div.lesPicto div.popup.green{
   border: 1px solid #78e285;
