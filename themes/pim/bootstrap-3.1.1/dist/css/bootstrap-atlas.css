@@ -712,7 +712,7 @@ body.node-type-book-sous-bassin.section-node-edit form#node-form > div > p:last-
 body.node-type-book-sous-bassin.section-node-edit div#overlayButton{
   height: 90px;
   position: absolute;
-  bottom: 65px;
+  bottom: 87px;
   z-index: 999999;
   width: 100%; 
 }

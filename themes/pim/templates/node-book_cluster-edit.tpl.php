@@ -171,7 +171,7 @@ $( document ).ready(function() {
 		}//log et pas de statut
 		else if(!noLog && noStatus){
 						
-			if(lang == 'en') $('.tooltip').html('Please status modifications made');
+			if(lang == 'en') tooltip.html('Please status modifications made');
 			else tooltip.html('veuillez renseigner un statut'); 	
 			overlayOnButton.show();
 			overlayOnButton.css('cursor','not-allowed');		
@@ -180,7 +180,7 @@ $( document ).ready(function() {
 		}//pas de log et un statut
 		else if(noLog && !noStatus){
 						
-			if(lang == 'en') $('.tooltip').html('Please note modifictions made');
+			if(lang == 'en') tooltip.html('Please note modifictions made');
 			else tooltip.html('Veuillez noter les modifications effectuées'); 
 			overlayOnButton.show();
 			overlayOnButton.css('cursor','not-allowed');		
@@ -190,7 +190,7 @@ $( document ).ready(function() {
 		else if(!noLog && !noStatus){
 
 			overlayOnButton.hide();
-			$('.tooltip').css('display','none');
+			tooltip.css('display','none');
 			overlayOnButton.css('cursor','auto');	
 			
 		} 
@@ -199,7 +199,7 @@ $( document ).ready(function() {
 
 	//Comportement lors qu'on quitte le focus sur le bouton ENREGISTRER 
 	overlayOnButton.mouseleave(function(){
-		$('.tooltip').css('display','none');			
+		tooltip.css('display','none');			
 	});
 
 
