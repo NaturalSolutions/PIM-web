@@ -163,7 +163,8 @@ $( document ).ready(function() {
 		//no log et no statut
 		if(noLog && noStatus) {
 			
-			tooltip.append("<span class='noStatus'> et renseigner un statut</span>");
+			if(lang == 'en') tooltip.html("Please status modifications and note modifictions made");
+			else tooltip.html('veuillez noter les modifications effectuées et renseigner un statut'); 	
 			overlayOnButton.show();
 			overlayOnButton.css('cursor','not-allowed');		
 			displayMessageOnCursor();			

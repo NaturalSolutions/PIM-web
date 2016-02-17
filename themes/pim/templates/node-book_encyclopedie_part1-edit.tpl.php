@@ -95,7 +95,7 @@ global $base_url, $language, $node;
 <?php print drupal_render($form['buttons']); ?>
 
 
-<span class="tooltip"><?php if($language->language == fr) echo 'Veuillez noter les modifictions effectuées'; else echo 'Please note modifictions made'; ?></span>
+<span class="tooltip"><?php if($language->language == fr) echo 'Veuillez noter les modifications effectuées'; else echo 'Please note modifications made'; ?></span>
 <p><span class='redStar'>*</span><?php if($language->language == fr) echo 'Champ obligatoire'; else echo 'Required field'; ?></p>
 <div id='overlayButton'></div>
 
@@ -146,11 +146,12 @@ $( document ).ready(function() {
 	saveButton.insertBefore('#node-form > div > fieldset:last');
 	deleteButton.insertBefore('#node-form > div > fieldset:last');
 
+	var tooltip = $('.tooltip');
+
 	//Pour afficher un message sur la souris
 	var displayMessageOnCursor = function(){
 
 		//Active le texte sur le cursor
-		var tooltip = $('.tooltip');
 		tooltip.show();
 		window.onmousemove = function (e) {
 		    var x = e.clientX,
@@ -167,29 +168,56 @@ $( document ).ready(function() {
 	var combined = button.add(overlayOnButton);
 
 	combined.mouseenter(function(){
+				
+		//Verifier qu'il y a bien un status		
+		if( $('#edit-brouillon').attr('checked') == false && $('#edit-avalider').attr('checked') == false && $('#edit-termine').attr('checked') == false ) var noStatus = true;
+		else var noStatus = false;
 
-		console.log($('#edit-log').val());
 		//Si pas de message de log
-		if($('#edit-log').val() == '') {
+		if($('#edit-log').val() == '') var noLog = true;
+		else var noLog = false;
 
+		//no log et no statut
+		if(noLog && noStatus) {
+			
+			if(lang == 'en') tooltip.html("Please status modifications and note modifictions made");
+			else tooltip.html('veuillez noter les modifications effectuées et renseigner un statut'); 	
 			overlayOnButton.show();
 			overlayOnButton.css('cursor','not-allowed');		
-			displayMessageOnCursor();
-			logIsWrite = false;
-			
-		}
-		else{
-			overlayOnButton.hide();
-			$('.tooltip').css('display','none');
-			overlayOnButton.css('cursor','auto');
-			logIsWrite = true;			
+			displayMessageOnCursor();			
 
+		}//log et pas de statut
+		else if(!noLog && noStatus){
+						
+			if(lang == 'en') tooltip.html('Please status modifications made');
+			else tooltip.html('veuillez renseigner un statut'); 	
+			overlayOnButton.show();
+			overlayOnButton.css('cursor','not-allowed');		
+			displayMessageOnCursor();			
+			
+		}//pas de log et un statut
+		else if(noLog && !noStatus){
+						
+			if(lang == 'en') tooltip.html('Please note modifictions made');
+			else tooltip.html('Veuillez noter les modifications effectuées'); 
+			overlayOnButton.show();
+			overlayOnButton.css('cursor','not-allowed');		
+			displayMessageOnCursor();				
+			
+		}//log et statut
+		else if(!noLog && !noStatus){
+
+			overlayOnButton.hide();
+			tooltip.css('display','none');
+			overlayOnButton.css('cursor','auto');	
+			
 		} 
+
 	});
 
 	//Comportement lors qu'on quitte le focus sur le bouton ENREGISTRER 
 	overlayOnButton.mouseleave(function(){
-		$('.tooltip').css('display','none');			
+		tooltip.css('display','none');			
 	});
 
 
