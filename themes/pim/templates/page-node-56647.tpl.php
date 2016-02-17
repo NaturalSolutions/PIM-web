@@ -307,9 +307,9 @@
                   $name_lien_sous_bassin = preg_replace('/\s+/', ' ', $name_lien_sous_bassin);
 
                   //get total of islands for completude
-                  $cptISlandForCompletude = $node->field_cpt_island[0]['value'];
+                  $cptISlandForCompletude = $node->field_ss_bassin_cpt_island[0]['value'];
                   //get total of clusters for completude
-                  $cptClusterForCompletude = $node->field_cpt_cluster[0]['value'];
+                  $cptClusterForCompletude = $node->field_ss_bassin_cpt_cluster[0]['value'];
                   
 
 
