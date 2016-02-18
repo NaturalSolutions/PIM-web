@@ -405,101 +405,101 @@
 
   global $user;  
   
-  //Parcour des pictos pictos surchargés
+  /*//Parcour des pictos pictos surchargés
   $sql = "SELECT n.title FROM drp_node n JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid;";
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
-  else while (  $row  =  db_fetch_array($result) ){
+  else while (  $row  =  db_fetch_array($result) ){*/
     
-    /*
-    * FAUNE MARINE
-    */
-    //Get nid of picto_surcharge to load the correct node edit form -> FauneM
-    $idPictoMSurcharge = '';
-    $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'fauneM' AND s.field_book_genre_picto_surcharge_value = 'connaissance';";
-    $result = db_query($sql);  
-    if (!$result) die('Invalid query: ' . mysql_error());
-    else while (  $row  =  db_fetch_array($result) ) {
-      $idPictoMSurcharge = $row['nid'];  
-      $comValueFauneM = $row['field_book_star_com_picto_value'];  
-      $isRemarquableFauneM = $row['field_book_star_on_picto_value'];
-      $valueOfPictoSurchargeFauneM = $row['field_book_value_picto_surcharge_value'];
+  /*
+  * FAUNE MARINE
+  */
+  //Get nid of picto_surcharge to load the correct node edit form -> FauneM
+  $idPictoMSurcharge = '';
+  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'fauneM' AND s.field_book_genre_picto_surcharge_value = 'connaissance';";
+  $result = db_query($sql);  
+  if (!$result) die('Invalid query: ' . mysql_error());
+  else while (  $row  =  db_fetch_array($result) ) {
+    $idPictoMSurcharge = $row['nid'];  
+    $comValueFauneM = $row['field_book_star_com_picto_value'];  
+    $isRemarquableFauneM = $row['field_book_star_on_picto_value'];
+    $valueOfPictoSurchargeFauneM = $row['field_book_value_picto_surcharge_value'];
 
-      //Si on a une valeur surchargé alors on va chercher le pictogrammes correspondant
-      if($valueOfPictoSurchargeFauneM != ''){
-        //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici FauneM et connaissance
-        $sql1 = "SELECT d.filepath, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND c.field_book_value_picto_connaiss_value = ".$valueOfPictoSurchargeFauneM." AND t.name = 'Faune marine';";  
-        $result1 = db_query($sql1);
-        if (!$result1) die('Invalid query: ' . mysql_error());
-        else while (  $row  =  db_fetch_array($result1) ) $urlPictoSurchargeFauneM = $row['filepath'];      
-      }
-
+    //Si on a une valeur surchargé alors on va chercher le pictogrammes correspondant
+    if($valueOfPictoSurchargeFauneM != ''){
+      //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici FauneM et connaissance
+      $sql1 = "SELECT d.filepath, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND c.field_book_value_picto_connaiss_value = ".$valueOfPictoSurchargeFauneM." AND t.name = 'Faune marine';";  
+      $result1 = db_query($sql1);
+      if (!$result1) die('Invalid query: ' . mysql_error());
+      else while (  $row  =  db_fetch_array($result1) ) $urlPictoSurchargeFauneM = $row['filepath'];      
     }
-    if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
-    //else create a blank node    
-    else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
-    $outputFauneM = drupal_get_form($form_id, $node);
 
+  }
+  if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+  //else create a blank node    
+  else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
+  $outputFauneM = drupal_get_form($form_id, $node);
+
+  
+  /*
+  * FLORE MARINE
+  */
+  //Get nid of picto_surcharge to load the correct node edit form -> FloreM
+  $idPictoMSurcharge = '';
+  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'floreM' AND s.field_book_genre_picto_surcharge_value = 'connaissance';";  
+  $result = db_query($sql);  
+  if (!$result) die('Invalid query: ' . mysql_error());
+  else while (  $row  =  db_fetch_array($result) ) {
+    $idPictoMSurcharge = $row['nid'];  
+    $comValueFloreM = $row['field_book_star_com_picto_value'];       
+    $isRemarquableFloreM = $row['field_book_star_on_picto_value'];        
+    $valuePictoSurchargeFloreM = $row['field_book_value_picto_surcharge_value'];        
     
-    /*
-    * FLORE MARINE
-    */
-    //Get nid of picto_surcharge to load the correct node edit form -> FloreM
-    $idPictoMSurcharge = '';
-    $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'floreM' AND s.field_book_genre_picto_surcharge_value = 'connaissance';";  
-    $result = db_query($sql);  
-    if (!$result) die('Invalid query: ' . mysql_error());
-    else while (  $row  =  db_fetch_array($result) ) {
-      $idPictoMSurcharge = $row['nid'];  
-      $comValueFloreM = $row['field_book_star_com_picto_value'];       
-      $isRemarquableFloreM = $row['field_book_star_on_picto_value'];        
-      $valuePictoSurchargeFloreM = $row['field_book_value_picto_surcharge_value'];        
-      
-      //Si on a une valeur surchargé alors on va chercher le pictogrammes correspondant
-      if($valuePictoSurchargeFloreM != ''){
-        //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici FauneM et connaissance
-        $sql1 = "SELECT d.filepath, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND c.field_book_value_picto_connaiss_value = ".$valuePictoSurchargeFloreM." AND t.name = 'Flore marine';";  
-        $result1 = db_query($sql1);
-        if (!$result1) die('Invalid query0: ' . mysql_error());
-        else while (  $row  =  db_fetch_array($result1) ) $urlPictoSurchargeFloreM = $row['filepath'];              
-      }
-
+    //Si on a une valeur surchargé alors on va chercher le pictogrammes correspondant
+    if($valuePictoSurchargeFloreM != ''){
+      //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici FauneM et connaissance
+      $sql1 = "SELECT d.filepath, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND c.field_book_value_picto_connaiss_value = ".$valuePictoSurchargeFloreM." AND t.name = 'Flore marine';";  
+      $result1 = db_query($sql1);
+      if (!$result1) die('Invalid query0: ' . mysql_error());
+      else while (  $row  =  db_fetch_array($result1) ) $urlPictoSurchargeFloreM = $row['filepath'];              
     }
-    if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
-    //else create a blank node    
-    else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
-    $outputFloreM = drupal_get_form($form_id, $node);
 
-    /*
-    * GROTTE
-    */
-    //Get nid of picto_surcharge to load the correct node edit form -> FloreM
-    $idPictoMSurcharge = '';
-    $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'grotte' AND s.field_book_genre_picto_surcharge_value = 'connaissance';";  
-    $result = db_query($sql);  
-    if (!$result) die('Invalid query: ' . mysql_error());
-    else while (  $row  =  db_fetch_array($result) ) {
-      $idPictoMSurcharge = $row['nid'];  
-      $comValueGrotte = $row['field_book_star_com_picto_value'];       
-      $isRemarquableGrotte = $row['field_book_star_on_picto_value'];        
-      $valuePictoSurchargeGrotte = $row['field_book_value_picto_surcharge_value'];        
-      
-      //Si on a une valeur surchargé alors on va chercher le pictogrammes correspondant
-      if($valuePictoSurchargeGrotte != ''){
-        //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici FauneM et connaissance
-        $sql1 = "SELECT d.filepath, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND c.field_book_value_picto_connaiss_value = ".$valuePictoSurchargeGrotte." AND t.name = 'Grotte / fonds rocheux-sableux';";  
-        $result1 = db_query($sql1);
-        if (!$result1) die('Invalid query: ' . mysql_error());
-        else while (  $row  =  db_fetch_array($result1) ) $urlPictoSurchargeGrotte = $row['filepath'];              
-      }
+  }
+  if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+  //else create a blank node    
+  else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
+  $outputFloreM = drupal_get_form($form_id, $node);
 
+  /*
+  * GROTTE
+  */
+  //Get nid of picto_surcharge to load the correct node edit form -> FloreM
+  $idPictoMSurcharge = '';
+  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'grotte' AND s.field_book_genre_picto_surcharge_value = 'connaissance';";  
+  $result = db_query($sql);  
+  if (!$result) die('Invalid query: ' . mysql_error());
+  else while (  $row  =  db_fetch_array($result) ) {
+    $idPictoMSurcharge = $row['nid'];  
+    $comValueGrotte = $row['field_book_star_com_picto_value'];       
+    $isRemarquableGrotte = $row['field_book_star_on_picto_value'];        
+    $valuePictoSurchargeGrotte = $row['field_book_value_picto_surcharge_value'];        
+    
+    //Si on a une valeur surchargé alors on va chercher le pictogrammes correspondant
+    if($valuePictoSurchargeGrotte != ''){
+      //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici FauneM et connaissance
+      $sql1 = "SELECT d.filepath, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND c.field_book_value_picto_connaiss_value = ".$valuePictoSurchargeGrotte." AND t.name = 'Grotte / fonds rocheux-sableux';";  
+      $result1 = db_query($sql1);
+      if (!$result1) die('Invalid query: ' . mysql_error());
+      else while (  $row  =  db_fetch_array($result1) ) $urlPictoSurchargeGrotte = $row['filepath'];              
     }
-    if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
-    //else create a blank node    
-    else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
-    $outputGrotte = drupal_get_form($form_id, $node);
 
-  } /*fin while parcours de picto*/
+  }
+  if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+  //else create a blank node    
+  else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
+  $outputGrotte = drupal_get_form($form_id, $node);
+
+  //} /*fin while parcours de picto*/
 
   //Transforme value of picto to label
   switch ($labelBota) {
