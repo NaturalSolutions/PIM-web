@@ -4940,6 +4940,22 @@ body.page-projet-atlas-tous-les-pictogrammes div.view-tous-les-pictogrammes tabl
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+body.page-projet-atlas-pictos-par-sous-bassin h1{
+  margin-bottom: 40px;
+  display: block;
+  height: 38px;
+  padding-top: 10px;
+  border-bottom: 3px dashed #666666;
+  text-decoration: initial;
+  font-size: 1.8em;  
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                       VISU PICTO_CONNAISSANCE                           */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
 body.node-type-book-les-pictos-connaissances div.field-field-book-picto-connaissance div.field-label{
   display:  none; 
 }
