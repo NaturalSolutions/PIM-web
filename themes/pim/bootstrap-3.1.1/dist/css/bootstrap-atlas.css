@@ -2503,7 +2503,7 @@ div.containerOfMyIsland div.myFormOnVisu input{
   width: 191px;
 }
 div.containerOfMyIsland div.onePicto{
-  
+  cursor: pointer;
   width: 60px;
   height: 60px;
   font-size: 10px;
