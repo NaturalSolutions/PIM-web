@@ -4932,6 +4932,11 @@ body.page-projet-atlas-tous-les-pictogrammes div.view-tous-les-pictogrammes tr{
 body.page-projet-atlas-tous-les-pictogrammes div.view-tous-les-pictogrammes table{
   width: 100%;
 }
+body.page-projet-atlas-tous-les-pictogrammes div.view-tous-les-pictogrammes img.imagefield.imagefield-field_book_picto_connaissance{
+  width: 60px;
+  height: auto;
+  padding: 8px;
+}
 
 /***************************************************************************/
 /***************************************************************************/
