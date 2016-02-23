@@ -404,6 +404,7 @@ global $user, $base_url, $language;
       jQuery('.onePicto.expert.interet.grotte #edit-title-11-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
       jQuery('.onePicto.expert.interet.paysT #edit-title-12-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
       jQuery('.onePicto.expert.interet.paysM #edit-title-13-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      jQuery('.onePicto.expert.interet.bati #edit-title-14-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
       
       //Alter label select value
       jQuery('.onePicto.expert.connaissance.grotte #edit-field-book-value-picto-surcharge-value-2 option').each(function(index, el) {        

@@ -856,6 +856,8 @@
   $etatPaysT = $result['niveau'] - 1;
 
   //Paysage (Mer) -> Valeur rentré par l'expert
+  
+  //Patrimoine bâti -> Valeur rentré par l'expert
     
   //Création de richesse économique (Mer)
   $sql = "select b.niveau from picto_intepa_crem b where code_ile = '".$termName."'";           
@@ -954,6 +956,7 @@
   }
 
   /*intervention manuel de l'expert pour Paysage / Mer */
+  /*intervention manuel de l'expert pour Patrimoine bâti */
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Création de richesse économique (Mer) et Interêt des patrimoines
   $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Création de richesse économique (Mer)';";
@@ -1227,6 +1230,34 @@
   $outputPaysM = drupal_get_form($form_id, $node);
 
   /*
+  * PATRIMOINE BATI
+  */
+  //Get nid of picto_surcharge to load the correct node edit form -> bati
+  $idPictoMSurcharge = '';
+  $sql = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur:".$nid."' AND s.field_book_type_picto_surcharge_value = 'bati' AND s.field_book_genre_picto_surcharge_value = 'interet';";  
+  $result = db_query($sql);  
+  if (!$result) die('Invalid query: ' . mysql_error());
+  else while (  $row  =  db_fetch_array($result) ) {
+    $idPictoMSurcharge = $row['nid'];  
+    $comValueBati = $row['field_book_star_com_picto_value'];       
+    $isRemarquableBati = $row['field_book_star_on_picto_value'];
+    $valueOfPictoSurchargeBati = $row['field_book_value_picto_surcharge_value'];        
+    
+    //Si on a une valeur surchargé alors on va chercher le pictogrammes correspondant
+    if($valueOfPictoSurchargeBati != ''){
+      //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici bota et interet
+      $sql1 = "SELECT d.filepath, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND c.field_book_value_picto_interet_value = ".$valueOfPictoSurchargeBati." AND t.name = 'Patrimoine bâti';";  
+      $result1 = db_query($sql1);
+      if (!$result1) die('Invalid query: ' . mysql_error());
+      else while (  $row  =  db_fetch_array($result1) ) $urlPictoSurchargeBati = $row['filepath'];
+    }        
+  }
+  if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+  //else create a blank node    
+  else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
+  $outputBati = drupal_get_form($form_id, $node);
+
+  /*
   * CREATION DE RICHESSE ECONOMIQUE - MER
   
   //Get nid of picto_surcharge to load the correct node edit form -> orni
@@ -1346,6 +1377,12 @@
     case 1: $valueOfPictoSurchargeGrotteI = 'Faible'; break;
     case 2: $valueOfPictoSurchargeGrotteI = 'Moyen'; break;
     case 3: $valueOfPictoSurchargeGrotteI = 'Fort'; break;    
+  } // fin switch
+  switch ($valueOfPictoSurchargeBati) {
+    case 0: $valueOfPictoSurchargeBati = 'Pas de connaissance'; break;
+    case 1: $valueOfPictoSurchargeBati = 'Faible'; break;
+    case 2: $valueOfPictoSurchargeBati = 'Moyen'; break;
+    case 3: $valueOfPictoSurchargeBati = 'Fort'; break;    
   } // fin switch
 
 
@@ -1689,6 +1726,41 @@
           <div class="linePicto">
             <?php if($urlPictoSurchargePaysM != '') echo "<img src='$base_url/$urlPictoSurchargePaysM'/>"; else echo '<p class="desc">Choisir une valeur pour afficher un pictogramme</p>'; ?>              
             <?php echo '<div class="myFormOnVisu">'.$outputPaysM.'</div>'; ?>              
+          </div>
+          <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>         
+        </div>
+      </div>
+    </div>
+    <!-- Patrimoine bâti -->
+    <div class="onePicto expert interet bati" title='Patrimoine bâti'>
+      <?php 
+        if($urlPictoSurchargeBati) echo "<img class='surcharge' src='$base_url/$urlPictoSurchargeBati' alt='' title='' />"; 
+        else echo "<i>Expert</i>";        
+        if($isRemarquableBati == '1') echo "<i class='star'>*</i>";
+      ?>      
+      <div class="popup green"><div class="croix">X</div>
+        <div class='visu'>
+          <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
+          <p class="titleGenrePicto">Interêt des patrimoines</p>
+          <p class="titleTypePicto">Patrimoine bâti</p>
+          <div class="linePicto">
+            <?php 
+            if($urlPictoSurchargeBati != '') echo "<img src='$base_url/$urlPictoSurchargeBati'/>"; 
+            else echo '<p class="noPicto">Pas de pictogramme</p>';               
+            if($urlPictoSurchargeBati != '') echo "<p class='labelEtat'>".$valueOfPictoSurchargePaysM."</p>"; 
+            ?>
+          </div>
+          <div class="remarquable"><?php if($isRemarquableBati == '1') echo "* Présence d'un lieu remarquable"; ?></div>
+          <div class="commentaire"><?php if($comValueBati != '') echo '<label>Commentaire : </label>'.$comValueBati; ?></div>
+          <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+        </div>
+        <div class='edit'>
+          <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
+          <p class="titleGenrePicto">Interêt des patrimoines</p>
+          <p class="titleTypePicto">Patrimoine bâti</p>            
+          <div class="linePicto">
+            <?php if($urlPictoSurchargeBati != '') echo "<img src='$base_url/$urlPictoSurchargeBati'/>"; else echo '<p class="desc">Choisir une valeur pour afficher un pictogramme</p>'; ?>              
+            <?php echo '<div class="myFormOnVisu">'.$outputBati.'</div>'; ?>              
           </div>
           <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>         
         </div>
