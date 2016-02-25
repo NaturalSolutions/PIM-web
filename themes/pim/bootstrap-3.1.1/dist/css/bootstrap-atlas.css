@@ -5061,13 +5061,22 @@ body.node-type-book-les-pictos-connaissances div#content-area div.content{
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
-body.page-node-add-book-les-pictos-connaissances li.ar, body.page-node-add-book-les-pictos-connaissances li.it, body.page-node-add-book-les-pictos-connaissances li.es, body.node-type-book-les-pictos-connaissances.section-node-edit li.ar, body.node-type-book-les-pictos-connaissances.section-node-edit li.it, body.node-type-book-les-pictos-connaissances.section-node-edit li.es {
+body.page-node-add-book-les-pictos-connaissances li.ar, 
+body.page-node-add-book-les-pictos-connaissances li.it, 
+body.page-node-add-book-les-pictos-connaissances li.es, 
+body.node-type-book-les-pictos-connaissances.section-node-edit li.ar, 
+body.node-type-book-les-pictos-connaissances.section-node-edit li.it, 
+body.node-type-book-les-pictos-connaissances.section-node-edit li.es {
     visibility: hidden;
 }
-body.page-node-add-book-les-pictos-connaissances fieldset.menu-item-form.collapsible.collapsed, body.page-node-add-book-les-pictos-connaissances fieldset.collapsible.collapsed, body.page-node-add-book-les-pictos-connaissances input#edit-preview{
+body.page-node-add-book-les-pictos-connaissances fieldset.menu-item-form.collapsible.collapsed, 
+body.page-node-add-book-les-pictos-connaissances fieldset.collapsible.collapsed, 
+body.page-node-add-book-les-pictos-connaissances input#edit-preview{
   display:  none; 
 }
-body.node-type-book-les-pictos-connaissances.section-node-edit fieldset.menu-item-form.collapsible.collapsed, body.node-type-book-les-pictos-connaissances.section-node-edit fieldset.collapsible.collapsed, body.node-type-book-les-pictos-connaissances.section-node-edit input#edit-preview{
+body.node-type-book-les-pictos-connaissances.section-node-edit fieldset.menu-item-form.collapsible.collapsed, 
+body.node-type-book-les-pictos-connaissances.section-node-edit fieldset.collapsible.collapsed, 
+body.node-type-book-les-pictos-connaissances.section-node-edit input#edit-preview{
   display:  none; 
 }
 /***************************************************************************/
@@ -5077,13 +5086,22 @@ body.node-type-book-les-pictos-connaissances.section-node-edit fieldset.menu-ite
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
-body.page-node-add-book-les-pictos-interet li.ar, body.page-node-add-book-les-pictos-interet li.it, body.page-node-add-book-les-pictos-interet li.es, body.node-type-book-les-pictos-interet.section-node-edit li.ar, body.node-type-book-les-pictos-interet.section-node-edit li.it, body.node-type-book-les-pictos-interet.section-node-edit li.es {
+body.page-node-add-book-les-pictos-interet li.ar, 
+body.page-node-add-book-les-pictos-interet li.it, 
+body.page-node-add-book-les-pictos-interet li.es, 
+body.node-type-book-les-pictos-interet.section-node-edit li.ar, 
+body.node-type-book-les-pictos-interet.section-node-edit li.it, 
+body.node-type-book-les-pictos-interet.section-node-edit li.es {
     visibility: hidden;
 }
-body.page-node-add-book-les-pictos-interet fieldset.menu-item-form.collapsible.collapsed, body.page-node-add-book-les-pictos-interet fieldset.collapsible.collapsed, body.page-node-add-book-les-pictos-interet input#edit-preview{
+body.page-node-add-book-les-pictos-interet fieldset.menu-item-form.collapsible.collapsed, 
+body.page-node-add-book-les-pictos-interet fieldset.collapsible.collapsed, 
+body.page-node-add-book-les-pictos-interet input#edit-preview{
   display:  none; 
 }
-body.node-type-book-les-pictos-interet.section-node-edit fieldset.menu-item-form.collapsible.collapsed, body.node-type-book-les-pictos-interet.section-node-edit fieldset.collapsible.collapsed, body.node-type-book-les-pictos-interet.section-node-edit input#edit-preview{
+body.node-type-book-les-pictos-interet.section-node-edit fieldset.menu-item-form.collapsible.collapsed, 
+body.node-type-book-les-pictos-interet.section-node-edit fieldset.collapsible.collapsed, 
+body.node-type-book-les-pictos-interet.section-node-edit input#edit-preview{
   display:  none; 
 }
 /***************************************************************************/
@@ -5093,13 +5111,26 @@ body.node-type-book-les-pictos-interet.section-node-edit fieldset.menu-item-form
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
-body.page-node-add-book-les-pictos-pression li.ar, body.page-node-add-book-les-pictos-pression li.it, body.page-node-add-book-les-pictos-pression li.es, body.node-type-book-les-pictos-pression.section-node-edit li.ar, body.node-type-book-les-pictos-pression.section-node-edit li.it, body.node-type-book-les-pictos-pression.section-node-edit li.es {
+body.page-node-add-book-les-pictos-pression li.ar, 
+body.page-node-add-book-les-pictos-pression li.it, 
+body.page-node-add-book-les-pictos-pression li.es, 
+body.node-type-book-les-pictos-pression.section-node-edit li.ar, 
+body.node-type-book-les-pictos-pression.section-node-edit li.it, 
+body.node-type-book-les-pictos-pression.section-node-edit li.es {
     visibility: hidden;
 }
-body.page-node-add-book-les-pictos-pression fieldset.menu-item-form.collapsible.collapsed, body.page-node-add-book-les-pictos-pression fieldset.collapsible.collapsed, body.page-node-add-book-les-pictos-pression input#edit-preview{
+body.page-node-add-book-les-pictos-pression fieldset.menu-item-form.collapsible.collapsed, 
+body.page-node-add-book-les-pictos-pression fieldset.collapsible.collapsed, 
+body.page-node-add-book-les-pictos-pression div#edit-field-book-value-picto-pression-value-wrapper, 
+body.page-node-add-book-les-pictos-pression div#edit-field-book-value-picto-pression1-value-wrapper, 
+body.page-node-add-book-les-pictos-pression input#edit-preview{
   display:  none; 
 }
-body.node-type-book-les-pictos-pression.section-node-edit fieldset.menu-item-form.collapsible.collapsed, body.node-type-book-les-pictos-pression.section-node-edit fieldset.collapsible.collapsed, body.node-type-book-les-pictos-pression.section-node-edit input#edit-preview{
+body.node-type-book-les-pictos-pression.section-node-edit fieldset.menu-item-form.collapsible.collapsed, 
+body.node-type-book-les-pictos-pression.section-node-edit fieldset.collapsible.collapsed, 
+body.node-type-book-les-pictos-pression.section-node-edit div#edit-field-book-value-picto-pression-value-wrapper, 
+body.node-type-book-les-pictos-pression.section-node-edit div#edit-field-book-value-picto-pression1-value-wrapper, 
+body.node-type-book-les-pictos-pression.section-node-edit input#edit-preview{
   display:  none; 
 }
 /***************************************************************************/
@@ -5109,12 +5140,29 @@ body.node-type-book-les-pictos-pression.section-node-edit fieldset.menu-item-for
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
-body.page-node-add-book-les-pictos-gestions li.ar, body.page-node-add-book-les-pictos-gestions li.it, body.page-node-add-book-les-pictos-gestions li.es, body.node-type-book-les-pictos-gestions.section-node-edit li.ar, body.node-type-book-les-pictos-gestions.section-node-edit li.it, body.node-type-book-les-pictos-gestions.section-node-edit li.es {
+body.page-node-add-book-les-pictos-gestions li.ar, 
+body.page-node-add-book-les-pictos-gestions li.it, 
+body.page-node-add-book-les-pictos-gestions li.es, 
+body.node-type-book-les-pictos-gestions.section-node-edit li.ar, 
+body.node-type-book-les-pictos-gestions.section-node-edit li.it, 
+body.node-type-book-les-pictos-gestions.section-node-edit li.es {
     visibility: hidden;
 }
-body.page-node-add-book-les-pictos-gestions fieldset.menu-item-form.collapsible.collapsed, body.page-node-add-book-les-pictos-gestions fieldset.collapsible.collapsed, body.page-node-add-book-les-pictos-gestions input#edit-preview{
+body.page-node-add-book-les-pictos-gestions fieldset.menu-item-form.collapsible.collapsed, 
+body.page-node-add-book-les-pictos-gestions fieldset.collapsible.collapsed, 
+body.page-node-add-book-les-pictos-gestions div#edit-field-book-value-picto-gestions-value-wrapper, 
+body.page-node-add-book-les-pictos-gestions div#edit-field-book-value-picto-gestions1-value-wrapper, 
+body.page-node-add-book-les-pictos-gestions div#edit-field-book-value-picto-gestions2-value-wrapper, 
+body.page-node-add-book-les-pictos-gestions div#edit-field-book-value-picto-gestions3-value-wrapper, 
+body.page-node-add-book-les-pictos-gestions input#edit-preview{
   display:  none; 
 }
-body.node-type-book-les-pictos-gestions.section-node-edit fieldset.menu-item-form.collapsible.collapsed, body.node-type-book-les-pictos-gestions.section-node-edit fieldset.collapsible.collapsed, body.node-type-book-les-pictos-gestions.section-node-edit input#edit-preview{
+body.node-type-book-les-pictos-gestions.section-node-edit fieldset.menu-item-form.collapsible.collapsed, 
+body.node-type-book-les-pictos-gestions.section-node-edit fieldset.collapsible.collapsed, 
+body.node-type-book-les-pictos-gestions.section-node-edit div#edit-field-book-value-picto-gestions-value-wrapper, 
+body.node-type-book-les-pictos-gestions.section-node-edit div#edit-field-book-value-picto-gestions-value-wrapper, 
+body.node-type-book-les-pictos-gestions.section-node-edit div#edit-field-book-value-picto-gestions2-value-wrapper, 
+body.node-type-book-les-pictos-gestions.section-node-edit div#edit-field-book-value-picto-gestions3-value-wrapper, 
+body.node-type-book-les-pictos-gestions.section-node-edit input#edit-preview{
   display:  none; 
 }
