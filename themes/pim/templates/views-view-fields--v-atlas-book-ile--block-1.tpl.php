@@ -308,83 +308,83 @@
   $etatEco = $result['niveau'] - 1;
     
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Botanique et connaissance
-  $sql = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Botanique';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Botanique' ORDER BY c.field_book_value_picto_connaiss_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsBota[$row['field_book_value_picto_connaiss_value']] = $row['filepath'];
-    $titleBota = $row['title'];    
-    $labelBota = $row['field_book_value_picto_connaiss_value'];
+    $rowsLabelBota [$row['field_book_value_picto_connaiss_value']] = $row['field_book_value_picto_connaiss_value'];
+    $rowsTitleBota[$row['field_book_value_picto_connaiss_value']] = $row['title'];    
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Ornithologie et connaissance
-  $sql = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Ornithologie';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Ornithologie' ORDER BY c.field_book_value_picto_connaiss_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsOrni[$row['field_book_value_picto_connaiss_value']] = $row['filepath'];   
-    $titleOrnito = $row['title'];
-    $labelOrni = $row['field_book_value_picto_connaiss_value'];
+    $rowsLabelOrni [$row['field_book_value_picto_connaiss_value']] = $row['field_book_value_picto_connaiss_value'];
+    $rowsTitleOrni[$row['field_book_value_picto_connaiss_value']] = $row['title'];    
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Herpétologie et connaissance
-  $sql = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Herpétologie';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Herpétologie' ORDER BY c.field_book_value_picto_connaiss_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsHerpeto[$row['field_book_value_picto_connaiss_value']] = $row['filepath'];
-    $titleHerpe = $row['title'];
-    $labelHerpe = $row['field_book_value_picto_connaiss_value'];
+    $rowsLabelHerpeto [$row['field_book_value_picto_connaiss_value']] = $row['field_book_value_picto_connaiss_value'];
+    $rowsTitleHerpeto[$row['field_book_value_picto_connaiss_value']] = $row['title'];    
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Mammifères et connaissance
-  $sql = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Mammifères';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Mammifères' ORDER BY c.field_book_value_picto_connaiss_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsMami[$row['field_book_value_picto_connaiss_value']] = $row['filepath']; 
-    $titleMami = $row['title'];
-    $labelMami = $row['field_book_value_picto_connaiss_value'];
+    $rowsLabelMami [$row['field_book_value_picto_connaiss_value']] = $row['field_book_value_picto_connaiss_value'];
+    $rowsTitleMami[$row['field_book_value_picto_connaiss_value']] = $row['title'];    
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Chiroptères et connaissance
-  $sql = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Chiroptères';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Chiroptères' ORDER BY c.field_book_value_picto_connaiss_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsChiro[$row['field_book_value_picto_connaiss_value']] = $row['filepath']; 
-    $titleChiro = $row['title'];
-    $labelChiro = $row['field_book_value_picto_connaiss_value'];
+    $rowsLabelChiro [$row['field_book_value_picto_connaiss_value']] = $row['field_book_value_picto_connaiss_value'];
+    $rowsTitleChiro[$row['field_book_value_picto_connaiss_value']] = $row['title'];    
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Invertébrés et connaissance
-  $sql = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Invertébrés';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Invertébrés' ORDER BY c.field_book_value_picto_connaiss_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsInvert[$row['field_book_value_picto_connaiss_value']] = $row['filepath']; 
-    $titleInvert = $row['title'];
-    $labelInvert = $row['field_book_value_picto_connaiss_value'];
+    $rowsLabelInvert [$row['field_book_value_picto_connaiss_value']] = $row['field_book_value_picto_connaiss_value'];
+    $rowsTitleInvert[$row['field_book_value_picto_connaiss_value']] = $row['title'];    
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici caractéristique environnentales
-  $sql = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Caractéristique environnementales';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Caractéristique environnementales' ORDER BY c.field_book_value_picto_connaiss_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsCaraEnviro[$row['field_book_value_picto_connaiss_value']] = $row['filepath'];
-    $titleCaractEnv = $row['title'];
-    $labelCaractEnv = $row['field_book_value_picto_connaiss_value'];
+    $rowsLabelCaraEnviro [$row['field_book_value_picto_connaiss_value']] = $row['field_book_value_picto_connaiss_value'];
+    $rowsTitleCaraEnviro[$row['field_book_value_picto_connaiss_value']] = $row['title'];    
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Socie économie
-  $sql = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Socio economie';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Socio economie' ORDER BY c.field_book_value_picto_connaiss_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsEco[$row['field_book_value_picto_connaiss_value']] = $row['filepath'];
-    $titleSocioEco = $row['title'];    
-    $labelSocioEco = $row['field_book_value_picto_connaiss_value'];
+    $rowsLabelEco [$row['field_book_value_picto_connaiss_value']] = $row['field_book_value_picto_connaiss_value'];
+    $rowsTitleEco[$row['field_book_value_picto_connaiss_value']] = $row['title'];    
   }
 
   //On stock le bon picto en fonction de la valeur
@@ -396,6 +396,26 @@
   $urlOfPictoInvertToDisplay = $rowsInvert[$etatInvert];
   $urlOfPictoEnviroToDisplay = $rowsCaraEnviro[$etatEnviro];
   $urlOfPictoEcoToDisplay = $rowsEco[$etatEco];
+
+  //On stock le bon label en fonction de la valeur
+  $labelBota = $rowsLabelBota[$etatBota];
+  $labelOrni = $rowsLabelOrni[$etatOrni];
+  $labelHerpe = $rowsLabelHerpeto[$etatHerpe];
+  $labelMami = $rowsLabelMami[$etatMami];
+  $labelChiro = $rowsLabelChiro[$etatChiro];
+  $labelInvert = $rowsLabelInvert[$etatInvert];
+  $labelCaractEnv = $rowsLabelCaraEnviro[$etatEnviro];
+  $labelSocioEco = $rowsLabelEco[$etatEco];
+
+  //On stock le bon titre en fonction de la valeur
+  $titleBota = $rowsTitleBota[$etatBota];
+  $titleOrni = $rowsTitleOrni[$etatOrni];
+  $titleHerpe = $rowsTitleHerpeto[$etatHerpe];
+  $titleMami = $rowsTitleMami[$etatMami];
+  $titleChiro = $rowsTitleChiro[$etatChiro];
+  $titleInvert = $rowsTitleInvert[$etatInvert];
+  $titleCaractEnv = $rowsTitleCaraEnviro[$etatEnviro];
+  $titleSocioEco = $rowsTitleEco[$etatEco];
 
   
   // required for Drupal 6 -Exemple in comment : https://api.drupal.org/api/drupal/includes%21form.inc/function/drupal_get_form/6
@@ -645,7 +665,7 @@
     <?php endif; ?>
     <!-- Invertébrés -->
     <?php if($urlOfPictoInvertToDisplay != ''): ?>
-      <div class="onePicto invert <?php echo $etatInvert; ?>"><?php echo "<img src='$base_url/$urlOfPictoInvertToDisplay' alt='$etatInvert' title='$etatInvert' />"; ?>
+      <div class="onePicto invert <?php echo $etatInvert; ?>"><?php echo "<img src='$base_url/$urlOfPictoInvertToDisplay' alt='$titleInvert' title='$titleInvert' />"; ?>
         <div class="popup"><div class="croix">X</div>
           <div class='visu'>
             <div class="actionLine"><a href="" class="visuPicto select">Voir</a><!-- <a href="" class="editPicto">Modifier</a> --></div>
@@ -660,7 +680,7 @@
     <!-- Faune Marine -->
     <div class="onePicto expert connaissance fauneM" title='Faune Marine'>
       <?php 
-        if($urlPictoSurchargeFauneM) echo "<img class='surcharge' src='$base_url/$urlPictoSurchargeFauneM' alt='$etatFauneM' title='$etatFauneM' />"; 
+        if($urlPictoSurchargeFauneM) echo "<img class='surcharge' src='$base_url/$urlPictoSurchargeFauneM' alt='$titleFauneM' title='$titleFauneM' />"; 
         else echo "<i>Expert</i>";        
         if($isRemarquableFauneM == '1') echo "<i class='star'>*</i>";
       ?>      
@@ -695,7 +715,7 @@
     <!-- Flore Marine -->
     <div class="onePicto expert connaissance floreM" title='Flore Marine'>
        <?php 
-        if($urlPictoSurchargeFloreM) echo "<img class='surcharge' src='$base_url/$urlPictoSurchargeFloreM' alt='$etatFloreM' title='$etatFloreM' />"; 
+        if($urlPictoSurchargeFloreM) echo "<img class='surcharge' src='$base_url/$urlPictoSurchargeFloreM' alt='$titleFloreM' title='$titleFloreM' />"; 
         else echo "<i>Expert</i>";        
         if($isRemarquableFloreM == '1') echo "<i class='star'>*</i>";
       ?>       
@@ -730,7 +750,7 @@
     <!-- Grotte / Fond rocheux -->
     <div class="onePicto expert connaissance grotte" title='Grotte / Fond rocheux'>
       <?php 
-        if($urlPictoSurchargeGrotte) echo "<img class='surcharge' src='$base_url/$urlPictoSurchargeGrotte' alt='' title='' />"; 
+        if($urlPictoSurchargeGrotte) echo "<img class='surcharge' src='$base_url/$urlPictoSurchargeGrotte' alt='$titleGrotte' title='$titleGrotte' />"; 
         else echo "<i>Expert</i>";        
         if($isRemarquableGrotte == '1') echo "<i class='star'>*</i>";
       ?>      
@@ -872,110 +892,110 @@
   $etatEcoTerre = $result['niveau'] - 1;
   
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Botanique et Interêt des patrimoines                
-  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Botanique';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Botanique' ORDER BY c.field_book_value_picto_interet_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsBota[$row['field_book_value_picto_interet_value']] = $row['filepath']; 
-    $titleBota = $row['title'];
-    $labelBota = $row['field_book_value_picto_interet_value'];
+    $rowsLabelBota [$row['field_book_value_picto_interet_value']] = $row['field_book_value_picto_interet_value'];
+    $rowsTitleBota[$row['field_book_value_picto_interet_value']] = $row['title'];    
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Ornithologie et Interêt des patrimoines
-  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Ornithologie';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Ornithologie' ORDER BY c.field_book_value_picto_interet_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsOrni[$row['field_book_value_picto_interet_value']] = $row['filepath']; 
-    $titleOrni = $row['title'];
-    $labelOrni = $row['field_book_value_picto_interet_value'];
+    $rowsLabelOrni [$row['field_book_value_picto_interet_value']] = $row['field_book_value_picto_interet_value'];
+    $rowsTitleOrni[$row['field_book_value_picto_interet_value']] = $row['title'];    
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Herpétologie et Interêt des patrimoines
-  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Herpétologie';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Herpétologie' ORDER BY c.field_book_value_picto_interet_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsHerpeto[$row['field_book_value_picto_interet_value']] = $row['filepath']; 
-    $titleHerpeto = $row['title'];
-    $labelHerpe = $row['field_book_value_picto_interet_value']; 
+    $rowsLabelHerpeto [$row['field_book_value_picto_interet_value']] = $row['field_book_value_picto_interet_value'];
+    $rowsTitleHerpeto[$row['field_book_value_picto_interet_value']] = $row['title'];    
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Mammifères et Interêt des patrimoines
-  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Mammifères';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Mammifères' ORDER BY c.field_book_value_picto_interet_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsMami[$row['field_book_value_picto_interet_value']] = $row['filepath']; 
-    $titleMami = $row['title'];
-    $labelMami = $row['field_book_value_picto_interet_value'];
+    $rowsLabelMami [$row['field_book_value_picto_interet_value']] = $row['field_book_value_picto_interet_value'];
+    $rowsTitleMami[$row['field_book_value_picto_interet_value']] = $row['title'];    
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Chiroptere et Interêt des patrimoines
-  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Chiroptères';";
+  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Chiroptères' ORDER BY c.field_book_value_picto_interet_value ASC;";
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsChiro[$row['field_book_value_picto_interet_value']] = $row['filepath']; 
-    $titleChiro = $row['title'];
-    $labelChiro = $row['field_book_value_picto_interet_value'];
+    $rowsLabelChiro [$row['field_book_value_picto_interet_value']] = $row['field_book_value_picto_interet_value'];
+    $rowsTitleChiro[$row['field_book_value_picto_interet_value']] = $row['title'];    
   }
 
   /*intervention manuel de l'expert pour invertébré*/
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Faune marine et Interêt des patrimoines
-  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Faune marine';";
+  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Faune marine' ORDER BY c.field_book_value_picto_interet_value ASC;";
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsFauneM[$row['field_book_value_picto_interet_value']] = $row['filepath']; 
-    $titleFauneM = $row['title'];
-    $labelFauneM = $row['field_book_value_picto_interet_value'];
+    $rowsLabelFauneM [$row['field_book_value_picto_interet_value']] = $row['field_book_value_picto_interet_value'];
+    $rowsTitleFauneM[$row['field_book_value_picto_interet_value']] = $row['title'];    
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Flore marine et Interêt des patrimoines
-  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Flore marine';";
+  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Flore marine' ORDER BY c.field_book_value_picto_interet_value ASC;";
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsFloreM[$row['field_book_value_picto_interet_value']] = $row['filepath']; 
-    $titleFloreM = $row['title'];
-    $labelFloreM = $row['field_book_value_picto_interet_value'];
+    $rowsLabelFloreM [$row['field_book_value_picto_interet_value']] = $row['field_book_value_picto_interet_value'];
+    $rowsTitleFloreM[$row['field_book_value_picto_interet_value']] = $row['title'];    
   }
 
   /*intervention manuel de l'expert pour Grotte et fond rocheux*/
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Paysage / Terre et Interêt des patrimoines
-  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Paysager / Terre';";
+  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Paysager / Terre' ORDER BY c.field_book_value_picto_interet_value ASC;";
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsPaysT[$row['field_book_value_picto_interet_value']] = $row['filepath']; 
-    $titlePaysT = $row['title'];
-    $labelPaysT = $row['field_book_value_picto_interet_value'];
+    $rowsLabelPaysT [$row['field_book_value_picto_interet_value']] = $row['field_book_value_picto_interet_value'];
+    $rowsTitlePaysT[$row['field_book_value_picto_interet_value']] = $row['title'];    
   }
 
   /*intervention manuel de l'expert pour Paysage / Mer */
   /*intervention manuel de l'expert pour Patrimoine bâti */
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Création de richesse économique (Mer) et Interêt des patrimoines
-  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Création de richesse économique (Mer)';";
+  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Création de richesse économique (Mer)' ORDER BY c.field_book_value_picto_interet_value ASC;";
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsEcoMer[$row['field_book_value_picto_interet_value']] = $row['filepath']; 
-    $titleCreaRichessEcoMer = $row['title'];
-    $labelCreaRichessEcoMer = $row['field_book_value_picto_interet_value'];
+    $rowsLabelEcoMer [$row['field_book_value_picto_interet_value']] = $row['field_book_value_picto_interet_value'];
+    $rowsTitleEcoMer[$row['field_book_value_picto_interet_value']] = $row['title'];    
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Création de richesse économique (Terre) et Interêt des patrimoines
-  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Création de richesse économique (Terre)';";
+  $sql = "SELECT d.filepath, c.field_book_value_picto_interet_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_interet c ON c.field_book_picto_interet_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_interet_value WHERE n.type = 'book_les_pictos_interet' AND t.name = 'Création de richesse économique (Terre)' ORDER BY c.field_book_value_picto_interet_value ASC;";
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsEcoTerre[$row['field_book_value_picto_interet_value']] = $row['filepath']; 
-    $titleCreaRichessEcoTerre = $row['title'];
-    $labelCreaRichessEcoTerre = $row['field_book_value_picto_interet_value'];
+    $rowsLabelEcoTerre [$row['field_book_value_picto_interet_value']] = $row['field_book_value_picto_interet_value'];
+    $rowsTitleEcoTerre[$row['field_book_value_picto_interet_value']] = $row['title'];    
   }
 
   //On stock le bon picto en fonction de la valeur
@@ -989,6 +1009,30 @@
   $urlOfPictoPaysTToDisplay = $rowsPaysT[$etatPaysT];
   $urlOfPictoEcoMerToDisplay = $rowsEcoMer[$etatEcoMer];
   $urlOfPictoEcoTerreToDisplay = $rowsEcoTerre[$etatEcoTerre];
+
+  //On stock le bon label en fonction de la valeur
+  $labelBota = $rowsLabelBota[$etatBota];
+  $labelOrni = $rowsLabelOrni[$etatOrni];
+  $labelHerpe = $rowsLabelHerpeto[$etatHerpe];
+  $labelMami = $rowsLabelMami[$etatMami];
+  $labelChiro = $rowsLabelChiro[$etatChiro];
+  $labelFauneM = $rowsLabelFauneM[$etatFauneM];
+  $labelFloreM = $rowsLabelFloreM[$etatFloreM];
+  $labelPaysT = $rowsLabelPaysT[$etatPaysT];
+  $labelCreaRichessEcoMer = $rowsLabelEcoMer[$etatEcoMer];
+  $labelCreaRichessEcoTerre = $rowsLabelEcoTerre[$etatEcoTerre];
+
+  //On stock le bon titre en fonction de la valeur
+  $titleBota = $rowsTitleBota[$etatBota];
+  $titleOrni = $rowsTitleOrni[$etatOrni];
+  $titleHerpe = $rowsTitleHerpeto[$etatHerpe];
+  $titleMami = $rowsTitleMami[$etatMami];
+  $titleChiro = $rowsTitleChiro[$etatChiro];
+  $titleFauneM = $rowsTitleFauneM[$etatFauneM];
+  $titleFloreM = $rowsTitleFloreM[$etatFloreM];
+  $titlePaysT = $rowsTitlePaysT[$etatPaysT];
+  $titleCreaRichessEcoMer = $rowsTitleEcoMer[$etatEcoMer];
+  $titleCreaRichessEcoTerre = $rowsTitleEcoTerre[$etatEcoTerre];
 
   /*
   * BOTANIQUE
@@ -1747,7 +1791,7 @@
             <?php 
             if($urlPictoSurchargeBati != '') echo "<img src='$base_url/$urlPictoSurchargeBati'/>"; 
             else echo '<p class="noPicto">Pas de pictogramme</p>';               
-            if($urlPictoSurchargeBati != '') echo "<p class='labelEtat'>".$valueOfPictoSurchargePaysM."</p>"; 
+            if($urlPictoSurchargeBati != '') echo "<p class='labelEtat'>".$valueOfPictoSurchargeBati."</p>"; 
             ?>
           </div>
           <div class="remarquable"><?php if($isRemarquableBati == '1') echo "* Présence d'un lieu remarquable"; ?></div>
@@ -1826,7 +1870,7 @@
   $sql = "select b.niveau from picto_press_haban b where code_ile = '".$termName."'";           
   $result = db_query($sql);
   $result = db_fetch_array($result); 
-  $etatHabitant = $result['niveau'];
+  $etatHabitant = $result['niveau'];  
     
   //Impacts des usages (Terre)
   $sql = "select b.niveau from picto_press_imusat b where code_ile = '".$termName."'";           
@@ -1853,83 +1897,83 @@
   $etatEspMer = $result['niveau'];
     
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Desserte par navette  et Pressions
-  $sql = "SELECT d.filepath, c.field_book_value_picto_pression_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_pression c ON c.field_book_picto_pression_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_pression_value WHERE n.type = 'book_les_pictos_pression' AND t.name = 'Desserte par navette';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_pression_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_pression c ON c.field_book_picto_pression_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_pression_value WHERE n.type = 'book_les_pictos_pression' AND t.name = 'Desserte par navette' ORDER BY c.field_book_value_picto_pression_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsNavette[$row['field_book_value_picto_pression_value']] = $row['filepath']; 
-    $titleNavette = $row['title'];
-    $labelNavette = $row['field_book_value_picto_pression_value'];
+    $rowsLabelNavette [$row['field_book_value_picto_pression_value']] = $row['field_book_value_picto_pression_value'];
+    $rowsTitleNavette[$row['field_book_value_picto_pression_value']] = $row['title'];    
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Présence de bâti  et Pressions
-  $sql = "SELECT d.filepath, c.field_book_value_picto_pression_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_pression c ON c.field_book_picto_pression_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_pression_value WHERE n.type = 'book_les_pictos_pression' AND t.name = 'Présence de bâti';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_pression_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_pression c ON c.field_book_picto_pression_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_pression_value WHERE n.type = 'book_les_pictos_pression' AND t.name = 'Présence de bâti' ORDER BY c.field_book_value_picto_pression_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsBati[$row['field_book_value_picto_pression_value']] = $row['filepath']; 
-    $titleBati = $row['title'];
-    $labelBati = $row['field_book_value_picto_pression_value'];
+    $rowsLabelBati [$row['field_book_value_picto_pression_value']] = $row['field_book_value_picto_pression_value'];
+    $rowsTitleBati[$row['field_book_value_picto_pression_value']] = $row['title'];    
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Activités touristisques et Pressions
-  $sql = "SELECT d.filepath, c.field_book_value_picto_pression_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_pression c ON c.field_book_picto_pression_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_pression_value WHERE n.type = 'book_les_pictos_pression' AND t.name = 'Activités touristiques';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_pression_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_pression c ON c.field_book_picto_pression_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_pression_value WHERE n.type = 'book_les_pictos_pression' AND t.name = 'Activités touristiques' ORDER BY c.field_book_value_picto_pression_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsTouriste[$row['field_book_value_picto_pression_value']] = $row['filepath']; 
-    $titleTouriste = $row['title'];
-    $labelTouriste = $row['field_book_value_picto_pression_value'];
+    $rowsLabelTouriste [$row['field_book_value_picto_pression_value']] = $row['field_book_value_picto_pression_value'];
+    $rowsTitleTouriste[$row['field_book_value_picto_pression_value']] = $row['title'];    
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Présence d'habitants à l'année et Pressions
-  $sql = "SELECT d.filepath, c.field_book_value_picto_pression_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_pression c ON c.field_book_picto_pression_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_pression_value WHERE n.type = 'book_les_pictos_pression' AND t.name = \"Présence d'habitants à l'année\";";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_pression_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_pression c ON c.field_book_picto_pression_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_pression_value WHERE n.type = 'book_les_pictos_pression' AND t.name = \"Présence d'habitants à l'année\" ORDER BY c.field_book_value_picto_pression_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsHab[$row['field_book_value_picto_pression_value']] = $row['filepath']; 
-    $titleHab = $row['title'];
-    $labelHab = $row['field_book_value_picto_pression_value'];
+    $rowsLabelHab [$row['field_book_value_picto_pression_value']] = $row['field_book_value_picto_pression_value'];
+    $rowsTitleHab[$row['field_book_value_picto_pression_value']] = $row['title'];
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Impacts des usages (Terre) et Pressions
-  $sql = "SELECT d.filepath, c.field_book_value_picto_pression1_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_pression c ON c.field_book_picto_pression_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_pression_value WHERE n.type = 'book_les_pictos_pression' AND t.name = 'Impact des usages / terre';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_pression1_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_pression c ON c.field_book_picto_pression_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_pression_value WHERE n.type = 'book_les_pictos_pression' AND t.name = 'Impact des usages / terre' ORDER BY c.field_book_value_picto_pression1_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsUsageT[$row['field_book_value_picto_pression1_value']] = $row['filepath']; 
-    $titleImpactUsageT = $row['title'];
-    $labelImpactUsageT = $row['field_book_value_picto_pression1_value'];
+    $rowsLabelImpactUsageT [$row['field_book_value_picto_pression1_value']] = $row['field_book_value_picto_pression1_value'];
+    $rowsTitleImpactUsageT[$row['field_book_value_picto_pression1_value']] = $row['title'];    
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Impacts des usages (Mer) et Pressions
-  $sql = "SELECT d.filepath, c.field_book_value_picto_pression1_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_pression c ON c.field_book_picto_pression_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_pression_value WHERE n.type = 'book_les_pictos_pression' AND t.name = 'Impact des usages / mer';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_pression1_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_pression c ON c.field_book_picto_pression_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_pression_value WHERE n.type = 'book_les_pictos_pression' AND t.name = 'Impact des usages / mer' ORDER BY c.field_book_value_picto_pression1_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsUsageM[$row['field_book_value_picto_pression1_value']] = $row['filepath']; 
-    $titleImpactUsageM = $row['title'];
-    $labelImpactUsageM = $row['field_book_value_picto_pression1_value'];
+    $rowsLabelImpactUsageM [$row['field_book_value_picto_pression1_value']] = $row['field_book_value_picto_pression1_value'];
+    $rowsTitleImpactUsageM[$row['field_book_value_picto_pression1_value']] = $row['title'];    
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Espèces envahissantes terrestres et Pressions
-  $sql = "SELECT d.filepath, c.field_book_value_picto_pression1_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_pression c ON c.field_book_picto_pression_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_pression_value WHERE n.type = 'book_les_pictos_pression' AND t.name = 'Espèces envahissantes / terrestres';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_pression1_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_pression c ON c.field_book_picto_pression_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_pression_value WHERE n.type = 'book_les_pictos_pression' AND t.name = 'Espèces envahissantes / terrestres' ORDER BY c.field_book_value_picto_pression1_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsEspEnvahT[$row['field_book_value_picto_pression1_value']] = $row['filepath']; 
-    $titleEspEnvahT = $row['title'];
-    $labelEspEnvahT = $row['field_book_value_picto_pression1_value'];
+    $rowsLabelEspEnvahT [$row['field_book_value_picto_pression1_value']] = $row['field_book_value_picto_pression1_value'];
+    $rowsTitleEspEnvahT[$row['field_book_value_picto_pression1_value']] = $row['title'];    
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Espèces envahissantes marines et Pressions
-  $sql = "SELECT d.filepath, c.field_book_value_picto_pression1_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_pression c ON c.field_book_picto_pression_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_pression_value WHERE n.type = 'book_les_pictos_pression' AND t.name = 'Espèces envahissantes / marines';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_pression1_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_pression c ON c.field_book_picto_pression_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_pression_value WHERE n.type = 'book_les_pictos_pression' AND t.name = 'Espèces envahissantes / marines' ORDER BY c.field_book_value_picto_pression1_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsEspEnvahM[$row['field_book_value_picto_pression1_value']] = $row['filepath']; 
-    $titleEspEnvahM = $row['title'];
-    $labelEspEnvahM = $row['field_book_value_picto_pression1_value'];
+    $rowsLabelEspEnvahM [$row['field_book_value_picto_pression1_value']] = $row['field_book_value_picto_pression1_value'];
+    $rowsTitleEspEnvahM[$row['field_book_value_picto_pression1_value']] = $row['title'];    
   }
 
   //On stock le bon picto en fonction de la valeur
@@ -1941,8 +1985,29 @@
   $urlOfPictoUsageMerToDisplay = $rowsUsageM[$etatUsageMer];
   $urlOfPictoEspEnvahTerreToDisplay = $rowsEspEnvahT[$etatEspTerre];
   $urlOfPictoEspEnvahMerToDisplay = $rowsEspEnvahM[$etatEspMer];
+  
+  //On stock le bon label en fonction de la valeur
+  $labelNavette = $rowsLabelNavette[$etatNavette];
+  $labelBati = $rowsLabelBati[$etatBati];
+  $labelTouriste = $rowsLabelTouriste[$etatTouriste];
+  $labelHab = $rowsLabelHab[$etatHabitant];
+  $labelImpactUsageT = $rowsLabelImpactUsageT[$etatUsageTerre];
+  $labelImpactUsageM = $rowsLabelImpactUsageM[$etatUsageMer];
+  $labelEspEnvahT = $rowsLabelEspEnvahT[$etatEspTerre];
+  $labelEspEnvahM = $rowsLabelEspEnvahM[$etatEspMer];
 
-  //Transforme value of picto to label
+  //On stock le bon titre en fonction de la valeur
+  $titleNavette = $rowsTitleNavette[$etatNavette];
+  $titleBati = $rowsTitleBati[$etatBati];
+  $titleTouriste = $rowsTitleTouriste[$etatTouriste];
+  $titleHab = $rowsTitleHab[$etatHabitant];
+  $titleImpactUsageT = $rowsTitleImpactUsageT[$etatUsageTerre];
+  $titleImpactUsageM = $rowsTitleImpactUsageM[$etatUsageMer];
+  $titleEspEnvahT = $rowsTitleEspEnvahT[$etatEspTerre];
+  $titleEspEnvahM = $rowsTitleEspEnvahM[$etatEspMer];
+
+
+  //Converion du label numérique en string
   switch ($labelNavette) {
     case 0: $labelNavette = '?'; break;
     case 1: $labelNavette = 'Non'; break;
@@ -2001,7 +2066,8 @@
     case 3: $labelEspEnvahM = 'Moyen'; break;    
     case 4: $labelEspEnvahM = 'Fort'; break;    
   } // fin switch
-  
+
+   
   ?>
 
   <div class="lesPicto">
@@ -2184,93 +2250,93 @@
   $etatPecheAutoSite = $result['niveau'];
   
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Statut de protection terrestre et Gestion / Conservation
-  $sql = "SELECT d.filepath, c.field_book_value_picto_gestions_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_gestions c ON c.field_book_picto_gestions_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_gestions_value WHERE n.type = 'book_les_pictos_gestions' AND t.name = 'Statut de protection terrestre';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_gestions_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_gestions c ON c.field_book_picto_gestions_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_gestions_value WHERE n.type = 'book_les_pictos_gestions' AND t.name = 'Statut de protection terrestre' ORDER BY c.field_book_value_picto_gestions_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsProtecT[$row['field_book_value_picto_gestions_value']] = $row['filepath']; 
-    $titleStatutProtecT = $row['title'];
-    $labelStatutProtecT = $row['field_book_value_picto_gestions_value'];
+    $rowsLabelProtectT [$row['field_book_value_picto_gestions_value']] = $row['field_book_value_picto_gestions_value'];
+    $rowsTitleProtectT[$row['field_book_value_picto_gestions_value']] = $row['title'];    
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Statut de protection marin et Gestion / Conservation
-  $sql = "SELECT d.filepath, c.field_book_value_picto_gestions_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_gestions c ON c.field_book_picto_gestions_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_gestions_value WHERE n.type = 'book_les_pictos_gestions' AND t.name = 'Statut de protection marin';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_gestions_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_gestions c ON c.field_book_picto_gestions_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_gestions_value WHERE n.type = 'book_les_pictos_gestions' AND t.name = 'Statut de protection marin' ORDER BY c.field_book_value_picto_gestions_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsProtecM[$row['field_book_value_picto_gestions_value']] = $row['filepath']; 
-    $titleStatutProtecM = $row['title'];
-    $labelStatutProtecM = $row['field_book_value_picto_gestions_value'];
+    $rowsLabelProtectM [$row['field_book_value_picto_gestions_value']] = $row['field_book_value_picto_gestions_value'];
+    $rowsTitleProtectM[$row['field_book_value_picto_gestions_value']] = $row['title'];
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Existence d'un gestionnaire et Gestion / Conservation
-  $sql = "SELECT d.filepath, c.field_book_value_picto_gestions_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_gestions c ON c.field_book_picto_gestions_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_gestions_value WHERE n.type = 'book_les_pictos_gestions' AND t.name = \"Existence d'un gestionnaire\";";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_gestions_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_gestions c ON c.field_book_picto_gestions_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_gestions_value WHERE n.type = 'book_les_pictos_gestions' AND t.name = \"Existence d'un gestionnaire\" ORDER BY c.field_book_value_picto_gestions_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsExistGestion[$row['field_book_value_picto_gestions_value']] = $row['filepath']; 
-    $titleGestion = $row['title'];
-    $labelGestion = $row['field_book_value_picto_gestions_value'];
+    $rowsLabelExistGestion [$row['field_book_value_picto_gestions_value']] = $row['field_book_value_picto_gestions_value'];
+    $rowsTitleExistGestion[$row['field_book_value_picto_gestions_value']] = $row['title'];
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici "Existence d'un gestionnaire sur le site" et Gestion / Conservation
-  $sql = "SELECT d.filepath, c.field_book_value_picto_gestions1_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_gestions c ON c.field_book_picto_gestions_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_gestions_value WHERE n.type = 'book_les_pictos_gestions' AND t.name = 'Présence du gestionnaire sur le site';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_gestions1_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_gestions c ON c.field_book_picto_gestions_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_gestions_value WHERE n.type = 'book_les_pictos_gestions' AND t.name = 'Présence du gestionnaire sur le site' ORDER BY c.field_book_value_picto_gestions1_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsExistGestionSite[$row['field_book_value_picto_gestions1_value']] = $row['filepath']; 
-    $titleGestionSite = $row['title'];
-    $labelGestionSite = $row['field_book_value_picto_gestions1_value'];
+    $rowsLabelExistGestionSite [$row['field_book_value_picto_gestions1_value']] = $row['field_book_value_picto_gestions1_value'];
+    $rowsTitleExistGestionSite[$row['field_book_value_picto_gestions1_value']] = $row['title'];
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici "Comité de gestion" et Gestion / Conservation
-  $sql = "SELECT d.filepath, c.field_book_value_picto_gestions_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_gestions c ON c.field_book_picto_gestions_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_gestions_value WHERE n.type = 'book_les_pictos_gestions' AND t.name = 'Comité de gestion';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_gestions_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_gestions c ON c.field_book_picto_gestions_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_gestions_value WHERE n.type = 'book_les_pictos_gestions' AND t.name = 'Comité de gestion' ORDER BY c.field_book_value_picto_gestions_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsComiteGestion[$row['field_book_value_picto_gestions_value']] = $row['filepath']; 
-    $titleComiteGestion = $row['title'];
-    $labelComiteGestion = $row['field_book_value_picto_gestions_value'];
+    $rowsLabelComiteGestion [$row['field_book_value_picto_gestions_value']] = $row['field_book_value_picto_gestions_value'];
+    $rowsTitleComiteGestion[$row['field_book_value_picto_gestions_value']] = $row['title'];
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici "Moyens disponibles" et Gestion / Conservation
-  $sql = "SELECT d.filepath, c.field_book_value_picto_gestions2_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_gestions c ON c.field_book_picto_gestions_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_gestions_value WHERE n.type = 'book_les_pictos_gestions' AND t.name = 'Moyens disponibles';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_gestions2_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_gestions c ON c.field_book_picto_gestions_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_gestions_value WHERE n.type = 'book_les_pictos_gestions' AND t.name = 'Moyens disponibles' ORDER BY c.field_book_value_picto_gestions2_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsMoyensDispo[$row['field_book_value_picto_gestions2_value']] = $row['filepath']; 
-    $titleMoyensDispo = $row['title'];
-    $labelMoyensDispo = $row['field_book_value_picto_gestions2_value'];
+    $rowsLabelMoyensDispo [$row['field_book_value_picto_gestions2_value']] = $row['field_book_value_picto_gestions2_value'];
+    $rowsTitleMoyensDispo[$row['field_book_value_picto_gestions2_value']] = $row['title'];
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici "Plan de gestion" et Gestion / Conservation
-  $sql = "SELECT d.filepath, c.field_book_value_picto_gestions3_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_gestions c ON c.field_book_picto_gestions_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_gestions_value WHERE n.type = 'book_les_pictos_gestions' AND t.name = 'Plan de gestion';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_gestions3_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_gestions c ON c.field_book_picto_gestions_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_gestions_value WHERE n.type = 'book_les_pictos_gestions' AND t.name = 'Plan de gestion' ORDER BY c.field_book_value_picto_gestions3_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsPlanGestion[$row['field_book_value_picto_gestions3_value']] = $row['filepath']; 
-    $titlePlanGestion = $row['title'];
-    $labelPlanGestion = $row['field_book_value_picto_gestions3_value'];
+    $rowsLabelPlanGestion [$row['field_book_value_picto_gestions3_value']] = $row['field_book_value_picto_gestions3_value'];
+    $rowsTitlePlanGestion[$row['field_book_value_picto_gestions3_value']] = $row['title'];
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici "Accès autorisé sur le site" et Gestion / Conservation
-  $sql = "SELECT d.filepath, c.field_book_value_picto_gestions_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_gestions c ON c.field_book_picto_gestions_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_gestions_value WHERE n.type = 'book_les_pictos_gestions' AND t.name = 'Accès autorisé sur le site';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_gestions_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_gestions c ON c.field_book_picto_gestions_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_gestions_value WHERE n.type = 'book_les_pictos_gestions' AND t.name = 'Accès autorisé sur le site' ORDER BY c.field_book_value_picto_gestions_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsAcces[$row['field_book_value_picto_gestions_value']] = $row['filepath']; 
-    $titleAccesAutoSite = $row['title'];
-    $labelAccesAutoSite = $row['field_book_value_picto_gestions_value'];
+    $rowsLabelAcces [$row['field_book_value_picto_gestions_value']] = $row['field_book_value_picto_gestions_value'];
+    $rowsTitleAcces[$row['field_book_value_picto_gestions_value']] = $row['title'];
   }
 
   //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici "Pêche autorisée sur le site" et Gestion / Conservation
-  $sql = "SELECT d.filepath, c.field_book_value_picto_gestions_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_gestions c ON c.field_book_picto_gestions_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_gestions_value WHERE n.type = 'book_les_pictos_gestions' AND t.name = 'Pêche autorisée sur le site';";  
+  $sql = "SELECT d.filepath, c.field_book_value_picto_gestions_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_gestions c ON c.field_book_picto_gestions_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_gestions_value WHERE n.type = 'book_les_pictos_gestions' AND t.name = 'Pêche autorisée sur le site' ORDER BY c.field_book_value_picto_gestions_value ASC;";  
   $result = db_query($sql);
   if (!$result) die('Invalid query: ' . mysql_error());
   else while (  $row  =  db_fetch_array($result) ) {
     $rowsPeche[$row['field_book_value_picto_gestions_value']] = $row['filepath']; 
-    $titlePecheAuto = $row['title'];
-    $labelPecheAuto = $row['field_book_value_picto_gestions_value'];
+    $rowsLabelPeche [$row['field_book_value_picto_gestions_value']] = $row['field_book_value_picto_gestions_value'];
+    $rowsTitlePeche[$row['field_book_value_picto_gestions_value']] = $row['title'];
   }
 
   //On stock le bon picto en fonction de la valeur
@@ -2283,6 +2349,28 @@
   $urlOfPictoPlanGestionToDisplay = $rowsPlanGestion[$etatPlanGestion];
   $urlOfPictoAccesToDisplay = $rowsAcces[$etatAccesAutoSite];
   $urlOfPictoPecheToDisplay = $rowsPeche[$etatPecheAutoSite];
+
+  //On stock le bon label en fonction de la valeur
+  $labelStatutProtecT = $rowsLabelProtectT[$etatProtectionT];
+  $labelStatutProtecM = $rowsLabelProtectM[$etatProtectionM];
+  $labelGestion = $rowsLabelExistGestion[$etatGestion];
+  $labelGestionSite = $rowsLabelExistGestionSite[$etatGestionSite];
+  $labelComiteGestion = $rowsLabelComiteGestion[$etatComiteGestion];
+  $labelMoyensDispo = $rowsLabelMoyensDispo[$etatMoyenDispo];
+  $labelPlanGestion = $rowsLabelPlanGestion[$etatPlanGestion];
+  $labelAccesAutoSite = $rowsLabelAcces[$etatAccesAutoSite];
+  $labelPecheAuto = $rowsLabelPeche[$etatPecheAutoSite];
+
+  //On stock le bon titre en fonction de la valeur
+  $titleStatutProtecT = $rowsTitleProtecT[$etatProtectionT];
+  $titleStatutProtecM = $rowsTitleProtecM[$etatProtectionM];
+  $titleGestion = $rowsTitleExistGestion[$etatGestion];
+  $titleGestionSite = $rowsTitleExistGestionSite[$etatGestionSite];
+  $titleComiteGestion = $rowsTitleComiteGestion[$etatComiteGestion];
+  $titleMoyensDispo = $rowsTitleMoyensDispo[$etatMoyenDispo];
+  $titlePlanGestion = $rowsTitlePlanGestion[$etatPlanGestion];
+  $titleAccesAutoSite = $rowsTitleAcces[$etatAccesAutoSite];
+  $titlePecheAuto = $rowsTitlePeche[$etatPecheAutoSite];
 
   //Transforme value of picto to label
   switch ($labelStatutProtecT) {
