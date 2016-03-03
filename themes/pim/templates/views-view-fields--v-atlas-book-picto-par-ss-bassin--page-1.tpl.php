@@ -48,11 +48,15 @@ $title_of_sous_bassin = $result['title'];
 
 
 
-echo "ID de l'ile : ".$nid.'<br/>';
+//echo "ID de l'ile : ".$nid.'<br/>';
+//echo "field_ile_code_value : ".$field_ile_code_value.'<br/>';
 
-echo "Son sous bassin : ".$title_of_sous_bassin.'<br/>';
+$currentIsland = node_load($nid);
 
-echo "field_ile_code_value : ".$field_ile_code_value.'<br/>';
+echo "<h2>".$title_of_sous_bassin.'</h2>';
+echo "<h4>".$currentIsland->title.'</h4>';
+
+
 
 
 //Get termName
@@ -91,5 +95,5 @@ $result = db_fetch_array($result);
 $etatMami = $result['niveau'] - 1;
 echo "Mammifères : ".$etatBota."<br/>";
 
-
+echo "<br/><center>-------------------------------------------------------------------------------------------------------------------------</center><br/>";
 ?>
