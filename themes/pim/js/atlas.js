@@ -25,9 +25,7 @@ $( document ).ready(function() {
 
 		var allClassBody = $('body').attr('class');
 		allClassBody = allClassBody.split(' ');
-		console.log(allClassBody[3]);
-		console.log(allClassBody[4]);
-		
+				
         
         if(lang == 'fr') var bar = "<div class='tabs'><ul class='tabs primary clearfix'><li><a href='"+pathBase+"/node/"+nodeID+"'><span class='tab'>Voir</span></a></li><li><a href='"+pathBase+"/node/"+nodeID+"/edit'><span class='tab'>Modifier</span></a></li><li class='tab'><a href='"+pathBase+"/node/"+nodeID+"/revisions' class='tab'><span class='tab'>Révisions</span></a></li><li class='active'><a href='"+pathBase+"/comment/reply/"+nodeID+"#comment-form' class='active'><span class='tab'>Commenter</span></a></li></div>";
 		else var bar = "<div class='tabs'><ul class='tabs primary clearfix'><li><a href='"+pathBase+"/en/node/"+nodeID+"'><span class='tab'>View</span></a></li><li><a href='"+pathBase+"/en/node/"+nodeID+"/edit'><span class='tab'>Edit</span></a></li><li class='tab'><a href='"+pathBase+"/en/node/"+nodeID+"/revisions' class='tab'><span class='tab'>Revisions</span></a></li><li class='active'><a href='"+pathBase+"/en/comment/reply/"+nodeID+"#comment-form' class='active'><span class='tab'>Comment</span></a></li></div>";
