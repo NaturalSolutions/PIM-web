@@ -2429,6 +2429,16 @@ div.containerOfCluster div.views-row-last div.containerOfOneComment {
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+div.containerOfMyIsland div.imgIsland div.field-item{
+  display: inline-block;
+  padding: 10px;
+}
+div.containerOfMyIsland div.imgIsland div.field-item img{
+  max-width: 643px;
+}
+div.containerOfMyIsland div.imgIsland {
+  text-align: center;
+}
 div.containerOfMyIsland div.myFormOnVisu fieldset.collapsible.collapsed, 
 div.containerOfMyIsland div.myFormOnVisu fieldset.collapsible,
 div.containerOfMyIsland div.myFormOnVisu input#edit-preview,
@@ -2436,69 +2446,6 @@ div.containerOfMyIsland div.myFormOnVisu div#edit-body-wrapper,
 div.containerOfMyIsland div.myFormOnVisu div.body-field-wrapper{
   display: none;
 }
-/* div.containerOfMyIsland div.myFormOnVisu form table.infoIsland,
-div.containerOfMyIsland div.myFormOnVisu div#edit-field-ile-code-value-wrapper,
-div.containerOfMyIsland div.myFormOnVisu div#edit-title-wrapper, 
-div.containerOfMyIsland div.myFormOnVisu div.body-field-wrapper, 
-div.containerOfMyIsland div.myFormOnVisu fieldset.collapsible.collapsed, 
-div.containerOfMyIsland div.myFormOnVisu fieldset.collapsible, 
-div.containerOfMyIsland div.myFormOnVisu div#edit-field-ile-autor-0-value-wrapper, 
-div.containerOfMyIsland div.myFormOnVisu p.labelFieldImages, 
-div.containerOfMyIsland div.myFormOnVisu div#field-ile-image-items, 
-div.containerOfMyIsland div.myFormOnVisu div#edit-field-ile-id-ss-bassin-0-value-wrapper,
-div.containerOfMyIsland div.myFormOnVisu div#edit-field-ile-id-cluster-0-value-wrapper, 
-div.containerOfMyIsland div.myFormOnVisu div#edit-field-ile-have-ss-bassin-nid-nid-wrapper,
-div.containerOfMyIsland div.myFormOnVisu div#edit-field-ile-have-cluster-nid-nid-wrapper,
-div.containerOfMyIsland div.myFormOnVisu div.contenerRelatif,
-div.containerOfMyIsland div.myFormOnVisu input#edit-preview,
-div.containerOfMyIsland div.myFormOnVisu input#edit-delete,
-div.containerOfMyIsland div.myFormOnVisu input#edit-field-ile-pictosurcharge-field-ile-pictosurcharge-add-more,
-div.containerOfMyIsland div.myFormOnVisu div#field-ile-pictosurcharge-items table thead,
-div.containerOfMyIsland div.myFormOnVisu div#field-ile-pictosurcharge-items td.delta-order,
-div.containerOfMyIsland div.myFormOnVisu #node-form > div > p{
-  display: none;
-}
-div.containerOfMyIsland div.myFormOnVisu div.form-item div.description{
-  display: none;
-  display: block;
-  width: 150px;
-  font-size: 10px;
-}
-div.containerOfMyIsland div.myFormOnVisu div#field-ile-pictosurcharge-items{
-  padding-bottom: 30px;
-  padding-top: 58px;
-}
-div.containerOfMyIsland div.myFormOnVisu div#field-ile-pictosurcharge-items table, div.containerOfMyIsland div.myFormOnVisu div#field-ile-pictosurcharge-items tr,div.containerOfMyIsland div.myFormOnVisu div#field-ile-pictosurcharge-items th,div.containerOfMyIsland div.myFormOnVisu div#field-ile-pictosurcharge-items td {  
-  width: 179px;
-  display: block;
-  position: relative;
-}
-div.containerOfMyIsland div.myFormOnVisu {
-  position: relative;  
-}
-div.containerOfMyIsland div.myFormOnVisu input[value='Enregistrer']{
-  display: none;
-}
-div.containerOfMyIsland div.myFormOnVisu div#field-ile-pictosurcharge-items input{
-  width: 174px;
-  height: 56px;
-}
-div.containerOfMyIsland div.myFormOnVisu div#field-ile-pictosurcharge-items input.form-submit{  
-  
-}
-div.containerOfMyIsland div.myFormOnVisu div#field-ile-pictosurcharge-items div.filefield-upload input{  
-  width: 177px;
-}
-div.containerOfMyIsland div.myFormOnVisu div#field-ile-pictosurcharge-items div.filefield-upload input[value='Transférer']{  
-  float: left;
-  margin-top: 6px;
-}
-div.containerOfMyIsland div.myFormOnVisu div#field-ile-pictosurcharge-items input#edit-field-ile-pictosurcharge-field-ile-pictosurcharge-add-more, div.containerOfMyIsland div.myFormOnVisu div#field-ile-pictosurcharge-items input.form-file{
-  width: auto;
-} */
-/* div.containerOfMyIsland div.popup div.edit div.myFormOnVisu #field_ile_pictosurcharge_values > tbody > tr.draggable.even{
-  display:  none; 
-} */
 div.containerOfMyIsland div.myFormOnVisu input{
   width: 191px;
 }
@@ -2516,16 +2463,6 @@ div.containerOfMyIsland div.onePicto i.star{
   margin-top: -59px;
   display: block;
 }
-div.containerOfMyIsland div.imgIsland div.field-item{
-  display: inline-block;
-  padding: 10px;
-}
-div.containerOfMyIsland div.imgIsland div.field-item img{
-  max-width: 643px;
-}
-div.containerOfMyIsland div.imgIsland {
-  text-align: center;
-}
 div.containerOfMyIsland div.onePicto.expert{
   vertical-align: top;
 }
@@ -2536,7 +2473,6 @@ div.containerOfMyIsland div.onePicto > img{
   -moz-object-fit: contain;
   -webkit-object-fit: contain;
   -ms-object-fit: contain;
-
 }
 div.containerOfMyIsland div.lesPicto{
   width: 100%;
@@ -4943,23 +4879,6 @@ body.page-projet-atlas-tous-les-pictogrammes div.view-tous-les-pictogrammes img.
   height: auto;
   padding: 8px;
 }
-
-/***************************************************************************/
-/***************************************************************************/
-/*                       VISU PICTO_CONNAISSANCE                           */
-/*                                                                         */
-/***************************************************************************/
-/*********************************  ****************************************/
-/*********************************  ****************************************/
-body.page-projet-atlas-pictos-par-sous-bassin h1{
-  margin-bottom: 40px;
-  display: block;
-  height: 38px;
-  padding-top: 10px;
-  border-bottom: 3px dashed #666666;
-  text-decoration: initial;
-  font-size: 1.8em;  
-}
 /***************************************************************************/
 /***************************************************************************/
 /*                       VISU PICTO_CONNAISSANCE                           */
@@ -5165,4 +5084,367 @@ body.node-type-book-les-pictos-gestions.section-node-edit div#edit-field-book-va
 body.node-type-book-les-pictos-gestions.section-node-edit div#edit-field-book-value-picto-gestions3-value-wrapper, 
 body.node-type-book-les-pictos-gestions.section-node-edit input#edit-preview{
   display:  none; 
+}
+/***************************************************************************/
+/***************************************************************************/
+/*                   PAGE PICTO PAR SOUS BASSIN                            */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.page-projet-atlas-pictos-par-sous-bassin h1{
+  margin-bottom: 40px;
+  display: block;
+  height: 38px;
+  padding-top: 10px;
+  border-bottom: 3px dashed #666666;
+  text-decoration: initial;
+  font-size: 1.8em;  
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.pager{
+  margin-top: 25px !important;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.pager a.itemPager{
+  display: inline-block;
+  float: left;
+  text-decoration: none;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.pager a.itemPager.active{
+  text-decoration: underline;
+  font-weight: bold;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.myFormOnVisu fieldset.collapsible.collapsed, 
+body.page-projet-atlas-pictos-par-sous-bassin div.myFormOnVisu fieldset.collapsible,
+body.page-projet-atlas-pictos-par-sous-bassin div.myFormOnVisu input#edit-preview,
+body.page-projet-atlas-pictos-par-sous-bassin div.myFormOnVisu div#edit-body-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.myFormOnVisu div.body-field-wrapper{
+  display: none;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.myFormOnVisu input{
+  width: 191px;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.onePicto{
+  cursor: pointer;
+  width: 60px;
+  height: 60px;
+  font-size: 10px;
+  display: inline-block;
+  border: 1px dotted #c1c1c1;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.onePicto i.star{
+  font-weight: bold;
+  font-size: 22px;
+  display: block;
+  position: absolute;
+  top: 6px;
+  margin-left: 45px;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.onePicto.expert{
+  vertical-align: top;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.onePicto > img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  -moz-object-fit: contain;
+  -webkit-object-fit: contain;
+  -ms-object-fit: contain;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto{
+  width: 100%;
+  position: relative;
+  padding-bottom: 24px;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup{
+  position: absolute;
+  top: 0;
+  left: -205px;
+  display: none;
+  background-color: #fff;
+  width: 195px;
+  height: auto;
+  font-size: 14px;
+  border: 1px solid #4472c4;
+  z-index: 99;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup.green{
+  border: 1px solid #78e285;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup.marron{
+  border: 1px solid #385723;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup.red{
+  border: 1px solid #ff0000;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div.actionLine{
+  border-bottom: 1px solid #4472c4;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup.green div.actionLine{
+  border-bottom: 1px solid #78e285;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup.marron div.actionLine{
+  border-bottom: 1px solid #385723;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup.red div.actionLine{
+  border-bottom: 1px solid #ff0000;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div.actionLine a{
+  text-decoration: none;
+  display: inline-block;
+  width: 44%;
+  text-align: center;
+  padding: 3%;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div.actionLine a.editPicto{
+  width: 34%;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.popup div.edit div.remarquable{
+  padding: 10px 0;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.popup.hidden{
+  display: none !important;
+}
+body.page-projet-atlas-pictos-par-sous-bassin img.surcharge{
+  border: 1px solid #000;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.popup div.edit p.desc{  
+  padding: 6px 6px;
+  font-style: italic;
+  text-align: center;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.popup div.croix{  
+  float: right;
+  margin-top: -1px;
+  border: 1px solid #4472c4;
+  padding: 0px 4px;
+  border-right: 0 !important;
+  z-index: 99;
+  cursor: pointer;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.popup.green div.croix{
+  border: 1px solid #78e285;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.popup.red div.croix{
+  border: 1px solid #ff0000;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.popup.marron div.croix{
+  border: 1px solid #385723;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.popup div.edit div.commentaire{
+  padding: 10px 0;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div.actionLine a.select{
+  background-color: #4472c4;
+  color: #fff !important;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup.green div.actionLine a.select{
+  background-color: #78e285;
+  color: #fff !important;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup.marron div.actionLine a.select{
+  background-color: #385723;
+  color: #fff !important;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup.red div.actionLine a.select{
+  background-color: #ff0000;
+  color: #fff !important;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div.actionLine a:not(.select):hover{
+  color : #4472c4 !important;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup.green div.actionLine a:not(.select):hover{
+  color : #78e285 !important;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup.marron div.actionLine a:not(.select):hover{
+  color : #385723 !important;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup.red div.actionLine a:not(.select):hover{
+  color : #ff0000 !important;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div.linePicto {
+  padding-top: 20px;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div.linePicto img{
+  height: 50px;
+  display: inline-block;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div.visu div.linePicto p.labelEtat{
+  padding: 0 10px;
+  margin: 0;
+  display: inline-block;
+  padding-right: 12px;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div.edit div.linePicto p.labelEtat{
+  position: absolute;
+  top: 112px;
+  left: 52px;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup p.titleGenrePicto{
+  font-weight:  bold; 
+  padding: 10px;
+  margin: 0;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup p.titleTypePicto{
+  padding: 0 10px;
+  margin: 0;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup p.noPicto{
+  padding: 0 10px;
+  margin: 0;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div.remarquable{
+  padding: 25px 12px 18px 12px;
+  font-weight: bold;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div.commentaire{
+  padding: 10px 12px 18px 12px;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div.commentaire label{
+  display: block;
+  font-weight: 600;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup a.linkToBase{
+  padding: 12px 0 18px 0;
+  display: block;
+  text-align: center;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-field-book-star-on-picto-value,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-field-book-star-on-picto-value-1,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-field-book-star-on-picto-value-2,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-field-book-star-on-picto-value-3,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-field-book-star-on-picto-value-4,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-field-book-star-on-picto-value-5,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-field-book-star-on-picto-value-6,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-field-book-star-on-picto-value-7,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-field-book-star-on-picto-value-8,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-field-book-star-on-picto-value-9,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-field-book-star-on-picto-value-10,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-field-book-star-on-picto-value-11,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-field-book-star-on-picto-value-12,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-field-book-star-on-picto-value-14,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-field-book-star-on-picto-value-13{
+  float: left;
+  width: 20px;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-value-picto-surcharge-value-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-value-picto-surcharge-value-1-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-value-picto-surcharge-value-2-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-value-picto-surcharge-value-3-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-value-picto-surcharge-value-4-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-value-picto-surcharge-value-5-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-value-picto-surcharge-value-6-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-value-picto-surcharge-value-7-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-value-picto-surcharge-value-8-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-value-picto-surcharge-value-9-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-value-picto-surcharge-value-10-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-value-picto-surcharge-value-11-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-value-picto-surcharge-value-12-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-value-picto-surcharge-value-13-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-value-picto-surcharge-value-14-wrapper{
+  padding-left: 5px;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-type-picto-surcharge-0-value-wrapper, 
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-type-picto-surcharge-0-value-1-wrapper, 
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-type-picto-surcharge-0-value-2-wrapper, 
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-type-picto-surcharge-0-value-3-wrapper, 
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-type-picto-surcharge-0-value-4-wrapper, 
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-type-picto-surcharge-0-value-5-wrapper, 
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-type-picto-surcharge-0-value-6-wrapper, 
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-type-picto-surcharge-0-value-7-wrapper, 
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-type-picto-surcharge-0-value-8-wrapper, 
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-type-picto-surcharge-0-value-9-wrapper, 
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-type-picto-surcharge-0-value-10-wrapper, 
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-type-picto-surcharge-0-value-11-wrapper, 
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-type-picto-surcharge-0-value-12-wrapper, 
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-type-picto-surcharge-0-value-13-wrapper, 
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-type-picto-surcharge-0-value-14-wrapper, 
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-genre-picto-surcharge-0-value-wrapper, 
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-genre-picto-surcharge-0-value-1-wrapper, 
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-genre-picto-surcharge-0-value-2-wrapper, 
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-genre-picto-surcharge-0-value-3-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-genre-picto-surcharge-0-value-4-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-genre-picto-surcharge-0-value-5-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-genre-picto-surcharge-0-value-6-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-genre-picto-surcharge-0-value-7-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-genre-picto-surcharge-0-value-8-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-genre-picto-surcharge-0-value-9-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-genre-picto-surcharge-0-value-10-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-genre-picto-surcharge-0-value-11-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-genre-picto-surcharge-0-value-12-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-genre-picto-surcharge-0-value-13-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-genre-picto-surcharge-0-value-14-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div.form-item:first-of-type,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div.edit,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-preview-1,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-preview-2,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-preview-3,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-preview-4,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-preview-5,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-preview-6,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-preview-7,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-preview-8,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-preview-9,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-preview-10,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-preview-11,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-preview-12,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-preview-13,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-preview-14,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-delete,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-delete-1,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-delete-2,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-delete-3,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-delete-4,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-delete-5,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-delete-6,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-delete-7,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-delete-8,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-delete-9,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-delete-10,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-delete-11,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-delete-12,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-delete-13,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-delete-14,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.onePicto.expert.interet.botanique div.popup div#edit-field-book-value-picto-surcharge-value-3-wrapper, 
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.onePicto.expert.interet.ornithologie div.popup div#edit-field-book-value-picto-surcharge-value-4-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.onePicto.expert.interet.herpetologie div.popup div#edit-field-book-value-picto-surcharge-value-5-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.onePicto.expert.interet.mamifere div.popup div#edit-field-book-value-picto-surcharge-value-6-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.onePicto.expert.interet.chiroptere div.popup div#edit-field-book-value-picto-surcharge-value-7-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.onePicto.expert.interet.fauneM div.popup div#edit-field-book-value-picto-surcharge-value-9-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.onePicto.expert.interet.floreM div.popup div#edit-field-book-value-picto-surcharge-value-10-wrapper{
+  display: none;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-star-com-picto-0-value-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-star-com-picto-0-value-1-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-star-com-picto-0-value-2-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-star-com-picto-0-value-3-wrapper,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-star-com-picto-0-value-4-wrapper,  
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-star-com-picto-0-value-5-wrapper,  
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-star-com-picto-0-value-6-wrapper,  
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-star-com-picto-0-value-7-wrapper,  
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-star-com-picto-0-value-8-wrapper,  
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-star-com-picto-0-value-9-wrapper,  
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-star-com-picto-0-value-10-wrapper,  
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-star-com-picto-0-value-11-wrapper,  
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-star-com-picto-0-value-12-wrapper,  
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-star-com-picto-0-value-13-wrapper,  
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div#edit-field-book-star-com-picto-0-value-14-wrapper{  
+  padding-left: 4px;
+}
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-submit-1,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-submit-2,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-submit-4,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-submit-3,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-submit-5,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-submit-5,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-submit-6,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-submit-7,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-submit-8,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-submit-9,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-submit-10,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-submit-11,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-submit-12,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-submit-14,
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup input#edit-submit-13{
+  margin-left: 2px;
+  margin-bottom: 2px;
 }

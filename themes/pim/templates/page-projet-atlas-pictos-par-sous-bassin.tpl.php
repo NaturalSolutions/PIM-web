@@ -119,6 +119,13 @@
 
  
 </head>
+
+<?php 
+module_load_include('inc', 'node', 'node.pages');    
+$node_type = 'book_les_pictos_surcharge';
+$form_id = $node_type . '_node_form';
+global $user, $base_url;  
+?>
 <body class="<?php print $classes; ?>">
 
   <?php if ($primary_links): ?>
@@ -221,7 +228,631 @@
 
         <div id="content-area">
           <h1>Pictogrammes par sous-bassins</h1>
-          <?php print $content; ?>
+          <?php 
+         
+          //Get param in url for pager
+          if(isset($_GET["pager"])) $pager = $_GET["pager"];
+          else $pager = 0; 
+
+          //Select all island of PIM BDD
+          $sql = "SELECT p.field_bdi_dp_code_ile_value, 
+          replace(
+            replace(
+              replace(      
+                replace(      
+                  replace(      
+                    replace(      
+                      replace(      
+                        replace(      
+                          replace(      
+                            replace(      
+                              replace(c.name,'Algérie','Algeria'),      
+                            'Tunisie-Nord','Tunisie-Nord'),
+                                          'Tunisie-Est','Eastern Tunisia'),
+                                      'Sicile','Sicily'),
+                                  'Sardaigne','Sardinia'),
+                              'Malte','Malta'),
+                          'Italie - Sud','Italy Tyrrhenian'),
+                'Espagne-Sud et Est','Eastern Spain'),
+                  'Corse','Corsica'),
+            'Adriatique Ouest','Italy Tyrrhenian'),
+          'Baléares','Balearic Islands') nameSousBassin
+          FROM drp_content_type_bd_i_description_physique p
+          LEFT JOIN drp_term_data c
+          ON c.tid = p.field_bdi_dp_zone_geographique_value
+          WHERE p.field_bdi_dp_ispim_island_value = 'Oui' 
+          OR p.field_bdi_dp_ispim_island_value IS NULL
+          ORDER BY nameSousBassin ASC LIMIT 10 OFFSET ".$pager."0;";           
+
+          $result = db_query($sql);    
+          $cpt = 0;                  
+          //Display
+          if (!$result) die('Invalid query: ' . mysql_error());
+          else while (  $row  =  db_fetch_array($result) ) {
+            
+            //Si le nom du sous bassin est different de l'ancien on l'affiche
+            if($row['nameSousBassin'] != $tabOfNameSousBassin[$cpt -1]) echo "<h2>".$row['nameSousBassin']."</h2>";
+            
+            //Stock ancien nom du sous bassin pour comparaison
+            $tabOfNameSousBassin[$cpt] = $row['nameSousBassin'];
+            //Increment compteur
+            $cpt++;
+
+            //Get termName
+            $termName = $row['field_bdi_dp_code_ile_value'];     
+            $myTerm = taxonomy_get_term_by_name($termName);
+            $myTid = $myTerm[0]->tid;
+            $allSyno = taxonomy_get_synonyms($myTid);
+            $firstSyno = $allSyno[0];
+
+            //Affichage island
+            echo "<p><a target='_blank' class='titleIsland' href='$base_url/fiche-Ile/$termName'>".$firstSyno."</a></p>";            
+
+            /*-- ----------------------------------------------------------------------------
+            -- État des connaissances
+            -- ----------------------------------------------------------------------------*/
+            
+            //Bota
+            $sql1 = "select b.niveau from picto_etaco_bota b where code_ile = '".$termName."'";           
+            $result1 = db_query($sql1);
+            $result1 = db_fetch_array($result1); 
+            $etatBota = $result1['niveau'] - 1;   
+
+            //Ornithologie
+            $sql1 = "select b.niveau from picto_etaco_ornitho b where code_ile = '".$termName."'";           
+            $result1 = db_query($sql1);
+            $result1 = db_fetch_array($result1);             
+            $etatOrni = $result1['niveau'] - 1;
+            
+            //Herpétologie
+            $sql1 = "select b.niveau from picto_etaco_herpeto b where code_ile = '".$termName."'";           
+            $result1 = db_query($sql1);
+            $result1 = db_fetch_array($result1);
+            $etatHerpe = $result1['niveau'] - 1;
+            
+            //Mammifères
+            $sql1 = "select b.niveau from picto_etaco_mamm b where code_ile = '".$termName."'";           
+            $result1 = db_query($sql1);
+            $result1 = db_fetch_array($result1);             
+            $etatMami = $result1['niveau'] - 1;
+            
+            //Chiroptères
+            $sql1 = "select b.niveau from picto_etaco_chiro b where code_ile = '".$termName."'";           
+            $result1 = db_query($sql1);
+            $result1 = db_fetch_array($result1);             
+            $etatChiro = $result1['niveau'] - 1;
+                          
+            //Invertébrés
+            $sql1 = "select b.niveau from picto_etaco_invert b where code_ile = '".$termName."'";           
+            $result1 = db_query($sql1);
+            $result1 = db_fetch_array($result1);             
+            $etatInvert = $result1['niveau'] - 1;  
+            
+            //Caractéristique environnentales
+            $sql1 = "select b.niveau from picto_etaco_carenv b where code_ile = '".$termName."'";           
+            $result1 = db_query($sql1);
+            $result1 = db_fetch_array($result1);             
+            $etatEnviro = $result1['niveau'] - 1;
+            
+            //Socie économie
+            $sql1 = "select b.niveau from picto_etaco_soceco b where code_ile = '".$termName."'";           
+            $result1 = db_query($sql1);
+            $result1 = db_fetch_array($result1);             
+            $etatEco = $result1['niveau'] - 1;         
+            
+            //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Botanique et connaissance
+            $sql1 = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Botanique' ORDER BY c.field_book_value_picto_connaiss_value ASC;";  
+            $result1 = db_query($sql1);
+            if (!$result1) die('Invalid query: ' . mysql_error());
+            else while (  $row  =  db_fetch_array($result1) ) {
+              $rowsBota[$row['field_book_value_picto_connaiss_value']] = $row['filepath'];
+              $rowsLabelBota [$row['field_book_value_picto_connaiss_value']] = $row['field_book_value_picto_connaiss_value'];
+              $rowsTitleBota[$row['field_book_value_picto_connaiss_value']] = $row['title'];    
+            }
+
+            //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Ornithologie et connaissance
+            $sql1 = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Ornithologie' ORDER BY c.field_book_value_picto_connaiss_value ASC;";  
+            $result1 = db_query($sql1);
+            if (!$result1) die('Invalid query: ' . mysql_error());
+            else while (  $row  =  db_fetch_array($result1) ) {
+              $rowsOrni[$row['field_book_value_picto_connaiss_value']] = $row['filepath'];   
+              $rowsLabelOrni [$row['field_book_value_picto_connaiss_value']] = $row['field_book_value_picto_connaiss_value'];
+              $rowsTitleOrni[$row['field_book_value_picto_connaiss_value']] = $row['title'];    
+            }
+
+            //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Herpétologie et connaissance
+            $sql1 = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Herpétologie' ORDER BY c.field_book_value_picto_connaiss_value ASC;";  
+            $result1 = db_query($sql1);
+            if (!$result1) die('Invalid query: ' . mysql_error());
+            else while (  $row  =  db_fetch_array($result1) ) {
+              $rowsHerpeto[$row['field_book_value_picto_connaiss_value']] = $row['filepath'];
+              $rowsLabelHerpeto [$row['field_book_value_picto_connaiss_value']] = $row['field_book_value_picto_connaiss_value'];
+              $rowsTitleHerpeto[$row['field_book_value_picto_connaiss_value']] = $row['title'];    
+            }
+
+            //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Mammifères et connaissance
+            $sql1 = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Mammifères' ORDER BY c.field_book_value_picto_connaiss_value ASC;";  
+            $result1 = db_query($sql1);
+            if (!$result1) die('Invalid query: ' . mysql_error());
+            else while (  $row  =  db_fetch_array($result1) ) {
+              $rowsMami[$row['field_book_value_picto_connaiss_value']] = $row['filepath']; 
+              $rowsLabelMami [$row['field_book_value_picto_connaiss_value']] = $row['field_book_value_picto_connaiss_value'];
+              $rowsTitleMami[$row['field_book_value_picto_connaiss_value']] = $row['title'];    
+            }
+
+            //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Chiroptères et connaissance
+            $sql1 = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Chiroptères' ORDER BY c.field_book_value_picto_connaiss_value ASC;";  
+            $result1 = db_query($sql1);
+            if (!$result1) die('Invalid query: ' . mysql_error());
+            else while (  $row  =  db_fetch_array($result1) ) {
+              $rowsChiro[$row['field_book_value_picto_connaiss_value']] = $row['filepath']; 
+              $rowsLabelChiro [$row['field_book_value_picto_connaiss_value']] = $row['field_book_value_picto_connaiss_value'];
+              $rowsTitleChiro[$row['field_book_value_picto_connaiss_value']] = $row['title'];    
+            }
+
+            //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Invertébrés et connaissance
+            $sql1 = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Invertébrés' ORDER BY c.field_book_value_picto_connaiss_value ASC;";  
+            $result1 = db_query($sql1);
+            if (!$result1) die('Invalid query: ' . mysql_error());
+            else while (  $row  =  db_fetch_array($result1) ) {
+              $rowsInvert[$row['field_book_value_picto_connaiss_value']] = $row['filepath']; 
+              $rowsLabelInvert [$row['field_book_value_picto_connaiss_value']] = $row['field_book_value_picto_connaiss_value'];
+              $rowsTitleInvert[$row['field_book_value_picto_connaiss_value']] = $row['title'];    
+            }
+
+            //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici caractéristique environnentales
+            $sql1 = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Caractéristique environnementales' ORDER BY c.field_book_value_picto_connaiss_value ASC;";  
+            $result1 = db_query($sql1);
+            if (!$result1) die('Invalid query: ' . mysql_error());
+            else while (  $row  =  db_fetch_array($result1) ) {
+              $rowsCaraEnviro[$row['field_book_value_picto_connaiss_value']] = $row['filepath'];
+              $rowsLabelCaraEnviro [$row['field_book_value_picto_connaiss_value']] = $row['field_book_value_picto_connaiss_value'];
+              $rowsTitleCaraEnviro[$row['field_book_value_picto_connaiss_value']] = $row['title'];    
+            }
+
+            //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Socie économie
+            $sql1 = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Socio economie' ORDER BY c.field_book_value_picto_connaiss_value ASC;";  
+            $result1 = db_query($sql1);
+            if (!$result1) die('Invalid query: ' . mysql_error());
+            else while (  $row  =  db_fetch_array($result1) ) {
+              $rowsEco[$row['field_book_value_picto_connaiss_value']] = $row['filepath'];
+              $rowsLabelEco [$row['field_book_value_picto_connaiss_value']] = $row['field_book_value_picto_connaiss_value'];
+              $rowsTitleEco[$row['field_book_value_picto_connaiss_value']] = $row['title'];    
+            }
+
+            //On stock le bon picto en fonction de la valeur
+            $urlOfPictoBotaToDisplay = $rowsBota[$etatBota];
+            $urlOfPictoOrniToDisplay = $rowsOrni[$etatOrni];
+            $urlOfPictoHerpeToDisplay = $rowsHerpeto[$etatHerpe];
+            $urlOfPictoMamiToDisplay = $rowsMami[$etatMami];
+            $urlOfPictoChiroToDisplay = $rowsChiro[$etatChiro];
+            $urlOfPictoInvertToDisplay = $rowsInvert[$etatInvert];
+            $urlOfPictoEnviroToDisplay = $rowsCaraEnviro[$etatEnviro];
+            $urlOfPictoEcoToDisplay = $rowsEco[$etatEco];
+
+            //On stock le bon label en fonction de la valeur
+            $labelBota = $rowsLabelBota[$etatBota];
+            $labelOrni = $rowsLabelOrni[$etatOrni];
+            $labelHerpe = $rowsLabelHerpeto[$etatHerpe];
+            $labelMami = $rowsLabelMami[$etatMami];
+            $labelChiro = $rowsLabelChiro[$etatChiro];
+            $labelInvert = $rowsLabelInvert[$etatInvert];
+            $labelCaractEnv = $rowsLabelCaraEnviro[$etatEnviro];
+            $labelSocioEco = $rowsLabelEco[$etatEco];
+
+            //On stock le bon titre en fonction de la valeur
+            $titleBota = $rowsTitleBota[$etatBota];
+            $titleOrni = $rowsTitleOrni[$etatOrni];
+            $titleHerpe = $rowsTitleHerpeto[$etatHerpe];
+            $titleMami = $rowsTitleMami[$etatMami];
+            $titleChiro = $rowsTitleChiro[$etatChiro];
+            $titleInvert = $rowsTitleInvert[$etatInvert];
+            $titleCaractEnv = $rowsTitleCaraEnviro[$etatEnviro];
+            $titleSocioEco = $rowsTitleEco[$etatEco];
+
+            /*
+            * FAUNE MARINE
+            */
+            //Get nid of picto_surcharge to load the correct node edit form -> FauneM
+            $idPictoMSurcharge = ''; $comValueFauneM = ''; $isRemarquableFauneM = ''; $valueOfPictoSurchargeFauneM = ''; $urlPictoSurchargeFauneM = '';
+            $sql1 = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur: ".$termName."' AND s.field_book_type_picto_surcharge_value = 'fauneM' AND s.field_book_genre_picto_surcharge_value = 'connaissance';";
+            $result1 = db_query($sql1);  
+            if (!$result1) die('Invalid query: ' . mysql_error());
+            else while (  $row  =  db_fetch_array($result1) ) {
+              $idPictoMSurcharge = $row['nid'];  
+              $comValueFauneM = $row['field_book_star_com_picto_value'];  
+              $isRemarquableFauneM = $row['field_book_star_on_picto_value'];
+              $valueOfPictoSurchargeFauneM = $row['field_book_value_picto_surcharge_value'];
+
+              //Si on a une valeur surchargé alors on va chercher le pictogrammes correspondant
+              if($valueOfPictoSurchargeFauneM != ''){
+                //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici FauneM et connaissance
+                $sql2 = "SELECT d.filepath, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND c.field_book_value_picto_connaiss_value = ".$valueOfPictoSurchargeFauneM." AND t.name = 'Faune marine';";  
+                $result2 = db_query($sql2);
+                if (!$result2) die('Invalid query: ' . mysql_error());
+                else while (  $row  =  db_fetch_array($result2) ) $urlPictoSurchargeFauneM = $row['filepath'];      
+              }
+
+            }
+            if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+            //else create a blank node    
+            else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
+            $outputFauneM = drupal_get_form($form_id, $node);
+
+            /*
+            * FLORE MARINE
+            */
+            //Get nid of picto_surcharge to load the correct node edit form -> FloreM
+            $idPictoMSurcharge = ''; $comValueFloreM = ''; $isRemarquableFloreM = ''; $valuePictoSurchargeFloreM = ''; $urlPictoSurchargeFloreM = '';
+            $sql1 = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur: ".$termName."' AND s.field_book_type_picto_surcharge_value = 'floreM' AND s.field_book_genre_picto_surcharge_value = 'connaissance';";  
+            $result1 = db_query($sql1);              
+            $result1 = db_fetch_array($result1);                         
+            $idPictoMSurcharge = $result1['nid'];  
+            $comValueFloreM = $result1['field_book_star_com_picto_value'];       
+            $isRemarquableFloreM = $result1['field_book_star_on_picto_value'];        
+            $valuePictoSurchargeFloreM = $result1['field_book_value_picto_surcharge_value'];             
+
+            //Si on a une valeur surchargé alors on va chercher le pictogrammes correspondant
+            if($valuePictoSurchargeFloreM != ''){
+              //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici FauneM et connaissance
+              $sql2 = "SELECT d.filepath, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND c.field_book_value_picto_connaiss_value = ".$valuePictoSurchargeFloreM." AND t.name = 'Flore marine';";  
+              $result2 = db_query($sql2);
+              if (!$result2) die('Invalid query0: ' . mysql_error());
+              else while (  $row  =  db_fetch_array($result2) ) $urlPictoSurchargeFloreM = $row['filepath'];              
+            }              
+            
+            if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+            //else create a blank node    
+            else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
+            $outputFloreM = drupal_get_form($form_id, $node);
+
+
+            /*
+            * GROTTE
+            */
+            //Get nid of picto_surcharge to load the correct node edit form -> FloreM
+            $idPictoMSurcharge = ''; $comValueGrotte = ''; $isRemarquableGrotte = ''; $valuePictoSurchargeGrotte = ''; $urlPictoSurchargeGrotte = '';
+            $sql1 = "SELECT n.nid, s.field_book_value_picto_surcharge_value, s.field_book_star_com_picto_value, s.field_book_star_on_picto_value FROM drp_node n LEFT JOIN drp_content_type_book_les_pictos_surcharge s ON s.nid = n.nid WHERE n.title='picto surcharge sur: ".$termName."' AND s.field_book_type_picto_surcharge_value = 'grotte' AND s.field_book_genre_picto_surcharge_value = 'connaissance';";  
+            $result1 = db_query($sql1);  
+            if (!$result1) die('Invalid query: ' . mysql_error());
+            else while (  $row  =  db_fetch_array($result1) ) {
+              $idPictoMSurcharge = $row['nid'];  
+              $comValueGrotte = $row['field_book_star_com_picto_value'];       
+              $isRemarquableGrotte = $row['field_book_star_on_picto_value'];        
+              $valuePictoSurchargeGrotte = $row['field_book_value_picto_surcharge_value'];        
+              
+              //Si on a une valeur surchargé alors on va chercher le pictogrammes correspondant
+              if($valuePictoSurchargeGrotte != ''){
+                //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici FauneM et connaissance
+                $sql2 = "SELECT d.filepath, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND c.field_book_value_picto_connaiss_value = ".$valuePictoSurchargeGrotte." AND t.name = 'Grotte / fonds rocheux-sableux';";  
+                $result2 = db_query($sql2);
+                if (!$result2) die('Invalid query: ' . mysql_error());
+                else while (  $row  =  db_fetch_array($result2) ) $urlPictoSurchargeGrotte = $row['filepath'];              
+              }
+
+            }
+            if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+            //else create a blank node    
+            else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
+            $outputGrotte = drupal_get_form($form_id, $node);
+
+            //Transforme value of picto to label
+            switch ($labelBota) {
+              case 0: $labelBota = 'Pas de données'; break;
+              case 1: $labelBota = 'Données anciennes'; break;
+              case 2: $labelBota = 'Données récentes'; break;
+              case 3: $labelBota = 'Bonne connaissance'; break;    
+            } // fin switch  
+            switch ($labelOrni) {
+              case 0: $labelOrni = 'Pas de données'; break;
+              case 1: $labelOrni = 'Données anciennes'; break;
+              case 2: $labelOrni = 'Données récentes'; break;
+              case 3: $labelOrni = 'Bonne connaissance'; break;    
+            } // fin switch  
+            switch ($labelHerpe) {
+              case 0: $labelHerpe = 'Pas de données'; break;
+              case 1: $labelHerpe = 'Données anciennes'; break;
+              case 2: $labelHerpe = 'Données récentes'; break;
+              case 3: $labelHerpe = 'Bonne connaissance'; break;    
+            } // fin switch 
+            switch ($labelMami) {
+              case 0: $labelMami = 'Pas de données'; break;
+              case 1: $labelMami = 'Données anciennes'; break;
+              case 2: $labelMami = 'Données récentes'; break;
+              case 3: $labelMami = 'Bonne connaissance'; break;    
+            } // fin switch
+            switch ($labelChiro) {
+              case 0: $labelChiro = 'Pas de données'; break;
+              case 1: $labelChiro = 'Données anciennes'; break;
+              case 2: $labelChiro = 'Données récentes'; break;
+              case 3: $labelChiro = 'Bonne connaissance'; break;    
+            } // fin switch 
+            switch ($labelInvert) {
+              case 0: $labelInvert = 'Pas de données'; break;
+              case 1: $labelInvert = 'Données anciennes'; break;
+              case 2: $labelInvert = 'Données récentes'; break;
+              case 3: $labelInvert = 'Bonne connaissance'; break;    
+            } // fin switch
+            switch ($labelCaractEnv) {
+              case 0: $labelCaractEnv = 'Pas de données'; break;
+              case 1: $labelCaractEnv = 'Données anciennes'; break;
+              case 2: $labelCaractEnv = 'Données récentes'; break;
+              case 3: $labelCaractEnv = 'Bonne connaissance'; break;    
+            } // fin switch 
+            switch ($labelSocioEco) {
+              case 0: $labelSocioEco = 'Pas de données'; break;
+              case 1: $labelSocioEco = 'Données anciennes'; break;
+              case 2: $labelSocioEco = 'Données récentes'; break;
+              case 3: $labelSocioEco = 'Bonne connaissance'; break;    
+            } // fin switch  
+            switch ($valueOfPictoSurchargeFauneM) {
+              case 0: $labelEtatSurchargeFauneM = 'Pas de données'; break;
+              case 1: $labelEtatSurchargeFauneM = 'Données anciennes'; break;
+              case 2: $labelEtatSurchargeFauneM = 'Données récentes'; break;
+              case 3: $labelEtatSurchargeFauneM = 'Bonne connaissance'; break;    
+            } // fin switch  
+            switch ($valuePictoSurchargeFloreM) {
+              case 0: $labelEtatSurchargeFloreM = 'Pas de données'; break;
+              case 1: $labelEtatSurchargeFloreM = 'Données anciennes'; break;
+              case 2: $labelEtatSurchargeFloreM = 'Données récentes'; break;
+              case 3: $labelEtatSurchargeFloreM = 'Bonne connaissance'; break;    
+            } // fin switch  
+            switch ($valuePictoSurchargeGrotte) {
+              case 0: $valuePictoSurchargeGrotte = 'Pas de connaissance'; break;
+              case 1: $valuePictoSurchargeGrotte = 'Fond sableux'; break;
+              case 2: $valuePictoSurchargeGrotte = 'Fond rocheux'; break;
+              case 3: $valuePictoSurchargeGrotte = 'Grottes'; break;    
+            } // fin switch
+
+
+            ?>
+            
+            <div class="lesPicto book_les_pictos_connaissances" data-term="<?php echo $termName; ?>">
+              
+              <!-- Botanique -->
+              <?php if($urlOfPictoBotaToDisplay != ''): ?>
+                <div class="onePicto Botanique"><?php echo "<img src='$base_url/$urlOfPictoBotaToDisplay' alt='$titleBota' title='$titleBota' />"; ?>
+                  <div class="popup"><div class="croix">X</div>
+                    <div class='visu'>
+                      <div class="actionLine"><a href="" class="visuPicto select">Voir</a><!-- <a href="" class="editPicto">Modifier</a> --></div>
+                      <p class="titleGenrePicto">Etat des connaissances</p>
+                      <p class="titleTypePicto">Botanique</p>
+                      <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoBotaToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelBota; ?></p></div>            
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
+                    </div>          
+                  </div>
+                </div>
+              <?php endif; ?>
+              <!-- Ornithologie -->
+              <?php if($urlOfPictoOrniToDisplay != ''): ?>
+                <div class="onePicto orni"><?php echo "<img src='$base_url/$urlOfPictoOrniToDisplay' alt='$titleOrnito' title='$titleOrnito' />"; ?>
+                  <div class="popup"><div class="croix">X</div>
+                    <div class='visu'>
+                      <div class="actionLine"><a href="" class="visuPicto select">Voir</a><!-- <a href="" class="editPicto">Modifier</a> --></div>
+                      <p class="titleGenrePicto">Etat des connaissances</p>
+                      <p class="titleTypePicto">Ornithologie</p>
+                      <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoOrniToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelOrni; ?></p></div>            
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
+                    </div>          
+                  </div>
+                </div>
+              <?php endif; ?>
+              <!-- Herpétologie -->
+              <?php if($urlOfPictoHerpeToDisplay != ''): ?>
+                <div class="onePicto herpe <?php echo $etatHerpe; ?>"><?php echo "<img src='$base_url/$urlOfPictoHerpeToDisplay' alt='$titleHerpe' title='$titleHerpe' />"; ?>
+                  <div class="popup"><div class="croix">X</div>
+                    <div class='visu'>
+                      <div class="actionLine"><a href="" class="visuPicto select">Voir</a><!-- <a href="" class="editPicto">Modifier</a> --></div>
+                      <p class="titleGenrePicto">Etat des connaissances</p>
+                      <p class="titleTypePicto">Herpétologie</p>
+                      <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoHerpeToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelHerpe; ?></p></div>            
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
+                    </div>          
+                  </div>
+                </div>
+              <?php endif; ?>
+              <!-- Mammifères -->
+              <?php if($urlOfPictoMamiToDisplay != ''): ?>
+                <div class="onePicto mammi <?php echo $etatMami; ?>"><?php echo "<img src='$base_url/$urlOfPictoMamiToDisplay' alt='$titleMami' title='$titleMami' />"; ?>
+                  <div class="popup"><div class="croix">X</div>
+                    <div class='visu'>
+                      <div class="actionLine"><a href="" class="visuPicto select">Voir</a><!-- <a href="" class="editPicto">Modifier</a> --></div>
+                      <p class="titleGenrePicto">Etat des connaissances</p>
+                      <p class="titleTypePicto">Mammifères</p>
+                      <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoMamiToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelMami; ?></p></div>            
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
+                    </div>          
+                  </div>
+                </div>
+              <?php endif; ?>
+              <!-- Chiroptères -->
+              <?php if($urlOfPictoChiroToDisplay != ''): ?>
+                <div class="onePicto chirop <?php echo $etatChiro; ?>"><?php echo "<img src='$base_url/$urlOfPictoChiroToDisplay' alt='$titleChiro' title='$titleChiro' />"; ?>
+                  <div class="popup"><div class="croix">X</div>
+                    <div class='visu'>
+                      <div class="actionLine"><a href="" class="visuPicto select">Voir</a><!-- <a href="" class="editPicto">Modifier</a> --></div>
+                      <p class="titleGenrePicto">Etat des connaissances</p>
+                      <p class="titleTypePicto">Chiroptères</p>
+                      <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoChiroToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelChiro; ?></p></div>            
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
+                    </div>          
+                  </div>
+                </div>
+              <?php endif; ?>
+              <!-- Invertébrés -->
+              <?php if($urlOfPictoInvertToDisplay != ''): ?>
+                <div class="onePicto invert <?php echo $etatInvert; ?>"><?php echo "<img src='$base_url/$urlOfPictoInvertToDisplay' alt='$titleInvert' title='$titleInvert' />"; ?>
+                  <div class="popup"><div class="croix">X</div>
+                    <div class='visu'>
+                      <div class="actionLine"><a href="" class="visuPicto select">Voir</a><!-- <a href="" class="editPicto">Modifier</a> --></div>
+                      <p class="titleGenrePicto">Etat des connaissances</p>
+                      <p class="titleTypePicto">Invertébrés</p>
+                      <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoInvertToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelInvert; ?></p></div>            
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
+                    </div>          
+                  </div>
+                </div>
+              <?php endif; ?>
+              <!-- Faune Marine -->
+              <div class="onePicto expert connaissance fauneM" title='Faune Marine'>
+                <?php 
+                  if($urlPictoSurchargeFauneM) echo "<img class='surcharge' src='$base_url/$urlPictoSurchargeFauneM' alt='$titleFauneM' title='$titleFauneM' />"; 
+                  else echo "<i>Expert</i>";        
+                  if($isRemarquableFauneM == '1') echo "<i class='star'>*</i>";
+                ?>      
+                <div class="popup"><div class="croix">X</div>
+                    <div class='visu'>
+                      <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
+                      <p class="titleGenrePicto">Etat des connaissances</p>
+                      <p class="titleTypePicto">Faune Marine</p>
+                      <div class="linePicto">
+                        <?php 
+                        if($urlPictoSurchargeFauneM != '') echo "<img src='$base_url/$urlPictoSurchargeFauneM'/>"; 
+                        else echo '<p class="noPicto">Pas de pictogramme</p>';               
+                        if($urlPictoSurchargeFauneM != '') echo "<p class='labelEtat'>".$labelEtatSurchargeFauneM."</p>";              
+                        ?>
+                      </div>
+                      <div class="remarquable"><?php if($isRemarquableFauneM == '1') echo "* Présence d'une espèce remarquable"; ?></div>
+                      <div class="commentaire"><?php if($comValueFauneM != '') echo '<label>Commentaire : </label>'.$comValueFauneM; ?></div>
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
+                    </div>
+                    <div class='edit'>
+                      <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
+                      <p class="titleGenrePicto">Etat des connaissances</p>
+                      <p class="titleTypePicto">Faune Marine</p>            
+                      <div class="linePicto">
+                        <?php if($urlPictoSurchargeFauneM != '') echo "<img src='$base_url/$urlPictoSurchargeFauneM'/>"; else echo '<p class="desc">Choisir une valeur pour afficher un pictogramme</p>'; ?>              
+                        <?php echo '<div class="myFormOnVisu">'.$outputFauneM.'</div>'; ?>              
+                      </div>
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
+                    </div>
+                  </div>
+              </div>
+              <!-- Flore Marine -->
+              <div class="onePicto expert connaissance floreM" title='Flore Marine'>
+                 <?php 
+                  if($urlPictoSurchargeFloreM) echo "<img class='surcharge' src='$base_url/$urlPictoSurchargeFloreM' alt='$titleFloreM' title='$titleFloreM' />"; 
+                  else echo "<i>Expert</i>";        
+                  if($isRemarquableFloreM == '1') echo "<i class='star'>*</i>";
+                ?>       
+                <div class="popup"><div class="croix">X</div>
+                    <div class='visu'>
+                      <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
+                      <p class="titleGenrePicto">Etat des connaissances</p>
+                      <p class="titleTypePicto">Flore Marine</p>
+                      <div class="linePicto">
+                        <?php 
+                        if($urlPictoSurchargeFloreM != '') echo "<img src='$base_url/$urlPictoSurchargeFloreM'/>"; 
+                        else echo '<p class="noPicto">Pas de pictogramme</p>';               
+                        if($urlPictoSurchargeFloreM != '') echo "<p class='labelEtat'>".$labelEtatSurchargeFloreM."</p>"; 
+                        ?>
+                      </div>
+                      <div class="remarquable"><?php if($isRemarquableFloreM == '1') echo "* Présence d'une espèce remarquable"; ?></div>
+                      <div class="commentaire"><?php if($comValueFloreM != '') echo '<label>Commentaire : </label>'.$comValueFloreM; ?></div>
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
+                    </div>
+                    <div class='edit'>
+                      <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
+                      <p class="titleGenrePicto">Etat des connaissances</p>
+                      <p class="titleTypePicto">Flore Marine</p>            
+                      <div class="linePicto">
+                        <?php if($urlPictoSurchargeFloreM != '') echo "<img src='$base_url/$urlPictoSurchargeFloreM'/>"; else echo '<p class="desc">Choisir une valeur pour afficher un pictogramme</p>'; ?>              
+                        <?php echo '<div class="myFormOnVisu">'.$outputFloreM.'</div>'; ?>              
+                      </div>
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
+                    </div>
+                  </div>
+              </div>
+              <!-- Grotte / Fond rocheux -->
+              <div class="onePicto expert connaissance grotte" title='Grotte / Fond rocheux'>
+                <?php 
+                  if($urlPictoSurchargeGrotte) echo "<img class='surcharge' src='$base_url/$urlPictoSurchargeGrotte' alt='$titleGrotte' title='$titleGrotte' />"; 
+                  else echo "<i>Expert</i>";        
+                  if($isRemarquableGrotte == '1') echo "<i class='star'>*</i>";
+                ?>      
+                <div class="popup"><div class="croix">X</div>
+                    <div class='visu'>
+                      <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
+                      <p class="titleGenrePicto">Etat des connaissances</p>
+                      <p class="titleTypePicto">Grotte / Fond rocheux</p>
+                      <div class="linePicto">
+                        <?php 
+                        if($urlPictoSurchargeGrotte != '') echo "<img src='$base_url/$urlPictoSurchargeGrotte'/>"; 
+                        else echo '<p class="noPicto">Pas de pictogramme</p>';               
+                        if($urlPictoSurchargeGrotte != '') echo "<p class='labelEtat'>".$valuePictoSurchargeGrotte."</p>"; 
+                        ?>
+                      </div>
+                      <div class="remarquable"><?php if($isRemarquableGrotte == '1') echo "* Présence d'une espèce remarquable"; ?></div>
+                      <div class="commentaire"><?php if($comValueGrotte != '') echo '<label>Commentaire : </label>'.$comValueGrotte; ?></div>
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
+                    </div>
+                    <div class='edit'>
+                      <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
+                      <p class="titleGenrePicto">Etat des connaissances</p>
+                      <p class="titleTypePicto">Grotte / Fond rocheux</p>            
+                      <div class="linePicto">
+                        <?php if($urlPictoSurchargeGrotte != '') echo "<img src='$base_url/$urlPictoSurchargeGrotte'/>"; else echo '<p class="desc">Choisir une valeur pour afficher un pictogramme</p>'; ?>              
+                        <?php echo '<div class="myFormOnVisu">'.$outputGrotte.'</div>'; ?>              
+                      </div>
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
+                    </div>
+                  </div>
+              </div>
+              <!-- caractéristique environnentales -->
+              <?php if($urlOfPictoEnviroToDisplay != ''): ?>
+                <div class="onePicto inviro <?php echo $etatEnviro; ?>"><?php echo "<img src='$base_url/$urlOfPictoEnviroToDisplay' alt='$titleCaractEnv' title='$titleCaractEnv' />"; ?>
+                  <div class="popup"><div class="croix">X</div>
+                    <div class='visu'>
+                      <div class="actionLine"><a href="" class="visuPicto select">Voir</a><!-- <a href="" class="editPicto">Modifier</a> --></div>
+                      <p class="titleGenrePicto">Etat des connaissances</p>
+                      <p class="titleTypePicto">Caractéristique environnentales</p>
+                      <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoEnviroToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelCaractEnv; ?></p></div>            
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
+                    </div>          
+                  </div>
+                </div>
+              <?php endif; ?>
+              <!-- Socio économie -->
+              <?php if($urlOfPictoEcoToDisplay != ''): ?>
+                <div class="onePicto invert <?php echo $etatEco; ?>"><?php echo "<img src='$base_url/$urlOfPictoEcoToDisplay' alt='$titleSocioEco' title='$titleSocioEco' />"; ?>
+                  <div class="popup"><div class="croix">X</div>
+                    <div class='visu'>
+                      <div class="actionLine"><a href="" class="visuPicto select">Voir</a><!-- <a href="" class="editPicto">Modifier</a> --></div>
+                      <p class="titleGenrePicto">Etat des connaissances</p>
+                      <p class="titleTypePicto">Socio économie</p>
+                      <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoEcoToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelSocioEco; ?></p></div>            
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
+                    </div>          
+                  </div>
+                </div>
+              <?php endif; ?>
+
+
+            </div>
+            <?php  
+            
+          }
+          
+          //Get pager
+          $sql = "SELECT p.field_bdi_dp_code_ile_value, c.name          
+          FROM drp_content_type_bd_i_description_physique p
+          LEFT JOIN drp_term_data c
+          ON c.tid = p.field_bdi_dp_zone_geographique_value
+          WHERE p.field_bdi_dp_ispim_island_value = 'Oui' 
+          OR p.field_bdi_dp_ispim_island_value IS NULL;";     
+          $result = db_query($sql);          
+          echo "Nombre d'îles : ".$result->num_rows."<br/>";
+
+          //Display pager
+          echo "<div class='pager'>";
+          for($i=1;$i<($result->num_rows / 10);$i++){
+            if($pager == $i) echo "<a href='pictos-par-sous-bassin?pager=$i' class='itemPager active'>$i</a>";
+            else echo "<a href='pictos-par-sous-bassin?pager=$i' class='itemPager'>$i</a>";
+          }
+          echo "</div>";
+
+
+          ?>
         </div>
 
         <?php print $content_bottom; ?>
@@ -295,6 +926,165 @@
 
   ga('create', 'UA-28879746-1', 'initiative-pim.org');
   ga('send', 'pageview');
+
+  jQuery( document ).ready(function() {
+
+    // Tout ce qu'il se passe autour des pictogrammes et clic dessus avec l'ouverture de la popup
+    var gestionPopup = function(){
+
+
+      //Event de fermeture de la popup
+      jQuery('.croix').click(function(event) {
+        /* Act on the event */        
+        thePopup = jQuery(this).parent();
+         thePopup.hide();        
+      });
+
+
+
+      /*jQuery('.onePicto.expert.connaissance.fauneM #edit-title-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.connaissance.floreM #edit-title-1-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.connaissance.grotte #edit-title-2-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.botanique #edit-title-3-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.ornithologie #edit-title-4-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.herpetologie #edit-title-5-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.mamifere #edit-title-6-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.chiroptere #edit-title-7-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.invert #edit-title-8-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.fauneM #edit-title-9-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.floreM #edit-title-10-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.grotte #edit-title-11-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.paysT #edit-title-12-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.paysM #edit-title-13-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.bati #edit-title-14-wrapper input').val("picto surcharge sur: "+term);*/
+      
+      //Alter label select value
+      jQuery('.onePicto.expert.connaissance.grotte #edit-field-book-value-picto-surcharge-value-2 option').each(function(index, el) {        
+        var myOption = jQuery(this);
+        if(index == 0) myOption.text('--'); else if(index == 1) myOption.text('Pas de connaissance'); else if(index == 2) myOption.text('Fond sableux'); else if(index == 3) myOption.text('Fond rocheux'); else if(index == 4) myOption.text('Grottes');
+      });     
+
+      //Alter label on interet select
+      jQuery('.onePicto.expert.interet').each(function(posPicto, el) {
+
+        var onePicto = jQuery(this);
+
+        onePicto.find('.popup .edit .myFormOnVisu .standard > .form-item').each(function(posFormItem, elem) {
+          
+          var myItem = jQuery(this);
+
+          if(posFormItem == 3) myItem.find('select option').each(function(index, el) {
+
+            myOption = jQuery(this);
+  
+            if(index == 0) myOption.text('--');
+            else if(index == 1) myOption.text('Pas de connaissance'); 
+            else if(index == 2) myOption.text('Faible'); 
+            else if(index == 3) myOption.text('Moyen'); 
+            else if(index == 4) myOption.text('Fort');
+            
+          });
+
+        });
+
+      });
+      
+
+      jQuery('div.lesPicto div.onePicto').click(function(event) {
+      /* Stuff to do when the mouse enters the element */
+      var thePictoClique = jQuery(this);
+      var popup = thePictoClique.find('div.popup');
+      var editBtn = popup.find('a.editPicto');
+      var visuBtn = popup.find('a.visuPicto');
+      var visuZone = popup.find('.visu');
+      var editZone = popup.find('.edit');
+      var term = thePictoClique.parent('.lesPicto').attr('data-term');
+      
+      //Print term in fields      
+      //jQuery('.onePicto.expert input:first-of-type').not('.form-submit').val("picto surcharge sur: "+term);
+      
+      //Changer destination      
+      if(thePictoClique.hasClass('expert')){ // Si form edit
+
+        var action = popup.find('form#node-form').attr('action');
+        var currentUrl = window.location.pathname.split('/');
+
+
+        //gestion redirect after submit form edit surcharge       
+        if(action.split('?destination').length == 1){
+
+          currentUrl = currentUrl[currentUrl.length - 1];          
+          action = action+'?destination=projet-atlas/'+currentUrl;
+          popup.find('form#node-form').attr('action', action);
+          
+        }
+
+      }
+        
+
+
+      //Print genre et type in popup
+      popup.find('.form-item').each(function(index, el) {    
+        if(index == 0)  jQuery(this).find('input').val("picto surcharge sur: "+term);
+        if(index == 17) jQuery(this).find('input').val(thePictoClique.attr('class').split(' ')[2]);
+        if(index == 18) jQuery(this).find('input').val(thePictoClique.attr('class').split(' ')[3]);
+      });      
+
+      //To toogle show hide popup
+      jQuery('.popup.active').hide();
+      popup.addClass('active');
+
+      //Toggle show / hide the popup
+     /* thePictoClique.parent('.lesPicto').find('.onePicto').each(function(index, el) {      
+        
+        var currentPopup = jQuery(this).find('.popup');
+        //Cacher l'ancienne popup lors du hover
+        if( currentPopup.length > 0 ) currentPopup.hide();        
+        
+      });   */   
+      
+      //On clikc Edit button in the popup
+      editBtn.click(function(event) {        
+        //disable link <a>
+        event.preventDefault();        
+        //toggle blocks
+        editBtn.addClass('select');
+        visuBtn.removeClass('select');
+        visuZone.hide();
+        editZone.show();        
+
+      });
+
+      visuBtn.click(function(event) {        
+        //disable link <a>
+        event.preventDefault();
+        //toggle blocks
+        visuBtn.addClass('select');
+        editBtn.removeClass('select');
+        visuZone.show();
+        editZone.hide();
+
+      });
+
+      //Show Popup
+      if(event.target.className != 'croix') {
+        popup.show();
+        popup.addClass('active');
+      }
+
+
+
+      });// fin click
+  
+    } //fin gestionPopup
+    
+
+    /*var current_url = "<?php echo $current_url; ?>";    
+    //Si on est pas en mode edition alors execute script gestion popup
+    if(current_url != 'edit')*/ gestionPopup();    
+
+
+  });
 
 </script>
 </html>

@@ -388,23 +388,25 @@ global $user, $base_url, $language;
          thePopup.hide();        
       });
 
+      //Get term
+      var term = jQuery('.titleIsland').attr('data-term');            
 
-      //Print nid in fields      
-      jQuery('.onePicto.expert.connaissance.fauneM #edit-title-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");            
-      jQuery('.onePicto.expert.connaissance.floreM #edit-title-1-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('.onePicto.expert.connaissance.grotte #edit-title-2-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('.onePicto.expert.interet.botanique #edit-title-3-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('.onePicto.expert.interet.ornithologie #edit-title-4-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('.onePicto.expert.interet.herpetologie #edit-title-5-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('.onePicto.expert.interet.mamifere #edit-title-6-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('.onePicto.expert.interet.chiroptere #edit-title-7-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('.onePicto.expert.interet.invert #edit-title-8-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('.onePicto.expert.interet.fauneM #edit-title-9-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('.onePicto.expert.interet.floreM #edit-title-10-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('.onePicto.expert.interet.grotte #edit-title-11-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('.onePicto.expert.interet.paysT #edit-title-12-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('.onePicto.expert.interet.paysM #edit-title-13-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
-      jQuery('.onePicto.expert.interet.bati #edit-title-14-wrapper input').val("picto surcharge sur:<?php echo $node->nid; ?>");      
+      //Print term in fields      
+      jQuery('.onePicto.expert.connaissance.fauneM #edit-title-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.connaissance.floreM #edit-title-1-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.connaissance.grotte #edit-title-2-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.botanique #edit-title-3-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.ornithologie #edit-title-4-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.herpetologie #edit-title-5-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.mamifere #edit-title-6-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.chiroptere #edit-title-7-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.invert #edit-title-8-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.fauneM #edit-title-9-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.floreM #edit-title-10-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.grotte #edit-title-11-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.paysT #edit-title-12-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.paysM #edit-title-13-wrapper input').val("picto surcharge sur: "+term);
+      jQuery('.onePicto.expert.interet.bati #edit-title-14-wrapper input').val("picto surcharge sur: "+term);
       
       //Alter label select value
       jQuery('.onePicto.expert.connaissance.grotte #edit-field-book-value-picto-surcharge-value-2 option').each(function(index, el) {        
