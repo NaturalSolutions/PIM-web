@@ -56,14 +56,16 @@
 <!-- Template for block Menu Atlas HP -->
 <?php global $base_url, $user; ?>
 
- 
-  <?php $currentRoles = $user->roles; ?>            
-  <?php foreach($currentRoles as $item): ?> 
-      <?php if($item == 'Admin PIM'): ?>
-          <?php $link = "<a class='linkForEditMenuAtlas' href='$base_url/admin/build/menu-customize/menu-menu-atlas-hp' alt='Modifier le menu' title='Modifier le menu' target='_blank'></a>"; ?>
-      <?php endif; ?>
-  <?php endforeach; ?>
+<?php 
+$access = false;
+foreach ($user->roles as $key => $value) {    
+  //Limit access to the page
+  if($value == 'Admin PIM') $access = true;    
+}  
+if($access) $link = "<a class='linkForEditMenuAtlas' href='$base_url/admin/build/menu-customize/menu-menu-atlas-hp' alt='Modifier le menu' title='Modifier le menu' target='_blank'></a>";  
+?>
 
+  
 <div id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>">
   <?php if ($title): ?>
     <h2 class="title"><?php print $title; ?><?php if(!empty($link)) echo $link; ?></h2>
@@ -145,6 +147,19 @@ $( document ).ready(function() {
   //Pointe vers glossaire fr,en
 	$('li.menu-13568.menu-path-node-57240 > a').attr('target','_blank');
 	$('li.menu-13572.menu-path-node-57240 > a').attr('target','_blank');
+  
+  var access = "<?php echo $access; ?>";
+  
+  if(!access){
+    //desable link to les pictogrammes
+    $('ul#nice-menu-5 li').each(function(index, el) {
+      
+      if($(this).find('a').text() == 'Pictogrammes') $(this).remove();
+    
+    });
+  }
+
+  
   
 });
 </script>
