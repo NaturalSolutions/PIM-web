@@ -1,0 +1,36 @@
+<?php
+/*
+module : alterFormAtlas
+pour alterer la redirection vers la page "projet-atlas/pictos-par-sous-bassin" avec tout ses paramètres
+*/
+
+
+function alterFormAtlas_form_book_les_pictos_surcharge_node_form_alter(&$form, &$form_state){
+  
+  	unset($form['destination']);
+  	$isAllPictoPage=false;
+
+	//Get param in url for pager
+	if(isset($_GET["pager"])) $pager = urldecode($_GET["pager"]);
+	else $pager = 0; 	
+
+	if(isset($_GET["ssbassin"])) {
+		//Si on a une valeur alors on est dans la page "projet-atlas/pictos-par-sous-bassin?ssbassin"
+		$isAllPictoPage = true;
+		$ssbassin = urldecode($_GET["ssbassin"]);
+
+	}
+	else $ssbassin = "Gibraltar";
+
+	//Redirection
+	if($isAllPictoPage) {
+
+		global $base_url;
+		$form['#redirect'] = $base_url."/projet-atlas/pictos-par-sous-bassin&ssbassin=".$ssbassin."&pager=".$pager;
+
+	}
+
+
+
+}
+

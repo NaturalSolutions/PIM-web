@@ -1364,6 +1364,7 @@ global $user, $base_url;
             //else create a blank node    
             else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
             $outputGrotte = drupal_get_form($form_id, $node);
+            
 
             /*
             * PAYSAGE / TERRE
@@ -1585,7 +1586,7 @@ global $user, $base_url;
               <div class="labelLesPictos interet">
                   <p>INTÉRÊT</p>                
               </div>
-              <div class="lesPicto book_les_pictos_interets">
+              <div class="lesPicto book_les_pictos_interets" data-term="<?php echo $termName; ?>">
                 <?php if($urlOfPictoBotaToDisplay != ''): ?>
                   <div class="onePicto expert interet botanique"><?php echo "<img src='$base_url/$urlOfPictoBotaToDisplay' alt='$titleBota' title='$titleBota' />"; ?>
                     <?php         
@@ -2224,7 +2225,7 @@ global $user, $base_url;
               <div class="labelLesPictos pression">
                   <p>PRESSIONS</p>                
               </div>
-              <div class="lesPicto book_les_pictos_pressions">
+              <div class="lesPicto book_les_pictos_pressions" data-term="<?php echo $termName; ?>">
                 <!-- Desserte par navette -->
                 <?php if($urlOfPictoNavetteToDisplay != ''): ?>
                   <div class="onePicto"><?php echo "<img src='$base_url/$urlOfPictoNavetteToDisplay' alt='$titleNavette' title='$titleNavette' />"; ?>
@@ -2591,7 +2592,7 @@ global $user, $base_url;
               <div class="labelLesPictos gestion">
                   <p>GESTION <br/> CONSERVATION</p>                
               </div>
-              <div class="lesPicto book_les_pictos_gestions">
+              <div class="lesPicto book_les_pictos_gestions" data-term="<?php echo $termName; ?>">
               <!-- Statut de protection terrestre -->
               <?php if($urlOfPictoProtecTerreToDisplay != ''): ?>
                 <div class="onePicto"><?php echo "<img src='$base_url/$urlOfPictoProtecTerreToDisplay' alt='$titleStatutProtecT' title='$titleStatutProtecT' />"; ?>
@@ -2876,6 +2877,9 @@ global $user, $base_url;
         });
 
       });
+
+      
+      var base_url = "<?php Print($base_url); ?>";
       
 
       jQuery('div.lesPicto div.onePicto').click(function(event) {
@@ -2888,29 +2892,7 @@ global $user, $base_url;
       var editZone = popup.find('.edit');
       var term = thePictoClique.parent('.lesPicto').attr('data-term');
             
-      
-      //Changer destination      
-      if(thePictoClique.hasClass('expert')){ // Si form edit
-
-        var action = popup.find('form#node-form').attr('action');
-        
-
-        console.log(window.location.pathname.split('?').length);
-
-        //var currentUrl = window.location.pathname.split('?');
-
-        //gestion redirect after submit form edit surcharge       
-        //if(action.split('?destination').length == 1){
-
-          /*currentUrl = currentUrl[currentUrl.length - 1];                    
-
-          action = action+'?destination=projet-atlas/'+currentUrl;
-          popup.find('form#node-form').attr('action', action);
-          */
-        //}
-
-      }
-        
+                    
       //Print genre et type in popup
       popup.find('.form-item').each(function(index, el) {    
         if(index == 0)  jQuery(this).find('input').val("picto surcharge sur: "+term);

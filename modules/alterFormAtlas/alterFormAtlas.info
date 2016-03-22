@@ -1,0 +1,6 @@
+; $Id: ctools.info,v 1.2 2016/21/03  $
+name = alterFormAtlas
+description = Alter submit form action from 'annuaire des îles' page
+core = 6.x
+version = "6.x-1"
+package = "# NS Modules"
