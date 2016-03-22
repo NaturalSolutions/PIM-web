@@ -411,7 +411,7 @@ global $user, $base_url;
               </div>
 
               <div class='col col3'>
-                <span class='item propriete'>Propiété : $valuePropriete</span>
+                <span class='item propriete'>Propriété : $valuePropriete</span>
               </div>
 
             </div>
