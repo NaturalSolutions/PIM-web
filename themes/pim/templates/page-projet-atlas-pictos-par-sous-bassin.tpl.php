@@ -295,55 +295,60 @@ global $user, $base_url;
             echo "<a class='linkSSbassin ".$active."' title='Afficher les pictogrammes pour ce sous bassin' href='$base_url/projet-atlas/pictos-par-sous-bassin?ssbassin=".urlencode($row['name'])."&pager=0'>".$row['nameSousBassin']."</a>";
           }
           
-          //Selection des iles de la bdd dans certaine région (remplacé) qui sont précisé PIM ou non-renseigné
-          $sql = "SELECT p.field_bdi_dp_code_ile_value, 
-            replace(        
-              replace(      
-                replace(              
-                  replace(              
+          //Selection des iles de la bdd dans certaine région (remplacé) qui sont précisé PIM ou non-renseigné         
+          $sql = "SELECT distinct p.field_bdi_dp_code_ile_value, 
+                  replace(        
+                    replace(      
                     replace(              
                       replace(              
+                      replace(              
+                        replace(              
                         replace(                            
                           replace(            
+                          replace(            
                             replace(            
-                              replace(            
-                                replace(              
-                                  replace(              
-                                    replace(              
-                                      replace(c.name,'Gibraltar','Alboran'),       
-                                    'Algérie','Algeria'),
-                                  'Sardaigne','Sardinia'),
-                                'Sicile','Sicily'),
-                              'Tunisie-Est','Eastern Tunisia'),                            
-                            'Tunisie-Nord','Northern Tunisia'),                            
-                                          'Maroc Atlantique','Atlantic Morocco'),                            
-                                      'Corse','Corsica'),
-                      'France-Sud','Southern France'),
-                              'Baléares','Balearic Islands'),
-                  'Malte','Malta'),
-                      'Italie-Mar Ligure','Italy Ligurian'),
-              'Italie-Mar Tirreno','Italy Tyrrhenian'),
-            'Espagne-Sud et Est','Eastern Spain') nameSousBassin
-          FROM drp_content_type_bd_i_description_physique p
-          JOIN drp_term_data c
-          ON c.tid = p.field_bdi_dp_zone_geographique_value
-          WHERE COALESCE(p.field_bdi_dp_ispim_island_value,'Oui') = 'Oui' 
-          AND p.field_bdi_dp_code_ile_value is not null
-          AND c.name NOT LIKE 'Adriatique Ouest'
-          AND c.name NOT LIKE 'Chypre'
-          AND c.name NOT LIKE 'Crète'
-          AND c.name NOT LIKE 'Egypte-Nord' 
-          AND c.name NOT LIKE 'Est-Méditerranée'
-          AND c.name NOT LIKE 'Illyrie'
-          AND c.name NOT LIKE 'Italie - Sud'
-          AND c.name NOT LIKE 'Libye'
-          and c.name like '".$ssbassin."'
-          ORDER BY nameSousBassin ASC LIMIT 5 OFFSET ".$offset.";"; 
+                            replace(              
+                              replace(              
+                              replace(              
+                                replace(c.name,'Gibraltar','Alboran'),       
+                              'Algérie','Algeria'),
+                              'Sardaigne','Sardinia'),
+                            'Sicile','Sicily'),
+                            'Tunisie-Est','Eastern Tunisia'),                            
+                          'Tunisie-Nord','Northern Tunisia'),                            
+                                  'Maroc Atlantique','Atlantic Morocco'),                            
+                                'Corse','Corsica'),
+                        'France-Sud','Southern France'),
+                            'Baléares','Balearic Islands'),
+                      'Malte','Malta'),
+                        'Italie-Mar Ligure','Italy Ligurian'),
+                    'Italie-Mar Tirreno','Italy Tyrrhenian'),
+                  'Espagne-Sud et Est','Eastern Spain') nameSousBassin,s.name, s.tid
+                  FROM drp_content_type_bd_i_description_physique p 
+                  JOIN drp_term_data c
+                  ON c.tid = p.field_bdi_dp_zone_geographique_value
+                  LEFT JOIN drp_term_synonym s
+                  ON s.tid = p.field_bdi_dp_nom_ile_code_ile_value
+                  WHERE COALESCE(p.field_bdi_dp_ispim_island_value,'Oui') = 'Oui' 
+                  AND p.field_bdi_dp_code_ile_value is not null
+                  AND c.name NOT LIKE 'Adriatique Ouest'
+                  AND c.name NOT LIKE 'Chypre'
+                  AND c.name NOT LIKE 'Crète'
+                  AND c.name NOT LIKE 'Egypte-Nord' 
+                  AND c.name NOT LIKE 'Est-Méditerranée'
+                  AND c.name NOT LIKE 'Illyrie'
+                  AND c.name NOT LIKE 'Italie - Sud'
+                  AND c.name NOT LIKE 'Libye'
+                  and c.name like '".$ssbassin."'
+                  ORDER BY nameSousBassin ASC
+                  , s.name ASC 
+                  LIMIT 3 OFFSET ".$offset.";";
+
 
           $result = db_query($sql);    
           $cpt = 0;                  
           //Display
-          if (!$result) die('Invalid query: ' . mysql_error());
+          if (!$result) die('Invalid query:0 ' . mysql_error());
           else while (  $row  =  db_fetch_array($result) ) {
             
             //Si le nom du sous bassin est different de l'ancien on l'affiche
@@ -357,11 +362,12 @@ global $user, $base_url;
             $cpt++;
 
             //Get termName
-            $termName = $row['field_bdi_dp_code_ile_value'];     
+            /*
             $myTerm = taxonomy_get_term_by_name($termName);
-            $myTid = $myTerm[0]->tid;
-            $allSyno = taxonomy_get_synonyms($myTid);
-            $firstSyno = $allSyno[0];
+            $allSyno = taxonomy_get_synonyms($myTid);*/
+            $termName = $row['field_bdi_dp_code_ile_value'];
+            $firstSyno = $row['name'];
+            $myTid = $row['tid'];
             
             //Get info sur proprietephysique de l'ile
             $resPhysique = views_get_view_result($name = 'v_atlas_tab_data_ile', $display_id = 'block_1', $myTid);
@@ -2725,13 +2731,13 @@ global $user, $base_url;
           <?php  
             
           }//Fin while query all bdd island
-          
-         
+        
+        
           //Get pager
           $sql = "SELECT count( c.name ) nb_island                 
           FROM drp_content_type_bd_i_description_physique p
           JOIN drp_term_data c
-          ON c.tid = p.field_bdi_dp_zone_geographique_value
+          ON c.tid = p.field_bdi_dp_zone_geographique_value          
           WHERE COALESCE(p.field_bdi_dp_ispim_island_value,'Oui') = 'Oui' 
           AND p.field_bdi_dp_code_ile_value is not null
           AND c.name NOT LIKE 'Adriatique Ouest'
@@ -2751,7 +2757,7 @@ global $user, $base_url;
 
           //Display pager
           echo "<div class='pager'>";
-          for($i=0;$i<($result['nb_island'] / 5);$i++){
+          for($i=0;$i<($result['nb_island'] / 3);$i++){
             if($pager == $i) echo "<a href='pictos-par-sous-bassin?ssbassin=$ssbassin&pager=$i' class='itemPager active'>$i</a>";
             else echo "<a href='pictos-par-sous-bassin?ssbassin=$ssbassin&pager=$i' class='itemPager'>$i</a>";
           }
