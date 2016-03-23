@@ -324,8 +324,8 @@ global $user, $base_url;
                       'Italie-Mar Ligure','Italy Ligurian'),
                   'Italie-Mar Tirreno','Italy Tyrrhenian'),
                 'Espagne-Sud et Est','Eastern Spain') nameSousBassin , s.name , s.tid
-                FROM pimPierre.drp_content_type_bd_i_description_physique p 
-                JOIN pimPierre.drp_term_data c
+                FROM drp_content_type_bd_i_description_physique p 
+                JOIN drp_term_data c
                 ON c.tid = p.field_bdi_dp_zone_geographique_value
                 LEFT JOIN ( 
                 select tid,tsid 
