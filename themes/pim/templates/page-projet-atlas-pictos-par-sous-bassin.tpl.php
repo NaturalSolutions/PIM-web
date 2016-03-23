@@ -328,7 +328,7 @@ global $user, $base_url;
                 JOIN drp_term_data c
                 ON c.tid = p.field_bdi_dp_zone_geographique_value
                 LEFT JOIN ( 
-                select tid,tsid 
+                select tid,min(tsid) tsid
                   from drp_term_synonym 
                   where name not like ''
                   group by tid
@@ -2745,7 +2745,7 @@ global $user, $base_url;
           JOIN drp_term_data c
           ON c.tid = p.field_bdi_dp_zone_geographique_value  
           LEFT JOIN ( 
-              select tid,tsid 
+              select tid,min(tsid) tsid
               from drp_term_synonym 
               where name not like ''
               group by tid
