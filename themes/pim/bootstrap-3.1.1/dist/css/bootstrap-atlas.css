@@ -5092,6 +5092,14 @@ body.node-type-book-les-pictos-gestions.section-node-edit input#edit-preview{
 /***************************************************************************/
 /*********************************  ****************************************/
 /*********************************  ****************************************/
+body.page-projet-atlas-pictos-par-sous-bassin li.ar, 
+body.page-projet-atlas-pictos-par-sous-bassin li.it, 
+body.page-projet-atlas-pictos-par-sous-bassin li.es, 
+body.page-projet-atlas-pictos-par-sous-bassin.section-node-edit li.ar, 
+body.page-projet-atlas-pictos-par-sous-bassin.section-node-edit li.it, 
+body.page-projet-atlas-pictos-par-sous-bassin.section-node-edit li.es {
+    visibility: hidden;
+}
 body.page-projet-atlas-pictos-par-sous-bassin div.lineHeader{
   background-color: #e1e1e1;
   margin-top:   24px;
