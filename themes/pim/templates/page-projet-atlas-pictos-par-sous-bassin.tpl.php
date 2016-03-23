@@ -349,7 +349,7 @@ global $user, $base_url;
                 and c.name like '".$ssbassin."'
                 ORDER BY nameSousBassin ASC
                 , s.name ASC 
-          LIMIT 5 OFFSET ".$offset.";";
+          LIMIT 3 OFFSET ".$offset.";";
 
 
           $result = db_query($sql);    
