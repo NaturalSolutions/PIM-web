@@ -84,6 +84,7 @@ function pim_fiche_taxon_callback_illustration($tid) {
 }
 
 function pim_fiche_taxon_callback_data ($tid) {
+    global $user;
 	$term = taxonomy_get_term($tid);
 	$taxons =formatTermFicheNode ($tid);
 	$node_type = _get_node_type($term->vid);
@@ -94,8 +95,18 @@ function pim_fiche_taxon_callback_data ($tid) {
 	}
 	$taxon_name = $term->name;
 	if ($term->description) $taxon_name =$term->description;
-	$htmlout .= _get_html_taxon_header($taxon_name, $taxons,$vernacularCurrentLg );
-	$viewName = 'v_search_taxon_observed';
+	$htmlout .= _get_html_taxon_header($taxon_name, $taxons,$vernacularCurrentLg );	
+	/*if($user->uid == 0) {
+		echo "anonyme<br/>";
+		echo "tid : ".$tid;
+		$viewName = 'v_search_taxon_observed_anon';
+	}
+	else {
+		echo "user<br/>";
+		echo "tid : ".$tid;
+		$viewName = 'v_search_taxon_observed';	
+	}*/
+	$viewName = 'v_search_taxon_observed' . ($user->uid === 0 ? '_anon' : '');
 	$myArgs = array($tid);
 	$htmlout .=  views_embed_view($viewName, 'block_1', $tid);
 	$htmlout .=  views_embed_view($viewName, 'block_2', $tid);
