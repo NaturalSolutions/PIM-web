@@ -13,7 +13,7 @@
  * - $rows: An array of row items. Each row is an array of content.
  *   $rows are keyed by row number, fields within rows are keyed by field ID.
  * @ingroup views_templates
- */
+ */ 
 global $base_url;
 ?>
 <div id="ficheile">
