@@ -346,7 +346,8 @@ global $user, $base_url;
                 AND c.name NOT LIKE 'Illyrie'
                 AND c.name NOT LIKE 'Italie - Sud'
                 AND c.name NOT LIKE 'Libye'
-                and c.name like '".$ssbassin."'
+                AND p.field_bdi_dp_code_ile_value not LIKE '%0'
+                AND c.name LIKE '".$ssbassin."'
                 ORDER BY nameSousBassin ASC
                 , s.name ASC 
           LIMIT 3 OFFSET ".$offset.";";
@@ -2763,7 +2764,8 @@ global $user, $base_url;
           AND c.name NOT LIKE 'Illyrie'
           AND c.name NOT LIKE 'Italie - Sud'
           AND c.name NOT LIKE 'Libye'
-          and c.name like '".$ssbassin."';";
+          AND p.field_bdi_dp_code_ile_value not LIKE '%0'
+          AND c.name LIKE '".$ssbassin."';";
 
           $result = db_query($sql);    
           $result = db_fetch_array($result);   
