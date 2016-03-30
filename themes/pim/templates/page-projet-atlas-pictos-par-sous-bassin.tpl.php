@@ -765,7 +765,7 @@ global $user, $base_url;
                         <p class="titleGenrePicto">Etat des connaissances</p>
                         <p class="titleTypePicto">Botanique</p>
                         <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoBotaToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelBota; ?></p></div>            
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$linkToBase"; ?>'>Donnée dans la base</a>
                       </div>          
                     </div>
                   </div>
@@ -1613,7 +1613,7 @@ global $user, $base_url;
                         <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoBotaToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelBota; ?></p></div>            
                         <div class="remarquable"><?php if($isRemarquableBota == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueBota != '') echo '<label>Commentaire : </label>'.$comValueBota; ?></div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                       </div>
                       <div class='edit'>
                         <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
@@ -1622,7 +1622,7 @@ global $user, $base_url;
                         <div class="linePicto">              
                           <?php echo '<div class="myFormOnVisu">'.$outputBota.'</div>'; ?>
                         </div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>         
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
                       </div>
                     </div>
                   </div>
@@ -1641,7 +1641,7 @@ global $user, $base_url;
                         <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoOrniToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelOrni; ?></p></div>
                         <div class="remarquable"><?php if($isRemarquableOrni == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueOrni != '') echo '<label>Commentaire : </label>'.$comValueOrni; ?></div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                       </div>
                       <div class='edit'>
                         <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
@@ -1650,7 +1650,7 @@ global $user, $base_url;
                         <div class="linePicto">              
                           <?php echo '<div class="myFormOnVisu">'.$outputOrni.'</div>'; ?>
                         </div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>         
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
                       </div>          
                     </div>
                   </div>
@@ -1669,7 +1669,7 @@ global $user, $base_url;
                         <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoHerpetoToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelHerpe; ?></p></div>            
                         <div class="remarquable"><?php if($isRemarquableHerpe == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueHerpe != '') echo '<label>Commentaire : </label>'.$comValueHerpe; ?></div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                       </div>  
                       <div class='edit'>
                         <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
@@ -1678,7 +1678,7 @@ global $user, $base_url;
                         <div class="linePicto">              
                           <?php echo '<div class="myFormOnVisu">'.$outputHerpe.'</div>'; ?>
                         </div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>         
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
                       </div>        
                     </div>
                   </div>
@@ -1697,7 +1697,7 @@ global $user, $base_url;
                         <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoMamitoToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelMami; ?></p></div>            
                         <div class="remarquable"><?php if($isRemarquableMami == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueMami != '') echo '<label>Commentaire : </label>'.$comValueMami; ?></div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                       </div>
                       <div class='edit'>
                         <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
@@ -1706,7 +1706,7 @@ global $user, $base_url;
                         <div class="linePicto">              
                           <?php echo '<div class="myFormOnVisu">'.$outputMami.'</div>'; ?>
                         </div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>         
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
                       </div>          
                     </div>
                   </div>
@@ -1725,7 +1725,7 @@ global $user, $base_url;
                         <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoChiroToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelChiro; ?></p></div>
                         <div class="remarquable"><?php if($isRemarquableChiro == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueChiro != '') echo '<label>Commentaire : </label>'.$comValueChiro; ?></div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                       </div>
                       <div class='edit'>
                         <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
@@ -1734,7 +1734,7 @@ global $user, $base_url;
                         <div class="linePicto">              
                           <?php echo '<div class="myFormOnVisu">'.$outputChiro.'</div>'; ?>
                         </div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>         
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
                       </div>           
                     </div>
                   </div>
@@ -1760,7 +1760,7 @@ global $user, $base_url;
                       </div>
                       <div class="remarquable"><?php if($isRemarquableInvert == '1') echo "* Présence d'un lieu remarquable"; ?></div>
                       <div class="commentaire"><?php if($comValueInvert != '') echo '<label>Commentaire : </label>'.$comValueInvert; ?></div>
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                     </div>
                     <div class='edit'>
                       <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
@@ -1770,7 +1770,7 @@ global $user, $base_url;
                         <?php if($urlPictoSurchargeInvert != '') echo "<img src='$base_url/$urlPictoSurchargeInvert'/>"; else echo '<p class="desc">Choisir une valeur pour afficher un pictogramme</p>'; ?>              
                         <?php echo '<div class="myFormOnVisu">'.$outputInvert.'</div>'; ?>              
                       </div>
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>         
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
                     </div>
                   </div>
                 </div>
@@ -1788,7 +1788,7 @@ global $user, $base_url;
                         <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoFauneMToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelFauneM; ?></p></div>            
                         <div class="remarquable"><?php if($isRemarquableFauneM_i == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueFauneM_i != '') echo '<label>Commentaire : </label>'.$comValueFauneM_i; ?></div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                       </div>
                       <div class='edit'>
                         <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
@@ -1797,7 +1797,7 @@ global $user, $base_url;
                         <div class="linePicto">              
                           <?php echo '<div class="myFormOnVisu">'.$outputFauneM.'</div>'; ?>
                         </div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>         
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
                       </div>          
                     </div>
                   </div>
@@ -1816,7 +1816,7 @@ global $user, $base_url;
                         <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoFloreMToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelFloreM; ?></p></div>            
                         <div class="remarquable"><?php if($isRemarquableFloreM_i == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueFloreM_i != '') echo '<label>Commentaire : </label>'.$comValueFloreM_i; ?></div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                       </div>
                       <div class='edit'>
                         <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
@@ -1825,7 +1825,7 @@ global $user, $base_url;
                         <div class="linePicto">              
                           <?php echo '<div class="myFormOnVisu">'.$outputFloreM.'</div>'; ?>
                         </div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>         
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
                       </div>      
                     </div>
                   </div>
@@ -1851,7 +1851,7 @@ global $user, $base_url;
                       </div>
                       <div class="remarquable"><?php if($isRemarquableGrotteI == '1') echo "* Présence d'un lieu remarquable"; ?></div>
                       <div class="commentaire"><?php if($comValueGrotteI != '') echo '<label>Commentaire : </label>'.$comValueGrotteI; ?></div>
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                     </div>
                     <div class='edit'>
                       <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
@@ -1861,7 +1861,7 @@ global $user, $base_url;
                         <?php if($urlPictoSurchargeGrotteI != '') echo "<img src='$base_url/$urlPictoSurchargeGrotteI'/>"; else echo '<p class="desc">Choisir une valeur pour afficher un pictogramme</p>'; ?>              
                         <?php echo '<div class="myFormOnVisu">'.$outputGrotte.'</div>'; ?>              
                       </div>
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>         
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
                     </div>
                   </div>
                 </div>
@@ -1888,7 +1888,7 @@ global $user, $base_url;
                       </div>
                       <div class="remarquable"><?php if($isRemarquablePaysT == '1') echo "* Présence d'un lieu remarquable"; ?></div>
                       <div class="commentaire"><?php if($comValuePaysT != '') echo '<label>Commentaire : </label>'.$comValuePaysT; ?></div>
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                     </div>
                     <div class='edit'>
                       <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
@@ -1901,7 +1901,7 @@ global $user, $base_url;
                         echo '<div class="myFormOnVisu">'.$outputPaysT.'</div>'; 
                         ?>              
                       </div>
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>         
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
                     </div>
                   </div>
                 </div>
@@ -1927,7 +1927,7 @@ global $user, $base_url;
                       </div>
                       <div class="remarquable"><?php if($isRemarquablePaysM == '1') echo "* Présence d'un lieu remarquable"; ?></div>
                       <div class="commentaire"><?php if($comValuePaysM != '') echo '<label>Commentaire : </label>'.$comValuePaysM; ?></div>
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                     </div>
                     <div class='edit'>
                       <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
@@ -1937,7 +1937,7 @@ global $user, $base_url;
                         <?php if($urlPictoSurchargePaysM != '') echo "<img src='$base_url/$urlPictoSurchargePaysM'/>"; else echo '<p class="desc">Choisir une valeur pour afficher un pictogramme</p>'; ?>              
                         <?php echo '<div class="myFormOnVisu">'.$outputPaysM.'</div>'; ?>              
                       </div>
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>         
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
                     </div>
                   </div>
                 </div>
@@ -1962,7 +1962,7 @@ global $user, $base_url;
                       </div>
                       <div class="remarquable"><?php if($isRemarquableBati == '1') echo "* Présence d'un lieu remarquable"; ?></div>
                       <div class="commentaire"><?php if($comValueBati != '') echo '<label>Commentaire : </label>'.$comValueBati; ?></div>
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                     </div>
                     <div class='edit'>
                       <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
@@ -1972,7 +1972,7 @@ global $user, $base_url;
                         <?php if($urlPictoSurchargeBati != '') echo "<img src='$base_url/$urlPictoSurchargeBati'/>"; else echo '<p class="desc">Choisir une valeur pour afficher un pictogramme</p>'; ?>              
                         <?php echo '<div class="myFormOnVisu">'.$outputBati.'</div>'; ?>              
                       </div>
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>         
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
                     </div>
                   </div>
                 </div>
@@ -1985,7 +1985,7 @@ global $user, $base_url;
                         <p class="titleGenrePicto">Interêt des patrimoines</p>
                         <p class="titleTypePicto">Création de richesse économique (Mer)</p>
                         <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoEcoMerToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelCreaRichessEcoMer; ?></p></div>                        
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                       </div>          
                     </div>
                   </div>
@@ -1999,7 +1999,7 @@ global $user, $base_url;
                         <p class="titleGenrePicto">Interêt des patrimoines</p>
                         <p class="titleTypePicto">Création de richesse économique (Terre)</p>
                         <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoEcoTerreToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelCreaRichessEcoTerre; ?></p></div>                        
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                       </div>                  
                     </div>
                   </div>
@@ -2189,13 +2189,7 @@ global $user, $base_url;
               case 1: $labelTouriste = 'Non'; break;
               case 2: $labelTouriste = 'Oui'; break;
               case 3: $labelTouriste = '---'; break;    
-            } // fin switch
-            switch ($labelNavette) {
-              case 0: $labelNavette = '?'; break;
-              case 1: $labelNavette = 'Non'; break;
-              case 2: $labelNavette = 'Oui'; break;
-              case 3: $labelNavette = '---'; break;    
-            } // fin switch
+            } 
             switch ($labelHab) {
               case 0: $labelHab = '?'; break;
               case 1: $labelHab = 'Non'; break;
@@ -2248,7 +2242,7 @@ global $user, $base_url;
                         <p class="titleGenrePicto">Pressions</p>
                         <p class="titleTypePicto">Desserte par navette</p>
                         <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoNavetteToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelNavette; ?></p></div>                        
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                       </div>          
                     </div>
                   </div>
@@ -2262,7 +2256,7 @@ global $user, $base_url;
                         <p class="titleGenrePicto">Pressions</p>
                         <p class="titleTypePicto">Présence de bâti</p>
                         <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoEtatBatiToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelBati; ?></p></div>                        
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                       </div>          
                     </div>
                   </div>
@@ -2276,7 +2270,7 @@ global $user, $base_url;
                         <p class="titleGenrePicto">Pressions</p>
                         <p class="titleTypePicto">Activités touristiques</p>
                         <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoTouristeToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelTouriste; ?></p></div>                        
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                       </div>          
                     </div>
                   </div>
@@ -2290,7 +2284,7 @@ global $user, $base_url;
                         <p class="titleGenrePicto">Pressions</p>
                         <p class="titleTypePicto">Présence d'habitants à l'année</p>
                         <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoHabToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelHab; ?></p></div>                        
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                       </div>          
                     </div>
                   </div>
@@ -2304,7 +2298,7 @@ global $user, $base_url;
                         <p class="titleGenrePicto">Pressions</p>
                         <p class="titleTypePicto">Impacts des usages / Terre</p>
                         <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoUsageTerreToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelImpactUsageT; ?></p></div>                        
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                       </div>          
                     </div>
                   </div>
@@ -2318,7 +2312,7 @@ global $user, $base_url;
                         <p class="titleGenrePicto">Pressions</p>
                         <p class="titleTypePicto">Impacts des usages / Mer</p>
                         <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoUsageMerToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelImpactUsageM; ?></p></div>                        
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                       </div>          
                     </div>
                   </div>
@@ -2332,7 +2326,7 @@ global $user, $base_url;
                         <p class="titleGenrePicto">Pressions</p>
                         <p class="titleTypePicto">Espèces envahissantes / Terrestres</p>
                         <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoEspEnvahTerreToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelEspEnvahT; ?></p></div>                        
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                       </div>          
                     </div>
                   </div>
@@ -2346,7 +2340,7 @@ global $user, $base_url;
                         <p class="titleGenrePicto">Pressions</p>
                         <p class="titleTypePicto">Espèces envahissantes / Marines</p>
                         <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoEspEnvahMerToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelEspEnvahM; ?></p></div>                        
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                       </div>          
                     </div>    
                   </div>
@@ -2615,7 +2609,7 @@ global $user, $base_url;
                       <p class="titleGenrePicto">Gestion / Conservation</p>
                       <p class="titleTypePicto">Statut de protection terrestre</p>
                       <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoProtecTerreToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelStatutProtecT; ?></p></div>                        
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                     </div>          
                   </div>
                 </div>
@@ -2629,7 +2623,7 @@ global $user, $base_url;
                       <p class="titleGenrePicto">Gestion / Conservation</p>
                       <p class="titleTypePicto">Statut de protection marin</p>
                       <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoProtecMerToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelStatutProtecM; ?></p></div>                        
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                     </div>          
                   </div>
                 </div>
@@ -2643,7 +2637,7 @@ global $user, $base_url;
                       <p class="titleGenrePicto">Gestion / Conservation</p>
                       <p class="titleTypePicto">Existence d'un gestionaire</p>
                       <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoExisteGestionToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelGestion; ?></p></div>                        
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                     </div>          
                   </div>
                 </div>
@@ -2657,7 +2651,7 @@ global $user, $base_url;
                       <p class="titleGenrePicto">Gestion / Conservation</p>
                       <p class="titleTypePicto">Existence d'un gestionaire sur le site</p>
                       <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoExisteGestionSiteToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelGestionSite; ?></p></div>                        
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                     </div>          
                   </div>
                 </div>
@@ -2671,7 +2665,7 @@ global $user, $base_url;
                       <p class="titleGenrePicto">Gestion / Conservation</p>
                       <p class="titleTypePicto">Comité de gestion</p>
                       <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoEtatComiteGestionToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelComiteGestion; ?></p></div>                        
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                     </div>          
                   </div>
                 </div>
@@ -2685,7 +2679,7 @@ global $user, $base_url;
                       <p class="titleGenrePicto">Gestion / Conservation</p>
                       <p class="titleTypePicto">Comité de gestion</p>
                       <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoMoyensDispoToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelMoyensDispo; ?></p></div>                        
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                     </div>          
                   </div>
                 </div>
@@ -2699,7 +2693,7 @@ global $user, $base_url;
                       <p class="titleGenrePicto">Gestion / Conservation</p>
                       <p class="titleTypePicto">Plan de gestion</p>
                       <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoPlanGestionToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelPlanGestion; ?></p></div>                        
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                     </div>          
                   </div>
                 </div>
@@ -2713,7 +2707,7 @@ global $user, $base_url;
                       <p class="titleGenrePicto">Gestion / Conservation</p>
                       <p class="titleTypePicto">Accès autorisé sur le site</p>
                       <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoAccesToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelAccesAutoSite; ?></p></div>                        
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                     </div>          
                   </div>
                 </div>
@@ -2727,7 +2721,7 @@ global $user, $base_url;
                       <p class="titleGenrePicto">Gestion / Conservation</p>
                       <p class="titleTypePicto">Pêche autorisé sur le site</p>
                       <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoPecheToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelPecheAuto; ?></p></div>                        
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$code_ile"; ?>'>Donnée dans la base</a>
+                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
                     </div>          
                   </div>
                 </div>
