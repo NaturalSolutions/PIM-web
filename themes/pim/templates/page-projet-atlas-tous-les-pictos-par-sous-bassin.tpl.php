@@ -296,7 +296,7 @@ global $user, $base_url;
           else while (  $row  =  db_fetch_array($result) ) {
             if($ssbassin == $row['name']) $active = 'active';
             else $active = 'notactive';             
-            echo "<a class='linkSSbassin ".$active."' title='Afficher les pictogrammes pour ce sous bassin' href='$base_url/projet-atlas/pictos-par-sous-bassin?ssbassin=".urlencode($row['name'])."&pager=0'>".$row['nameSousBassin']."</a>";
+            echo "<a class='linkSSbassin ".$active."' title='Afficher les pictogrammes pour ce sous bassin' href='$base_url/projet-atlas/tous-les-pictos-par-sous-bassin?ssbassin=".urlencode($row['name'])."&pager=0'>".$row['nameSousBassin']."</a>";
           }
           
           //Selection des iles de la bdd dans certaine région (remplacé) qui sont précisé PIM ou non-renseigné         
@@ -2773,8 +2773,8 @@ global $user, $base_url;
           //Display pager
           echo "<div class='pager'>";
           for($i=0;$i<($result['nb_island'] / 3);$i++){
-            if($pager == $i) echo "<a href='pictos-par-sous-bassin?ssbassin=$ssbassin&pager=$i' class='itemPager active'>$i</a>";
-            else echo "<a href='pictos-par-sous-bassin?ssbassin=$ssbassin&pager=$i' class='itemPager'>$i</a>";
+            if($pager == $i) echo "<a href='tous-les-pictos-par-sous-bassin?ssbassin=$ssbassin&pager=$i' class='itemPager active'>$i</a>";
+            else echo "<a href='tous-les-pictos-par-sous-bassin?ssbassin=$ssbassin&pager=$i' class='itemPager'>$i</a>";
           }
           echo "</div>";
 
