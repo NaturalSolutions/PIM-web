@@ -1226,6 +1226,68 @@ global $user, $base_url;
             $urlOfPictoEcoMerToDisplay = $rowsEcoMer[$etatEcoMer];
             $urlOfPictoEcoTerreToDisplay = $rowsEcoTerre[$etatEcoTerre];
 
+            //Convert image size
+            if($urlOfPictoBotaToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoBotaToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoBotaToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart;               
+            }
+
+            if($urlOfPictoOrniToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoOrniToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoOrniToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoHerpetoToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoHerpetoToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoHerpetoToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoMamitoToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoMamitoToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoMamitoToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoChiroToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoChiroToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoChiroToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoFauneMToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoFauneMToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoFauneMToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoFloreMToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoFloreMToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoFloreMToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoPaysTToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoPaysTToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoPaysTToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoEcoMerToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoEcoMerToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoEcoMerToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoEcoTerreToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoEcoTerreToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoEcoTerreToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+           
+
             //On stock le bon label en fonction de la valeur
             $labelBota = $rowsLabelBota[$etatBota];
             $labelOrni = $rowsLabelOrni[$etatOrni];
@@ -2204,7 +2266,58 @@ global $user, $base_url;
             $urlOfPictoUsageMerToDisplay = $rowsUsageM[$etatUsageMer];
             $urlOfPictoEspEnvahTerreToDisplay = $rowsEspEnvahT[$etatEspTerre];
             $urlOfPictoEspEnvahMerToDisplay = $rowsEspEnvahM[$etatEspMer];
-            
+
+
+            //Convert image size
+            if($urlOfPictoNavetteToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoNavetteToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoNavetteToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart;               
+            }
+
+            if($urlOfPictoEtatBatiToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoEtatBatiToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoEtatBatiToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoTouristeToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoTouristeToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoTouristeToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoHabToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoHabToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoHabToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoUsageTerreToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoUsageTerreToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoUsageTerreToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoUsageMerToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoUsageMerToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoUsageMerToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoEspEnvahTerreToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoEspEnvahTerreToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoEspEnvahTerreToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoEspEnvahMerToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoEspEnvahMerToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoEspEnvahMerToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+                        
             //On stock le bon label en fonction de la valeur
             $labelNavette = $rowsLabelNavette[$etatNavette];
             $labelBati = $rowsLabelBati[$etatBati];
@@ -2565,6 +2678,61 @@ global $user, $base_url;
             $urlOfPictoPlanGestionToDisplay = $rowsPlanGestion[$etatPlanGestion];
             $urlOfPictoAccesToDisplay = $rowsAcces[$etatAccesAutoSite];
             $urlOfPictoPecheToDisplay = $rowsPeche[$etatPecheAutoSite];
+
+             //Convert image size
+            if($urlOfPictoProtecTerreToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoProtecTerreToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoProtecTerreToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart;               
+            }
+
+            if($urlOfPictoProtecMerToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoProtecMerToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoProtecMerToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoExisteGestionToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoExisteGestionToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoExisteGestionToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoExisteGestionSiteToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoExisteGestionSiteToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoExisteGestionSiteToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoEtatComiteGestionToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoEtatComiteGestionToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoEtatComiteGestionToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoMoyensDispoToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoMoyensDispoToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoMoyensDispoToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoPlanGestionToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoPlanGestionToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoPlanGestionToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoAccesToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoAccesToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoAccesToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+            
+            if($urlOfPictoPecheToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoPecheToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoPecheToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
 
             //On stock le bon label en fonction de la valeur
             $labelStatutProtecT = $rowsLabelProtectT[$etatProtectionT];
