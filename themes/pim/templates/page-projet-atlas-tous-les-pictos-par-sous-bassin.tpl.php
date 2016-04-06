@@ -577,6 +577,57 @@ global $user, $base_url;
             $urlOfPictoEnviroToDisplay = $rowsCaraEnviro[$etatEnviro];
             $urlOfPictoEcoToDisplay = $rowsEco[$etatEco];
 
+            //Convert image size
+            if($urlOfPictoBotaToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoBotaToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoBotaToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart;               
+            }
+
+            if($urlOfPictoOrniToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoOrniToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoOrniToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoHerpeToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoHerpeToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoHerpeToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoMamiToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoMamiToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoMamiToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoChiroToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoChiroToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoChiroToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoInvertToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoInvertToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoInvertToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoEnviroToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoEnviroToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoEnviroToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+            if($urlOfPictoEcoToDisplay != ''){
+            $secondePart = explode('sites/default/files/', $urlOfPictoEcoToDisplay);            
+            $secondePart = $secondePart[1];                
+            $urlOfPictoEcoToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
+            }
+
+
+
             //On stock le bon label en fonction de la valeur
             $labelBota = $rowsLabelBota[$etatBota];
             $labelOrni = $rowsLabelOrni[$etatOrni];
@@ -761,7 +812,7 @@ global $user, $base_url;
               <div class="lesPicto book_les_pictos_connaissances" data-term="<?php echo $termName; ?>">
                 
                 <!-- Botanique -->
-                <?php if($urlOfPictoBotaToDisplay != ''): ?>
+                <?php if($urlOfPictoBotaToDisplay != ''): ?> 
                   <div class="onePicto Botanique"><?php echo "<img src='$base_url/$urlOfPictoBotaToDisplay' alt='$titleBota' title='$titleBota' />"; ?>
                     <div class="popup"><div class="croix">X</div>
                       <div class='visu'>
