@@ -5462,3 +5462,380 @@ body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div.myFormO
   margin-bottom: 2px;
 }
 
+/***************************************************************************/
+/***************************************************************************/
+/*                   PAGE TOUS LES PICTOS PAR SOUS BASSIN                  */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin li.ar, 
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin li.it, 
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin li.es, 
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin.section-node-edit li.ar, 
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin.section-node-edit li.it, 
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin.section-node-edit li.es {
+    visibility: hidden;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lineHeader{
+  background-color: #e1e1e1;
+  margin-top:   24px;
+  padding: 12px 15px
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lineHeader div.col{  
+  display: inline-block;
+  font-size: 9px;
+  padding-left: 60px;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lineHeader div.col span.item{
+  width: 100%;
+  display: block;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin p.nbIsland{
+  font-family: 'Poiret One', cursive;
+  font-weight: 600;
+  font-size: 13px;  
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin h1{
+  margin-bottom: 0;
+  display: block;
+  height: 46px;
+  padding-top: 10px;
+  border-bottom: 1px dashed #666666;
+  text-decoration: initial;
+  font-size: 35px;
+  font-family: 'Poiret One', cursive;
+  font-weight: 300;
+  text-transform: uppercase;
+  background: url(../../../images/iconePalmierb.png) no-repeat 100% 50%;
+  background-size: 6%;
+  padding-bottom: 2px;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin h2.bigTitleSousBassin{
+  font-weight: 100;
+  font-family: 'Poiret One', cursive;
+  margin-bottom: 0;
+  margin-top: 8px;
+  font-size: 25px;
+  padding-bottom: 34px;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin h3{
+  margin-bottom: 1px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #000;
+  font-size: 36px;
+  margin-top: 45px;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin p.help{
+  background: url(../../../images/Arrowhead-Up.png) no-repeat 50% 20px;
+  background-size: 12%;
+  display: block;
+  height: 100px;
+  text-align: center;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lineHeader:nth-of-type(1){
+  margin-top: 0;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin h2.titleSousBassin{
+  margin-top: 30px;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.labelLesPictos.connaissance{
+  background-color: #023c74;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.labelLesPictos.interet{
+  background-color: #00491d;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.labelLesPictos.pression{
+  background-color: #d12329;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.labelLesPictos.gestion{
+  background-color: #554218;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.labelLesPictos{
+  width: 19%;
+  display: inline-block;
+  padding-top: 51px;
+  position: relative;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.labelLesPictos p{
+  margin: 0;
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  color: #fff;
+  font-size: 13px;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.labelLesPictos.gestion p{
+  top: 10px;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lineHeader a{
+  max-width: 118px;
+  display: inline-block;
+  font-size: 15px;
+  line-height: 19px;
+  text-decoration: underline !important;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.pager{
+  margin-top: 25px !important;
+  text-align: center !important;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.pager a.itemPager{
+  display: inline-block;
+  float: none;
+  text-decoration: none;
+  text-align: center;
+  font-family: 'Poiret One', cursive;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.pager a.itemPager.active{
+  text-decoration: underline;
+  font-weight: bold;  
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.myFormOnVisu fieldset.collapsible.collapsed, 
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.myFormOnVisu fieldset.collapsible,
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.myFormOnVisu input#edit-preview,
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.myFormOnVisu div#edit-body-wrapper,
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.myFormOnVisu div.body-field-wrapper{
+  display: none;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.myFormOnVisu input{
+  width: 191px;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.onePicto{
+  cursor: pointer;
+  width: 25px;
+  height: 30px;
+  font-size: 9px;
+  display: inline-block;
+  border-right: 1px solid #c1c1c1;
+  padding: 13px 6px 6px 6px;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin a.linkSSbassin{
+  text-decoration: none;
+  text-align: center;
+  width: 20%;
+  display: inline-block;
+  min-height: 23px;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin a.linkSSbassin.active{
+  font-weight: bold;
+  color: #00659b !important;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.onePicto i.star{
+  font-weight: bold;
+  font-size: 16px;
+  display: block;
+  position: absolute;
+  top: 6px;
+  margin-left: -10px;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.onePicto.expert{
+  vertical-align: top;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.onePicto > img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  -moz-object-fit: contain;
+  -webkit-object-fit: contain;
+  -ms-object-fit: contain;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto{
+  width: 80%;
+  position: relative;
+  float: right;
+  border-top: 1px solid #c1c1c1;
+  border-right: 1px solid #c1c1c1;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto.book_les_pictos_gestions{
+  border-bottom: 1px solid #c1c1c1;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto.book_les_pictos_connaissances{
+  border-top:   none; 
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.linePictos{
+  margin-top:   -2px;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup{
+  position: absolute;
+  top: 0;
+  left: -348px;
+  display: none;
+  background-color: #fff;
+  width: 195px;
+  height: auto;
+  font-size: 14px;
+  border: 1px solid #4472c4;
+  z-index: 99;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup.green{
+  border: 1px solid #78e285;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup.marron{
+  border: 1px solid #385723;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup.red{
+  border: 1px solid #ff0000;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.actionLine{
+  border-bottom: 1px solid #4472c4;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup.green div.actionLine{
+  border-bottom: 1px solid #78e285;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup.marron div.actionLine{
+  border-bottom: 1px solid #385723;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup.red div.actionLine{
+  border-bottom: 1px solid #ff0000;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.actionLine a{
+  text-decoration: none;
+  display: inline-block;
+  width: 44%;
+  text-align: center;
+  padding: 3%;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.actionLine a.editPicto{
+  width: 34%;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.popup div.edit div.remarquable{
+  padding: 10px 0;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.popup.hidden{
+  display: none !important;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin img.surcharge{
+  border-bottom: 1px solid #666;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.onePicto:last-child{
+  border-right: 0;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.popup div.edit p.desc{  
+  padding: 6px 6px;
+  font-style: italic;
+  text-align: center;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.popup div.croix{  
+  float: right;
+  margin-top: -1px;
+  border: 1px solid #4472c4;
+  padding: 0px 4px;
+  border-right: 0 !important;
+  z-index: 99;
+  cursor: pointer;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.popup.green div.croix{
+  border: 1px solid #78e285;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.popup.red div.croix{
+  border: 1px solid #ff0000;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.popup.marron div.croix{
+  border: 1px solid #385723;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.popup div.edit div.commentaire{
+  padding: 10px 0;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.actionLine a.select{
+  background-color: #4472c4;
+  color: #fff !important;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup.green div.actionLine a.select{
+  background-color: #78e285;
+  color: #fff !important;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup.marron div.actionLine a.select{
+  background-color: #385723;
+  color: #fff !important;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup.red div.actionLine a.select{
+  background-color: #ff0000;
+  color: #fff !important;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.actionLine a:not(.select):hover{
+  color : #4472c4 !important;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup.green div.actionLine a:not(.select):hover{
+  color : #78e285 !important;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup.marron div.actionLine a:not(.select):hover{
+  color : #385723 !important;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup.red div.actionLine a:not(.select):hover{
+  color : #ff0000 !important;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.linePicto {
+  padding-top: 20px;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.linePicto img{
+  height: 50px;
+  display: inline-block;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.visu div.linePicto p.labelEtat{
+  padding: 0 10px;
+  margin: 0;
+  display: inline-block;
+  padding-right: 12px;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.edit div.linePicto p.labelEtat{
+  position: absolute;
+  top: 112px;
+  left: 52px;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup p.titleGenrePicto{
+  font-weight:  bold; 
+  padding: 10px;
+  margin: 0;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup p.titleTypePicto{
+  padding: 0 10px;
+  margin: 0;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup p.noPicto{
+  padding: 0 10px;
+  margin: 0;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.remarquable{
+  padding: 25px 12px 18px 12px;
+  font-weight: bold;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.commentaire{
+  padding: 10px 12px 18px 12px;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.commentaire label{
+  display: block;
+  font-weight: 600;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup a.linkToBase{
+  padding: 12px 0 18px 0;
+  display: block;
+  text-align: center;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.myFormOnVisu div.standard > div.form-item:nth-of-type(5n){
+  text-align: center;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.form-item:first-of-type,
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.myFormOnVisu div.standard > div.form-item:nth-of-type(3n),
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.myFormOnVisu div.standard > div.form-item:nth-of-type(4n),
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.myFormOnVisu input.form-submit[value='Aperçu'],
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.myFormOnVisu input.form-submit[value='Supprimer'],
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.edit{
+  display: none;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.myFormOnVisu div.standard > div.form-item:nth-of-type(n+6){
+  display: block;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.myFormOnVisu div.standard > div.form-item:nth-of-type(6n){  
+  padding-left: 4px;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.myFormOnVisu div.standard > div.form-item:nth-of-type(6n) input{  
+  float: left;
+  width: 20px;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup div.myFormOnVisu input.form-submit[value='Enregistrer']{
+  margin-left: 2px;
+  margin-bottom: 2px;
+}
+
