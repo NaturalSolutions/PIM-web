@@ -91,6 +91,20 @@ ul#nice-menu-2 li.menu-13552.menu-path-node-56647.odd.last a:hover {
 ul#nice-menu-5 ul li {
   background-color: rgba(255, 255, 255, 0.8);
 }
+div#block-nice_menus-5 li.tousLesSousBassins a{
+  text-decoration: none;
+  color: #31569F;
+  font-size: 13px;
+}
+div#block-nice_menus-5 li.tousLesSousBassins a:hover{
+  color: #FF741C;
+}
+div#block-nice_menus-5 li.tousLesSousBassins{
+  background: url("../images/puce/Fleches_n2_31569f_4x7.png") no-repeat 0px 0px;
+  list-style-type: none;
+  background-size: 114px;
+  padding-left: 35px;
+}
 a.linkForEditMenuAtlas{
   background: url('../../../images/icon-edit-menu.png') no-repeat 50% 50%;
   background-size: 100%;

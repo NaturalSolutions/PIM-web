@@ -119,12 +119,7 @@
 
  
 </head>
-
 <?php 
-$myTime = microtime(true);
-//drupal_set_message( "<pre>" . print_r('Avant : '.(microtime(true) - $myTime), TRUE) . "</pre>" ); 
-
-
 module_load_include('inc', 'node', 'node.pages');    
 $node_type = 'book_les_pictos_surcharge';
 $form_id = $node_type . '_node_form';
@@ -141,6 +136,7 @@ global $user, $base_url;
     <div id="header"><div class="section clearfix">
 
     <div id="header-top">
+      <a href="<?php echo $base_url; ?>/projet-atlas/">Retour Atlas</a>
       <?php if ($site_name || $site_slogan): ?>
       <div id="name-and-slogan">
         <?php if ($site_name): ?>
@@ -239,11 +235,11 @@ global $user, $base_url;
           //Get param in url for pager
           if(isset($_GET["pager"])) $pager = $_GET["pager"];
           else $pager = 0; 
-          $offset = ($pager*3);          
+          $offset = ($pager*25);          
 
           if(isset($_GET["ssbassin"])) $ssbassin = urldecode($_GET["ssbassin"]);
           else $ssbassin = "Gibraltar";
-
+/*
           //Selection des iles de la bdd dans certaine région (remplacé) qui sont précisé PIM ou non-renseigné
           $sql = "SELECT distinct c.name, 
             replace(        
@@ -297,7 +293,28 @@ global $user, $base_url;
             if($ssbassin == $row['name']) $active = 'active';
             else $active = 'notactive';             
             echo "<a class='linkSSbassin ".$active."' title='Afficher les pictogrammes pour ce sous bassin' href='$base_url/projet-atlas/tous-les-pictos-par-sous-bassin?ssbassin=".urlencode($row['name'])."&pager=0'>".$row['nameSousBassin']."</a>";
-          }
+          }*/
+
+          ?>
+          
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Gibraltar&pager=0.html">Alboran</a>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=0.html">Eastern Spain</a>                    
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Tunisie-Nord&pager=0.html">Northern Tunisia</a> 
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=0.html">Algeria</a>          
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Tunisie-Est&pager=0.html">Eastern Tunisia</a>          
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=0.html">Sardinia</a>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/tous-les-pictos-par-sous-bassin_ssbassin=Maroc%20Atlantique&pager=0.html">Atlantic Morocco</a> 
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Ligure&pager=0.html">Italy Ligurian</a>          
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=0.html">Sicily</a>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=0.html">Balearic Islands</a>           
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Tirreno&pager=0.html">Italy Tyrrhenian</a> 
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=0.html">Southern France</a> 
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=0.html">Corsica</a> 
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=0.html">Malta</a> 
+
+          
+
+          <?php
           
           //Selection des iles de la bdd dans certaine région (remplacé) qui sont précisé PIM ou non-renseigné         
           $sql = "SELECT distinct p.field_bdi_dp_code_ile_value, 
@@ -354,7 +371,7 @@ global $user, $base_url;
                 AND c.name LIKE '".$ssbassin."'
                 ORDER BY nameSousBassin ASC
                 , s.name ASC 
-          LIMIT 3 OFFSET ".$offset.";";
+          LIMIT 25 OFFSET ".$offset.";";
 
 
           $result = db_query($sql);    
@@ -2956,7 +2973,7 @@ global $user, $base_url;
             
           }//Fin while query all bdd island
         
-          
+          /*
           //Get pager
           $sql = "SELECT count( c.name ) nb_island                 
           FROM drp_content_type_bd_i_description_physique p
@@ -2991,14 +3008,95 @@ global $user, $base_url;
 
           //Display pager
           echo "<div class='pager'>";
-          for($i=0;$i<($result['nb_island'] / 3);$i++){
+          for($i=0;$i<($result['nb_island'] / 25);$i++){
             if($pager == $i) echo "<a href='tous-les-pictos-par-sous-bassin?ssbassin=$ssbassin&pager=$i' class='itemPager active'>$i</a>";
             else echo "<a href='tous-les-pictos-par-sous-bassin?ssbassin=$ssbassin&pager=$i' class='itemPager'>$i</a>";
           }
-          echo "</div>";
+          echo "</div>"; */         
+          ?>          
+          <h2>Tous les liens</h2>
 
-          //drupal_set_message( "<pre>" . print_r('Après : '.(microtime(true) - $myTime), TRUE) . "</pre>" ); 
-          ?>
+          <h3>Alboran</h3>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Gibraltar&pager=0.html">Alboran</a><br/>                    
+
+          <h3>Eastern Spain</h3>
+          <a class="linkSSbassin" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=0.html">Eastern Spain - page 0</a><br/>
+          <a class="linkSSbassin" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=1.html">Eastern Spain - page 1</a><br/>
+          <a class="linkSSbassin" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=2.html">Eastern Spain - page 2</a><br/>
+          <a class="linkSSbassin" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=3.html">Eastern Spain - page 3</a><br/>    
+          <a class="linkSSbassin" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=4.html">Eastern Spain - page 4</a><br/>    
+          
+          <h3>Northern Tunisia</h3>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Tunisie-Nord&pager=0.html">Northern Tunisia</a><br/>
+
+          <h3>Algeria</h3>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=0.html">Algeria - page 0</a><br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=1.html">Algeria - page 1</a><br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=2.html">Algeria - page 2</a><br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=3.html">Algeria - page 3</a><br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=4.html">Algeria - page 4</a><br/>
+
+          <h3>Eastern Tunisia</h3>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Tunisie-Est&pager=0.html">Eastern Tunisia - page 0</a><br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Tunisie-Est&pager=1.html">Eastern Tunisia - page 1</a><br/>
+
+          <h3>Sardinia</h3>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=0.html">Sardinia - page 0</a><br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=1.html">Sardinia - page 1</a><br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=2.html">Sardinia - page 2</a><br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=3.html">Sardinia - page 3</a><br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=4.html">Sardinia - page 4</a><br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=5.html">Sardinia - page 5</a><br/>
+
+          <h3>Atlantic Morocco</h3>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Maroc%20Atlantique&pager=0.html">Atlantic Morocco - page 0</a><br/>
+
+          <h3>Italy Ligurian</h3>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Ligure&pager=0.html">Italy Ligurian - page 0</a><br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Ligure&pager=1.html">Italy Ligurian - page 1</a><br/>
+
+          <h3>Sicily</h3>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=0.html">Sicily - page 0</a><br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=1.html">Sicily - page 1</a><br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=2.html">Sicily - page 2</a><br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=3.html">Sicily - page 3</a><br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=4.html">Sicily - page 4</a><br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=5.html">Sicily - page 5</a><br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=6.html">Sicily - page 6</a><br/>
+
+          <h3>Balearic Islands</h3>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=0.html">Balearic Islands - page 0</a> <br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=1.html">Balearic Islands - page 1</a> <br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=2.html">Balearic Islands - page 2</a> <br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=3.html">Balearic Islands - page 3</a> <br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=4.html">Balearic Islands - page 4</a> <br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=5.html">Balearic Islands - page 5</a> <br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=6.html">Balearic Islands - page 6</a> <br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=7.html">Balearic Islands - page 7</a> <br/>
+
+          <h3>Italy Tyrrhenian</h3>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Tirreno&pager=0.html">Italy Tyrrhenian - page 0</a> <br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Tirreno&pager=1.html">Italy Tyrrhenian - page 1</a> <br/>
+
+          <h3>Southern France</h3>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=0.html">Southern France - page 0</a> <br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=1.html">Southern France - page 1</a> <br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=2.html">Southern France - page 2</a> <br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=3.html">Southern France - page 3</a> <br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=4.html">Southern France - page 4</a> <br/>
+
+          <h3>Corsica</h3>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=0.html">Corsica - page 0</a> <br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=1.html">Corsica - page 1</a> <br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=2.html">Corsica - page 2</a> <br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=3.html">Corsica - page 3</a> <br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=4.html">Corsica - page 4</a> <br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=5.html">Corsica - page 5</a> <br/>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=6.html">Corsica - page 6</a> <br/>
+
+          <h3>Malta</h3>
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Malte&pager=0.html">Malta - page 0</a>
+
         </div>
 
         <?php print $content_bottom; ?>
