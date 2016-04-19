@@ -234,8 +234,8 @@ global $user, $base_url;
          
           //Get param in url for pager
           if(isset($_GET["pager"])) $pager = $_GET["pager"];
-          else $pager = 0; 
-          $offset = ($pager*3);          
+          else $pager = 1; 
+          $offset = ($pager - 1) *3;          
 
           if(isset($_GET["ssbassin"])) $ssbassin = urldecode($_GET["ssbassin"]);
           else $ssbassin = "Gibraltar";
@@ -286,13 +286,12 @@ global $user, $base_url;
 
           $result = db_query($sql);    
 
-          //Display
-          $cpt=0;
+          //Display          
           if (!$result) die('Invalid query1: ' . mysql_error());
           else while (  $row  =  db_fetch_array($result) ) {
             if($ssbassin == $row['name']) $active = 'active';
             else $active = 'notactive';             
-            echo "<a class='linkSSbassin ".$active."' title='Afficher les pictogrammes pour ce sous bassin' href='$base_url/projet-atlas/pictos-par-sous-bassin?ssbassin=".urlencode($row['name'])."&pager=0'>".$row['nameSousBassin']."</a>";
+            echo "<a class='linkSSbassin ".$active."' title='Afficher les pictogrammes pour ce sous bassin' href='$base_url/projet-atlas/pictos-par-sous-bassin?ssbassin=".urlencode($row['name'])."&pager=1'>".$row['nameSousBassin']."</a>";
           }
           
           //Selection des iles de la bdd dans certaine région (remplacé) qui sont précisé PIM ou non-renseigné         
@@ -2769,8 +2768,9 @@ global $user, $base_url;
           //Display pager
           echo "<div class='pager'>";
           for($i=0;$i<($result['nb_island'] / 3);$i++){
-            if($pager == $i) echo "<a href='pictos-par-sous-bassin?ssbassin=$ssbassin&pager=$i' class='itemPager active'>$i</a>";
-            else echo "<a href='pictos-par-sous-bassin?ssbassin=$ssbassin&pager=$i' class='itemPager'>$i</a>";
+            $j = $i+1;
+            if($pager == $j) echo "<a href='pictos-par-sous-bassin?ssbassin=$ssbassin&pager=$j' class='itemPager active'>$j</a>";
+            else echo "<a href='pictos-par-sous-bassin?ssbassin=$ssbassin&pager=$j' class='itemPager'>$j</a>";
           }
           echo "</div>";
 
