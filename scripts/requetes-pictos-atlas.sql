@@ -779,13 +779,13 @@ WHERE t.vid = 4;
 
 -- Existence d'un gestionnaire
 
-CREATE OR REPLACE VIEW picto_press_pregest AS
+CREATE OR REPLACE VIEW picto_press_exgest AS
 SELECT code_ile, pregest AS niveau
 FROM picto_gecon_base_gest;
 
 -- Présence d'un gestionnaire sur le site
 
-CREATE OR REPLACE VIEW picto_press_exgest AS
+CREATE OR REPLACE VIEW picto_press_pregest AS
 SELECT code_ile, exgest AS niveau
 FROM picto_gecon_base_gest;
 

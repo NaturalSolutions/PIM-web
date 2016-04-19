@@ -2369,13 +2369,13 @@ global $user, $base_url;
             $etatProtectionM = $result1['niveau'];
             
             //Existence d'un gestionnaire
-            $sql1 = "select b.niveau from picto_press_pregest b where code_ile = '".$termName."'";           
+            $sql1 = "select b.niveau from picto_press_exgest b where code_ile = '".$termName."'";           
             $result1 = db_query($sql1);
             $result1 = db_fetch_array($result1); 
-            $etatGestion = $result1['niveau'];
+            $etatGestion = $result1['niveau'];            
             
             //Existence d'un gestionnaire sur le site
-            $sql1 = "select b.niveau from picto_press_exgest b where code_ile = '".$termName."'";           
+            $sql1 = "select b.niveau from picto_press_pregest b where code_ile = '".$termName."'";           
             $result1 = db_query($sql1);
             $result1 = db_fetch_array($result1); 
             $etatGestionSite = $result1['niveau'];
