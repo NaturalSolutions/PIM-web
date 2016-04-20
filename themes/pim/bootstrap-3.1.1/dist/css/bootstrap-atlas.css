@@ -5119,6 +5119,11 @@ body.page-projet-atlas-pictos-par-sous-bassin div.lineHeader{
   margin-top:   24px;
   padding: 12px 15px
 }
+body.page-projet-atlas-pictos-par-sous-bassin p.notInteresting{
+  margin: 3px 0 0 6px;
+  font-size: 12px;
+  font-weight: bold;
+}
 body.page-projet-atlas-pictos-par-sous-bassin div.lineHeader div.col{  
   display: inline-block;
   font-size: 9px;

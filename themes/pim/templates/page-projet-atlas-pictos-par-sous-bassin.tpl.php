@@ -435,52 +435,68 @@ global $user, $base_url;
             -- ----------------------------------------------------------------------------*/
             
             //Bota
+            $isNotInteretBota = false;
             $sql1 = "select b.niveau from picto_etaco_bota b where code_ile = '".$termName."'";           
             $result1 = db_query($sql1);
             $result1 = db_fetch_array($result1); 
-            $etatBota = $result1['niveau'] - 1;   
+            $etatBota = $result1['niveau'] - 1;               
+            if($etatBota == 0) $isNotInteretBota = true;
 
             //Ornithologie
+            $isNotInteretOrni = false;
             $sql1 = "select b.niveau from picto_etaco_ornitho b where code_ile = '".$termName."'";           
             $result1 = db_query($sql1);
             $result1 = db_fetch_array($result1);             
             $etatOrni = $result1['niveau'] - 1;
+            if($etatOrni == 0) $isNotInteretOrni = true;
             
             //Herpétologie
+            $isNotInteretHerpeto = false;
             $sql1 = "select b.niveau from picto_etaco_herpeto b where code_ile = '".$termName."'";           
             $result1 = db_query($sql1);
             $result1 = db_fetch_array($result1);
             $etatHerpe = $result1['niveau'] - 1;
+            if($etatHerpe == 0) $isNotInteretHerpeto = true;
             
             //Mammifères
+            $isNotInteretMami = false;
             $sql1 = "select b.niveau from picto_etaco_mamm b where code_ile = '".$termName."'";           
             $result1 = db_query($sql1);
             $result1 = db_fetch_array($result1);             
             $etatMami = $result1['niveau'] - 1;
+            if($etatMami == 0) $isNotInteretMami = true;
             
             //Chiroptères
+            $isNotInteretChiro = false;
             $sql1 = "select b.niveau from picto_etaco_chiro b where code_ile = '".$termName."'";           
             $result1 = db_query($sql1);
             $result1 = db_fetch_array($result1);             
             $etatChiro = $result1['niveau'] - 1;
+            if($etatChiro == 0) $isNotInteretChiro = true;
                           
             //Invertébrés
+            $isNotInteretInvert = false;
             $sql1 = "select b.niveau from picto_etaco_invert b where code_ile = '".$termName."'";           
             $result1 = db_query($sql1);
             $result1 = db_fetch_array($result1);             
-            $etatInvert = $result1['niveau'] - 1;  
+            $etatInvert = $result1['niveau'] - 1; 
+            if($etatInvert == 0) $isNotInteretInvert = true; 
             
             //Caractéristique environnentales
+            $isNotInteretEnviro = false;
             $sql1 = "select b.niveau from picto_etaco_carenv b where code_ile = '".$termName."'";           
             $result1 = db_query($sql1);
             $result1 = db_fetch_array($result1);             
             $etatEnviro = $result1['niveau'] - 1;
+            if($etatEnviro == 0) $isNotInteretEnviro = true;
             
             //Socie économie
+            $isNotInteretEco = false;
             $sql1 = "select b.niveau from picto_etaco_soceco b where code_ile = '".$termName."'";           
             $result1 = db_query($sql1);
             $result1 = db_fetch_array($result1);             
-            $etatEco = $result1['niveau'] - 1;         
+            $etatEco = $result1['niveau'] - 1;  
+            if($etatEco == 0) $isNotInteretEco = true;       
             
             //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Botanique et connaissance
             $sql1 = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Botanique' ORDER BY c.field_book_value_picto_connaiss_value ASC;";  
@@ -1600,7 +1616,7 @@ global $user, $base_url;
               </div>
               <div class="lesPicto book_les_pictos_interets" data-term="<?php echo $termName; ?>">
                 <?php if($urlOfPictoBotaToDisplay != ''): ?>
-                  <div class="onePicto expert interet botanique"><?php echo "<img src='$base_url/$urlOfPictoBotaToDisplay' alt='$titleBota' title='$titleBota' />"; ?>
+                  <div class="onePicto expert interet botanique"><?php if($isNotInteretBota) echo "<p class='notInteresting'>_</p>"; else echo "<img src='$base_url/$urlOfPictoBotaToDisplay' alt='$titleBota' title='$titleBota' />"; ?>
                     <?php         
                     if($isRemarquableBota == '1') echo "<i class='star'>*</i>";
                     ?> 
@@ -1609,7 +1625,13 @@ global $user, $base_url;
                         <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
                         <p class="titleGenrePicto">Interêt des patrimoines</p>
                         <p class="titleTypePicto">Botanique</p>
-                        <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoBotaToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelBota; ?></p></div>            
+                        <div class="linePicto">
+                          <?php if($isNotInteretBota): ?>
+                            <p class='labelEtat notInteresting'>_</p>
+                          <?php else : ?>
+                            <img src='<?php echo "$base_url/$urlOfPictoBotaToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelBota; ?></p>
+                        <?php endif; ?>
+                        </div>            
                         <div class="remarquable"><?php if($isRemarquableBota == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueBota != '') echo '<label>Commentaire : </label>'.$comValueBota; ?></div>
                         <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
@@ -1628,7 +1650,7 @@ global $user, $base_url;
                 <?php endif; ?>  
                 <!-- Ornithologie -->  
                 <?php if($urlOfPictoOrniToDisplay != ''): ?>
-                  <div class="onePicto expert interet ornithologie"><?php echo "<img src='$base_url/$urlOfPictoOrniToDisplay' alt='$titleOrni' title='$titleOrni' />"; ?>        
+                  <div class="onePicto expert interet ornithologie"><?php if($isNotInteretOrni) echo "<p class='notInteresting'>_</p>"; else echo "<img src='$base_url/$urlOfPictoOrniToDisplay' alt='$titleOrni' title='$titleOrni' />"; ?>        
                     <?php         
                     if($isRemarquableOrni == '1') echo "<i class='star'>*</i>";
                     ?>
@@ -1637,7 +1659,13 @@ global $user, $base_url;
                         <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
                         <p class="titleGenrePicto">Interêt des patrimoines</p>
                         <p class="titleTypePicto">Ornithologie</p>
-                        <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoOrniToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelOrni; ?></p></div>
+                        <div class="linePicto">
+                        <?php if($isNotInteretOrni): ?>
+                          <p class='labelEtat notInteresting'>_</p>
+                        <?php else : ?>
+                          <img src='<?php echo "$base_url/$urlOfPictoOrniToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelOrni; ?></p>
+                        <?php endif; ?>
+                        </div>
                         <div class="remarquable"><?php if($isRemarquableOrni == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueOrni != '') echo '<label>Commentaire : </label>'.$comValueOrni; ?></div>
                         <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
@@ -1656,7 +1684,7 @@ global $user, $base_url;
                 <?php endif; ?>    
                 <!-- Herpétologie --> 
                 <?php if($urlOfPictoHerpetoToDisplay != ''): ?>
-                  <div class="onePicto expert interet herpetologie"><?php echo "<img src='$base_url/$urlOfPictoHerpetoToDisplay' alt='$titleHerpeto' title='$titleHerpeto' />"; ?>      
+                  <div class="onePicto expert interet herpetologie"><?php if($isNotInteretHerpeto) echo "<p class='notInteresting'>_</p>"; else echo "<img src='$base_url/$urlOfPictoHerpetoToDisplay' alt='$titleHerpeto' title='$titleHerpeto' />"; ?>      
                     <?php         
                     if($isRemarquableHerpe == '1') echo "<i class='star'>*</i>";
                     ?>
@@ -1665,7 +1693,13 @@ global $user, $base_url;
                         <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
                         <p class="titleGenrePicto">Interêt des patrimoines</p>
                         <p class="titleTypePicto">Herpétologie</p>
-                        <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoHerpetoToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelHerpe; ?></p></div>            
+                        <div class="linePicto">
+                        <?php if($isNotInteretOrni): ?>
+                          <p class='labelEtat notInteresting'>_</p>
+                        <?php else : ?>
+                          <img src='<?php echo "$base_url/$urlOfPictoHerpetoToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelHerpe; ?></p>
+                        <?php endif; ?>
+                        </div>            
                         <div class="remarquable"><?php if($isRemarquableHerpe == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueHerpe != '') echo '<label>Commentaire : </label>'.$comValueHerpe; ?></div>
                         <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
@@ -1684,7 +1718,7 @@ global $user, $base_url;
                 <?php endif; ?>    
                 <!-- Mammifères -->
                 <?php if($urlOfPictoMamitoToDisplay != ''): ?>
-                  <div class="onePicto expert interet mamifere"><?php echo "<img src='$base_url/$urlOfPictoMamitoToDisplay' alt='$titleMami' title='$titleMami' />"; ?>        
+                  <div class="onePicto expert interet mamifere"><?php if($isNotInteretMami) echo "<p class='notInteresting'>_</p>"; else echo "<img src='$base_url/$urlOfPictoMamitoToDisplay' alt='$titleMami' title='$titleMami' />"; ?>        
                     <?php         
                     if($isRemarquableMami == '1') echo "<i class='star'>*</i>";
                     ?>
@@ -1693,7 +1727,13 @@ global $user, $base_url;
                         <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
                         <p class="titleGenrePicto">Interêt des patrimoines</p>
                         <p class="titleTypePicto">Mammifères</p>
-                        <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoMamitoToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelMami; ?></p></div>            
+                        <div class="linePicto">
+                        <?php if($isNotInteretOrni): ?>
+                          <p class='labelEtat notInteresting'>_</p>
+                        <?php else : ?>
+                          <img src='<?php echo "$base_url/$urlOfPictoMamitoToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelMami; ?></p>
+                        <?php endif; ?>  
+                        </div>
                         <div class="remarquable"><?php if($isRemarquableMami == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueMami != '') echo '<label>Commentaire : </label>'.$comValueMami; ?></div>
                         <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
@@ -1712,7 +1752,7 @@ global $user, $base_url;
                 <?php endif; ?>    
                 <!-- Chiroptere -->
                 <?php if($urlOfPictoChiroToDisplay != ''): ?>
-                  <div class="onePicto expert interet chiroptere"><?php echo "<img src='$base_url/$urlOfPictoChiroToDisplay' alt='$titleChiro' title='$titleChiro' />"; ?>        
+                  <div class="onePicto expert interet chiroptere"><?php if($isNotInteretChiro) echo "<p class='notInteresting'>_</p>"; else echo "<img src='$base_url/$urlOfPictoChiroToDisplay' alt='$titleChiro' title='$titleChiro' />"; ?>        
                     <?php         
                     if($isRemarquableChiro == '1') echo "<i class='star'>*</i>";
                     ?>
@@ -1721,7 +1761,13 @@ global $user, $base_url;
                         <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
                         <p class="titleGenrePicto">Interêt des patrimoines</p>
                         <p class="titleTypePicto">Chiroptere</p>
-                        <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoChiroToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelChiro; ?></p></div>
+                        <div class="linePicto">
+                        <?php if($isNotInteretChiro): ?>
+                          <p class='labelEtat notInteresting'>_</p>
+                        <?php else : ?>
+                        <img src='<?php echo "$base_url/$urlOfPictoChiroToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelChiro; ?></p>
+                        <?php endif; ?>
+                        </div>
                         <div class="remarquable"><?php if($isRemarquableChiro == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueChiro != '') echo '<label>Commentaire : </label>'.$comValueChiro; ?></div>
                         <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
@@ -1742,6 +1788,7 @@ global $user, $base_url;
                 <div class="onePicto expert interet invert" title='Invertébré'>
                   <?php 
                     if($urlPictoSurchargeInvert) echo "<img class='surcharge' src='$base_url/$urlPictoSurchargeInvert' alt='' title='' />"; 
+                    else if($isNotInteretInvert) echo "<p class='notInteresting'>_</p>"; 
                     else echo "<i>Expert</i>";        
                     if($isRemarquableInvert == '1') echo "<i class='star'>*</i>";
                   ?>      
@@ -1753,6 +1800,7 @@ global $user, $base_url;
                       <div class="linePicto">
                         <?php 
                         if($urlPictoSurchargeInvert != '') echo "<img src='$base_url/$urlPictoSurchargeInvert'/>"; 
+                        else if($isNotInteretInvert) echo "<p class='labelEtat notInteresting'>_</p>";
                         else echo '<p class="noPicto">Pas de pictogramme</p>';               
                         if($urlPictoSurchargeInvert != '') echo "<p class='labelEtat'>".$valueOfPictoSurchargeInvert."</p>"; 
                         ?>
