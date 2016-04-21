@@ -145,18 +145,227 @@
   <?php endif; ?>
 <?php endif;?>
 
-<?php if ($id == 'field_encylop_body_value') : ?>
-  <?php if (!empty($field->content)): ?>
-    <?php $field_encylop_body_value = $field->content; ?>
-  <?php endif; ?>
-<?php endif;?>
-
 <?php if ($id == 'path') : ?>
   <?php if (!empty($field->content)): ?>
     <?php $path = $field->content; ?>
   <?php endif; ?>
 <?php endif;?>
 
+<?php if ($id == 'field_encyclop_part_txt1_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part_txt1_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part_txt2_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part_txt1_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+<!-- -- -->
+<?php if ($id == 'field_encyclop_part1_txt1_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part1_txt1_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part1_txt2_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part1_txt2_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part1_txt3_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part1_txt3_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part1_txt4_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part1_txt4_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part1_txt5_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part1_txt5_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+<!-- -- -->
+<?php if ($id == 'field_encyclop_part2_txt1_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part2_txt1_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part2_txt2_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part2_txt2_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part2_txt3_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part2_txt3_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part2_txt4_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part2_txt4_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part2_txt5_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part2_txt5_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<!-- -- -->
+
+<?php if ($id == 'field_encyclop_part3_txt1_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part3_txt1_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part3_txt2_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part3_txt2_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part3_txt3_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part3_txt3_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part3_txt4_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part3_txt4_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part3_txt5_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part3_txt5_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part3_txt6_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part3_txt6_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part3_txt7_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part3_txt7_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part3_txt8_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part3_txt8_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part3_txt9_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part3_txt9_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part3_txt10_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part3_txt10_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part3_txt11_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part3_txt11_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<!-- -- -->
+
+<?php if ($id == 'field_encyclop_part4_txt1_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part4_txt1_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part4_txt2_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part4_txt2_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part4_txt3_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part4_txt3_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part4_txt4_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part4_txt4_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part4_txt5_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part4_txt5_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part4_txt6_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part4_txt6_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<!-- -- -->
+
+<?php if ($id == 'field_encyclop_part5_txt1_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part5_txt1_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part5_txt2_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part5_txt2_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part5_txt3_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part5_txt3_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part5_txt4_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part5_txt4_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part5_txt5_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part5_txt5_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
+
+<?php if ($id == 'field_encyclop_part5_txt6_value') : ?>
+  <?php if (!empty($field->content)): ?>
+    <?php $field_encyclop_part5_txt6_value = $field->content; ?>
+  <?php endif; ?>
+<?php endif;?>
 
 <?php endforeach; ?>
 
@@ -371,11 +580,323 @@ if (strpos($field_ss_bassin_strat_conserv_value,'encadreStyle') !== false) {
  
   echo "</div>";
 }
-if (strpos($field_encylop_body_value,'encadreStyle') !== false) {
+if (strpos($field_encyclop_part_txt1_value,'encadreStyle') !== false) {
     
   echo "<div class='conteneurRelatif'>";
    
-    echo $field_encylop_body_value;
+    echo $field_encyclop_part_txt1_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part_txt2_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part_txt2_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+/*--*/
+if (strpos($field_encyclop_part1_txt1_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part1_txt1_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part1_txt2_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part1_txt2_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part1_txt3_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part1_txt3_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part1_txt4_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part1_txt4_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part1_txt5_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part1_txt5_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+/**/
+if (strpos($field_encyclop_part2_txt1_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part2_txt1_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part2_txt2_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part2_txt2_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part2_txt3_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part2_txt3_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part2_txt4_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part2_txt4_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part2_txt5_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part2_txt5_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+/**/
+if (strpos($field_encyclop_part3_txt1_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part3_txt1_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part3_txt2_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part3_txt2_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part3_txt3_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part3_txt3_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part3_txt4_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part3_txt4_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part3_txt5_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part3_txt5_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part3_txt6_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part3_txt6_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part3_txt7_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part3_txt7_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part3_txt8_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part3_txt8_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part3_txt9_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part3_txt9_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part3_txt10_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part3_txt10_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part3_txt11_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part3_txt11_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+/*--*/
+if (strpos($field_encyclop_part4_txt1_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part4_txt1_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part4_txt2_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part4_txt2_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part4_txt3_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part4_txt3_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part4_txt4_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part4_txt4_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part4_txt5_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part4_txt5_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part4_txt6_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part4_txt6_value;
     echo '<div class="enSavoirPlus">Voir+</div>';
     echo $path;
     echo '<br/><br/>';
@@ -383,8 +904,63 @@ if (strpos($field_encylop_body_value,'encadreStyle') !== false) {
   echo "</div>";
 }
 
-/**/
+/*--*/
 
+if (strpos($field_encyclop_part5_txt1_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part5_txt1_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part5_txt2_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part5_txt2_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part5_txt3_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part5_txt3_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part5_txt4_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part5_txt4_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
+if (strpos($field_encyclop_part5_txt5_value,'encadreStyle') !== false) {
+    
+  echo "<div class='conteneurRelatif'>";
+   
+    echo $field_encyclop_part5_txt5_value;
+    echo '<div class="enSavoirPlus">Voir+</div>';
+    echo $path;
+    echo '<br/><br/>';
+ 
+  echo "</div>";
+}
 
 // if (strpos($field_ss_bassin_dom_terrestre_value,'encadreStyle') !== false) {
 
