@@ -93,11 +93,11 @@ ul#nice-menu-5 ul li {
 }
 div#block-nice_menus-5 li.tousLesSousBassins a{
   text-decoration: none;
-  color: #31569F;
+  color: #FF741C;
   font-size: 13px;
 }
 div#block-nice_menus-5 li.tousLesSousBassins a:hover{
-  color: #FF741C;
+  color: #31569F;
 }
 div#block-nice_menus-5 li.tousLesSousBassins{
   background: url("../images/puce/Fleches_n2_31569f_4x7.png") no-repeat 0px 0px;
@@ -5501,6 +5501,12 @@ body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lineHeader{
   margin-top:   24px;
   padding: 12px 15px
 }
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin a.backAtlas{
+  text-decoration: none;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div#content-area div.lineHeader.first{
+  margin-top: 0;
+}
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lineHeader div.col{  
   display: inline-block;
   font-size: 9px;
@@ -5509,6 +5515,15 @@ body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lineHeader div.col{
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lineHeader div.col span.item{
   width: 100%;
   display: block;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin p.notInteresting {
+    margin: 3px 0 0 6px;
+    font-size: 12px;
+    font-weight: bold;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesLiens{
+  overflow: auto;
+  height: 247px;
 }
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin p.nbIsland{
   font-family: 'Poiret One', cursive;
@@ -5539,11 +5554,15 @@ body.page-projet-atlas-tous-les-pictos-par-sous-bassin h2.bigTitleSousBassin{
   padding-bottom: 34px;
 }
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin h3{
-  margin-bottom: 1px;
   text-transform: uppercase;
   border-bottom: 1px solid #000;
-  font-size: 36px;
-  margin-top: 45px;
+  font-size: 28px;
+  margin-bottom: 0;
+  font-weight: 300;
+  margin-top: 33px;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin h2.littleTitle{
+  font-family: 'Poiret One', cursive;
 }
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin p.help{
   background: url(../../../images/Arrowhead-Up.png) no-repeat 50% 20px;
@@ -5551,8 +5570,7 @@ body.page-projet-atlas-tous-les-pictos-par-sous-bassin p.help{
   display: block;
   height: 100px;
   text-align: center;
-  margin-bottom: 12px;
-  font-weight: bold;
+  margin-bottom: 12px;  
 }
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lineHeader:nth-of-type(1){
   margin-top: 0;
@@ -5633,9 +5651,32 @@ body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.onePicto{
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin a.linkSSbassin{
   text-decoration: none;
   text-align: center;
-  width: 20%;
+  width: 20px;
   display: inline-block;
-  min-height: 23px;
+  background-color: #31569F;
+  border-radius: 100%;
+  padding: 7px 6px 3px 6px;
+  height: 20px;
+  vertical-align: middle;
+  color: #Fff!important;
+  border: none;
+  margin-right: 3px;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.oneSSbassin{
+  border-bottom: 1px dashed rgba(0,0,0,0.2);
+  padding-bottom: 31px;
+  padding-top: 20px;
+  width: 49%;
+  display: inline-block;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.oneSSbassin:first-of-type{
+  padding-top: 0;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.oneSSbassin.last{
+  border-bottom: 0;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin a.linkSSbassin:hover{
+  color: #FF741C !important;
 }
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin a.linkSSbassin.active{
   font-weight: bold;

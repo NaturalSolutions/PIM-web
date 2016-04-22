@@ -135,8 +135,7 @@ global $user, $base_url;
 
     <div id="header"><div class="section clearfix">
 
-    <div id="header-top">
-      <a href="<?php echo $base_url; ?>/projet-atlas/">Retour Atlas</a>
+    <div id="header-top">      
       <?php if ($site_name || $site_slogan): ?>
       <div id="name-and-slogan">
         <?php if ($site_name): ?>
@@ -227,77 +226,164 @@ global $user, $base_url;
         
 
         <div id="content-area">
+          <a class='backAtlas' href="<?php echo $base_url; ?>/projet-atlas/">Retour Atlas</a>
           <h1>Annuaire des îles</h1>
           <h2 class='bigTitleSousBassin'>SOUS-BASSIN</h2>
-          <p class='help'>Séléctionnez un sous bassin</p>
-          <?php 
-         
+          <p class='help'>Séléctionnez votre page</p>
+          <?php          
           //Get param in url for pager
           if(isset($_GET["pager"])) $pager = $_GET["pager"];
-          else $pager = 0; 
-          $offset = ($pager*25);          
+          else $pager = 1; 
+          $offset = ($pager - 1) * 3;
 
           if(isset($_GET["ssbassin"])) $ssbassin = urldecode($_GET["ssbassin"]);
           else $ssbassin = "Gibraltar";
-/*
-          //Selection des iles de la bdd dans certaine région (remplacé) qui sont précisé PIM ou non-renseigné
-          $sql = "SELECT distinct c.name, 
-            replace(        
-              replace(      
-                replace(              
-                  replace(              
-                    replace(              
-                      replace(              
-                        replace(                            
-                          replace(            
-                            replace(            
-                              replace(            
-                                replace(              
-                                  replace(              
-                                    replace(              
-                                      replace(c.name,'Gibraltar','Alboran'),       
-                                    'Algérie','Algeria'),
-                                  'Sardaigne','Sardinia'),
-                                'Sicile','Sicily'),
-                              'Tunisie-Est','Eastern Tunisia'),                            
-                            'Tunisie-Nord','Northern Tunisia'),                            
-                                          'Maroc Atlantique','Atlantic Morocco'),                            
-                                      'Corse','Corsica'),
-                      'France-Sud','Southern France'),
-                              'Baléares','Balearic Islands'),
-                  'Malte','Malta'),
-                      'Italie-Mar Ligure','Italy Ligurian'),
-              'Italie-Mar Tirreno','Italy Tyrrhenian'),
-            'Espagne-Sud et Est','Eastern Spain') nameSousBassin
-          FROM drp_content_type_bd_i_description_physique p
-          JOIN drp_term_data c
-          ON c.tid = p.field_bdi_dp_zone_geographique_value
-          WHERE COALESCE(p.field_bdi_dp_ispim_island_value,'Oui') = 'Oui' 
-          AND p.field_bdi_dp_code_ile_value is not null
-          AND c.name NOT LIKE 'Adriatique Ouest'
-          AND c.name NOT LIKE 'Chypre'
-          AND c.name NOT LIKE 'Crète'
-          AND c.name NOT LIKE 'Egypte-Nord' 
-          AND c.name NOT LIKE 'Est-Méditerranée'
-          AND c.name NOT LIKE 'Illyrie'
-          AND c.name NOT LIKE 'Italie - Sud'
-          AND c.name NOT LIKE 'Libye'          
-          ORDER BY nameSousBassin ASC;";
-
-          $result = db_query($sql);    
-
-          //Display
-          $cpt=0;
-          if (!$result) die('Invalid query1: ' . mysql_error());
-          else while (  $row  =  db_fetch_array($result) ) {
-            if($ssbassin == $row['name']) $active = 'active';
-            else $active = 'notactive';             
-            echo "<a class='linkSSbassin ".$active."' title='Afficher les pictogrammes pour ce sous bassin' href='$base_url/projet-atlas/tous-les-pictos-par-sous-bassin?ssbassin=".urlencode($row['name'])."&pager=0'>".$row['nameSousBassin']."</a>";
-          }*/
-
           ?>
+
+          <div class="lesLiens">          
+  
+            <div class="oneSSbassin">
+              <h2 class="littleTitle">Alboran</h2>
+              <div class="pagerPager">
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Gibraltar&pager=1.html">1</a>
+              </div>            
+            </div>
+
+            <div class="oneSSbassin">
+              <h2 class="littleTitle" >Algeria</h2>
+              <div class="pagerPager">
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=1.html">1</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=2.html">2</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=3.html">3</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=4.html">4</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=5.html">5</a>
+              </div>
+            </div>
+
+            <div class="oneSSbassin">
+              <h2 class="littleTitle" >Atlantic Morocco</h2>
+              <div class="pagerPager">
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Maroc%20Atlantique&pager=1.html">1</a>
+              </div>
+            </div>
+                      
+            <div class="oneSSbassin">
+              <h2 class="littleTitle" >Balearic Islands</h2>
+              <div class="pagerPager">
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=1.html">1</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=2.html">2</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=3.html">3</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=4.html">4</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=5.html">5</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=6.html">6</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=7.html">7</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=8.html">8</a>
+              </div>
+            </div>
+            
+            <div class="oneSSbassin">
+              <h2 class="littleTitle" >Corsica</h2>
+              <div class="pagerPager">
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=1.html">1</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=2.html">2</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=3.html">3</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=4.html">4</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=5.html">5</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=6.html">6</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=7.html">7</a>
+              </div>
+            </div>
+
+            <div class="oneSSbassin">  
+              <h2 class="littleTitle" >Eastern Spain</h2>
+              <div class="pagerPager">
+                <a class="linkSSbassin" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=1.html">1</a>
+                <a class="linkSSbassin" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=2.html">2</a>
+                <a class="linkSSbassin" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=3.html">3</a>
+                <a class="linkSSbassin" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=4.html">4</a>
+                <a class="linkSSbassin" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=5.html">5</a>
+              </div>
+            </div>
+
+            <div class="oneSSbassin">        
+              <h2 class="littleTitle" >Eastern Tunisia</h2>
+              <div class="pagerPager">
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Tunisie-Est&pager=1.html">1</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Tunisie-Est&pager=2.html">2</a>
+              </div>
+            </div>
+
+            <div class="oneSSbassin">
+              <h2 class="littleTitle" >Italy Ligurian</h2>
+              <div class="pagerPager">
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Ligure&pager=1.html">1</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Ligure&pager=2.html">2</a>
+              </div>
+            </div>
+
+            <div class="oneSSbassin">
+              <h2 class="littleTitle" >Italy Tyrrhenian</h2>
+              <div class="pagerPager">
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Tirreno&pager=1.html">1</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Tirreno&pager=2.html">2</a>
+              </div>
+            </div>
+
+            <div class="oneSSbassin">
+              <h2 class="littleTitle" >Malta</h2>
+              <div class="pagerPager">
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Malte&pager=1.html">1</a>
+              </div>
+            </div>
+            
+            <div class="oneSSbassin">
+              <h2 class="littleTitle" >Northern Tunisia</h2>
+              <div class="pagerPager">
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Tunisie-Nord&pager=1.html">1</a>
+              </div>
+            </div>
+
+            <div class="oneSSbassin">
+              <h2 class="littleTitle" >Sardinia</h2>
+              <div class="pagerPager">
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=1.html">1</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=2.html">2</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=3.html">3</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=4.html">4</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=5.html">5</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=6.html">6</a>
+              </div>
+            </div>
+
+            <div class="oneSSbassin last">
+              <h2 class="littleTitle" >Sicily</h2>
+              <div class="pagerPager">
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=1.html">1</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=2.html">2</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=3.html">3</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=4.html">4</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=5.html">5</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=6.html">6</a>
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=7.html">7</a>
+              </div>
+            </div>
+
+            <div class="oneSSbassin last">
+              <h2 class="littleTitle" >Southern France</h2>
+              <div class="pagerPager">
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=1.html">1</a> 
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=2.html">2</a> 
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=3.html">3</a> 
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=4.html">4</a> 
+                <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=5.html">5</a> 
+              </div>
+            </div>
+
+          </div> <!-- fin lesliens -->
+
+
           
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Gibraltar&pager=0.html">Alboran</a>
+          <!-- <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Gibraltar&pager=0.html">Alboran</a>
           <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=0.html">Eastern Spain</a>                    
           <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Tunisie-Nord&pager=0.html">Northern Tunisia</a> 
           <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=0.html">Algeria</a>          
@@ -310,7 +396,7 @@ global $user, $base_url;
           <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Tirreno&pager=0.html">Italy Tyrrhenian</a> 
           <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=0.html">Southern France</a> 
           <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=0.html">Corsica</a> 
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=0.html">Malta</a> 
+          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=0.html">Malta</a>  -->
 
           
 
@@ -377,7 +463,7 @@ global $user, $base_url;
           $result = db_query($sql);    
           $cpt = 0;                  
           //Display
-          if (!$result) die('Invalid query:0 ' . mysql_error());
+          if (!$result) die('Invalid big query ' . mysql_error());
           else while (  $row  =  db_fetch_array($result) ) {
             
             //Si le nom du sous bassin est different de l'ancien on l'affiche
@@ -424,14 +510,12 @@ global $user, $base_url;
             else if($pourcentPrivee == '100') $valuePropriete = 'privée';
             else if($pourcentPublic == '' && $pourcentPrivee == '') $valuePropriete = 'N/A';
             else $valuePropriete = 'publique/privée';
-
-
-            //drupal_set_message( "<pre>" . print_r($resFonciere, TRUE) . "</pre>" ); 
-
-            //Affichage island avec ses infos physique et foncière
-            echo "
-            <div class='lineHeader'>
             
+            //Affichage island avec ses infos physique et foncière
+            if($cpt == 1) echo "<div class='lineHeader first'>";
+            else echo "<div class='lineHeader'>";
+
+            echo "            
               <a target='_blank' class='titleIsland' href='$base_url/fiche-Ile/$termName'>".$firstSyno."</a>
               
               <div class='col col1'>
@@ -457,52 +541,68 @@ global $user, $base_url;
             -- ----------------------------------------------------------------------------*/
             
             //Bota
+            $isNotInteretBota = false;
             $sql1 = "select b.niveau from picto_etaco_bota b where code_ile = '".$termName."'";           
             $result1 = db_query($sql1);
             $result1 = db_fetch_array($result1); 
-            $etatBota = $result1['niveau'] - 1;   
+            $etatBota = $result1['niveau'] - 1;               
+            if($etatBota == 0) $isNotInteretBota = true;
 
             //Ornithologie
+            $isNotInteretOrni = false;
             $sql1 = "select b.niveau from picto_etaco_ornitho b where code_ile = '".$termName."'";           
             $result1 = db_query($sql1);
             $result1 = db_fetch_array($result1);             
             $etatOrni = $result1['niveau'] - 1;
+            if($etatOrni == 0) $isNotInteretOrni = true;
             
             //Herpétologie
+            $isNotInteretHerpeto = false;
             $sql1 = "select b.niveau from picto_etaco_herpeto b where code_ile = '".$termName."'";           
             $result1 = db_query($sql1);
             $result1 = db_fetch_array($result1);
             $etatHerpe = $result1['niveau'] - 1;
+            if($etatHerpe == 0) $isNotInteretHerpeto = true;
             
             //Mammifères
+            $isNotInteretMami = false;
             $sql1 = "select b.niveau from picto_etaco_mamm b where code_ile = '".$termName."'";           
             $result1 = db_query($sql1);
             $result1 = db_fetch_array($result1);             
             $etatMami = $result1['niveau'] - 1;
+            if($etatMami == 0) $isNotInteretMami = true;
             
             //Chiroptères
+            $isNotInteretChiro = false;
             $sql1 = "select b.niveau from picto_etaco_chiro b where code_ile = '".$termName."'";           
             $result1 = db_query($sql1);
             $result1 = db_fetch_array($result1);             
             $etatChiro = $result1['niveau'] - 1;
+            if($etatChiro == 0) $isNotInteretChiro = true;
                           
             //Invertébrés
+            $isNotInteretInvert = false;
             $sql1 = "select b.niveau from picto_etaco_invert b where code_ile = '".$termName."'";           
             $result1 = db_query($sql1);
             $result1 = db_fetch_array($result1);             
-            $etatInvert = $result1['niveau'] - 1;  
+            $etatInvert = $result1['niveau'] - 1; 
+            if($etatInvert == 0) $isNotInteretInvert = true; 
             
             //Caractéristique environnentales
+            $isNotInteretEnviro = false;
             $sql1 = "select b.niveau from picto_etaco_carenv b where code_ile = '".$termName."'";           
             $result1 = db_query($sql1);
             $result1 = db_fetch_array($result1);             
             $etatEnviro = $result1['niveau'] - 1;
+            if($etatEnviro == 0) $isNotInteretEnviro = true;
             
             //Socie économie
+            $isNotInteretEco = false;
             $sql1 = "select b.niveau from picto_etaco_soceco b where code_ile = '".$termName."'";           
             $result1 = db_query($sql1);
             $result1 = db_fetch_array($result1);             
-            $etatEco = $result1['niveau'] - 1;         
+            $etatEco = $result1['niveau'] - 1;  
+            if($etatEco == 0) $isNotInteretEco = true;             
             
             //On enregistre tous les chemins de pictos en fonction du type de picto (Botanique, Ornitologie...) et de son genre (connaissance, intérêt, pression...) -> ici Botanique et connaissance
             $sql1 = "SELECT d.filepath, c.field_book_value_picto_connaiss_value, n.title FROM drp_files d LEFT JOIN drp_content_type_book_les_pictos_connaissances c ON c.field_book_picto_connaissance_fid = d.fid LEFT JOIN drp_node n ON n.vid = c.vid LEFT JOIN drp_term_data t ON t.tid = c.field_book_type_picto_connaiss_value WHERE n.type = 'book_les_pictos_connaissances' AND t.name = 'Botanique' ORDER BY c.field_book_value_picto_connaiss_value ASC;";  
@@ -1735,7 +1835,7 @@ global $user, $base_url;
               </div>
               <div class="lesPicto book_les_pictos_interets" data-term="<?php echo $termName; ?>">
                 <?php if($urlOfPictoBotaToDisplay != ''): ?>
-                  <div class="onePicto expert interet botanique"><?php echo "<img src='$base_url/$urlOfPictoBotaToDisplay' alt='$titleBota' title='$titleBota' />"; ?>
+                  <div class="onePicto expert interet botanique"><?php if($isNotInteretBota) echo "<p class='notInteresting'>_</p>"; else echo "<img src='$base_url/$urlOfPictoBotaToDisplay' alt='$titleBota' title='$titleBota' />"; ?>
                     <?php         
                     if($isRemarquableBota == '1') echo "<i class='star'>*</i>";
                     ?> 
@@ -1744,7 +1844,13 @@ global $user, $base_url;
                         <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
                         <p class="titleGenrePicto">Interêt des patrimoines</p>
                         <p class="titleTypePicto">Botanique</p>
-                        <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoBotaToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelBota; ?></p></div>            
+                        <div class="linePicto">
+                          <?php if($isNotInteretBota): ?>
+                            <p class='labelEtat notInteresting'>_</p>
+                          <?php else : ?>
+                            <img src='<?php echo "$base_url/$urlOfPictoBotaToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelBota; ?></p>
+                        <?php endif; ?>
+                        </div>            
                         <div class="remarquable"><?php if($isRemarquableBota == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueBota != '') echo '<label>Commentaire : </label>'.$comValueBota; ?></div>
                         <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
@@ -1763,7 +1869,7 @@ global $user, $base_url;
                 <?php endif; ?>  
                 <!-- Ornithologie -->  
                 <?php if($urlOfPictoOrniToDisplay != ''): ?>
-                  <div class="onePicto expert interet ornithologie"><?php echo "<img src='$base_url/$urlOfPictoOrniToDisplay' alt='$titleOrni' title='$titleOrni' />"; ?>        
+                  <div class="onePicto expert interet ornithologie"><?php if($isNotInteretOrni) echo "<p class='notInteresting'>_</p>"; else echo "<img src='$base_url/$urlOfPictoOrniToDisplay' alt='$titleOrni' title='$titleOrni' />"; ?>        
                     <?php         
                     if($isRemarquableOrni == '1') echo "<i class='star'>*</i>";
                     ?>
@@ -1772,7 +1878,13 @@ global $user, $base_url;
                         <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
                         <p class="titleGenrePicto">Interêt des patrimoines</p>
                         <p class="titleTypePicto">Ornithologie</p>
-                        <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoOrniToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelOrni; ?></p></div>
+                        <div class="linePicto">
+                        <?php if($isNotInteretOrni): ?>
+                          <p class='labelEtat notInteresting'>_</p>
+                        <?php else : ?>
+                          <img src='<?php echo "$base_url/$urlOfPictoOrniToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelOrni; ?></p>
+                        <?php endif; ?>
+                        </div>
                         <div class="remarquable"><?php if($isRemarquableOrni == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueOrni != '') echo '<label>Commentaire : </label>'.$comValueOrni; ?></div>
                         <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
@@ -1791,7 +1903,7 @@ global $user, $base_url;
                 <?php endif; ?>    
                 <!-- Herpétologie --> 
                 <?php if($urlOfPictoHerpetoToDisplay != ''): ?>
-                  <div class="onePicto expert interet herpetologie"><?php echo "<img src='$base_url/$urlOfPictoHerpetoToDisplay' alt='$titleHerpeto' title='$titleHerpeto' />"; ?>      
+                  <div class="onePicto expert interet herpetologie"><?php if($isNotInteretHerpeto) echo "<p class='notInteresting'>_</p>"; else echo "<img src='$base_url/$urlOfPictoHerpetoToDisplay' alt='$titleHerpeto' title='$titleHerpeto' />"; ?>      
                     <?php         
                     if($isRemarquableHerpe == '1') echo "<i class='star'>*</i>";
                     ?>
@@ -1800,7 +1912,13 @@ global $user, $base_url;
                         <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
                         <p class="titleGenrePicto">Interêt des patrimoines</p>
                         <p class="titleTypePicto">Herpétologie</p>
-                        <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoHerpetoToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelHerpe; ?></p></div>            
+                        <div class="linePicto">
+                        <?php if($isNotInteretOrni): ?>
+                          <p class='labelEtat notInteresting'>_</p>
+                        <?php else : ?>
+                          <img src='<?php echo "$base_url/$urlOfPictoHerpetoToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelHerpe; ?></p>
+                        <?php endif; ?>
+                        </div>            
                         <div class="remarquable"><?php if($isRemarquableHerpe == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueHerpe != '') echo '<label>Commentaire : </label>'.$comValueHerpe; ?></div>
                         <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
@@ -1819,7 +1937,7 @@ global $user, $base_url;
                 <?php endif; ?>    
                 <!-- Mammifères -->
                 <?php if($urlOfPictoMamitoToDisplay != ''): ?>
-                  <div class="onePicto expert interet mamifere"><?php echo "<img src='$base_url/$urlOfPictoMamitoToDisplay' alt='$titleMami' title='$titleMami' />"; ?>        
+                  <div class="onePicto expert interet mamifere"><?php if($isNotInteretMami) echo "<p class='notInteresting'>_</p>"; else echo "<img src='$base_url/$urlOfPictoMamitoToDisplay' alt='$titleMami' title='$titleMami' />"; ?>        
                     <?php         
                     if($isRemarquableMami == '1') echo "<i class='star'>*</i>";
                     ?>
@@ -1828,7 +1946,13 @@ global $user, $base_url;
                         <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
                         <p class="titleGenrePicto">Interêt des patrimoines</p>
                         <p class="titleTypePicto">Mammifères</p>
-                        <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoMamitoToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelMami; ?></p></div>            
+                        <div class="linePicto">
+                        <?php if($isNotInteretOrni): ?>
+                          <p class='labelEtat notInteresting'>_</p>
+                        <?php else : ?>
+                          <img src='<?php echo "$base_url/$urlOfPictoMamitoToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelMami; ?></p>
+                        <?php endif; ?>  
+                        </div>
                         <div class="remarquable"><?php if($isRemarquableMami == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueMami != '') echo '<label>Commentaire : </label>'.$comValueMami; ?></div>
                         <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
@@ -1847,7 +1971,7 @@ global $user, $base_url;
                 <?php endif; ?>    
                 <!-- Chiroptere -->
                 <?php if($urlOfPictoChiroToDisplay != ''): ?>
-                  <div class="onePicto expert interet chiroptere"><?php echo "<img src='$base_url/$urlOfPictoChiroToDisplay' alt='$titleChiro' title='$titleChiro' />"; ?>        
+                  <div class="onePicto expert interet chiroptere"><?php if($isNotInteretChiro) echo "<p class='notInteresting'>_</p>"; else echo "<img src='$base_url/$urlOfPictoChiroToDisplay' alt='$titleChiro' title='$titleChiro' />"; ?>        
                     <?php         
                     if($isRemarquableChiro == '1') echo "<i class='star'>*</i>";
                     ?>
@@ -1856,7 +1980,13 @@ global $user, $base_url;
                         <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
                         <p class="titleGenrePicto">Interêt des patrimoines</p>
                         <p class="titleTypePicto">Chiroptere</p>
-                        <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoChiroToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelChiro; ?></p></div>
+                        <div class="linePicto">
+                        <?php if($isNotInteretChiro): ?>
+                          <p class='labelEtat notInteresting'>_</p>
+                        <?php else : ?>
+                        <img src='<?php echo "$base_url/$urlOfPictoChiroToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelChiro; ?></p>
+                        <?php endif; ?>
+                        </div>
                         <div class="remarquable"><?php if($isRemarquableChiro == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueChiro != '') echo '<label>Commentaire : </label>'.$comValueChiro; ?></div>
                         <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
@@ -1877,6 +2007,7 @@ global $user, $base_url;
                 <div class="onePicto expert interet invert" title='Invertébré'>
                   <?php 
                     if($urlPictoSurchargeInvert) echo "<img class='surcharge' src='$base_url/$urlPictoSurchargeInvert' alt='' title='' />"; 
+                    else if($isNotInteretInvert) echo "<p class='notInteresting'>_</p>"; 
                     else echo "<i>Expert</i>";        
                     if($isRemarquableInvert == '1') echo "<i class='star'>*</i>";
                   ?>      
@@ -1888,6 +2019,7 @@ global $user, $base_url;
                       <div class="linePicto">
                         <?php 
                         if($urlPictoSurchargeInvert != '') echo "<img src='$base_url/$urlPictoSurchargeInvert'/>"; 
+                        else if($isNotInteretInvert) echo "<p class='labelEtat notInteresting'>_</p>";
                         else echo '<p class="noPicto">Pas de pictogramme</p>';               
                         if($urlPictoSurchargeInvert != '') echo "<p class='labelEtat'>".$valueOfPictoSurchargeInvert."</p>"; 
                         ?>
@@ -2971,131 +3103,9 @@ global $user, $base_url;
             
           <?php  
             
-          }//Fin while query all bdd island
-        
-          /*
-          //Get pager
-          $sql = "SELECT count( c.name ) nb_island                 
-          FROM drp_content_type_bd_i_description_physique p
-          JOIN drp_term_data c
-          ON c.tid = p.field_bdi_dp_zone_geographique_value  
-          LEFT JOIN ( 
-              select tid,min(tsid) tsid
-              from drp_term_synonym 
-              where name not like ''
-              group by tid
-              order by tid
-            ) Sy 
-          ON Sy.tid = p.field_bdi_dp_nom_ile_code_ile_value 
-          LEFT JOIN  drp_term_synonym s ON s.tid = Sy.tid and s.tsid = Sy.tsid        
-          WHERE COALESCE(p.field_bdi_dp_ispim_island_value,'Oui') = 'Oui' 
-          AND p.field_bdi_dp_code_ile_value is not null
-          AND c.name NOT LIKE 'Adriatique Ouest'
-          AND c.name NOT LIKE 'Chypre'
-          AND c.name NOT LIKE 'Crète'
-          AND c.name NOT LIKE 'Egypte-Nord' 
-          AND c.name NOT LIKE 'Est-Méditerranée'
-          AND c.name NOT LIKE 'Illyrie'
-          AND c.name NOT LIKE 'Italie - Sud'
-          AND c.name NOT LIKE 'Libye'
-          AND p.field_bdi_dp_code_ile_value not LIKE '%0'
-          AND c.name LIKE '".$ssbassin."';";
-
-          $result = db_query($sql);    
-          $result = db_fetch_array($result);   
-
-          echo "<br/><p class='nbIsland'>Nombre d'îles dans ce sous-bassin: ".$result['nb_island']."</p>";
-
-          //Display pager
-          echo "<div class='pager'>";
-          for($i=0;$i<($result['nb_island'] / 25);$i++){
-            if($pager == $i) echo "<a href='tous-les-pictos-par-sous-bassin?ssbassin=$ssbassin&pager=$i' class='itemPager active'>$i</a>";
-            else echo "<a href='tous-les-pictos-par-sous-bassin?ssbassin=$ssbassin&pager=$i' class='itemPager'>$i</a>";
-          }
-          echo "</div>"; */         
+          }       
           ?>          
-          <h2>Tous les liens</h2>
-
-          <h3>Alboran</h3>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Gibraltar&pager=0.html">Alboran</a><br/>                    
-
-          <h3>Eastern Spain</h3>
-          <a class="linkSSbassin" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=0.html">Eastern Spain - page 0</a><br/>
-          <a class="linkSSbassin" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=1.html">Eastern Spain - page 1</a><br/>
-          <a class="linkSSbassin" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=2.html">Eastern Spain - page 2</a><br/>
-          <a class="linkSSbassin" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=3.html">Eastern Spain - page 3</a><br/>    
-          <a class="linkSSbassin" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=4.html">Eastern Spain - page 4</a><br/>    
           
-          <h3>Northern Tunisia</h3>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Tunisie-Nord&pager=0.html">Northern Tunisia</a><br/>
-
-          <h3>Algeria</h3>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=0.html">Algeria - page 0</a><br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=1.html">Algeria - page 1</a><br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=2.html">Algeria - page 2</a><br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=3.html">Algeria - page 3</a><br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=4.html">Algeria - page 4</a><br/>
-
-          <h3>Eastern Tunisia</h3>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Tunisie-Est&pager=0.html">Eastern Tunisia - page 0</a><br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Tunisie-Est&pager=1.html">Eastern Tunisia - page 1</a><br/>
-
-          <h3>Sardinia</h3>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=0.html">Sardinia - page 0</a><br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=1.html">Sardinia - page 1</a><br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=2.html">Sardinia - page 2</a><br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=3.html">Sardinia - page 3</a><br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=4.html">Sardinia - page 4</a><br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=5.html">Sardinia - page 5</a><br/>
-
-          <h3>Atlantic Morocco</h3>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Maroc%20Atlantique&pager=0.html">Atlantic Morocco - page 0</a><br/>
-
-          <h3>Italy Ligurian</h3>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Ligure&pager=0.html">Italy Ligurian - page 0</a><br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Ligure&pager=1.html">Italy Ligurian - page 1</a><br/>
-
-          <h3>Sicily</h3>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=0.html">Sicily - page 0</a><br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=1.html">Sicily - page 1</a><br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=2.html">Sicily - page 2</a><br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=3.html">Sicily - page 3</a><br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=4.html">Sicily - page 4</a><br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=5.html">Sicily - page 5</a><br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=6.html">Sicily - page 6</a><br/>
-
-          <h3>Balearic Islands</h3>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=0.html">Balearic Islands - page 0</a> <br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=1.html">Balearic Islands - page 1</a> <br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=2.html">Balearic Islands - page 2</a> <br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=3.html">Balearic Islands - page 3</a> <br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=4.html">Balearic Islands - page 4</a> <br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=5.html">Balearic Islands - page 5</a> <br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=6.html">Balearic Islands - page 6</a> <br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=7.html">Balearic Islands - page 7</a> <br/>
-
-          <h3>Italy Tyrrhenian</h3>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Tirreno&pager=0.html">Italy Tyrrhenian - page 0</a> <br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Tirreno&pager=1.html">Italy Tyrrhenian - page 1</a> <br/>
-
-          <h3>Southern France</h3>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=0.html">Southern France - page 0</a> <br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=1.html">Southern France - page 1</a> <br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=2.html">Southern France - page 2</a> <br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=3.html">Southern France - page 3</a> <br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=4.html">Southern France - page 4</a> <br/>
-
-          <h3>Corsica</h3>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=0.html">Corsica - page 0</a> <br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=1.html">Corsica - page 1</a> <br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=2.html">Corsica - page 2</a> <br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=3.html">Corsica - page 3</a> <br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=4.html">Corsica - page 4</a> <br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=5.html">Corsica - page 5</a> <br/>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=6.html">Corsica - page 6</a> <br/>
-
-          <h3>Malta</h3>
-          <a class="linkSSbassin" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Malte&pager=0.html">Malta - page 0</a>
 
         </div>
 
