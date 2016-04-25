@@ -6,31 +6,76 @@ pour alterer la redirection vers la page "projet-atlas/pictos-par-sous-bassin" a
 
 
 function alterFormAtlas_form_book_les_pictos_surcharge_node_form_alter(&$form, &$form_state){
+
+	if(isset($_GET['code'])){
+
+		drupal_set_message( "Saisissez votre nouvelle valeur, elle sera prise en compte cette nuit.", $type = 'status', $repeat = TRUE); 
+		//do smthing after submit form surcharge from cache page
+		$form['title']['#default_value'] = 'picto surcharge sur: '.$_GET['code'];
+		$form['#after_build'][] = 'alterFormAtlas_after_build';
+
+		unset($form['destination']);
+	  	$isAllPictoPage=false;
+
+		//Get param in url for pager
+		if(isset($_GET["pager"])) $pager = urldecode($_GET["pager"]);		
+
+		if(isset($_GET["ssbassin"])) {
+			//Si on a une valeur alors on est dans la page "projet-atlas/pictos-par-sous-bassin?ssbassin"
+			$isAllPictoPage = true;
+			$ssbassin = urldecode($_GET["ssbassin"]);
+
+		}
+		else $ssbassin = "Gibraltar";
+
+		//Redirection
+		if($isAllPictoPage) {
+
+			global $base_url;
+			$form['#redirect'] = $base_url."/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=".$ssbassin."&pager=".$pager.'.html';
+
+		}
+
+
+	}else{
+
+	  	unset($form['destination']);
+	  	$isAllPictoPage=false;
+
+		//Get param in url for pager
+		if(isset($_GET["pager"])) $pager = urldecode($_GET["pager"]);		
+
+		if(isset($_GET["ssbassin"])) {
+			//Si on a une valeur alors on est dans la page "projet-atlas/pictos-par-sous-bassin?ssbassin"
+			$isAllPictoPage = true;
+			$ssbassin = urldecode($_GET["ssbassin"]);
+
+		}
+		else $ssbassin = "Gibraltar";
+
+		//Redirection
+		if($isAllPictoPage) {
+
+			global $base_url;
+			$form['#redirect'] = $base_url."/projet-atlas/pictos-par-sous-bassin&ssbassin=".$ssbassin."&pager=".$pager;
+
+		}
+		
+	}
   
-  	unset($form['destination']);
-  	$isAllPictoPage=false;
-
-	//Get param in url for pager
-	if(isset($_GET["pager"])) $pager = urldecode($_GET["pager"]);
-	else $pager = 0; 	
-
-	if(isset($_GET["ssbassin"])) {
-		//Si on a une valeur alors on est dans la page "projet-atlas/pictos-par-sous-bassin?ssbassin"
-		$isAllPictoPage = true;
-		$ssbassin = urldecode($_GET["ssbassin"]);
-
-	}
-	else $ssbassin = "Gibraltar";
-
-	//Redirection
-	if($isAllPictoPage) {
-
-		global $base_url;
-		$form['#redirect'] = $base_url."/projet-atlas/pictos-par-sous-bassin&ssbassin=".$ssbassin."&pager=".$pager;
-
-	}
 
 
 
+}
+
+/**
+ * Modify CCK form elements on the example node form.
+ */
+function alterFormAtlas_after_build($form, &$form_state) {
+  // TODO: Stuff!
+	$form['field_book_genre_picto_surcharge'][0]['value']['#value'] = $_GET['genre'];
+	$form['field_book_type_picto_surcharge'][0]['value']['#value'] = $_GET['type'];	
+
+  return $form;
 }
 

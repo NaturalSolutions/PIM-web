@@ -5898,4 +5898,32 @@ body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesPicto div.popup di
   margin-left: 2px;
   margin-bottom: 2px;
 }
+/***************************************************************************/
+/***************************************************************************/
+/*                        PAGE ADD/EDIT PICTO SURCHARGE                    */
+/*                                                                         */
+/***************************************************************************/
+/*********************************  ****************************************/
+/*********************************  ****************************************/
+body.page-node-add-book-les-pictos-surcharge fieldset.collapsible.collapsed,
+body.node-type-book-les-pictos-surcharge fieldset.collapsible.collapsed,
 
+body.page-node-add-book-les-pictos-surcharge div#edit-title-wrapper,
+body.node-type-book-les-pictos-surcharge div#edit-title-wrapper,
+
+body.page-node-add-book-les-pictos-surcharge div.body-field-wrapper,
+body.node-type-book-les-pictos-surcharge div.body-field-wrapper,
+
+body.page-node-add-book-les-pictos-surcharge div#edit-field-book-genre-picto-surcharge-0-value-wrapper,
+body.node-type-book-les-pictos-surcharge div#edit-field-book-genre-picto-surcharge-0-value-wrapper,
+
+body.page-node-add-book-les-pictos-surcharge div#edit-field-book-type-picto-surcharge-0-value-wrapper,
+body.node-type-book-les-pictos-surcharge div#edit-field-book-type-picto-surcharge-0-value-wrapper,
+
+body.page-node-add-book-les-pictos-surcharge input#edit-preview,
+body.node-type-book-les-pictos-surcharge input#edit-preview{
+  display: none;
+}
+body.node-type-book-les-pictos-surcharge div.tabs{
+  display: none;
+}

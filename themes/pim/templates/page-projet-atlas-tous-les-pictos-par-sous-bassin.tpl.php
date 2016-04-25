@@ -234,11 +234,67 @@ global $user, $base_url;
           //Get param in url for pager
           if(isset($_GET["pager"])) $pager = $_GET["pager"];
           else $pager = 1; 
-          $offset = ($pager - 1) * 3;
+          $offset = ($pager - 1) * 25;
 
           if(isset($_GET["ssbassin"])) $ssbassin = urldecode($_GET["ssbassin"]);
           else $ssbassin = "Gibraltar";
+
+           //Selection des iles de la bdd dans certaine région (remplacé) qui sont précisé PIM ou non-renseigné
+          $sql = "SELECT distinct c.name, 
+            replace(        
+              replace(      
+                replace(              
+                  replace(              
+                    replace(              
+                      replace(              
+                        replace(                            
+                          replace(            
+                            replace(            
+                              replace(            
+                                replace(              
+                                  replace(              
+                                    replace(              
+                                      replace(c.name,'Gibraltar','Alboran'),       
+                                    'Algérie','Algeria'),
+                                  'Sardaigne','Sardinia'),
+                                'Sicile','Sicily'),
+                              'Tunisie-Est','Eastern Tunisia'),                            
+                            'Tunisie-Nord','Northern Tunisia'),                            
+                                          'Maroc Atlantique','Atlantic Morocco'),                            
+                                      'Corse','Corsica'),
+                      'France-Sud','Southern France'),
+                              'Baléares','Balearic Islands'),
+                  'Malte','Malta'),
+                      'Italie-Mar Ligure','Italy Ligurian'),
+              'Italie-Mar Tirreno','Italy Tyrrhenian'),
+            'Espagne-Sud et Est','Eastern Spain') nameSousBassin
+          FROM drp_content_type_bd_i_description_physique p
+          JOIN drp_term_data c
+          ON c.tid = p.field_bdi_dp_zone_geographique_value
+          WHERE COALESCE(p.field_bdi_dp_ispim_island_value,'Oui') = 'Oui' 
+          AND p.field_bdi_dp_code_ile_value is not null
+          AND c.name NOT LIKE 'Adriatique Ouest'
+          AND c.name NOT LIKE 'Chypre'
+          AND c.name NOT LIKE 'Crète'
+          AND c.name NOT LIKE 'Egypte-Nord' 
+          AND c.name NOT LIKE 'Est-Méditerranée'
+          AND c.name NOT LIKE 'Illyrie'
+          AND c.name NOT LIKE 'Italie - Sud'
+          AND c.name NOT LIKE 'Libye'          
+          ORDER BY nameSousBassin ASC;";
+
+          $result = db_query($sql);    
+
+          //Display          
+          if (!$result) die('Invalid query1: ' . mysql_error());
+          else while (  $row  =  db_fetch_array($result) ) {
+            if($ssbassin == $row['name']) $active = 'active';
+            else $active = 'notactive';             
+            echo "<a class=' ".$active."' title='Afficher les pictogrammes pour ce sous bassin' href='$base_url/projet-atlas/tous-les-pictos-par-sous-bassin?ssbassin=".urlencode($row['name'])."&pager=1'>".$row['nameSousBassin']."</a><br/>";
+          }
           ?>
+
+
 
           <div class="lesLiens">          
   
@@ -788,8 +844,8 @@ global $user, $base_url;
                 else while (  $row  =  db_fetch_array($result2) ) $urlPictoSurchargeFauneM = $row['filepath'];      
               }
 
-            }
-            if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+            }//deiv ici avec nodeOutputFauneM
+            if($idPictoMSurcharge != '') $nodeOutputFauneM = node_load($idPictoMSurcharge);
             //else create a blank node    
             else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
             //$outputFauneM = drupal_get_form($form_id, $node);
@@ -1021,7 +1077,9 @@ global $user, $base_url;
                   ?>      
                   <div class="popup"><div class="croix">X</div>
                       <div class='visu'>
-                        <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
+                        <div class="actionLine">
+                          <a href="" class="visuPicto select">Voir</a><a href="<?php if($urlPictoSurchargeFauneM) echo $base_url.'/node/'.$nodeOutputFauneM->nid.'/edit?genre=connaissance&type=fauneM&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; else echo $base_url.'/node/add/book-les-pictos-surcharge?genre=connaissance&type=fauneM&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; ?>" target='_blank' class="editPicto">Modifier</a>
+                        </div>
                         <p class="titleGenrePicto">Etat des connaissances</p>
                         <p class="titleTypePicto">Faune Marine</p>
                         <div class="linePicto">
@@ -3104,6 +3162,47 @@ global $user, $base_url;
           <?php  
             
           }       
+
+          //Get pager
+          $sql = "SELECT count( c.name ) nb_island                 
+          FROM drp_content_type_bd_i_description_physique p
+          JOIN drp_term_data c
+          ON c.tid = p.field_bdi_dp_zone_geographique_value  
+          LEFT JOIN ( 
+              select tid,min(tsid) tsid
+              from drp_term_synonym 
+              where name not like ''
+              group by tid
+              order by tid
+            ) Sy 
+          ON Sy.tid = p.field_bdi_dp_nom_ile_code_ile_value 
+          LEFT JOIN  drp_term_synonym s ON s.tid = Sy.tid and s.tsid = Sy.tsid        
+          WHERE COALESCE(p.field_bdi_dp_ispim_island_value,'Oui') = 'Oui' 
+          AND p.field_bdi_dp_code_ile_value is not null
+          AND c.name NOT LIKE 'Adriatique Ouest'
+          AND c.name NOT LIKE 'Chypre'
+          AND c.name NOT LIKE 'Crète'
+          AND c.name NOT LIKE 'Egypte-Nord' 
+          AND c.name NOT LIKE 'Est-Méditerranée'
+          AND c.name NOT LIKE 'Illyrie'
+          AND c.name NOT LIKE 'Italie - Sud'
+          AND c.name NOT LIKE 'Libye'
+          AND p.field_bdi_dp_code_ile_value not LIKE '%0'
+          AND c.name LIKE '".$ssbassin."';";
+
+          $result = db_query($sql);    
+          $result = db_fetch_array($result);   
+
+          echo "<br/><p class='nbIsland'>Nombre d'îles dans ce sous-bassin: ".$result['nb_island']."</p>";
+
+          //Display pager
+          echo "<div class='pager'>";
+          for($i=0;$i<($result['nb_island'] / 25);$i++){
+            $j = $i+1;
+            if($pager == $j) echo "<a href='tous-les-pictos-par-sous-bassin?ssbassin=$ssbassin&pager=$j' class='itemPager active'>$j</a>";
+            else echo "<a href='tous-les-pictos-par-sous-bassin?ssbassin=$ssbassin&pager=$j' class='itemPager'>$j</a>";
+          }
+          echo "</div>";
           ?>          
           
 
@@ -3196,13 +3295,13 @@ global $user, $base_url;
       
       
       //Alter label select value
-      jQuery('.onePicto.expert.connaissance.grotte #edit-field-book-value-picto-surcharge-value-2 option').each(function(index, el) {        
+      /*jQuery('.onePicto.expert.connaissance.grotte #edit-field-book-value-picto-surcharge-value-2 option').each(function(index, el) {        
         var myOption = jQuery(this);
         if(index == 0) myOption.text('--'); else if(index == 1) myOption.text('Pas de connaissance'); else if(index == 2) myOption.text('Fond sableux'); else if(index == 3) myOption.text('Fond rocheux'); else if(index == 4) myOption.text('Grottes');
-      });     
+      });*/     
 
       //Alter label on interet select
-      jQuery('.onePicto.expert.interet').each(function(posPicto, el) {
+      /*jQuery('.onePicto.expert.interet').each(function(posPicto, el) {
 
         var onePicto = jQuery(this);
 
@@ -3224,29 +3323,29 @@ global $user, $base_url;
 
         });
 
-      });
+      });*/
 
       
-      var base_url = "<?php Print($base_url); ?>";
+      //var base_url = "<?php Print($base_url); ?>";
       
 
       jQuery('div.lesPicto div.onePicto').click(function(event) {
       /* Stuff to do when the mouse enters the element */
       var thePictoClique = jQuery(this);
       var popup = thePictoClique.find('div.popup');
-      var editBtn = popup.find('a.editPicto');
       var visuBtn = popup.find('a.visuPicto');
+      /*var editBtn = popup.find('a.editPicto');
       var visuZone = popup.find('.visu');
       var editZone = popup.find('.edit');
-      var term = thePictoClique.parent('.lesPicto').attr('data-term');
+      var term = thePictoClique.parent('.lesPicto').attr('data-term');*/
             
                     
       //Print genre et type in popup
-      popup.find('.form-item').each(function(index, el) {    
+      /*popup.find('.form-item').each(function(index, el) {    
         if(index == 0)  jQuery(this).find('input').val("picto surcharge sur: "+term);
         if(index == 17) jQuery(this).find('input').val(thePictoClique.attr('class').split(' ')[2]);
         if(index == 18) jQuery(this).find('input').val(thePictoClique.attr('class').split(' ')[3]);
-      });      
+      }); */     
 
       //To toogle show hide popup
       jQuery('.popup.active').hide();
@@ -3254,7 +3353,7 @@ global $user, $base_url;
 
       
       //On clikc Edit button in the popup
-      editBtn.click(function(event) {        
+      /*editBtn.click(function(event) {        
         //disable link <a>
         event.preventDefault();        
         //toggle blocks
@@ -3263,16 +3362,16 @@ global $user, $base_url;
         visuZone.hide();
         editZone.show();        
 
-      });
+      });*/
 
       visuBtn.click(function(event) {        
         //disable link <a>
         event.preventDefault();
         //toggle blocks
-        visuBtn.addClass('select');
+       /* visuBtn.addClass('select');
         editBtn.removeClass('select');
         visuZone.show();
-        editZone.hide();
+        editZone.hide();*/
 
       });
 
