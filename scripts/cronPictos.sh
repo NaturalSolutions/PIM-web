@@ -1,6 +1,6 @@
 #!/bin/bash
 #Alboran
-echo "debut : " >> logcron.txt
+echo "debut : " >> logcron
 date >> logcron.txt
 wget -c --delete-after -np -nd "http://www.initiative-pim.org/projet-atlas/tous-les-pictos-par-sous-bassin?ssbassin=Gibraltar&pager=1"
 wget -c --delete-after -np -nd "http://www.initiative-pim.org/projet-atlas/tous-les-pictos-par-sous-bassin?ssbassin=Algérie&pager=1"
@@ -71,8 +71,8 @@ wget -c --delete-after -np -nd "http://www.initiative-pim.org/projet-atlas/tous-
 wget -c --delete-after -np -nd "http://www.initiative-pim.org/projet-atlas/tous-les-pictos-par-sous-bassin?ssbassin=France-Sud&pager=4"
 wget -c --delete-after -np -nd "http://www.initiative-pim.org/projet-atlas/tous-les-pictos-par-sous-bassin?ssbassin=France-Sud&pager=5"
 #log
-echo "fin : " >> logcron.txt
+echo "fin : " >> logcron
 date >> logcron.txt
-echo "-------" >> logcron.txt
-tail -n -10 logcron.txt > logcron.tmp && mv logcron.tmp logcron.txt
+echo "-------" >> logcron
+tail -n -10 logcron > logcron.tmp && mv logcron.tmp logcron
 exit $?
