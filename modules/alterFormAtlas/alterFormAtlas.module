@@ -1,70 +1,46 @@
 <?php
 /*
 module : alterFormAtlas
-pour alterer la redirection vers la page "projet-atlas/pictos-par-sous-bassin" avec tout ses paramètres
+Alteration du formulaire d'ajout de picto surcharge
+Alteration de la redirection en fonction de l'entrée
 */
+
 function alterFormAtlas_form_book_les_pictos_surcharge_node_form_alter(&$form, &$form_state){
 
-	if(isset($_GET['code'])){
+	global $base_url;
 
-		drupal_set_message( "Saisissez votre nouvelle valeur, elle sera prise en compte cette nuit.", $type = 'status', $repeat = TRUE); 
-		//do smthing after submit form surcharge from cache page
+	//test si on vient de tous-les-pictos-par-sous-bassin
+	if(isset($_GET['code'])){		
+		
+		//Get param in url for pager
+		if(isset($_GET["pager"])) $pager = urldecode($_GET["pager"]);		
+		if(isset($_GET["ssbassin"])) $ssbassin = urldecode($_GET["ssbassin"]);
+		
+		//Set message to user
+		drupal_set_message( "ATTENTION : Vos modifications ne seront enregistrés que cette nuit.", $type = 'warning', $repeat = TRUE); 
+		
+		//Alter title field value
 		$form['title']['#default_value'] = 'picto surcharge sur: '.$_GET['code'];		
 
+		//Alter value of other fields
 		$form['#after_build'][] = 'alterFormAtlas_after_build';
 
-		unset($form['destination']);
-	  	$isAllPictoPage=false;
+		//Set redirect to html cached pages
+		unset($form['destination']);				
+		$form['#redirect'] = $base_url."/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=".$ssbassin."&pager=".$pager.".html";		
 
-		//Get param in url for pager
-		if(isset($_GET["pager"])) $pager = urldecode($_GET["pager"]);		
-
-		if(isset($_GET["ssbassin"])) {
-			//Si on a une valeur alors on est dans la page "projet-atlas/pictos-par-sous-bassin?ssbassin"
-			$isAllPictoPage = true;
-			$ssbassin = urldecode($_GET["ssbassin"]);
-
-		}
-		else $ssbassin = "Gibraltar";
-
-		//Redirection
-		if($isAllPictoPage) {
-
-			global $base_url;
-			$form['#redirect'] = $base_url."/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=".$ssbassin."&pager=".$pager.'.html';
-
-		}
-
-
+	//test si on vient de pictos-par-sous-bassin
 	}else{
 
-	  	unset($form['destination']);
-	  	$isAllPictoPage=false;
-
 		//Get param in url for pager
-		if(isset($_GET["pager"])) $pager = urldecode($_GET["pager"]);		
-			
+		if(isset($_GET["pager"])) $pager = urldecode($_GET["pager"]);	
+		if(isset($_GET["ssbassin"])) $ssbassin = urldecode($_GET["ssbassin"]);		
 
-		if(isset($_GET["ssbassin"])) {
-			//Si on a une valeur alors on est dans la page "projet-atlas/pictos-par-sous-bassin?ssbassin"
-			$isAllPictoPage = true;
-			$ssbassin = urldecode($_GET["ssbassin"]);
-
-		}
-		else $ssbassin = "Gibraltar";
-
-		//Redirection
-		if($isAllPictoPage) {
-
-			global $base_url;
-			$form['#redirect'] = $base_url."/projet-atlas/pictos-par-sous-bassin&ssbassin=".$ssbassin."&pager=".$pager;
-
-		}
+		//Set redirect to normal pages
+  		unset($form['destination']);	  	
+		$form['#redirect'] = $base_url."/projet-atlas/pictos-par-sous-bassin&ssbassin=".$ssbassin."&pager=".$pager;		
 		
 	}
-  
-
-
 
 }
 
@@ -73,6 +49,7 @@ function alterFormAtlas_form_book_les_pictos_surcharge_node_form_alter(&$form, &
  */
 function alterFormAtlas_after_build($form, &$form_state) {
   
+  	//Add css to hide some field - Specific field
 	if($_GET['genre'] == 'interet' && $_GET['type'] == 'botanique') drupal_add_css(drupal_get_path('module', 'alterFormAtlas') .'/alterFormAtlas.css');
 	else if($_GET['genre'] == 'interet' && $_GET['type'] == 'ornithologie') drupal_add_css(drupal_get_path('module', 'alterFormAtlas') .'/alterFormAtlas.css');
 	else if($_GET['genre'] == 'interet' && $_GET['type'] == 'herpetologie') drupal_add_css(drupal_get_path('module', 'alterFormAtlas') .'/alterFormAtlas.css');
@@ -81,9 +58,9 @@ function alterFormAtlas_after_build($form, &$form_state) {
 	else if($_GET['genre'] == 'interet' && $_GET['type'] == 'fauneM') drupal_add_css(drupal_get_path('module', 'alterFormAtlas') .'/alterFormAtlas.css');	
 	else if($_GET['genre'] == 'interet' && $_GET['type'] == 'floreM') drupal_add_css(drupal_get_path('module', 'alterFormAtlas') .'/alterFormAtlas.css');	
 
+	//Alter value to add id for the node
 	$form['field_book_genre_picto_surcharge'][0]['value']['#value'] = $_GET['genre'];
 	$form['field_book_type_picto_surcharge'][0]['value']['#value'] = $_GET['type'];		
 
   return $form;
 }
-

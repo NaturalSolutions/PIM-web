@@ -240,7 +240,7 @@ global $user, $base_url;
           else $ssbassin = "Gibraltar";
 
            //Selection des iles de la bdd dans certaine région (remplacé) qui sont précisé PIM ou non-renseigné
-          $sql = "SELECT distinct c.name, 
+          /*$sql = "SELECT distinct c.name, 
             replace(        
               replace(      
                 replace(              
@@ -291,7 +291,7 @@ global $user, $base_url;
             if($ssbassin == $row['name']) $active = 'active';
             else $active = 'notactive';             
             echo "<a class=' ".$active."' title='Afficher les pictogrammes pour ce sous bassin' href='$base_url/projet-atlas/tous-les-pictos-par-sous-bassin?ssbassin=".urlencode($row['name'])."&pager=1'>".$row['nameSousBassin']."</a><br/>";
-          }
+          }*/
           ?>
 
 
@@ -3069,7 +3069,7 @@ global $user, $base_url;
             
           }       
 
-          //Get pager
+          /*//Get pager
           $sql = "SELECT count( c.name ) nb_island                 
           FROM drp_content_type_bd_i_description_physique p
           JOIN drp_term_data c
@@ -3108,7 +3108,7 @@ global $user, $base_url;
             if($pager == $j) echo "<a href='tous-les-pictos-par-sous-bassin?ssbassin=$ssbassin&pager=$j' class='itemPager active'>$j</a>";
             else echo "<a href='tous-les-pictos-par-sous-bassin?ssbassin=$ssbassin&pager=$j' class='itemPager'>$j</a>";
           }
-          echo "</div>";
+          echo "</div>";*/
           ?>          
           
 
