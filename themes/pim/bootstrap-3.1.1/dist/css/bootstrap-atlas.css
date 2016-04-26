@@ -5455,6 +5455,13 @@ body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup a.linkToBas
   display: block;
   text-align: center;
 }
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.onePicto.interet.botanique div.popup div.myFormOnVisu div.standard > div.form-item:nth-of-type(5n),
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.onePicto.interet.ornithologie div.popup div.myFormOnVisu div.standard > div.form-item:nth-of-type(5n),
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.onePicto.interet.herpetologie div.popup div.myFormOnVisu div.standard > div.form-item:nth-of-type(5n),
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.onePicto.interet.mamifere div.popup div.myFormOnVisu div.standard > div.form-item:nth-of-type(5n),
+body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.onePicto.interet.chiroptere div.popup div.myFormOnVisu div.standard > div.form-item:nth-of-type(5n){
+  display: none;
+}
 body.page-projet-atlas-pictos-par-sous-bassin div.lesPicto div.popup div.myFormOnVisu div.standard > div.form-item:nth-of-type(5n){
   text-align: center;
 }

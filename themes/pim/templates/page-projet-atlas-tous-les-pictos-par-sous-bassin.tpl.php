@@ -844,7 +844,7 @@ global $user, $base_url;
                 else while (  $row  =  db_fetch_array($result2) ) $urlPictoSurchargeFauneM = $row['filepath'];      
               }
 
-            }//deiv ici avec nodeOutputFauneM
+            }
             if($idPictoMSurcharge != '') $nodeOutputFauneM = node_load($idPictoMSurcharge);
             //else create a blank node    
             else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
@@ -872,7 +872,7 @@ global $user, $base_url;
               else while (  $row  =  db_fetch_array($result2) ) $urlPictoSurchargeFloreM = $row['filepath'];              
             }              
             
-            if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+            if($idPictoMSurcharge != '') $nodeOutputFloreM = node_load($idPictoMSurcharge);
             //else create a blank node    
             else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
             //$outputFloreM = drupal_get_form($form_id, $node);
@@ -902,7 +902,7 @@ global $user, $base_url;
               }
 
             }
-            if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+            if($idPictoMSurcharge != '') $nodeOutputGrotte = node_load($idPictoMSurcharge);
             //else create a blank node    
             else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
             //$outputGrotte = drupal_get_form($form_id, $node);
@@ -1092,17 +1092,7 @@ global $user, $base_url;
                         <div class="remarquable"><?php if($isRemarquableFauneM == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueFauneM != '') echo '<label>Commentaire : </label>'.$comValueFauneM; ?></div>
                         <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
-                      </div>
-                      <div class='edit'>
-                        <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
-                        <p class="titleGenrePicto">Etat des connaissances</p>
-                        <p class="titleTypePicto">Faune Marine</p>            
-                        <div class="linePicto">
-                          <?php if($urlPictoSurchargeFauneM != '') echo "<img src='$base_url/$urlPictoSurchargeFauneM'/>"; else echo '<p class="desc">Choisir une valeur pour afficher un pictogramme</p>'; ?>              
-                          <?php echo '<div class="myFormOnVisu">'.$outputFauneM.'</div>'; ?>              
-                        </div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
-                      </div>
+                      </div>                      
                     </div>
                 </div>
                 <!-- Flore Marine -->
@@ -1114,7 +1104,10 @@ global $user, $base_url;
                   ?>       
                   <div class="popup"><div class="croix">X</div>
                       <div class='visu'>
-                        <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
+                        <div class="actionLine">
+                          <a href="" class="visuPicto select">Voir</a><a href="<?php if($urlPictoSurchargeFloreM) echo $base_url.'/node/'.$nodeOutputFloreM->nid.'/edit?genre=connaissance&type=floreM&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; else echo $base_url.'/node/add/book-les-pictos-surcharge?genre=connaissance&type=floreM&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; ?>" target='_blank' class="editPicto">Modifier</a>
+                        </div>
+                        <!-- <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div> -->
                         <p class="titleGenrePicto">Etat des connaissances</p>
                         <p class="titleTypePicto">Flore Marine</p>
                         <div class="linePicto">
@@ -1127,17 +1120,7 @@ global $user, $base_url;
                         <div class="remarquable"><?php if($isRemarquableFloreM == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueFloreM != '') echo '<label>Commentaire : </label>'.$comValueFloreM; ?></div>
                         <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
-                      </div>
-                      <div class='edit'>
-                        <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
-                        <p class="titleGenrePicto">Etat des connaissances</p>
-                        <p class="titleTypePicto">Flore Marine</p>            
-                        <div class="linePicto">
-                          <?php if($urlPictoSurchargeFloreM != '') echo "<img src='$base_url/$urlPictoSurchargeFloreM'/>"; else echo '<p class="desc">Choisir une valeur pour afficher un pictogramme</p>'; ?>              
-                          <?php echo '<div class="myFormOnVisu">'.$outputFloreM.'</div>'; ?>              
-                        </div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
-                      </div>
+                      </div>                      
                     </div>
                 </div>
                 <!-- Grotte / Fond rocheux -->
@@ -1149,7 +1132,10 @@ global $user, $base_url;
                   ?>      
                   <div class="popup"><div class="croix">X</div>
                       <div class='visu'>
-                        <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
+                        <div class="actionLine">
+                          <a href="" class="visuPicto select">Voir</a><a href="<?php if($urlPictoSurchargeGrotte) echo $base_url.'/node/'.$nodeOutputGrotte->nid.'/edit?genre=connaissance&type=grotte&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; else echo $base_url.'/node/add/book-les-pictos-surcharge?genre=connaissance&type=grotte&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; ?>" target='_blank' class="editPicto">Modifier</a>
+                        </div>
+                        <!-- <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div> -->
                         <p class="titleGenrePicto">Etat des connaissances</p>
                         <p class="titleTypePicto">Grotte / Fond rocheux</p>
                         <div class="linePicto">
@@ -1162,17 +1148,7 @@ global $user, $base_url;
                         <div class="remarquable"><?php if($isRemarquableGrotte == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueGrotte != '') echo '<label>Commentaire : </label>'.$comValueGrotte; ?></div>
                         <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
-                      </div>
-                      <div class='edit'>
-                        <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
-                        <p class="titleGenrePicto">Etat des connaissances</p>
-                        <p class="titleTypePicto">Grotte / Fond rocheux</p>            
-                        <div class="linePicto">
-                          <?php if($urlPictoSurchargeGrotte != '') echo "<img src='$base_url/$urlPictoSurchargeGrotte'/>"; else echo '<p class="desc">Choisir une valeur pour afficher un pictogramme</p>'; ?>              
-                          <?php echo '<div class="myFormOnVisu">'.$outputGrotte.'</div>'; ?>              
-                        </div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
-                      </div>
+                      </div>                      
                     </div>
                 </div>
                 <!-- caractéristique environnentales -->
@@ -1500,7 +1476,7 @@ global $user, $base_url;
               $comValueBota = $row['field_book_star_com_picto_value'];       
               $isRemarquableBota = $row['field_book_star_on_picto_value'];
             }
-            if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+            if($idPictoMSurcharge != '') $nodeOutputBota = node_load($idPictoMSurcharge);
             //else create a blank node    
             else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
             //$outputBota = drupal_get_form($form_id, $node);
@@ -1518,7 +1494,7 @@ global $user, $base_url;
               $comValueOrni = $row['field_book_star_com_picto_value'];       
               $isRemarquableOrni = $row['field_book_star_on_picto_value'];        
             }
-            if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+            if($idPictoMSurcharge != '') $nodeOutputOrni = node_load($idPictoMSurcharge);
             //else create a blank node    
             else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
             //$outputOrni = drupal_get_form($form_id, $node);
@@ -1536,7 +1512,7 @@ global $user, $base_url;
               $comValueHerpe = $row['field_book_star_com_picto_value'];       
               $isRemarquableHerpe = $row['field_book_star_on_picto_value'];        
             }
-            if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+            if($idPictoMSurcharge != '') $nodeOutputHerpeto = node_load($idPictoMSurcharge);
             //else create a blank node    
             else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
             //$outputHerpe = drupal_get_form($form_id, $node);
@@ -1554,7 +1530,7 @@ global $user, $base_url;
               $comValueMami = $row['field_book_star_com_picto_value'];       
               $isRemarquableMami = $row['field_book_star_on_picto_value'];        
             }
-            if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+            if($idPictoMSurcharge != '') $nodeOutputMami = node_load($idPictoMSurcharge);
             //else create a blank node    
             else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
             //$outputMami = drupal_get_form($form_id, $node);
@@ -1572,7 +1548,7 @@ global $user, $base_url;
               $comValueChiro = $row['field_book_star_com_picto_value'];       
               $isRemarquableChiro = $row['field_book_star_on_picto_value'];        
             }
-            if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+            if($idPictoMSurcharge != '') $nodeOutputChiro = node_load($idPictoMSurcharge);
             //else create a blank node    
             else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
             //$outputChiro = drupal_get_form($form_id, $node);
@@ -1600,7 +1576,7 @@ global $user, $base_url;
                 else while (  $row  =  db_fetch_array($result1) ) $urlPictoSurchargeInvert = $row['filepath'];
               }        
             }
-            if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+            if($idPictoMSurcharge != '') $nodeOutputInvert = node_load($idPictoMSurcharge);
             //else create a blank node    
             else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
             //$outputInvert = drupal_get_form($form_id, $node);
@@ -1618,7 +1594,7 @@ global $user, $base_url;
               $comValueFauneM_i = $row['field_book_star_com_picto_value'];       
               $isRemarquableFauneM_i = $row['field_book_star_on_picto_value'];        
             }
-            if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+            if($idPictoMSurcharge != '') $nodeOutputFauneM = node_load($idPictoMSurcharge);
             //else create a blank node    
             else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
             //$outputFauneM = drupal_get_form($form_id, $node);
@@ -1636,7 +1612,7 @@ global $user, $base_url;
               $comValueFloreM_i = $row['field_book_star_com_picto_value'];       
               $isRemarquableFloreM_i = $row['field_book_star_on_picto_value'];        
             }
-            if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+            if($idPictoMSurcharge != '') $nodeOutputFloreM = node_load($idPictoMSurcharge);
             //else create a blank node    
             else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
             //$outputFloreM = drupal_get_form($form_id, $node);
@@ -1665,7 +1641,7 @@ global $user, $base_url;
               }
 
             }
-            if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+            if($idPictoMSurcharge != '') $nodeOutputGrotte = node_load($idPictoMSurcharge);
             //else create a blank node    
             else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
             //$outputGrotte = drupal_get_form($form_id, $node);
@@ -1694,7 +1670,7 @@ global $user, $base_url;
                 else while (  $row  =  db_fetch_array($result2) ) $urlPictoSurchargePaysT = $row['filepath'];
               }        
             }
-            if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+            if($idPictoMSurcharge != '') $nodeOutputPaysT = node_load($idPictoMSurcharge);
             //else create a blank node    
             else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
             //$outputPaysT = drupal_get_form($form_id, $node);
@@ -1722,7 +1698,7 @@ global $user, $base_url;
                 else while (  $row  =  db_fetch_array($result2) ) $urlPictoSurchargePaysM = $row['filepath'];
               }        
             }
-            if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+            if($idPictoMSurcharge != '') $nodeOutputPaysM = node_load($idPictoMSurcharge);
             //else create a blank node    
             else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
             //$outputPaysM = drupal_get_form($form_id, $node);
@@ -1750,7 +1726,7 @@ global $user, $base_url;
                 else while (  $row  =  db_fetch_array($result2) ) $urlPictoSurchargeBati = $row['filepath'];
               }        
             }
-            if($idPictoMSurcharge != '') $node = node_load($idPictoMSurcharge);
+            if($idPictoMSurcharge != '') $nodeOutputBati = node_load($idPictoMSurcharge);
             //else create a blank node    
             else $node = array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => $node_type);  
             //$outputBati = drupal_get_form($form_id, $node);
@@ -1899,7 +1875,10 @@ global $user, $base_url;
                     ?> 
                     <div class="popup green"><div class="croix">X</div>
                       <div class='visu'>
-                        <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
+                        <div class="actionLine">
+                          <a href="" class="visuPicto select">Voir</a><a href="<?php if($comValueBota != '' || $isRemarquableBota == '1') echo $base_url.'/node/'.$nodeOutputBota->nid.'/edit?genre=interet&type=botanique&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; else echo $base_url.'/node/add/book-les-pictos-surcharge?genre=interet&type=botanique&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; ?>" target='_blank' class="editPicto">Modifier</a>
+                        </div>
+                        <!-- <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div> -->
                         <p class="titleGenrePicto">Interêt des patrimoines</p>
                         <p class="titleTypePicto">Botanique</p>
                         <div class="linePicto">
@@ -1912,16 +1891,7 @@ global $user, $base_url;
                         <div class="remarquable"><?php if($isRemarquableBota == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueBota != '') echo '<label>Commentaire : </label>'.$comValueBota; ?></div>
                         <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
-                      </div>
-                      <div class='edit'>
-                        <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
-                        <p class="titleGenrePicto">Interêt des patrimoines</p>
-                        <p class="titleTypePicto">Botanique</p>            
-                        <div class="linePicto">              
-                          <?php echo '<div class="myFormOnVisu">'.$outputBota.'</div>'; ?>
-                        </div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
-                      </div>
+                      </div>                      
                     </div>
                   </div>
                 <?php endif; ?>  
@@ -1933,7 +1903,10 @@ global $user, $base_url;
                     ?>
                     <div class="popup green"><div class="croix">X</div>
                       <div class='visu'>
-                        <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
+                        <div class="actionLine">
+                          <a href="" class="visuPicto select">Voir</a><a href="<?php if($comValueOrni != '' || $isRemarquableOrni == '1') echo $base_url.'/node/'.$nodeOutputOrni->nid.'/edit?genre=interet&type=ornithologie&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; else echo $base_url.'/node/add/book-les-pictos-surcharge?genre=interet&type=ornithologie&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; ?>" target='_blank' class="editPicto">Modifier</a>
+                        </div>
+                        <!-- <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div> -->
                         <p class="titleGenrePicto">Interêt des patrimoines</p>
                         <p class="titleTypePicto">Ornithologie</p>
                         <div class="linePicto">
@@ -1946,16 +1919,7 @@ global $user, $base_url;
                         <div class="remarquable"><?php if($isRemarquableOrni == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueOrni != '') echo '<label>Commentaire : </label>'.$comValueOrni; ?></div>
                         <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
-                      </div>
-                      <div class='edit'>
-                        <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
-                        <p class="titleGenrePicto">Interêt des patrimoines</p>
-                        <p class="titleTypePicto">Ornithologie</p>            
-                        <div class="linePicto">              
-                          <?php echo '<div class="myFormOnVisu">'.$outputOrni.'</div>'; ?>
-                        </div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
-                      </div>          
+                      </div>                                
                     </div>
                   </div>
                 <?php endif; ?>    
@@ -1967,7 +1931,10 @@ global $user, $base_url;
                     ?>
                     <div class="popup green"><div class="croix">X</div>
                       <div class='visu'>
-                        <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
+                        <div class="actionLine">
+                          <a href="" class="visuPicto select">Voir</a><a href="<?php if($comValueHerpe != '' || $isRemarquableHerpe == '1') echo $base_url.'/node/'.$nodeOutputHerpeto->nid.'/edit?genre=interet&type=herpetologie&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; else echo $base_url.'/node/add/book-les-pictos-surcharge?genre=interet&type=herpetologie&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; ?>" target='_blank' class="editPicto">Modifier</a>
+                        </div>
+                        <!-- <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div> -->
                         <p class="titleGenrePicto">Interêt des patrimoines</p>
                         <p class="titleTypePicto">Herpétologie</p>
                         <div class="linePicto">
@@ -1980,16 +1947,7 @@ global $user, $base_url;
                         <div class="remarquable"><?php if($isRemarquableHerpe == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueHerpe != '') echo '<label>Commentaire : </label>'.$comValueHerpe; ?></div>
                         <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
-                      </div>  
-                      <div class='edit'>
-                        <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
-                        <p class="titleGenrePicto">Interêt des patrimoines</p>
-                        <p class="titleTypePicto">Herpétologie</p>            
-                        <div class="linePicto">              
-                          <?php echo '<div class="myFormOnVisu">'.$outputHerpe.'</div>'; ?>
-                        </div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
-                      </div>        
+                      </div>                                
                     </div>
                   </div>
                 <?php endif; ?>    
@@ -2001,7 +1959,10 @@ global $user, $base_url;
                     ?>
                     <div class="popup green"><div class="croix">X</div>
                       <div class='visu'>
-                        <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
+                        <div class="actionLine">
+                          <a href="" class="visuPicto select">Voir</a><a href="<?php if($comValueMami != '' || $isRemarquableMami == '1') echo $base_url.'/node/'.$nodeOutputMami->nid.'/edit?genre=interet&type=mamifere&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; else echo $base_url.'/node/add/book-les-pictos-surcharge?genre=interet&type=mamifere&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; ?>" target='_blank' class="editPicto">Modifier</a>
+                        </div>
+                        <!-- <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div> -->
                         <p class="titleGenrePicto">Interêt des patrimoines</p>
                         <p class="titleTypePicto">Mammifères</p>
                         <div class="linePicto">
@@ -2014,16 +1975,7 @@ global $user, $base_url;
                         <div class="remarquable"><?php if($isRemarquableMami == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueMami != '') echo '<label>Commentaire : </label>'.$comValueMami; ?></div>
                         <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
-                      </div>
-                      <div class='edit'>
-                        <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
-                        <p class="titleGenrePicto">Interêt des patrimoines</p>
-                        <p class="titleTypePicto">Mammifères</p>            
-                        <div class="linePicto">              
-                          <?php echo '<div class="myFormOnVisu">'.$outputMami.'</div>'; ?>
-                        </div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
-                      </div>          
+                      </div>                                
                     </div>
                   </div>
                 <?php endif; ?>    
@@ -2035,7 +1987,10 @@ global $user, $base_url;
                     ?>
                     <div class="popup green"><div class="croix">X</div>
                       <div class='visu'>
-                        <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
+                        <div class="actionLine">
+                          <a href="" class="visuPicto select">Voir</a><a href="<?php if($comValueChiro != '' || $isRemarquableChiro == '1') echo $base_url.'/node/'.$nodeOutputChiro->nid.'/edit?genre=interet&type=chiroptere&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; else echo $base_url.'/node/add/book-les-pictos-surcharge?genre=interet&type=chiroptere&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; ?>" target='_blank' class="editPicto">Modifier</a>
+                        </div>
+                        <!-- <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div> -->
                         <p class="titleGenrePicto">Interêt des patrimoines</p>
                         <p class="titleTypePicto">Chiroptere</p>
                         <div class="linePicto">
@@ -2048,16 +2003,7 @@ global $user, $base_url;
                         <div class="remarquable"><?php if($isRemarquableChiro == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueChiro != '') echo '<label>Commentaire : </label>'.$comValueChiro; ?></div>
                         <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
-                      </div>
-                      <div class='edit'>
-                        <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
-                        <p class="titleGenrePicto">Interêt des patrimoines</p>
-                        <p class="titleTypePicto">Chiroptere</p>            
-                        <div class="linePicto">              
-                          <?php echo '<div class="myFormOnVisu">'.$outputChiro.'</div>'; ?>
-                        </div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
-                      </div>           
+                      </div>                                 
                     </div>
                   </div>
                 <?php endif; ?>    
@@ -2071,7 +2017,10 @@ global $user, $base_url;
                   ?>      
                   <div class="popup green"><div class="croix">X</div>
                     <div class='visu'>
-                      <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
+                      <div class="actionLine">
+                          <a href="" class="visuPicto select">Voir</a><a href="<?php if($urlPictoSurchargeInvert) echo $base_url.'/node/'.$nodeOutputInvert->nid.'/edit?genre=interet&type=invert&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; else echo $base_url.'/node/add/book-les-pictos-surcharge?genre=interet&type=invert&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; ?>" target='_blank' class="editPicto">Modifier</a>
+                      </div>
+                      <!-- <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div> -->
                       <p class="titleGenrePicto">Interêt des patrimoines</p>
                       <p class="titleTypePicto">Invertebré</p>
                       <div class="linePicto">
@@ -2085,17 +2034,7 @@ global $user, $base_url;
                       <div class="remarquable"><?php if($isRemarquableInvert == '1') echo "* Présence d'un lieu remarquable"; ?></div>
                       <div class="commentaire"><?php if($comValueInvert != '') echo '<label>Commentaire : </label>'.$comValueInvert; ?></div>
                       <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
-                    </div>
-                    <div class='edit'>
-                      <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
-                      <p class="titleGenrePicto">Interêt des patrimoines</p>
-                      <p class="titleTypePicto">Invertebré</p>            
-                      <div class="linePicto">
-                        <?php if($urlPictoSurchargeInvert != '') echo "<img src='$base_url/$urlPictoSurchargeInvert'/>"; else echo '<p class="desc">Choisir une valeur pour afficher un pictogramme</p>'; ?>              
-                        <?php echo '<div class="myFormOnVisu">'.$outputInvert.'</div>'; ?>              
-                      </div>
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
-                    </div>
+                    </div>                    
                   </div>
                 </div>
                 <!-- Faune marine -->
@@ -2106,23 +2045,17 @@ global $user, $base_url;
                     ?>
                     <div class="popup green"><div class="croix">X</div>
                       <div class='visu'>
-                        <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
+                        <div class="actionLine">
+                          <a href="" class="visuPicto select">Voir</a><a href="<?php if($comValueFauneM_i != '' || $isRemarquableFauneM_i == '1') echo $base_url.'/node/'.$nodeOutputFauneM->nid.'/edit?genre=interet&type=fauneM&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; else echo $base_url.'/node/add/book-les-pictos-surcharge?genre=interet&type=fauneM&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; ?>" target='_blank' class="editPicto">Modifier</a>
+                        </div>
+                        <!-- <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div> -->
                         <p class="titleGenrePicto">Interêt des patrimoines</p>
                         <p class="titleTypePicto">Faune marine</p>
                         <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoFauneMToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelFauneM; ?></p></div>            
                         <div class="remarquable"><?php if($isRemarquableFauneM_i == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueFauneM_i != '') echo '<label>Commentaire : </label>'.$comValueFauneM_i; ?></div>
                         <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
-                      </div>
-                      <div class='edit'>
-                        <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
-                        <p class="titleGenrePicto">Interêt des patrimoines</p>
-                        <p class="titleTypePicto">Faune marine</p>            
-                        <div class="linePicto">              
-                          <?php echo '<div class="myFormOnVisu">'.$outputFauneM.'</div>'; ?>
-                        </div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
-                      </div>          
+                      </div>                                
                     </div>
                   </div>
                 <?php endif; ?>    
@@ -2134,23 +2067,17 @@ global $user, $base_url;
                     ?>
                     <div class="popup green"><div class="croix">X</div>
                       <div class='visu'>
-                        <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
+                        <div class="actionLine">
+                          <a href="" class="visuPicto select">Voir</a><a href="<?php if($comValueFloreM_i != '' || $isRemarquableFloreM_i == '1') echo $base_url.'/node/'.$nodeOutputFloreM->nid.'/edit?genre=interet&type=floreM&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; else echo $base_url.'/node/add/book-les-pictos-surcharge?genre=interet&type=floreM&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; ?>" target='_blank' class="editPicto">Modifier</a>
+                        </div>
+                        <!-- <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div> -->
                         <p class="titleGenrePicto">Interêt des patrimoines</p>
                         <p class="titleTypePicto">Flore marine</p>
                         <div class="linePicto"><img src='<?php echo "$base_url/$urlOfPictoFloreMToDisplay"; ?>' alt="titleBota"><p class='labelEtat'><?php echo $labelFloreM; ?></p></div>            
                         <div class="remarquable"><?php if($isRemarquableFloreM_i == '1') echo "* Présence d'une espèce remarquable"; ?></div>
                         <div class="commentaire"><?php if($comValueFloreM_i != '') echo '<label>Commentaire : </label>'.$comValueFloreM_i; ?></div>
                         <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
-                      </div>
-                      <div class='edit'>
-                        <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
-                        <p class="titleGenrePicto">Interêt des patrimoines</p>
-                        <p class="titleTypePicto">Flore marine</p>            
-                        <div class="linePicto">              
-                          <?php echo '<div class="myFormOnVisu">'.$outputFloreM.'</div>'; ?>
-                        </div>
-                        <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
-                      </div>      
+                      </div>                            
                     </div>
                   </div>
                 <?php endif; ?>    
@@ -2163,7 +2090,10 @@ global $user, $base_url;
                   ?>      
                   <div class="popup green"><div class="croix">X</div>
                     <div class='visu'>
-                      <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
+                      <div class="actionLine">
+                          <a href="" class="visuPicto select">Voir</a><a href="<?php if($urlPictoSurchargeGrotteI) echo $base_url.'/node/'.$nodeOutputGrotte->nid.'/edit?genre=interet&type=grotte&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; else echo $base_url.'/node/add/book-les-pictos-surcharge?genre=interet&type=grotte&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; ?>" target='_blank' class="editPicto">Modifier</a>
+                      </div>
+                      <!-- <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div> -->
                       <p class="titleGenrePicto">Interêt des patrimoines</p>
                       <p class="titleTypePicto">Grotte / Fond rocheux</p>
                       <div class="linePicto">
@@ -2176,17 +2106,7 @@ global $user, $base_url;
                       <div class="remarquable"><?php if($isRemarquableGrotteI == '1') echo "* Présence d'un lieu remarquable"; ?></div>
                       <div class="commentaire"><?php if($comValueGrotteI != '') echo '<label>Commentaire : </label>'.$comValueGrotteI; ?></div>
                       <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
-                    </div>
-                    <div class='edit'>
-                      <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
-                      <p class="titleGenrePicto">Interêt des patrimoines</p>
-                      <p class="titleTypePicto">Grotte / Fond rocheux</p>            
-                      <div class="linePicto">
-                        <?php if($urlPictoSurchargeGrotteI != '') echo "<img src='$base_url/$urlPictoSurchargeGrotteI'/>"; else echo '<p class="desc">Choisir une valeur pour afficher un pictogramme</p>'; ?>              
-                        <?php echo '<div class="myFormOnVisu">'.$outputGrotte.'</div>'; ?>              
-                      </div>
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
-                    </div>
+                    </div>                    
                   </div>
                 </div>
                 <!-- Paysage / Terre ici (valeur + surcharge)-->
@@ -2199,7 +2119,10 @@ global $user, $base_url;
                   ?>      
                   <div class="popup green"><div class="croix">X</div>
                     <div class='visu'>
-                      <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
+                      <div class="actionLine">
+                          <a href="" class="visuPicto select">Voir</a><a href="<?php if($urlPictoSurchargePaysT) echo $base_url.'/node/'.$nodeOutputPaysT->nid.'/edit?genre=interet&type=paysT&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; else echo $base_url.'/node/add/book-les-pictos-surcharge?genre=interet&type=paysT&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; ?>" target='_blank' class="editPicto">Modifier</a>
+                      </div>
+                      <!-- <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div> -->
                       <p class="titleGenrePicto">Interêt des patrimoines</p>
                       <p class="titleTypePicto">Paysage / Terre</p>
                       <div class="linePicto">
@@ -2213,20 +2136,7 @@ global $user, $base_url;
                       <div class="remarquable"><?php if($isRemarquablePaysT == '1') echo "* Présence d'un lieu remarquable"; ?></div>
                       <div class="commentaire"><?php if($comValuePaysT != '') echo '<label>Commentaire : </label>'.$comValuePaysT; ?></div>
                       <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
-                    </div>
-                    <div class='edit'>
-                      <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
-                      <p class="titleGenrePicto">Interêt des patrimoines</p>
-                      <p class="titleTypePicto">Paysage / Terre</p>            
-                      <div class="linePicto">
-                        <?php 
-                        if($urlPictoSurchargePaysT != '') echo "<img src='$base_url/$urlPictoSurchargePaysT'/> <p class='desc'>Choisir une valeur pour surcharger le pictogramme</p>";
-                        else echo "<img src='$base_url/$urlOfPictoPaysTToDisplay'/>";            
-                        echo '<div class="myFormOnVisu">'.$outputPaysT.'</div>'; 
-                        ?>              
-                      </div>
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
-                    </div>
+                    </div>                    
                   </div>
                 </div>
                 <?php endif; ?>
@@ -2239,7 +2149,10 @@ global $user, $base_url;
                   ?>      
                   <div class="popup green"><div class="croix">X</div>
                     <div class='visu'>
-                      <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
+                      <div class="actionLine">
+                          <a href="" class="visuPicto select">Voir</a><a href="<?php if($urlPictoSurchargePaysM) echo $base_url.'/node/'.$nodeOutputPaysM->nid.'/edit?genre=interet&type=paysM&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; else echo $base_url.'/node/add/book-les-pictos-surcharge?genre=interet&type=paysM&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; ?>" target='_blank' class="editPicto">Modifier</a>
+                      </div>
+                      <!-- <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div> -->
                       <p class="titleGenrePicto">Interêt des patrimoines</p>
                       <p class="titleTypePicto">Paysage / Mer</p>
                       <div class="linePicto">
@@ -2252,17 +2165,7 @@ global $user, $base_url;
                       <div class="remarquable"><?php if($isRemarquablePaysM == '1') echo "* Présence d'un lieu remarquable"; ?></div>
                       <div class="commentaire"><?php if($comValuePaysM != '') echo '<label>Commentaire : </label>'.$comValuePaysM; ?></div>
                       <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>
-                    </div>
-                    <div class='edit'>
-                      <div class="actionLine"><a href="" class="visuPicto">Voir</a><a href="" class="select editPicto">Modifier</a></div>
-                      <p class="titleGenrePicto">Interêt des patrimoines</p>
-                      <p class="titleTypePicto">Paysage / Mer</p>            
-                      <div class="linePicto">
-                        <?php if($urlPictoSurchargePaysM != '') echo "<img src='$base_url/$urlPictoSurchargePaysM'/>"; else echo '<p class="desc">Choisir une valeur pour afficher un pictogramme</p>'; ?>              
-                        <?php echo '<div class="myFormOnVisu">'.$outputPaysM.'</div>'; ?>              
-                      </div>
-                      <a class='linkToBase' href='<?php echo "$base_url/fiche-Ile/$termName"; ?>'>Donnée dans la base</a>         
-                    </div>
+                    </div>                    
                   </div>
                 </div>
                 <!-- Patrimoine bâti -->
@@ -2274,7 +2177,10 @@ global $user, $base_url;
                   ?>      
                   <div class="popup green"><div class="croix">X</div>
                     <div class='visu'>
-                      <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div>
+                      <div class="actionLine">
+                          <a href="" class="visuPicto select">Voir</a><a href="<?php if($urlPictoSurchargePaysM) echo $base_url.'/node/'.$nodeOutputBati->nid.'/edit?genre=interet&type=bati&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; else echo $base_url.'/node/add/book-les-pictos-surcharge?genre=interet&type=bati&pager='.$pager.'&ssbassin='.$ssbassin.'&code='.$termName; ?>" target='_blank' class="editPicto">Modifier</a>
+                      </div>
+                      <!-- <div class="actionLine"><a href="" class="visuPicto select">Voir</a><a href="" class="editPicto">Modifier</a></div> -->
                       <p class="titleGenrePicto">Interêt des patrimoines</p>
                       <p class="titleTypePicto">Patrimoine bâti</p>
                       <div class="linePicto">

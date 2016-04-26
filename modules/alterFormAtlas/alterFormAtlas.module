@@ -3,15 +3,14 @@
 module : alterFormAtlas
 pour alterer la redirection vers la page "projet-atlas/pictos-par-sous-bassin" avec tout ses paramètres
 */
-
-
 function alterFormAtlas_form_book_les_pictos_surcharge_node_form_alter(&$form, &$form_state){
 
 	if(isset($_GET['code'])){
 
 		drupal_set_message( "Saisissez votre nouvelle valeur, elle sera prise en compte cette nuit.", $type = 'status', $repeat = TRUE); 
 		//do smthing after submit form surcharge from cache page
-		$form['title']['#default_value'] = 'picto surcharge sur: '.$_GET['code'];
+		$form['title']['#default_value'] = 'picto surcharge sur: '.$_GET['code'];		
+
 		$form['#after_build'][] = 'alterFormAtlas_after_build';
 
 		unset($form['destination']);
@@ -44,6 +43,7 @@ function alterFormAtlas_form_book_les_pictos_surcharge_node_form_alter(&$form, &
 
 		//Get param in url for pager
 		if(isset($_GET["pager"])) $pager = urldecode($_GET["pager"]);		
+			
 
 		if(isset($_GET["ssbassin"])) {
 			//Si on a une valeur alors on est dans la page "projet-atlas/pictos-par-sous-bassin?ssbassin"
@@ -72,9 +72,17 @@ function alterFormAtlas_form_book_les_pictos_surcharge_node_form_alter(&$form, &
  * Modify CCK form elements on the example node form.
  */
 function alterFormAtlas_after_build($form, &$form_state) {
-  // TODO: Stuff!
+  
+	if($_GET['genre'] == 'interet' && $_GET['type'] == 'botanique') drupal_add_css(drupal_get_path('module', 'alterFormAtlas') .'/alterFormAtlas.css');
+	else if($_GET['genre'] == 'interet' && $_GET['type'] == 'ornithologie') drupal_add_css(drupal_get_path('module', 'alterFormAtlas') .'/alterFormAtlas.css');
+	else if($_GET['genre'] == 'interet' && $_GET['type'] == 'herpetologie') drupal_add_css(drupal_get_path('module', 'alterFormAtlas') .'/alterFormAtlas.css');
+	else if($_GET['genre'] == 'interet' && $_GET['type'] == 'mamifere') drupal_add_css(drupal_get_path('module', 'alterFormAtlas') .'/alterFormAtlas.css');
+	else if($_GET['genre'] == 'interet' && $_GET['type'] == 'chiroptere') drupal_add_css(drupal_get_path('module', 'alterFormAtlas') .'/alterFormAtlas.css');	
+	else if($_GET['genre'] == 'interet' && $_GET['type'] == 'fauneM') drupal_add_css(drupal_get_path('module', 'alterFormAtlas') .'/alterFormAtlas.css');	
+	else if($_GET['genre'] == 'interet' && $_GET['type'] == 'floreM') drupal_add_css(drupal_get_path('module', 'alterFormAtlas') .'/alterFormAtlas.css');	
+
 	$form['field_book_genre_picto_surcharge'][0]['value']['#value'] = $_GET['genre'];
-	$form['field_book_type_picto_surcharge'][0]['value']['#value'] = $_GET['type'];	
+	$form['field_book_type_picto_surcharge'][0]['value']['#value'] = $_GET['type'];		
 
   return $form;
 }
