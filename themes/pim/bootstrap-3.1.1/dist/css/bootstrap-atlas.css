@@ -5673,7 +5673,7 @@ body.page-projet-atlas-tous-les-pictos-par-sous-bassin a.linkSSbassin{
   margin-right: 3px;
   font-family: 'Poiret One', cursive;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 15px;
 }
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.oneSSbassin{
   border-bottom: 1px dashed rgba(0,0,0,0.2);
@@ -5685,7 +5685,8 @@ body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.oneSSbassin{
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.oneSSbassin div.pagerPager{  
   display: inline-block;
   font-size: 22px;
-  float: right;
+  margin-left: 7%;
+  color: rgba(0,0,0,0.2);
 }
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.oneSSbassin:first-of-type{
   padding-top: 0;
@@ -5698,7 +5699,8 @@ body.page-projet-atlas-tous-les-pictos-par-sous-bassin a.linkSSbassin:hover{
 }
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin a.linkSSbassin.active{
   font-weight: bold;
-  color: #00659b !important;
+  color: #FF741C !important;
+  text-shadow: 0px 0px 31px rgba(0,0,0, 3);
 }
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.onePicto i.star{
   font-weight: bold;
