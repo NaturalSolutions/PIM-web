@@ -5529,8 +5529,8 @@ body.page-projet-atlas-tous-les-pictos-par-sous-bassin p.notInteresting {
     font-weight: bold;
 }
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lesLiens{
-  overflow: auto;
-  height: 247px;
+/*   overflow: auto;
+height: 247px; */
 }
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin p.nbIsland{
   font-family: 'Poiret One', cursive;
@@ -5570,6 +5570,8 @@ body.page-projet-atlas-tous-les-pictos-par-sous-bassin h3{
 }
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin h2.littleTitle{
   font-family: 'Poiret One', cursive;
+  width: 17%;
+  display: inline-block;
 }
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin p.help{
   background: url(../../../images/Arrowhead-Up.png) no-repeat 50% 20px;
@@ -5578,6 +5580,9 @@ body.page-projet-atlas-tous-les-pictos-par-sous-bassin p.help{
   height: 100px;
   text-align: center;
   margin-bottom: 12px;  
+  font-family: 'Poiret One', cursive;
+  font-size: 22px;
+  font-weight: bold;
 }
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lineHeader:nth-of-type(1){
   margin-top: 0;
@@ -5660,21 +5665,27 @@ body.page-projet-atlas-tous-les-pictos-par-sous-bassin a.linkSSbassin{
   text-align: center;
   width: 20px;
   display: inline-block;
-  background-color: #31569F;
   border-radius: 100%;
-  padding: 7px 6px 3px 6px;
+  padding: 7px 0px 3px 0px;
   height: 20px;
   vertical-align: middle;
-  color: #Fff!important;
   border: none;
   margin-right: 3px;
+  font-family: 'Poiret One', cursive;
+  font-weight: 600;
+  font-size: 12px;
 }
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.oneSSbassin{
   border-bottom: 1px dashed rgba(0,0,0,0.2);
-  padding-bottom: 31px;
-  padding-top: 20px;
-  width: 49%;
+  padding-bottom: 3px;
+  padding-top: 0px;
+  width: 100%;
   display: inline-block;
+}
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.oneSSbassin div.pagerPager{  
+  display: inline-block;
+  font-size: 22px;
+  float: right;
 }
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.oneSSbassin:first-of-type{
   padding-top: 0;
