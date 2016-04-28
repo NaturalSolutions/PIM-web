@@ -5928,7 +5928,9 @@ body.page-node-add-book-les-pictos-surcharge div#edit-field-book-type-picto-surc
 body.node-type-book-les-pictos-surcharge div#edit-field-book-type-picto-surcharge-0-value-wrapper,
 
 body.page-node-add-book-les-pictos-surcharge input#edit-preview,
-body.node-type-book-les-pictos-surcharge input#edit-preview{
+body.node-type-book-les-pictos-surcharge input#edit-preview,
+body.page-node-add-book-les-pictos-surcharge input#edit-delete,
+body.node-type-book-les-pictos-surcharge input#edit-delete{
   display: none;
 }
 body.node-type-book-les-pictos-surcharge div.tabs{

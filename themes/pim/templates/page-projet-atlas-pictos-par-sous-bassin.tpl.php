@@ -229,7 +229,7 @@ global $user, $base_url;
         <div id="content-area">
           <h1>Annuaire des îles</h1>
           <h2 class='bigTitleSousBassin'>PAR SOUS-BASSIN</h2>
-          <p class='help'>Séléctionnez un sous bassin</p>
+          <p class='help'>Sélectionnez un sous bassin</p>
           <?php 
          
           //Get param in url for pager

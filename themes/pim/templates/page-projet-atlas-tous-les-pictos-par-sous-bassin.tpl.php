@@ -229,7 +229,7 @@ global $user, $base_url;
           <a class='backAtlas' href="<?php echo $base_url; ?>/projet-atlas/">Retour Atlas</a>
           <h1>Annuaire des îles</h1>
           <h2 class='bigTitleSousBassin'>SOUS-BASSIN</h2>
-          <p class='help'>Séléctionnez votre page</p>
+          <p class='help'>Sélectionnez votre page</p>
           <?php          
           //Get param in url for pager
           if(isset($_GET["pager"])) $pager = $_GET["pager"];
