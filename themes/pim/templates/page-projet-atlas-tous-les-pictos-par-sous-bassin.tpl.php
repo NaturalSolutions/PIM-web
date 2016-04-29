@@ -296,145 +296,151 @@ global $user, $base_url;
 
 
 
-          <div class="lesLiens">          
+          <div class="lesLiens">         
+
+            <div class="left">            
   
-            <div class="oneSSbassin">
-              <h2 class="littleTitle">Alboran</h2>
-              <div class="pagerPager">
-                [<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Gibraltar') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Gibraltar&pager=1.html">1</a>]
-              </div>            
-            </div>
+              <div class="oneSSbassin">
+                <h2 class="littleTitle">Alboran</h2>
+                <div class="pagerPager">
+                  [&nbsp;<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Gibraltar') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Gibraltar&pager=1.html">1</a>&nbsp;]
+                </div>            
+              </div>
 
-            <div class="oneSSbassin">
-              <h2 class="littleTitle" >Algeria</h2>
-              <div class="pagerPager">
-                [<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Algérie') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=1.html">1</a>-
-                <a class="linkSSbassin <?php if($pager == 2 && $ssbassin == 'Algérie') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=2.html">2</a>-
-                <a class="linkSSbassin <?php if($pager == 3 && $ssbassin == 'Algérie') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=3.html">3</a>-
-                <a class="linkSSbassin <?php if($pager == 4 && $ssbassin == 'Algérie') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=4.html">4</a>-
-                <a class="linkSSbassin <?php if($pager == 5 && $ssbassin == 'Algérie') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=5.html">5</a>]
+              <div class="oneSSbassin">
+                <h2 class="littleTitle" >Algeria</h2>
+                <div class="pagerPager">
+                  [&nbsp;<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Algérie') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=1.html">1</a>-
+                  <a class="linkSSbassin <?php if($pager == 2 && $ssbassin == 'Algérie') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=2.html">2</a>-
+                  <a class="linkSSbassin <?php if($pager == 3 && $ssbassin == 'Algérie') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=3.html">3</a>-
+                  <a class="linkSSbassin <?php if($pager == 4 && $ssbassin == 'Algérie') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=4.html">4</a>-
+                  <a class="linkSSbassin <?php if($pager == 5 && $ssbassin == 'Algérie') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Algérie&pager=5.html">5</a>&nbsp;]
+                </div>
               </div>
-            </div>
 
-            <div class="oneSSbassin">
-              <h2 class="littleTitle" >Atlantic Morocco</h2>
-              <div class="pagerPager">
-                [<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Maroc%20Atlantique') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Maroc%20Atlantique&pager=1.html">1</a>]
+              <div class="oneSSbassin">
+                <h2 class="littleTitle" >Atlantic Morocco</h2>
+                <div class="pagerPager">
+                  [&nbsp;<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Maroc Atlantique') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Maroc%20Atlantique&pager=1.html">1</a>&nbsp;]
+                </div>
               </div>
-            </div>
-                      
-            <div class="oneSSbassin">
-              <h2 class="littleTitle" >Balearic Islands</h2>
-              <div class="pagerPager">
-                [<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Baléares') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=1.html">1</a>-
-                <a class="linkSSbassin <?php if($pager == 2 && $ssbassin == 'Baléares') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=2.html">2</a>-
-                <a class="linkSSbassin <?php if($pager == 3 && $ssbassin == 'Baléares') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=3.html">3</a>-
-                <a class="linkSSbassin <?php if($pager == 4 && $ssbassin == 'Baléares') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=4.html">4</a>-
-                <a class="linkSSbassin <?php if($pager == 5 && $ssbassin == 'Baléares') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=5.html">5</a>-
-                <a class="linkSSbassin <?php if($pager == 6 && $ssbassin == 'Baléares') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=6.html">6</a>-
-                <a class="linkSSbassin <?php if($pager == 7 && $ssbassin == 'Baléares') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=7.html">7</a>-
-                <a class="linkSSbassin <?php if($pager == 8 && $ssbassin == 'Baléares') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=8.html">8</a>]
+                        
+              <div class="oneSSbassin">
+                <h2 class="littleTitle" >Balearic Islands</h2>
+                <div class="pagerPager">
+                  [&nbsp;<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Baléares') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=1.html">1</a>-
+                  <a class="linkSSbassin <?php if($pager == 2 && $ssbassin == 'Baléares') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=2.html">2</a>-
+                  <a class="linkSSbassin <?php if($pager == 3 && $ssbassin == 'Baléares') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=3.html">3</a>-
+                  <a class="linkSSbassin <?php if($pager == 4 && $ssbassin == 'Baléares') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=4.html">4</a>-
+                  <a class="linkSSbassin <?php if($pager == 5 && $ssbassin == 'Baléares') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=5.html">5</a>-
+                  <a class="linkSSbassin <?php if($pager == 6 && $ssbassin == 'Baléares') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=6.html">6</a>-
+                  <a class="linkSSbassin <?php if($pager == 7 && $ssbassin == 'Baléares') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=7.html">7</a>-
+                  <a class="linkSSbassin <?php if($pager == 8 && $ssbassin == 'Baléares') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Baléares&pager=8.html">8</a>&nbsp;]
+                </div>
               </div>
-            </div>
-            
-            <div class="oneSSbassin">
-              <h2 class="littleTitle" >Corsica</h2>
-              <div class="pagerPager">
-                [<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Corse') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=1.html">1</a>-
-                <a class="linkSSbassin <?php if($pager == 2 && $ssbassin == 'Corse') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=2.html">2</a>-
-                <a class="linkSSbassin <?php if($pager == 3 && $ssbassin == 'Corse') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=3.html">3</a>-
-                <a class="linkSSbassin <?php if($pager == 4 && $ssbassin == 'Corse') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=4.html">4</a>-
-                <a class="linkSSbassin <?php if($pager == 5 && $ssbassin == 'Corse') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=5.html">5</a>-
-                <a class="linkSSbassin <?php if($pager == 6 && $ssbassin == 'Corse') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=6.html">6</a>-
-                <a class="linkSSbassin <?php if($pager == 7 && $ssbassin == 'Corse') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=7.html">7</a>]
+              
+              <div class="oneSSbassin">
+                <h2 class="littleTitle" >Corsica</h2>
+                <div class="pagerPager">
+                  [&nbsp;<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Corse') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=1.html">1</a>-
+                  <a class="linkSSbassin <?php if($pager == 2 && $ssbassin == 'Corse') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=2.html">2</a>-
+                  <a class="linkSSbassin <?php if($pager == 3 && $ssbassin == 'Corse') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=3.html">3</a>-
+                  <a class="linkSSbassin <?php if($pager == 4 && $ssbassin == 'Corse') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=4.html">4</a>-
+                  <a class="linkSSbassin <?php if($pager == 5 && $ssbassin == 'Corse') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=5.html">5</a>-
+                  <a class="linkSSbassin <?php if($pager == 6 && $ssbassin == 'Corse') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=6.html">6</a>-
+                  <a class="linkSSbassin <?php if($pager == 7 && $ssbassin == 'Corse') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Corse&pager=7.html">7</a>&nbsp;]
+                </div>
               </div>
-            </div>
 
-            <div class="oneSSbassin">  
-              <h2 class="littleTitle" >Eastern Spain</h2>
-              <div class="pagerPager">
-                [<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Espagne-Sud%20et%20Est') echo 'active'; ?>" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=1.html">1</a>-
-                <a class="linkSSbassin <?php if($pager == 2 && $ssbassin == 'Espagne-Sud%20et%20Est') echo 'active'; ?>" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=2.html">2</a>-
-                <a class="linkSSbassin <?php if($pager == 3 && $ssbassin == 'Espagne-Sud%20et%20Est') echo 'active'; ?>" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=3.html">3</a>-
-                <a class="linkSSbassin <?php if($pager == 4 && $ssbassin == 'Espagne-Sud%20et%20Est') echo 'active'; ?>" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=4.html">4</a>-
-                <a class="linkSSbassin <?php if($pager == 5 && $ssbassin == 'Espagne-Sud%20et%20Est') echo 'active'; ?>" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=5.html">5</a>]
+              <div class="oneSSbassin">  
+                <h2 class="littleTitle" >Eastern Spain</h2>
+                <div class="pagerPager">
+                  [&nbsp;<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Espagne-Sud et Est') echo 'active'; ?>" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=1.html">1</a>-
+                  <a class="linkSSbassin <?php if($pager == 2 && $ssbassin == 'Espagne-Sud et Est') echo 'active'; ?>" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=2.html">2</a>-
+                  <a class="linkSSbassin <?php if($pager == 3 && $ssbassin == 'Espagne-Sud et Est') echo 'active'; ?>" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=3.html">3</a>-
+                  <a class="linkSSbassin <?php if($pager == 4 && $ssbassin == 'Espagne-Sud et Est') echo 'active'; ?>" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=4.html">4</a>-
+                  <a class="linkSSbassin <?php if($pager == 5 && $ssbassin == 'Espagne-Sud et Est') echo 'active'; ?>" title="" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Espagne-Sud%20et%20Est&pager=5.html">5</a>&nbsp;]
+                </div>
               </div>
-            </div>
 
-            <div class="oneSSbassin">        
-              <h2 class="littleTitle" >Eastern Tunisia</h2>
-              <div class="pagerPager">
-                [<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Tunisie-Est') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Tunisie-Est&pager=1.html">1</a>-
-                <a class="linkSSbassin <?php if($pager == 2 && $ssbassin == 'Tunisie-Est') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Tunisie-Est&pager=2.html">2</a>]
-              </div>
-            </div>            
+              <div class="oneSSbassin last">        
+                <h2 class="littleTitle" >Eastern Tunisia</h2>
+                <div class="pagerPager">
+                  [&nbsp;<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Tunisie-Est') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Tunisie-Est&pager=1.html">1</a>-
+                  <a class="linkSSbassin <?php if($pager == 2 && $ssbassin == 'Tunisie-Est') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Tunisie-Est&pager=2.html">2</a>&nbsp;]
+                </div>
+              </div>      
 
-            <div class="oneSSbassin">
-              <h2 class="littleTitle" >Italy Ligurian</h2>
-              <div class="pagerPager">
-                [<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Italie-Mar%20Ligure') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Ligure&pager=1.html">1</a>-
-                <a class="linkSSbassin <?php if($pager == 2 && $ssbassin == 'Italie-Mar%20Ligure') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Ligure&pager=2.html">2</a>]
-              </div>
-            </div>
+            </div> <!-- fin left -->     
+            <div class="right">            
 
-            <div class="oneSSbassin">
-              <h2 class="littleTitle" >Italy Tyrrhenian</h2>
-              <div class="pagerPager">
-                [<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Italie-Mar%20Tirreno') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Tirreno&pager=1.html">1</a>-
-                <a class="linkSSbassin <?php if($pager == 2 && $ssbassin == 'Italie-Mar%20Tirreno') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Tirreno&pager=2.html">2</a>]
+              <div class="oneSSbassin">
+                <h2 class="littleTitle" >Italy Ligurian</h2>
+                <div class="pagerPager">
+                  [&nbsp;<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Italie-Mar Ligure') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Ligure&pager=1.html">1</a>-
+                  <a class="linkSSbassin <?php if($pager == 2 && $ssbassin == 'Italie-Mar Ligure') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Ligure&pager=2.html">2</a>&nbsp;]
+                </div>
               </div>
-            </div>
 
-            <div class="oneSSbassin">
-              <h2 class="littleTitle" >Malta</h2>
-              <div class="pagerPager">
-                [<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Malte') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Malte&pager=1.html">1</a>]
+              <div class="oneSSbassin">
+                <h2 class="littleTitle" >Italy Tyrrhenian</h2>
+                <div class="pagerPager">
+                  [&nbsp;<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Italie-Mar Tirreno') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Tirreno&pager=1.html">1</a>-
+                  <a class="linkSSbassin <?php if($pager == 2 && $ssbassin == 'Italie-Mar Tirreno') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Italie-Mar%20Tirreno&pager=2.html">2</a>&nbsp;]
+                </div>
               </div>
-            </div>
-            
-            <div class="oneSSbassin">
-              <h2 class="littleTitle" >Northern Tunisia</h2>
-              <div class="pagerPager">
-                [<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Tunisie-Nord') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Tunisie-Nord&pager=1.html">1</a>]
-              </div>
-            </div>
 
-            <div class="oneSSbassin">
-              <h2 class="littleTitle" >Sardinia</h2>
-              <div class="pagerPager">
-                [<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Sardaigne') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=1.html">1</a>-
-                <a class="linkSSbassin <?php if($pager == 2 && $ssbassin == 'Sardaigne') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=2.html">2</a>-
-                <a class="linkSSbassin <?php if($pager == 3 && $ssbassin == 'Sardaigne') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=3.html">3</a>-
-                <a class="linkSSbassin <?php if($pager == 4 && $ssbassin == 'Sardaigne') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=4.html">4</a>-
-                <a class="linkSSbassin <?php if($pager == 5 && $ssbassin == 'Sardaigne') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=5.html">5</a>-
-                <a class="linkSSbassin <?php if($pager == 6 && $ssbassin == 'Sardaigne') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=6.html">6</a>]
+              <div class="oneSSbassin">
+                <h2 class="littleTitle" >Malta</h2>
+                <div class="pagerPager">
+                  [&nbsp;<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Malte') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Malte&pager=1.html">1</a>&nbsp;]
+                </div>
               </div>
-            </div>
-
-            <div class="oneSSbassin">
-              <h2 class="littleTitle" >Sicily</h2>
-              <div class="pagerPager">
-                [<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Sicile') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=1.html">1</a>-
-                <a class="linkSSbassin <?php if($pager == 2 && $ssbassin == 'Sicile') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=2.html">2</a>-
-                <a class="linkSSbassin <?php if($pager == 3 && $ssbassin == 'Sicile') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=3.html">3</a>-
-                <a class="linkSSbassin <?php if($pager == 4 && $ssbassin == 'Sicile') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=4.html">4</a>-
-                <a class="linkSSbassin <?php if($pager == 5 && $ssbassin == 'Sicile') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=5.html">5</a>-
-                <a class="linkSSbassin <?php if($pager == 6 && $ssbassin == 'Sicile') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=6.html">6</a>-
-                <a class="linkSSbassin <?php if($pager == 7 && $ssbassin == 'Sicile') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=7.html">7</a>]
+              
+              <div class="oneSSbassin">
+                <h2 class="littleTitle" >Northern Tunisia</h2>
+                <div class="pagerPager">
+                  [&nbsp;<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Tunisie-Nord') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Tunisie-Nord&pager=1.html">1</a>&nbsp;]
+                </div>
               </div>
-            </div>
 
-            <div class="oneSSbassin last">
-              <h2 class="littleTitle" >Southern France</h2>
-              <div class="pagerPager">
-                [<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'France-Sud') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=1.html">1</a>- 
-                <a class="linkSSbassin <?php if($pager == 2 && $ssbassin == 'France-Sud') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=2.html">2</a>- 
-                <a class="linkSSbassin <?php if($pager == 3 && $ssbassin == 'France-Sud') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=3.html">3</a>- 
-                <a class="linkSSbassin <?php if($pager == 4 && $ssbassin == 'France-Sud') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=4.html">4</a>- 
-                <a class="linkSSbassin <?php if($pager == 5 && $ssbassin == 'France-Sud') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=5.html">5</a>]
+              <div class="oneSSbassin">
+                <h2 class="littleTitle" >Sardinia</h2>
+                <div class="pagerPager">
+                  [&nbsp;<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Sardaigne') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=1.html">1</a>-
+                  <a class="linkSSbassin <?php if($pager == 2 && $ssbassin == 'Sardaigne') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=2.html">2</a>-
+                  <a class="linkSSbassin <?php if($pager == 3 && $ssbassin == 'Sardaigne') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=3.html">3</a>-
+                  <a class="linkSSbassin <?php if($pager == 4 && $ssbassin == 'Sardaigne') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=4.html">4</a>-
+                  <a class="linkSSbassin <?php if($pager == 5 && $ssbassin == 'Sardaigne') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=5.html">5</a>-
+                  <a class="linkSSbassin <?php if($pager == 6 && $ssbassin == 'Sardaigne') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sardaigne&pager=6.html">6</a>&nbsp;]
+                </div>
               </div>
-            </div>
 
+              <div class="oneSSbassin ">
+                <h2 class="littleTitle" >Sicily</h2>
+                <div class="pagerPager">
+                  [&nbsp;<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'Sicile') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=1.html">1</a>-
+                  <a class="linkSSbassin <?php if($pager == 2 && $ssbassin == 'Sicile') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=2.html">2</a>-
+                  <a class="linkSSbassin <?php if($pager == 3 && $ssbassin == 'Sicile') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=3.html">3</a>-
+                  <a class="linkSSbassin <?php if($pager == 4 && $ssbassin == 'Sicile') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=4.html">4</a>-
+                  <a class="linkSSbassin <?php if($pager == 5 && $ssbassin == 'Sicile') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=5.html">5</a>-
+                  <a class="linkSSbassin <?php if($pager == 6 && $ssbassin == 'Sicile') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=6.html">6</a>-
+                  <a class="linkSSbassin <?php if($pager == 7 && $ssbassin == 'Sicile') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Sicile&pager=7.html">7</a>&nbsp;]
+                </div>
+              </div>
+
+              <div class="oneSSbassin last">
+                <h2 class="littleTitle" >Southern France</h2>
+                <div class="pagerPager">
+                  [&nbsp;<a class="linkSSbassin <?php if($pager == 1 && $ssbassin == 'France-Sud') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=1.html">1</a>- 
+                  <a class="linkSSbassin <?php if($pager == 2 && $ssbassin == 'France-Sud') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=2.html">2</a>- 
+                  <a class="linkSSbassin <?php if($pager == 3 && $ssbassin == 'France-Sud') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=3.html">3</a>- 
+                  <a class="linkSSbassin <?php if($pager == 4 && $ssbassin == 'France-Sud') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=4.html">4</a>- 
+                  <a class="linkSSbassin <?php if($pager == 5 && $ssbassin == 'France-Sud') echo 'active'; ?>" title="Afficher les pictogrammes pour ce sous bassin" href="<?php echo $base_url; ?>/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=France-Sud&pager=5.html">5</a>&nbsp;]
+                </div>
+              </div>
+
+            </div>  <!-- fin right -->
           </div> <!-- fin lesliens -->
 
 
