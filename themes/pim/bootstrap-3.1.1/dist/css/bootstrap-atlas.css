@@ -5508,6 +5508,10 @@ body.page-projet-atlas-tous-les-pictos-par-sous-bassin div.lineHeader{
   margin-top:   24px;
   padding: 12px 15px
 }
+body.page-projet-atlas-tous-les-pictos-par-sous-bassin div#content-area{
+  width: 100%;
+  margin-left: 58px;
+}
 body.page-projet-atlas-tous-les-pictos-par-sous-bassin a.backAtlas{
   text-decoration: none;
 }
