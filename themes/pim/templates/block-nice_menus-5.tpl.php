@@ -74,7 +74,7 @@ if($access) $link = "<a class='linkForEditMenuAtlas' href='$base_url/admin/build
   <div class="content">
     <?php print $content; ?>
     <li class="tousLesSousBassins menu-path-projet-atlas-pictos-par-sous-bassin">
-      <!-- <a href="<?php //echo $base_url.'/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Gibraltar&pager=1.html'; ?>">[ADMIN] <br/>Annuaire des îles</a> -->
+      <a href="<?php echo $base_url.'/cache/projet-atlas/tous-les-pictos-par-sous-bassin_ssbassin=Gibraltar&pager=1.html'; ?>">[ADMIN] <br/>Annuaire des îles</a>
     </li>
   </div>
 
