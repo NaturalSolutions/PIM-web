@@ -757,7 +757,7 @@ global $user, $base_url;
             $urlOfPictoEcoToDisplay = $rowsEco[$etatEco];
 
             //Convert image size
-            if($urlOfPictoBotaToDisplay != ''){
+            /*if($urlOfPictoBotaToDisplay != ''){
             $secondePart = explode('sites/default/files/', $urlOfPictoBotaToDisplay);            
             $secondePart = $secondePart[1];                
             $urlOfPictoBotaToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart;               
@@ -803,7 +803,7 @@ global $user, $base_url;
             $secondePart = explode('sites/default/files/', $urlOfPictoEcoToDisplay);            
             $secondePart = $secondePart[1];                
             $urlOfPictoEcoToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
-            }
+            }*/
 
 
 
@@ -1384,7 +1384,7 @@ global $user, $base_url;
             $urlOfPictoEcoTerreToDisplay = $rowsEcoTerre[$etatEcoTerre];
 
             //Convert image size
-            if($urlOfPictoBotaToDisplay != ''){
+           /* if($urlOfPictoBotaToDisplay != ''){
             $secondePart = explode('sites/default/files/', $urlOfPictoBotaToDisplay);            
             $secondePart = $secondePart[1];                
             $urlOfPictoBotaToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart;               
@@ -1442,7 +1442,7 @@ global $user, $base_url;
             $secondePart = explode('sites/default/files/', $urlOfPictoEcoTerreToDisplay);            
             $secondePart = $secondePart[1];                
             $urlOfPictoEcoTerreToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
-            }
+            }*/
            
 
             //On stock le bon label en fonction de la valeur
@@ -2387,7 +2387,7 @@ global $user, $base_url;
             $urlOfPictoEspEnvahMerToDisplay = $rowsEspEnvahM[$etatEspMer];
 
 
-            //Convert image size
+            /*//Convert image size
             if($urlOfPictoNavetteToDisplay != ''){
             $secondePart = explode('sites/default/files/', $urlOfPictoNavetteToDisplay);            
             $secondePart = $secondePart[1];                
@@ -2434,7 +2434,7 @@ global $user, $base_url;
             $secondePart = explode('sites/default/files/', $urlOfPictoEspEnvahMerToDisplay);            
             $secondePart = $secondePart[1];                
             $urlOfPictoEspEnvahMerToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
-            }
+            }*/
 
                         
             //On stock le bon label en fonction de la valeur
@@ -2798,7 +2798,7 @@ global $user, $base_url;
             $urlOfPictoAccesToDisplay = $rowsAcces[$etatAccesAutoSite];
             $urlOfPictoPecheToDisplay = $rowsPeche[$etatPecheAutoSite];
 
-             //Convert image size
+             /*//Convert image size
             if($urlOfPictoProtecTerreToDisplay != ''){
             $secondePart = explode('sites/default/files/', $urlOfPictoProtecTerreToDisplay);            
             $secondePart = $secondePart[1];                
@@ -2851,7 +2851,7 @@ global $user, $base_url;
             $secondePart = explode('sites/default/files/', $urlOfPictoPecheToDisplay);            
             $secondePart = $secondePart[1];                
             $urlOfPictoPecheToDisplay = 'sites/default/files/imagefield_thumbs/'.$secondePart; 
-            }
+            }*/
 
             //On stock le bon label en fonction de la valeur
             $labelStatutProtecT = $rowsLabelProtectT[$etatProtectionT];
